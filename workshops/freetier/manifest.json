@@ -1,0 +1,56 @@
+{
+  "workshoptitle": "Oracle Machine Learning Workshop",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+    "title": "Prepare Setup",
+    "description": "How to download your ORM stack and update security rules for an existing VCN.",
+    "filename": "./../../preparation/preparation.md"
+    },
+    {
+      "title": "OML4Py - Part 1",
+      "description": "Handson lab for using OML4Py.",
+      "filename": "./../../oml4py/oml4py.md"
+    },
+    {
+      "title": "OML4Py - Part 2",
+      "description": "Handson lab for using OML4Py.",
+      "filename": "./../../oml4py2/oml4py2.md"
+    },
+    {
+      "title": "OML using REST Services",
+      "description": "OML using REST Services",
+      "filename": "./../../oml-services/oml-services.md"
+    },
+    {
+      "title": "OML4R",
+      "description": "Handon workshop on using OML4R.",
+      "filename": "./../../oml-services/oml4r.md"
+    },
+    {
+      "title": "OML4SQL",
+      "description": "Handon workshop on using OML4SQL.",
+      "filename": "./../../oml4sql/oml4sql.md"
+    },
+    {
+      "title": "OML AutoML UI",
+      "description": "Handon workshop on using AutoML UI.",
+      "filename": "./../../automl-ui/automl-ui.md"
+    },
+    {
+      "title": "Time series",
+      "description": "Handon workshop on OML for Time series.",
+      "filename": "./../../time-series/time-series.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
