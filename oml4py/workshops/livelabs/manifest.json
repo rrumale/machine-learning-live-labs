@@ -8,10 +8,10 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-    "title": "Understaing the use case",
+    "title": "Understanding the use case",
     "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
     "filename": "./../../../ltv-use-case/ltv-use-case.md"
-    },    
+    },
     {
     "title": "Prepare Setup",
     "description": "How to download your ORM stack and update security rules for an existing VCN.",
