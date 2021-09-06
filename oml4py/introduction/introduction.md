@@ -22,11 +22,10 @@ Watch the video below on introduction to Oracle Machine Learning for Python.
 
 The labs in this workshop focus on the following:
 * Oracle Machine Learning Notebook and connection to an Oracle Autonomous Database from a Python session
-* Data selection and manipulation using the Transparency Layer
 * In-database algorithms and models
-* Datastores to store Python objects
 * Embedded Python Execution
-* AutoML functionality
+* Explore ML algorithms and compare the prediction results 
+* Use AutoML functionality to identify the most efficient algorithm for given use case.
 
 ### Prerequisites
 
