@@ -21,13 +21,13 @@ In this lab, you will:
 
 * Access to the Oracle database containing the customer insurance table.
 
-## **STEP 1:** Review the Customer Insurance Data
+## Task 1: Review the Customer Insurance Data
 
 1. Review the historical customer data.  Note the Buy Insurance column.  
 
   ![customer-data-1](./images/customer-data-1.png)
 
-2. Note the LTV and LTV_BIN columns. LTV gives us a numerical score of the life time value of the customer, and LTV_BIN is just a readable category derived from the score with VERY HIGH, HIGH, MEDIUM, and LOW business value.
+2. Note the LTV and LTV\_BIN columns. LTV gives us a numerical score of the life time value of the customer, and LTV\_BIN is just a readable category derived from the score with VERY HIGH, HIGH, MEDIUM, and LOW business value.
 
   ![customer-data-2](./images/customer-data-2.png)
 

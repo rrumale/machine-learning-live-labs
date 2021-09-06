@@ -24,7 +24,7 @@ The labs in this workshop focus on the following:
 * Oracle Machine Learning Notebook and connection to an Oracle Autonomous Database from a Python session
 * In-database algorithms and models
 * Embedded Python Execution
-* Explore ML algorithms and compare the prediction results 
+* Explore ML algorithms and compare the prediction results
 * Use AutoML functionality to identify the most efficient algorithm for given use case.
 
 ### Prerequisites
@@ -35,7 +35,7 @@ The labs in this workshop focus on the following:
 
 ## Learn More
 
-* [About Oracle Machine Learning for Python](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/about-oml4py.html#GUID-D00976CA-3663-4F32-A6A2-B6BF5A843ADC)
+* [About Oracle Machine Learning for Python](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/index.html)
 * [Oracle Machine Learning Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/)
 
 ## Acknowledgements
