@@ -159,7 +159,7 @@ Write the following script to create the **CUSTOMER_INSURANCE** table in OMLUSER
 CREATE TABLE OMLUSER.CUSTOMER_INSURANCE
 AS
 SELECT * FROM CUST_INSUR_LTV;
-
+</copy>
 ````
 ![ADB-sql-web](images/prerequisites-screenshot-20.jpg)
 
@@ -196,15 +196,11 @@ Access the OML Services link and connect with the credentials that we created ea
 ![Open-Scratchpad](images/automl-screenshot-1.jpg)
 
 
-* The notebook server is starting. Once opened we can run a select on the ``CUSTOMER_INSURANCE`` table
+* The notebook server is starting. Once opened we can run a select on the **CUSTOMER_INSURANCE** table
 
-
-
-````
-<copy> select * from customer_insurance;  </copy>
- ````
-
-
+  ````
+  <copy>select * from customer_insurance;</copy>
+  ````
 
  ![customer-insurance](images/automl-screenshot-2.jpg)
 
@@ -934,7 +930,7 @@ We are going to run the next steps:
  3. Deploy the model;
  4. Score a customer using the Decision Tree model;
 
-## Task Prerequisites
+### Task Prerequisites
 
 * Run the OML4PY workshop.
 * Run the OML-Services Workshop.

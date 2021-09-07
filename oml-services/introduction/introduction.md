@@ -1,12 +1,21 @@
-# Introduction to OML
+# Introduction to OML Services
+
+The REST API for Oracle Machine Learning Services provides REST API endpoints hosted on Oracle Autonomous Database. These endpoints allow you to store Machine Learning models along with its metadata, and create scoring endpoints for the model. The REST API for Oracle Machine Learning Services supports both Oracle Machine Learning models and ONNX format models.
+
+
+Estimated Time: 1 hour
+
+### Objectives
+*
+*
+*
 
 
 
-Estimate duration :
 
-Objectives
-
-Prerequisites
+### Prerequisites
+* Prior knowledge and familiarity of Machine Learning Algorithms
+*
 
 
 
