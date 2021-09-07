@@ -14,7 +14,7 @@ In this lab, you will:
 
 * Access to OCI OraclePartnerSas tenancy.
 
-## **STEP 1:** Create Compute Instance
+## Task 1: Create Compute Instance
 
 1. On OCI OraclePartnerSas tenancy, select **Germany Central (Frankfurt)** region.
 
@@ -36,7 +36,7 @@ In this lab, you will:
 5. After the instance is created, copy the Public IP address.
 
 
-## **STEP 2:** Verify Oracle Database and Listener.
+## Task 2: Verify Oracle Database and Listener.
 
 1. In your browser, go to [**Public-IP**]:6080/index.html?resize=remote
 
@@ -81,7 +81,7 @@ In this lab, you will:
     ````
 
 
-## **STEP 3:** Enable Database Resident Connection Pooling
+## Task 3: Enable Database Resident Connection Pooling
 
 1. AutoML requires Database Resident Connection Pooling (DRCP) to be running on the database server. Enable DRCP in the spfile.
 
@@ -132,7 +132,7 @@ In this lab, you will:
     ````
 
 
-## **STEP 4:** Activate Python environment and start Jupyter
+## Task 4: Activate Python environment and start Jupyter
 
 1. Go to the Python project folder in Terminal.
 
