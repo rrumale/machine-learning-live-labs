@@ -169,7 +169,7 @@ SELECT * FROM CUST_INSUR_LTV;
 The next part is to use this data and create an AutoML model.
 
 
-## **Task 1:** Introduce Insurance Customer Data
+## Task 1: Introduce Insurance Customer Data
 
 * In the Autonomous Database instance details page. Click on the Service Console button.
 ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
@@ -258,7 +258,7 @@ Notice that in the testing table we will not use any of the leading ``LTV`` or `
 
 
 
-## **Task 2:** Use AutoML from Autonomous Database
+## Task 2: Use AutoML from Autonomous Database
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
 ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -343,7 +343,7 @@ There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** ho
 ![Model Rename ](images/automl-screenshot-X1114.jpg)
 
 
-## **Task 3:** Deploy the model for REST access using OML Services
+## Task 3: Deploy the model for REST access using OML Services
 
 The next steps would be to take a model and deploy it for REST access.
 
@@ -387,9 +387,9 @@ The model will be deployed and a green banner will show the success of the deplo
 
 We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
-## **Task 4:**   Access the model using REST APIs using POSTMAN
+## Task 4:   Access the model using REST APIs using POSTMAN
 
-## ***Task 4.1:***   Prepare the REST calls
+## Task 4.1:*   Prepare the REST calls
 
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
@@ -497,7 +497,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
-## ***Task 4.2:***  Use REST calls to predict customer classification
+## Task 4.2:*  Use REST calls to predict customer classification
 
 in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
  - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
@@ -697,9 +697,9 @@ Notice the result in JSON format shows the probability for this customer to be i
 
 
 
-## **Task 5:**   Access the model using REST APIs using CURL
+## Task 5:   Access the model using REST APIs using CURL
 
-## ***Task 5.1:***   Prepare the REST calls
+## Task 5.1:   Prepare the REST calls
 
 To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
@@ -734,7 +734,7 @@ Don't forget to add a single quote at the beginning and at the end.
  ````
 $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA=='</copy>
  ````
-## ***Task 5.2:***  Use REST calls to predict customer classification
+## Task 5.2:  Use REST calls to predict customer classification
 
 * We will check the predicted classification for 3 distinct customers
 
@@ -897,7 +897,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 
 
 
-## ***Task 5.3:***  Verify the classification prediction
+## Task 5.3:  Verify the classification prediction
 
 * Return to OML services in Autonomous Database
 * Run the following SQL statement using the same ``CUST_IDs`` as in the REST call. You can replace the model name with the one used previously.
@@ -924,7 +924,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 Notice the predictions are the same as in the REST calls. In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
 
 
-## **Task 6** Import the Decision Tree model (optional)
+## Task 6 Import the Decision Tree model (optional)
 
 In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3.
 
@@ -939,7 +939,7 @@ We are going to run the next steps:
 * Run the OML4PY workshop.
 * Run the OML-Services Workshop.
 
-## ***Task 6.1***: Extract the saved model to a file
+## Task 6.1: Extract the saved model to a file
 
 * Connect to the VM and open a Terminal window.
 
@@ -993,7 +993,7 @@ $<copy>ls ~/dmuser</copy>
 
 
 
-## ***Task 6.2***: Load the model in the Autonomous Database repository
+## Task 6.2: Load the model in the Autonomous Database repository
 
 *  In the Postman session opened at Task 4 run the following Get method to get the list of models deployed.
 
@@ -1065,7 +1065,7 @@ The response is that the model is created.
 Copy the **`modelId`** displayed in the JSON response.
 
 
-## ***Task 6.3***: Deploy the model
+## Task 6.3: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
@@ -1112,7 +1112,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## ***Task 6.4***: Score a customer using the Decision Tree model
+## Task 6.4: Score a customer using the Decision Tree model
 
 In this step we are going to score Fran Hobbs against our Decision Tree imported model.
 

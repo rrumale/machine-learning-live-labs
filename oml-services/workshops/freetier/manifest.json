@@ -1,0 +1,26 @@
+{
+  "workshoptitle": "Oracle Machine Learning Workshop",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "./../../introduction/introduction.md"
+    },
+    {
+    "title": "Prepare Setup",
+    "description": "How to download your ORM stack and update security rules for an existing VCN.",
+    "filename": "./../../preparation/preparation.md"
+    },
+    {
+      "title": "OML using REST Services",
+      "description": "OML using REST Services",
+      "filename": "./../../oml-services/oml-services.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

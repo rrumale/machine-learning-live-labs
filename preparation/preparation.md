@@ -174,6 +174,8 @@ In this lab, you will:
     deactivate
     ````
 
+You may now [proceed to the next lab](#next).
+
 ## Acknowledgements
-* **Author** - Valentin Leonard Tabacaru 
+* **Author** - Valentin Leonard Tabacaru
 * **Last Updated By/Date** -  Valentin Leonard Tabacaru, July 2021
