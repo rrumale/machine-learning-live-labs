@@ -15,7 +15,7 @@ In this lab, you will:
 
 ## Task 11: Automated Machine Learning: Model Tuning (continued)
 
-7. Optioanlly, an example invocation of model tuning with user-defined search ranges for selected hyperparameters on a new tuning metric (`f1_macro`).
+7. Optionally, an example invocation of model tuning with user-defined search ranges for selected hyperparameters on a new tuning metric (`f1_macro`).
 
     ````
     <copy>

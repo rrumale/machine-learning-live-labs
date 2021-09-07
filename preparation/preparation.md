@@ -175,5 +175,5 @@ In this lab, you will:
     ````
 
 ## Acknowledgements
-* **Author** - Valentin Leonard Tabacaru
+* **Author** - Valentin Leonard Tabacaru 
 * **Last Updated By/Date** -  Valentin Leonard Tabacaru, July 2021
