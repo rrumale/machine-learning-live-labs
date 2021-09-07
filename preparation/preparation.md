@@ -24,14 +24,16 @@ In this lab, you will:
 
 4. Next to **OML-WS-IMG** custom image click **⋮** > **Create Instance**.
 
-- Name: give it a short name, e.g. *oml-vm-xy*.
-- Create in compartment: choose your compartment.
-- Under Network, Select existing virtual cloud network: Virtual cloud network in VTABACARU, REHEVCN.
+    - Name: give it a short name, e.g. *oml-vm-xy*.
+    - Create in compartment: choose your compartment.
+    - Under Network, Select existing virtual cloud network: Virtual cloud network in VTABACARU, REHEVCN.
+    - Under Subnet, Select existing subnet: use the Public Subnet.
+    - Public IP Address: it is necessary to Assign a public IPv4 address.
 
-> **Note** : If you want to use your own VCN, change the compartment and select your VCN. You need to have ports TCP 6080 for NoVNC and TCP 8888 for Jupyter open in your VCN Public Subnet Security List.
-
-- Under Subnet, Select existing subnet: use the Public Subnet.
-- Public IP Address: it is necessary to Assign a public IPv4 address.
+> **Note** : If you want to use your own VCN, change the compartment and select your VCN. You need to have the following ports open in your VCN Public Subnet Security List:
+> - TCP 6080 for NoVNC
+> - TCP 8888 for Jupyter
+> - TCP 8787 for RStudio
 
 5. After the instance is created, copy the Public IP address.
 
@@ -81,45 +83,17 @@ In this lab, you will:
     ````
 
 
-## Task 3: Enable Database Resident Connection Pooling
+## Task 3: Start Database Resident Connection Pooling
 
-1. AutoML requires Database Resident Connection Pooling (DRCP) to be running on the database server. Enable DRCP in the spfile.
-
-    ````
-    alter system set ENABLE_PER_PDB_DRCP=TRUE scope=spfile;
-    ````
-
-2. Bounce your database.
+1. Connect to your PDB as SYSDBA.
 
     ````
-    shutdown immediate
-
-    startup
+    sqlplus sys/MLlearnPTS#21_@MLPDB1 as sysdba
     ````
 
-3. Connect to your PDB as SYSDBA.
+2. Start the pool. Every time you restart the database, you will have to start the pool.
 
     ````
-    conn sys/MLlearnPTS#21_@<YOUR-HOSTNAME>:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com as sysdba
-    ````
-
-4. Set a couple of DRCP parameters, one by one.
-
-    ````
-    exec DBMS_CONNECTION_POOL.ALTER_PARAM('SYS_DEFAULT_CONNECTION_POOL', 'INACTIVITY_TIMEOUT', '120');
-
-    exec DBMS_CONNECTION_POOL.ALTER_PARAM('SYS_DEFAULT_CONNECTION_POOL', 'MAX_THINK_TIME', '120');
-
-    exit
-    ````
-
-5. Start the pool. Every time you restart the database, you will have to start the pool.
-
-    ````
-    sqlplus /nolog
-
-    conn sys/MLlearnPTS#21_@<YOUR-HOSTNAME>:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com as sysdba
-
     exec DBMS_CONNECTION_POOL.start_pool;
 
     exit
@@ -128,7 +102,7 @@ In this lab, you will:
 6. Test DRCP on your PDB.
 
     ````
-    sqlplus oml_user/MLlearnPTS#21_@<YOUR-HOSTNAME>:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com:POOLED
+    sqlplus oml_user/MLlearnPTS#21_@MLPDB1P
     ````
 
 
@@ -140,12 +114,12 @@ In this lab, you will:
     cd ~/projects/oml4py/
     ````
 
-2. Activate Python environment. Install a Python library I forgot about. Ignore the warning message about Pip old version.
+2. Activate Python environment. Install any Python library in this environment. Ignore the warning message about Pip old version.
 
     ````
     . orclvenv/bin/activate
 
-    pip install pydataset
+    pip install [library]
     ````
 
 3. Start Jupyter Notebook.
@@ -160,7 +134,11 @@ In this lab, you will:
     http://0.0.0.0​:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
     ````
 
-5. If you want to connect to Jupyter Notebook from your browser, use the Public IP address: http://[**Public-IP**]:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
+5. If you want to connect to Jupyter Notebook from your browser, use the Public IP address: 
+
+    ````
+    http://[**Public-IP**]:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
+    ````
 
 6. This Terminal window must stay open until you finish and close Jupyter Notebook. To close, press **Ctrl-C** and **y**.
 
@@ -174,7 +152,20 @@ In this lab, you will:
     deactivate
     ````
 
-You may now [proceed to the next lab](#next).
+## Task 5: Connect to RStudio
+
+1. On the remote desktop, launch in a browser window and navigate to:
+
+    ````
+    localhost​:8787
+    ````
+
+2. If you want to connect to RStudio from your browser, use the Public IP address: 
+
+    ````
+    [**Public-IP**]:8787
+    ````
+
 
 ## Acknowledgements
 * **Author** - Valentin Leonard Tabacaru
