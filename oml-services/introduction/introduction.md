@@ -6,11 +6,11 @@ The REST API for Oracle Machine Learning Services provides REST API endpoints ho
 Estimated Time: 1 hour
 
 ### Objectives
-*
-*
-*
-
-
+•	Load data into Autonomous Database
+•	Prepare the customer insurance date
+•	Use AutoML to create a Machine Learning model.
+•	Use Postman to score the machine learning model using REST APIs  
+•	Use Curl to score the machine-learning model using REST APIs in command line.
 
 
 ### Prerequisites
