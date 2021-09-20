@@ -104,7 +104,7 @@ Notice how the small padlock closes in both options, which represents that you a
 
 ![oml4sql_user-connection](images/oml4sql_user-connection.png)
 
-9. Copy and execute this script with oml4sql_user, to 
+9. Copy and execute this script with oml4sql_user:
    
     ````
     <copy>
