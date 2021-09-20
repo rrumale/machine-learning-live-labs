@@ -21,12 +21,16 @@ Estimated Lab Time: 2 hours
 
 In this lab, you will:
 
-* **Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-* **Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields. 
-* **Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
-* **Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
-* **Evaluation**: Next, test model accuracy, make sure the model makes sense.
-* **Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+* **1. Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
+* **2. Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields. 
+* **3. Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
+* **4. Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
+* **5. Evaluation**: Next, test model accuracy, make sure the model makes sense.
+* **6. Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+
+* Database Developer to Data Scientist Journey
+
+![process](images/process.png)
 
 
 ### Prerequisites
@@ -144,8 +148,209 @@ Notice how the small padlock closes in both options, which represents that you a
 
 10. Check that there are no errors in the output of the script.
 
+11. Review your settings table: 
+
+![settings-table](images/settings-table.png)
 
 
+## Task 4: Modeling
+
+* CREATE A Model with the name: **SVMO_CUST_Clas_sample**
+We use One-Class Support Vector Machine, Support Vector Machine (SVM) as a one-class classifier is used for detecting anomalies.
+Oracle Machine Learning for SQL uses SVM as the one-class classifier for anomaly detection. When SVM is used for anomaly detection, it has the classification machine learning function but no target.
+
+One-class SVM models, when applied, produce a prediction and a probability for each case in the scoring data. If the prediction is 1, the case is considered typical. If the prediction is 0, the case is considered anomalous. This behavior reflects the fact that the model is trained with normal data.
+ 
+Note the NULL specification for target column name.
+
+* For more information abaout SVM in Oracle chek this link: [Support Vector Machine,] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/support-vector-machine.html#GUID-FD5DF1FB-AAAA-4D4E-84A2-8F645F87C344)
+   
+    ````
+    <copy>
+	BEGIN
+	  DBMS_DATA_MINING.CREATE_MODEL(
+		model_name          => 'SVMO_CUST_Clas_sample',
+		mining_function     => dbms_data_mining.classification,
+		data_table_name     => 'cust_data_one_class_pv',
+		case_id_column_name => 'cust_id',
+		target_column_name  => NULL,
+		settings_table_name => 'svmo_cust_sample_settings');
+	END;
+	/
+    </copy>
+    ```` 
+ 
+* DISPLAY MODEL SETTINGS
+
+    ````
+    <copy>
+	SELECT setting_name, setting_value
+	  FROM user_mining_model_settings
+	 WHERE model_name = 'SVMO_CUST_CLAS_SAMPLE'
+	ORDER BY setting_name;
+    </copy>
+    ```` 
+	
+![settings-model](images/settings-model.png)
+
+* Review your model attributes. DISPLAY MODEL SIGNATURE 
+
+    ````
+    <copy>
+	SELECT attribute_name, attribute_type
+	  FROM user_mining_model_attributes
+	 WHERE model_name = 'SVMO_CUST_CLAS_SAMPLE'
+	ORDER BY attribute_name;
+    </copy>
+    ```` 
+	
+![model-attributesl](images/model-attributes.png)
+
+* Review your model details. Model details are available only for SVM models with linear kernel.
+
+    ````
+    <copy>
+	WITH
+	mod_dtls AS (
+	SELECT *
+	  FROM TABLE(DBMS_DATA_MINING.GET_MODEL_DETAILS_SVM('SVMO_CUST_CLAS_SAMPLE'))
+	),
+	model_details AS (
+	SELECT D.class, A.attribute_name, A.attribute_value, A.coefficient
+	  FROM mod_dtls D,
+		   TABLE(D.attribute_set) A
+	ORDER BY D.class, ABS(A.coefficient) DESC
+	)
+	SELECT class, attribute_name aname, attribute_value aval, coefficient coeff
+	  FROM model_details
+	 WHERE ROWNUM < 50;	
+    </copy>
+    ```` 	 
+
+![model-details](images/model-details.png)
+
+* Review your model views that are generated.
+
+    ````
+    <copy>
+	 SELECT view_name, view_type FROM user_mining_model_views
+	WHERE model_name='SVMO_CUST_CLAS_SAMPLE'
+	ORDER BY view_name;
+    </copy>
+    ```` 	 
+	
+![model-views](images/model-views.png)
+
+## Task 5: Evaluation 
+
+* APPLY THE MODEL
+
+Depending on the business case, the model can be scored against the build data (e.g, business cases 1 and 2) or against new, previously unseen data (e.g., business case 3). New apply data needs to undergo the same transformations as the build data (see business case 3).
+
+
+* BUSINESS CASE 1
+
+Find the top 5 outliers - customers that differ the most from  the rest of the population. Depending on the application, such  atypical customers can be removed from the data (data cleansing). Explain which attributes cause them to appear different.
+
+    ````
+    <copy>
+	set long 20000
+	col pd format a90
+	SELECT cust_id, pd FROM
+	(SELECT cust_id,
+			PREDICTION_DETAILS(SVMO_CUST_CLAS_SAMPLE, 0 using *) pd,
+			rank() over (order by prediction_probability(
+						 SVMO_CUST_CLAS_SAMPLE, 0 using *) DESC, cust_id) rnk
+	 FROM cust_data_one_class_pv)
+	WHERE rnk <= 5
+	order by rnk;
+    </copy>
+    ```` 
+	
+![case-1](images/case-1.png)
+
+* BUSINESS CASE 2
+
+Find demographic characteristics of the **typical** BUY_INSURANCE=Yes members.
+These statistics will not be influenced by outliers and are likely to provide a more truthful picture of the population of interest than statistics computed on the entire group of insurance members. Statistics are computed on the original (non-transformed) data.
+
+    ````
+    <copy>
+	column SEX format a12
+	SELECT SEX, round(avg(age)) age, 
+		   round(avg(TIME_AS_CUSTOMER)) TIME_AS_CUSTOMER,
+		   count(*) cnt
+	FROM cust_data_one_class_pv
+	WHERE prediction(SVMO_CUST_CLAS_SAMPLE using *) = 1
+	GROUP BY SEX
+	ORDER BY SEX;
+    </copy>
+    ```` 
+	
+![case-2](images/case-2.png)
+
+## Task 6: Deployment 
+
+* BUSINESS CASE 3
+
+Compute probability of a new/hypothetical customer being a typical BUY_INSURANCE=Yes.
+Necessary data preparation on the input attributes is performed automatically during model scoring since the model was build with auto data prep.
+
+    ````
+    <copy>
+	select ROUND(prob_typical,5)*100||'%' Probability_BUY
+	from
+	(select 
+	prediction_probability(SVMO_CUST_CLAS_SAMPLE, 1 using 
+								 44 AS age,
+								 3 AS TIME_AS_CUSTOMER,
+								 'Programmer/Developer' AS PROFESSION,
+								 'SINGLE' AS MARITAL_STATUS,
+								 'NorthEast' AS REGION,
+								 'NY' AS STATE,
+								 'M' AS SEX,
+								 '20442' AS SALARY,
+								 '0' AS HOUSE_OWNERSHIP
+								 ) prob_typical 
+	from dual);
+    </copy>
+    ```` 
+
+![case-3](images/case-3.png)
+
+
+* BUSINESS USE CASE 4
+
+Identify rows that are most atypical in the input dataset.
+Consider each type of marital status to be separate, so the most anomalous rows per married status group should be returned.
+Provide the top three attributes leading to the reason for the record being an anomaly.
+The partition by clause used in the analytic version of the prediction_probability function will lead to separate models being built and scored for each marital status.
+
+    ````
+    <copy>
+	col MARITAL_STATUS format a30
+	select cust_id, MARITAL_STATUS, rank_anom, anom_det FROM
+	(SELECT cust_id, MARITAL_STATUS, anom_det,
+			rank() OVER (PARTITION BY MARITAL_STATUS 
+						 ORDER BY ROUND(ANOM_PROB,8) DESC,cust_id) rank_anom FROM
+	 (SELECT cust_id, MARITAL_STATUS,
+			PREDICTION_PROBABILITY(OF ANOMALY, 0 USING *) 
+			  OVER (PARTITION BY MARITAL_STATUS) anom_prob,
+			PREDICTION_DETAILS(OF ANOMALY, 0, 3 USING *) 
+			  OVER (PARTITION BY MARITAL_STATUS) anom_det
+	   FROM cust_data_one_class_pv
+	 ))
+	where rank_anom < 3 order by 2, 3;
+    </copy>
+    ```` 
+
+![case-4](images/case-4.png)
+
+![case-4](images/case-4-2.png)
+
+## Conclusion
+
+With this practice, we can conclude that the SVM algorithm is very useful to solve problems of detection of anomalies of atypical cases and at the same time we can take advantage of it to be able to adequately qualify a prospect by calculating the probability of how typical it can become, what which becomes a powerful tool for salespeople and marketing people so they can close more sales and get more income for the company more quickly.
 
 
 ## Acknowledgements
