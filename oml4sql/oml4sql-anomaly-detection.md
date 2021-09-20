@@ -37,7 +37,7 @@ In this lab, you will:
     
 ## Task 1: Business Understanding 
     
-1. Review Business Objectives that describe in ![oml4sql-use-case.md](oml4sql-use-case.md) file.
+1. Review Business Objectives that describe in [oml4sql-use-case.md](oml4sql-use-case.md) file.
 
 ## Task 2: Data Understanding 
 
