@@ -11,7 +11,7 @@ OML4SQL offers a comprehensive set of in-database algorithms for performing a va
 The PL/SQL API and SQL language operators provide direct access to OML4SQL functionality in Oracle Database. 
 
 
-In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in oml4sql-use-case.md file.
+In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](oml4sql-use-case.md) file.
 
 For more information about [OML4SQL API Guide,](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmapi/introduction-to-oml4sql.html#GUID-429CF74D-C4B7-4302-9C33-5292A664E2AD) 
 
@@ -41,10 +41,14 @@ In this lab, you will:
 
 ## Task 2: Data Understanding 
 
-* Data information of insurance clients is like this:.
+* Data information of insurance clients is like this:
+
 ![cust_insur_ltv-table](images/cust_insur_ltv-table.png)
-* Sample of single record is like this:.
+
+* Sample of single record is like this:
+
 ![single-record-sample](images/single-record.png)
+
 * The most important field in this use case, is BUY_INSURANCE, because businesses need to know who is their buyer persona typical and atypical. 
 
 ## Task 3: Data Preparation 
@@ -53,13 +57,22 @@ In this lab, you will:
 * You can download here [SQL Developer Download,](https://www.oracle.com/tools/downloads/sqldev-downloads.html)
 
 2. Once installed SQL Developer, you need to configure the remote connection in SSH Hosts of SQL Developer feature, following these instructions:
+
 ![view-SSH-Hosts](images/view-ssh.png)
+
 3. Rigth clic on SSH Hots and then do clic in New SSH Host, write values in each field and then clic Ok. 
+
 ![ssh-remote-host](images/ssh-remote-host.png)
+
 4. Rigth clic on the fisrt oml4sql tab in SSH Hosts an clic connect, and then right clic in the submenu oml4sql tab an clic connect. 
-Notice how the small padlock closes in both options, which represents that you are already remotely connected to your VM and you are ready to create a connection to your 5. schema from SQL Developer. 
+Notice how the small padlock closes in both options, which represents that you are already remotely connected to your VM and you are ready to create a connection to your 
+
+5. schema from SQL Developer. 
+
 ![conection-ssh](images/conection-ssh.png)
+
 6. Create SQL Developer new database connection with **SYS** user to your Oracle 21c Pluggable Database, and test connectivity with password: **MLlearnPTS#21_**.
+
 ![Database-connection-SYS](images/Database-connection-SYS.png)
 
 7. Once the database connection is open and SQL Developer Worksheet is ready, execute this script to create the user oml4sql_user and grant privileges to work with OML4SQL API, and generate a copy of table CUST_INSUR_LTV.
@@ -88,6 +101,7 @@ Notice how the small padlock closes in both options, which represents that you a
     ````
 
 8. Create SQL Developer new database connection with **oml4sql_user** user to your Oracle 21c Pluggable Database, and test connectivity with password: **oml4sql_user**.
+
 ![oml4sql_user-connection](images/oml4sql_user-connection.png)
 
 9. Copy and execute this script with oml4sql_user, to 
@@ -95,24 +109,10 @@ Notice how the small padlock closes in both options, which represents that you a
     ````
     <copy>
     
------------------------------------------------------------------------
---                            BUILD THE MODEL
------------------------------------------------------------------------
-
--- Cleanup old model with the same name (if any)
 BEGIN DBMS_DATA_MINING.DROP_MODEL('SVMO_CUST_Clas_sample');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
 
---------------------------------
--- PREPARE DATA
---
--- Automatic data preparation is used.
-
--------------------
--- SPECIFY SETTINGS
---
--- Cleanup old settings table (if any)
 BEGIN
   EXECUTE IMMEDIATE 'DROP TABLE svmo_cust_sample_settings';
 EXCEPTION WHEN OTHERS THEN
@@ -120,25 +120,13 @@ EXCEPTION WHEN OTHERS THEN
 END;
 /
 
--- CREATE AND POPULATE A SETTINGS TABLE
---
 set echo off
 CREATE TABLE svmo_cust_sample_settings (
   setting_name  VARCHAR2(30),
   setting_value VARCHAR2(4000));
 set echo on
 
-BEGIN       
-  -- Populate settings table
-  -- SVM needs to be selected explicitly (default classifier: Naive Bayes)
-   
-  -- Examples of other possible overrides are:
-  -- select a different rate of outliers in the data (default 0.1)
-  -- (dbms_data_mining.svms_outlier_rate, ,0.05);
-  -- select a kernel type (default kernel: selected by the algorithm)
-  -- (dbms_data_mining.svms_kernel_function, dbms_data_mining.svms_linear);
-  -- (dbms_data_mining.svms_kernel_function, dbms_data_mining.svms_gaussian);
-   
+BEGIN        
   INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
   (dbms_data_mining.algo_name, dbms_data_mining.algo_support_vector_machines);  
   INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
@@ -146,22 +134,12 @@ BEGIN
 END;
 /
 
---------------------------------------------------------------------------------
--- Data for one class model
--- Only data for positive BUY_INSURANCE=Yes (one class) is used.
-
 CREATE OR REPLACE VIEW cust_data_one_class_v AS
 SELECT *
 FROM cust_insur_ltv
 WHERE BUY_INSURANCE = 'Yes';
 
---------------------------------------------------------------------------------
---
--- Create view  cust_data_one_class_pv with a parallel hint
---
---------------------------------------------------------------------------------
 CREATE or REPLACE VIEW cust_data_one_class_pv AS SELECT /*+ parallel (4)*/ * FROM cust_data_one_class_v;
-
 
     </copy>
     ````
