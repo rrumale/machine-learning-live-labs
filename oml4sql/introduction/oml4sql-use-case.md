@@ -22,12 +22,12 @@ We can use historical records to make predictions with machine learning.  An emp
 
 In this lab, you will:
 
-* Business Understanding: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-* Data Understanding: (Review the data; does it makes sense?), Understand the meaning of fields. 
-* Data Preparation: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
-* Modeling: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
-* Evaluation: Next, test model accuracy, make sure the model makes sense.
-* Deployment: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+* **Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
+* **Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields. 
+* **Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
+* **Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
+* **Evaluation**: Next, test model accuracy, make sure the model makes sense.
+* **Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
 
 
 ### Prerequisites
