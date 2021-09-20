@@ -38,6 +38,11 @@
       "filename": "./../../oml4sql/oml4sql.md"
     },
     {
+      "title": "F1 OML Service",
+      "description": "Pridicting winner for next F1 season.",
+      "filename": "./../../f1-oml-services/f1-oml-services.md"
+    },
+    {
       "title": "OML AutoML UI",
       "description": "Handon workshop on using AutoML UI.",
       "filename": "./../../automl-ui/automl-ui.md"

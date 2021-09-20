@@ -12,76 +12,76 @@
 ## Data Loading
 
 1. Upload the files in a Object Storage Bucket
-![Data Loading](./Images/data_loading_01.jpg)
+![Data Loading](./images/data_loading_01.jpg)
 
 2. Open Autonomous Database Actions
-![Data Loading](./Images/data_loading_02.jpg)
+![Data Loading](./images/data_loading_02.jpg)
 
 Connect with the RBRUSER user and password.
 In the Database Actions Launchpad, in the Data Tools section, chose Data Load.
-![Data Loading](./Images/data_loading_03.jpg)
+![Data Loading](./images/data_loading_03.jpg)
 
 Chose Load Data and Cloud Storage.
-![Data Loading](./Images/data_loading_04.jpg)
+![Data Loading](./images/data_loading_04.jpg)
 
 3. In the Data Load menu, chose a pre-define cloud storage, or define a new cloud storage to the Object Storage Bucket where the files are uploaded.
-![Data Loading](./Images/data_loading_05.jpg)
+![Data Loading](./images/data_loading_05.jpg)
 
 Drag each file one by one in the middle.
-![Data Loading](./Images/data_loading_06.jpg)
+![Data Loading](./images/data_loading_06.jpg)
 
 Click on the Run button to upload all the files.
-![Data Loading](./Images/data_loading_07.jpg)
+![Data Loading](./images/data_loading_07.jpg)
 
 
 ## Data Preparation
 
 1. Connect the the Autonomous Database Machine Learning home with `RBRUSER` and `Welcome12345`;
-![Data Preparation](./Images/data_preparation_01.jpg)
+![Data Preparation](./images/data_preparation_01.jpg)
 
 2. Go to Notebooks
-![Data Preparation](./Images/data_preparation_02.jpg)
+![Data Preparation](./images/data_preparation_02.jpg)
 
 3. Import and open [**`F1_OML_SERVICES`**](https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/bf9m9JiVydMdRhomPo3mq3_ehLsFA3Qoy1gJlmStQZR1EA6q5QeylEY9ihLB99Md/n/oraclepartnersas/b/RBR/o/F1_OML_SERVICES.json) notebook.
-![Data Preparation](./Images/data_preparation_03.jpg)
+![Data Preparation](./images/data_preparation_03.jpg)
 
 4. You can run all paragraphs or each paragraph in turn.
 
 * Create Driver Data View for all the drivers running in 2021
-![Data Preparation](./Images/data_preparation_04.jpg)
+![Data Preparation](./images/data_preparation_04.jpg)
 
 * Create Circuit Data View with details about all the circuits
-![Data Preparation](./Images/data_preparation_05.jpg)
+![Data Preparation](./images/data_preparation_05.jpg)
 
 * Create Extended Dataset table
-![Data Preparation](./Images/data_preparation_06.jpg)
+![Data Preparation](./images/data_preparation_06.jpg)
 
 Run Data Insights on the `F1_dataset_extended` table.
 
 ## Data Insights
 
 1. Open Autonomous Database Actions
-![Data Insights](./Images/data_loading_02.jpg)
+![Data Insights](./images/data_loading_02.jpg)
 
 2. Connect with the RBRUSER user and password.
 In the Database Ations Launchpad, in the Data Tools section, chose Data Insights.
-![Data Insights](./Images/data_insights_01.jpg)
+![Data Insights](./images/data_insights_01.jpg)
 
 3. In the Data Insights page chose the following:
 
 * Schema: RBRUSER
 * Analytic View/ Table: F1_dataset_extended
 * Column: prognostication
-![Data Insights](./Images/data_insights_02.jpg)
+![Data Insights](./images/data_insights_02.jpg)
 
 Click Search.
 The process might take a while and it starts populating with graphical insights right away.
-![Data Insights](./Images/data_insights_03.jpg)
+![Data Insights](./images/data_insights_03.jpg)
 
 
 One insight that we can see is over QUALI_POS = 01 what is the distribution of constructors:
 
-![Data Insights](./Images/data_insights_04.jpg)
+![Data Insights](./images/data_insights_04.jpg)
 
 ## Running AutoML
 
@@ -96,12 +96,12 @@ In the experiment settings chose:
 * Predict: avg_lap_time
 * Case ID: raceId
 * Prediction Type: regression
-![AutoML](./Images/auto_ml_01.jpg)
+![AutoML](./images/auto_ml_01.jpg)
 
 
 In the Additiona Settings chose
 Database Service Level: HIGH
-![AutoML](./Images/auto_ml_02.jpg)
+![AutoML](./images/auto_ml_02.jpg)
 
 In the Features section pick the following columns to be used:
 * avg_stop_duration
@@ -123,22 +123,22 @@ In the Features section pick the following columns to be used:
 * stops
 * stop_laps
 * year
-![AutoML](./Images/auto_ml_03.jpg)
+![AutoML](./images/auto_ml_03.jpg)
 
 Click Start for Better Accuracy.
-![AutoML](./Images/auto_ml_04.jpg)
+![AutoML](./images/auto_ml_04.jpg)
 
 When the experiment is completed we have a list of model whit their scoring. Chose the one with the highest scoring and click rename to rename the model to `F1_AVG_LAPTIME`.
-![AutoML](./Images/auto_ml_05.jpg)
+![AutoML](./images/auto_ml_05.jpg)
 
 You can click on Deploy also to be able to access the model using REST APIs.
-![AutoML](./Images/auto_ml_06.jpg)
+![AutoML](./images/auto_ml_06.jpg)
 
 Enter the following:
 * Name: F1_AVG_LAPTIME
 * URI: laptime
 * Version: 1
-![AutoML](./Images/auto_ml_07.jpg)
+![AutoML](./images/auto_ml_07.jpg)
 
 
 
@@ -151,7 +151,7 @@ In the experiment settings chose:
 * Predict: stops
 * Case ID: raceId
 * Prediction Type: CLASSIFICATION
-![AutoML](./Images/auto_ml_08.jpg)
+![AutoML](./images/auto_ml_08.jpg)
 
 
 In the Additiona Settings chose
@@ -159,7 +159,7 @@ Database Service Level: HIGH
 Model Metric: F1
 Weight Option: Weighted
 
-![AutoML](./Images/auto_ml_09.jpg)
+![AutoML](./images/auto_ml_09.jpg)
 
 In the Features section pick the following columns to be used:
 * avg_stop_duration
@@ -191,23 +191,23 @@ In the Features section pick the following columns to be used:
 * psition
 
 
-![AutoML](./Images/auto_ml_10.jpg)
+![AutoML](./images/auto_ml_10.jpg)
 
 
 Click Start for Better Accuracy.
-![AutoML](./Images/auto_ml_11.jpg)
+![AutoML](./images/auto_ml_11.jpg)
 
 When the experiment is completed we have a list of model whit their scoring. Chose the one with the highest scoring and click rename to rename the model to `F1_stops_rf`.
-![AutoML](./Images/auto_ml_12.jpg)
+![AutoML](./images/auto_ml_12.jpg)
 
 You can click on Deploy also to be able to access the model using REST APIs.
-![AutoML](./Images/auto_ml_13.jpg)
+![AutoML](./images/auto_ml_13.jpg)
 
 Enter the following:
 * Name: F1_stops_rf
 * URI: stops
 * Version: 1
-![AutoML](./Images/auto_ml_14.jpg)
+![AutoML](./images/auto_ml_14.jpg)
 
 
 3. Predict the Qualifying position of a driver in a race. We are going to use classification to predict the probability of `quali_pos` to be 1, 2,3 up to 20 for a specific driver looking at past data and driver performance that we have in the `F1_dataset_extended` table.
@@ -222,7 +222,7 @@ In the experiment settings chose:
 * Case ID: raceId
 * Prediction Type: CLASSIFICATION
 
-![AutoML](./Images/auto_ml_15.jpg)
+![AutoML](./images/auto_ml_15.jpg)
 
 
 In the Additiona Settings chose
@@ -230,7 +230,7 @@ Database Service Level: HIGH
 Model Metric: F1
 Weight Option: Weighted
 
-![AutoML](./Images/auto_ml_09.jpg)
+![AutoML](./images/auto_ml_09.jpg)
 
 In the Features section pick the following columns to be used:
 * Year
@@ -260,14 +260,14 @@ In the Features section pick the following columns to be used:
 * laps
 
 
-![AutoML](./Images/auto_ml_16.jpg)
+![AutoML](./images/auto_ml_16.jpg)
 
 
 Click Start for Better Accuracy.
-![AutoML](./Images/auto_ml_17.jpg)
+![AutoML](./images/auto_ml_17.jpg)
 
 When the experiment is completed we have a list of model whit their scoring. Chose the one with the highest scoring and click rename to rename the model to `f1_quali_rf`.
-![AutoML](./Images/auto_ml_18.jpg)
+![AutoML](./images/auto_ml_18.jpg)
 
 
 3. Predict the final Position of a driver in a race. We are going to use classification to predict the probability of `position` to be 1, 2,3 up to 20 for a specific driver looking at past data and driver performance that we have in the `F1_dataset_extended` table.
@@ -281,7 +281,7 @@ In the experiment settings chose:
 * Case ID: raceId
 * Prediction Type: CLASSIFICATION
 
-![AutoML](./Images/auto_ml_19.jpg)
+![AutoML](./images/auto_ml_19.jpg)
 
 
 In the Additiona Settings chose
@@ -289,7 +289,7 @@ Database Service Level: HIGH
 Model Metric: F1
 Weight Option: Weighted
 
-![AutoML](./Images/auto_ml_09.jpg)
+![AutoML](./images/auto_ml_09.jpg)
 
 
 In the Features section pick the following columns to be used:
@@ -323,14 +323,14 @@ In the Features section pick the following columns to be used:
 * avg_lap_time
 * stop_laps
 
-![AutoML](./Images/auto_ml_20.jpg)
+![AutoML](./images/auto_ml_20.jpg)
 
 
 Click Start for Better Accuracy.
-![AutoML](./Images/auto_ml_21.jpg)
+![AutoML](./images/auto_ml_21.jpg)
 
 When the experiment is completed we have a list of model whit their scoring. Chose the one with the highest scoring and click rename to rename the model to `F1_position_rf`.
-![AutoML](./Images/auto_ml_22.jpg)
+![AutoML](./images/auto_ml_22.jpg)
 
 We have the models ready, we will use them to make predictions.
 
@@ -346,7 +346,7 @@ Returning to our notebook: **`F1_OML_SERVICES`**  and scroll to the bottom to ru
 %sql
 <copy> select "date","name" from races where "year"=2021 </copy>
 ````
-![Data Prediction](./Images/data_prediction_01.jpg)
+![Data Prediction](./images/data_prediction_01.jpg)
 
 
 2. Run the following query to predict the standings for one of the races that you choose:
@@ -411,7 +411,7 @@ order by 3, 4 desc, 5 asc </copy>
 When you click on Run notice the field with the labe **GP_NAME** at the bottom of the paragraph. Insert ther any Grand Prix name from the above query.
 
 
-![Data Prediction](./Images/data_prediction_02.jpg)
+![Data Prediction](./images/data_prediction_02.jpg)
 
 Notice that the 2 contenders for the championship have the highest probabiliy to get goth Pole Position and Race Win.
 
