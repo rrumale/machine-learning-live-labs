@@ -108,39 +108,37 @@ Notice how the small padlock closes in both options, which represents that you a
    
     ````
     <copy>
-    
-BEGIN DBMS_DATA_MINING.DROP_MODEL('SVMO_CUST_Clas_sample');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
+	BEGIN DBMS_DATA_MINING.DROP_MODEL('SVMO_CUST_Clas_sample');
+	EXCEPTION WHEN OTHERS THEN NULL; END;
+	/
 
-BEGIN
-  EXECUTE IMMEDIATE 'DROP TABLE svmo_cust_sample_settings';
-EXCEPTION WHEN OTHERS THEN
-  NULL;
-END;
-/
+	BEGIN
+	  EXECUTE IMMEDIATE 'DROP TABLE svmo_cust_sample_settings';
+	EXCEPTION WHEN OTHERS THEN
+	  NULL;
+	END;
+	/
 
-set echo off
-CREATE TABLE svmo_cust_sample_settings (
-  setting_name  VARCHAR2(30),
-  setting_value VARCHAR2(4000));
-set echo on
+	set echo off
+	CREATE TABLE svmo_cust_sample_settings (
+	  setting_name  VARCHAR2(30),
+	  setting_value VARCHAR2(4000));
+	set echo on
 
-BEGIN        
-  INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
-  (dbms_data_mining.algo_name, dbms_data_mining.algo_support_vector_machines);  
-  INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
-  (dbms_data_mining.prep_auto, dbms_data_mining.prep_auto_on);
-END;
-/
+	BEGIN        
+	  INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
+	  (dbms_data_mining.algo_name, dbms_data_mining.algo_support_vector_machines);  
+	  INSERT INTO svmo_cust_sample_settings (setting_name, setting_value) VALUES
+	  (dbms_data_mining.prep_auto, dbms_data_mining.prep_auto_on);
+	END;
+	/
 
-CREATE OR REPLACE VIEW cust_data_one_class_v AS
-SELECT *
-FROM cust_insur_ltv
-WHERE BUY_INSURANCE = 'Yes';
+	CREATE OR REPLACE VIEW cust_data_one_class_v AS
+	SELECT *
+	FROM cust_insur_ltv
+	WHERE BUY_INSURANCE = 'Yes';
 
-CREATE or REPLACE VIEW cust_data_one_class_pv AS SELECT /*+ parallel (4)*/ * FROM cust_data_one_class_v;
-
+	CREATE or REPLACE VIEW cust_data_one_class_pv AS SELECT /*+ parallel (4)*/ * FROM cust_data_one_class_v;
     </copy>
     ````
 
