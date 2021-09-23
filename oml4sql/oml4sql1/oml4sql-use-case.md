@@ -36,4 +36,4 @@ In this lab, you will:
 
 ## Acknowledgements
 * **Author** - Valentin Leonard Tabacaru, Milton Wan, Adrian Castillo Mendoza
-* **Last Updated By/Date** -  Adrian Castillo, September 2021
+* **Last Updated By/Date** -  Adrian Castillo Mendoza, September 2021
