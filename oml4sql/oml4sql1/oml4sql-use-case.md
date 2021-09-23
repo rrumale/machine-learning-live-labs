@@ -35,5 +35,5 @@ In this lab, you will:
 * Access the Oracle database containing the customer insurance table and run the scripts to configure the user and prepare data.
 
 ## Acknowledgements
-* **Author** - Valentin Leonard Tabacaru, Milton Wan, Adrian Castillo
+* **Author** - Valentin Leonard Tabacaru, Milton Wan, Adrian Castillo Mendoza
 * **Last Updated By/Date** -  Adrian Castillo, September 2021
