@@ -4,7 +4,7 @@
 
 This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Oracle Database. OML4SQL supports scalable in-database data exploration and preparation using native SQL & PLSQL syntax, invocation of in-database algorithms for model building and detect anomaly detection for example.
 
-In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](/oml4sql1/oml4sql-use-case.md) file.
+In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](oml4sql1/oml4sql-use-case.md) file.
 
 * 1) Find the most atypical members of this customer group (outlier identification).
 * 2) Discover the common demographic characteristics of the most typical customers with insurance. 
@@ -41,7 +41,7 @@ In this lab, you will:
 
 * Database Developer to Data Scientist Journey
 
-![process](/oml4sql1/images/process.png)
+![process](oml4sql1/images/process.png)
 
 
 
