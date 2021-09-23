@@ -41,7 +41,7 @@ In this lab, you will:
 
 * Database Developer to Data Scientist Journey
 
-![process](images/process.png)
+![process](/oml4sql/oml4sql1/images/process.png)
 
 
 
