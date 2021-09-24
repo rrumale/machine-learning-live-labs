@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Oracle Machine Learning for Python (OML4Py)",
+  "workshoptitle": "Oracle Machine Learning for SQL (OML4SQL)",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -18,14 +18,14 @@
     "filename": "./../../../preparation/preparation.md"
     },
     {
-      "title": "OML4Py - Part 1",
-      "description": "Handson lab for using OML4Py.",
-      "filename": "./../../oml4py1/oml4py1.md"
+      "title": "OML4SQL - Use Case",
+      "description": "Understanding the use case for this lab.",
+      "filename": "./../../oml4sql1/oml4sql-use-case.md"
     },
     {
-      "title": "OML4Py - Part 2 (optional)",
-      "description": "Handson lab for using OML4Py.",
-      "filename": "./../../oml4py2/oml4py2.md"
+      "title": "OML4SQL - Anomaly Detection",
+      "description": "Handson lab for using OML4SQL.",
+      "filename": "./../../oml4sql2/oml4sql-use-case.md"
     },
     {
       "title": "Need Help?",
