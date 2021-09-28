@@ -8,11 +8,6 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-    "title": "Understanding Use Case Dataset",
-    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
-    "filename": "./../../../use-case/use-case.md"
-    },
-    {
     "title": "Prepare Setup",
     "description": "How to download your ORM stack and update security rules for an existing VCN.",
     "filename": "./../../../preparation/preparation.md"
@@ -25,7 +20,7 @@
     {
       "title": "OML4SQL - Anomaly Detection",
       "description": "Handson lab for using OML4SQL.",
-      "filename": "./../../oml4sql1/oml4sql-use-case.md"
+      "filename": "./../../oml4sql1/oml4sql-anomaly-detection.md"
     },
     {
       "title": "Need Help?",

@@ -8,21 +8,21 @@ OML4SQL offers a comprehensive set of in-database algorithms for performing a va
 
 **Oracle Machine Learning for SQL is a component of the Oracle Database Enterprise Edition.**
 
-The PL/SQL API and SQL language operators provide direct access to OML4SQL functionality in Oracle Database. 
+The PL/SQL API and SQL language operators provide direct access to OML4SQL functionality in Oracle Database.
 
 
 In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](/oml4sql/oml4sql1/oml4sql-use-case.md) file.
 
-For more information about [OML4SQL API Guide,](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmapi/introduction-to-oml4sql.html#GUID-429CF74D-C4B7-4302-9C33-5292A664E2AD) 
+For more information about [OML4SQL API Guide,](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmapi/introduction-to-oml4sql.html#GUID-429CF74D-C4B7-4302-9C33-5292A664E2AD)
 
-Estimated Lab Time: 2 hours 
+Estimated Lab Time: 2 hours
 
 ### Objectives
 
 In this lab, you will:
 
 * **1. Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-* **2. Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields. 
+* **2. Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
 * **3. Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
 * **4. Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
 * **5. Evaluation**: Next, test model accuracy, make sure the model makes sense.
@@ -30,57 +30,57 @@ In this lab, you will:
 
 * Database Developer to Data Scientist Journey
 
-![process](/oml4sql/oml4sql1/images/process.png)
+![process](../oml4sql1/images/process.png)
 
 
 ### Prerequisites
 
 * Oracle Database 21c installed on-premise;
 * Access the Oracle database containing the customer insurance table and run the scripts to configure the user and prepare data.
-* SSH private key with which you created your VM on OCI. 
-    
-## Task 1: Business Understanding 
-    
+* SSH private key with which you created your VM on OCI.
+
+## Task 1: Business Understanding
+
 1. Review Business Objectives that describe in [oml4sql-use-case.md](/oml4sql/oml4sql1/oml4sql-use-case.md) file.
 
-## Task 2: Data Understanding 
+## Task 2: Data Understanding
 
 * Data information of insurance clients is like this:
 
-![cust_insur_ltv-table](/oml4sql/oml4sql1/images/cust_insur_ltv-table.png)
+![cust_insur_ltv-table](../oml4sql1/images/cust_insur_ltv-table.png)
 
 * Sample of single record is like this:
 
-![single-record-sample](/oml4sql/oml4sql1/images/single-record.png)
+![single-record-sample](../oml4sql1/images/single-record.png)
 
-* The most important field in this use case, is BUY_INSURANCE, because businesses need to know who is their buyer persona typical and atypical. 
+* The most important field in this use case, is BUY_INSURANCE, because businesses need to know who is their buyer persona typical and atypical.
 
-## Task 3: Data Preparation 
+## Task 3: Data Preparation
 
 1. It is recommended to have SQL Developer installed on your host machine so that you can interact with the data in a more friendly way.
 * You can download here [SQL Developer Download,](https://www.oracle.com/tools/downloads/sqldev-downloads.html)
 
 2. Once installed SQL Developer, you need to configure the remote connection in SSH Hosts of SQL Developer feature, following these instructions:
 
-![view-SSH-Hosts](/oml4sql/oml4sql1/images/view-ssh.png)
+![view-SSH-Hosts](../oml4sql1/images/view-ssh.png)
 
-3. Rigth clic on SSH Hots and then do clic in New SSH Host, write values in each field and then clic Ok. 
+3. Rigth clic on SSH Hots and then do clic in New SSH Host, write values in each field and then clic Ok.
 
-![ssh-remote-host](/oml4sql/oml4sql1/images/ssh-remote-host.png)
+![ssh-remote-host](../oml4sql1/images/ssh-remote-host.png)
 
-4. Rigth clic on the fisrt oml4sql tab in SSH Hosts an clic connect, and then right clic in the submenu oml4sql tab an clic connect. 
-Notice how the small padlock closes in both options, which represents that you are already remotely connected to your VM and you are ready to create a connection to your 
+4. Rigth clic on the fisrt oml4sql tab in SSH Hosts an clic connect, and then right clic in the submenu oml4sql tab an clic connect.
+Notice how the small padlock closes in both options, which represents that you are already remotely connected to your VM and you are ready to create a connection to your
 
-5. schema from SQL Developer. 
+5. schema from SQL Developer.
 
-![conection-ssh](/oml4sql/oml4sql1/images/conection-ssh.png)
+![conection-ssh](../oml4sql1/images/conection-ssh.png)
 
 6. Create SQL Developer new database connection with **SYS** user to your Oracle 21c Pluggable Database, and test connectivity with password: **MLlearnPTS#21_**.
 
-![Database-connection-SYS](/oml4sql/oml4sql1/images/Database-connection-SYS.png)
+![Database-connection-SYS](../oml4sql1/images/Database-connection-SYS.png)
 
 7. Once the database connection is open and SQL Developer Worksheet is ready, execute this script to create the user oml4sql_user and grant privileges to work with OML4SQL API, and generate a copy of table CUST_INSUR_LTV.
-    
+
     ````
     <copy>
     DROP USER oml4sql_user;
@@ -106,13 +106,13 @@ Notice how the small padlock closes in both options, which represents that you a
 
 8. Create SQL Developer new database connection with **oml4sql_user** user to your Oracle 21c Pluggable Database, and test connectivity with password: **oml4sql_user**.
 
-![oml4sql_user-connection](/oml4sql/oml4sql1/images/oml4sql_user-connection.png)
+![oml4sql_user-connection](../oml4sql1/images/oml4sql_user-connection.png)
 
 9. Copy and execute this script with oml4sql_user:
-   
+
     ````
     <copy>
-	BEGIN DBMS_DATA_MINING.DROP_MODEL('SVMO_CUST_Clas_sample');
+	BEGIN DBMS_DATA_MINING.DROP_MODEL('SVMO_CUST_Class_sample');
 	EXCEPTION WHEN OTHERS THEN NULL; END;
 	/
 
@@ -148,28 +148,27 @@ Notice how the small padlock closes in both options, which represents that you a
 
 10. Check that there are no errors in the output of the script.
 
-11. Review your settings table: 
+11. Review your settings table:
 
-![settings-table](/oml4sql/oml4sql1/images/settings-table.png)
+![settings-table](../oml4sql1/images/settings-table.png)
 
 
 ## Task 4: Modeling
 
-* CREATE A Model with the name: **SVMO_CUST_Clas_sample**
-We use One-Class Support Vector Machine, Support Vector Machine (SVM) as a one-class classifier is used for detecting anomalies.
-Oracle Machine Learning for SQL uses SVM as the one-class classifier for anomaly detection. When SVM is used for anomaly detection, it has the classification machine learning function but no target.
+* CREATE A Model with the name: **SVMO_CUST_Class_sample**
+  We use One-Class Support Vector Machine, Support Vector Machine (SVM) as a one-class classifier is used for detecting anomalies. Oracle Machine Learning for SQL uses SVM as the one-class classifier for anomaly detection. When SVM is used for anomaly detection, it has the classification machine learning function but no target.
 
-One-class SVM models, when applied, produce a prediction and a probability for each case in the scoring data. If the prediction is 1, the case is considered typical. If the prediction is 0, the case is considered anomalous. This behavior reflects the fact that the model is trained with normal data.
- 
-Note the NULL specification for target column name.
+  One-class SVM models, when applied, produce a prediction and a probability for each case in the scoring data. If the prediction is 1, the case is considered typical. If the prediction is 0, the case is considered anomalous. This behavior reflects the fact that the model is trained with normal data.
 
-* For more information abaout SVM in Oracle chek this link: [Support Vector Machine,] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/support-vector-machine.html#GUID-FD5DF1FB-AAAA-4D4E-84A2-8F645F87C344)
-   
+  Note the NULL specification for target column name.
+
+* For more information about SVM in Oracle check this link: [Support Vector Machine,] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/support-vector-machine.html#GUID-FD5DF1FB-AAAA-4D4E-84A2-8F645F87C344)
+
     ````
     <copy>
 	BEGIN
 	  DBMS_DATA_MINING.CREATE_MODEL(
-		model_name          => 'SVMO_CUST_Clas_sample',
+		model_name          => 'SVMO_CUST_Class_sample',
 		mining_function     => dbms_data_mining.classification,
 		data_table_name     => 'cust_data_one_class_pv',
 		case_id_column_name => 'cust_id',
@@ -178,33 +177,33 @@ Note the NULL specification for target column name.
 	END;
 	/
     </copy>
-    ```` 
- 
+    ````
+
 * DISPLAY MODEL SETTINGS
 
     ````
     <copy>
 	SELECT setting_name, setting_value
 	  FROM user_mining_model_settings
-	 WHERE model_name = 'SVMO_CUST_CLAS_SAMPLE'
+	 WHERE model_name = 'SVMO_CUST_Class_sample'
 	ORDER BY setting_name;
     </copy>
-    ```` 
-	
-![settings-model](/oml4sql/oml4sql1/images/settings-model.png)
+    ````
 
-* Review your model attributes. DISPLAY MODEL SIGNATURE 
+![settings-model](../oml4sql1/images/settings-model.png)
+
+* Review your model attributes. DISPLAY MODEL SIGNATURE
 
     ````
     <copy>
 	SELECT attribute_name, attribute_type
 	  FROM user_mining_model_attributes
-	 WHERE model_name = 'SVMO_CUST_CLAS_SAMPLE'
+	 WHERE model_name = 'SVMO_CUST_Class_sample'
 	ORDER BY attribute_name;
     </copy>
-    ```` 
-	
-![model-attributesl](/oml4sql/oml4sql1/images/model-attributes.png)
+    ````
+
+![model-attributesl](../oml4sql1/images/model-attributes.png)
 
 * Review your model details. Model details are available only for SVM models with linear kernel.
 
@@ -213,7 +212,7 @@ Note the NULL specification for target column name.
 	WITH
 	mod_dtls AS (
 	SELECT *
-	  FROM TABLE(DBMS_DATA_MINING.GET_MODEL_DETAILS_SVM('SVMO_CUST_CLAS_SAMPLE'))
+	  FROM TABLE(DBMS_DATA_MINING.GET_MODEL_DETAILS_SVM('SVMO_CUST_Class_sample'))
 	),
 	model_details AS (
 	SELECT D.class, A.attribute_name, A.attribute_value, A.coefficient
@@ -223,25 +222,25 @@ Note the NULL specification for target column name.
 	)
 	SELECT class, attribute_name aname, attribute_value aval, coefficient coeff
 	  FROM model_details
-	 WHERE ROWNUM < 50;	
+	 WHERE ROWNUM < 50;
     </copy>
     ```` 	 
 
-![model-details](/oml4sql/oml4sql1/images/model-details.png)
+![model-details](../oml4sql1/images/model-details.png)
 
 * Review your model views that are generated.
 
     ````
     <copy>
 	 SELECT view_name, view_type FROM user_mining_model_views
-	WHERE model_name='SVMO_CUST_CLAS_SAMPLE'
+	WHERE model_name='SVMO_CUST_Class_sample'
 	ORDER BY view_name;
     </copy>
     ```` 	 
-	
-![model-views](/oml4sql/oml4sql1/images/model-views.png)
 
-## Task 5: Evaluation 
+![model-views](../oml4sql1/images/model-views.png)
+
+## Task 5: Evaluation
 
 * APPLY THE MODEL
 
@@ -258,16 +257,16 @@ Find the top 5 outliers - customers that differ the most from  the rest of the p
 	col pd format a90
 	SELECT cust_id, pd FROM
 	(SELECT cust_id,
-			PREDICTION_DETAILS(SVMO_CUST_CLAS_SAMPLE, 0 using *) pd,
+			PREDICTION_DETAILS(SVMO_CUST_Class_sample, 0 using *) pd,
 			rank() over (order by prediction_probability(
-						 SVMO_CUST_CLAS_SAMPLE, 0 using *) DESC, cust_id) rnk
+						 SVMO_CUST_Class_sample, 0 using *) DESC, cust_id) rnk
 	 FROM cust_data_one_class_pv)
 	WHERE rnk <= 5
 	order by rnk;
     </copy>
-    ```` 
-	
-![case-1](/oml4sql/oml4sql1/images/case-1.png)
+    ````
+
+![case-1](../oml4sql1/images/case-1.png)
 
 * BUSINESS CASE 2
 
@@ -277,19 +276,19 @@ These statistics will not be influenced by outliers and are likely to provide a 
     ````
     <copy>
 	column SEX format a12
-	SELECT SEX, round(avg(age)) age, 
+	SELECT SEX, round(avg(age)) age,
 		   round(avg(TIME_AS_CUSTOMER)) TIME_AS_CUSTOMER,
 		   count(*) cnt
 	FROM cust_data_one_class_pv
-	WHERE prediction(SVMO_CUST_CLAS_SAMPLE using *) = 1
+	WHERE prediction(SVMO_CUST_Class_sample using *) = 1
 	GROUP BY SEX
 	ORDER BY SEX;
     </copy>
-    ```` 
-	
-![case-2](/oml4sql/oml4sql1/images/case-2.png)
+    ````
 
-## Task 6: Deployment 
+![case-2](../oml4sql1/images/case-2.png)
+
+## Task 6: Deployment
 
 * BUSINESS CASE 3
 
@@ -300,8 +299,8 @@ Necessary data preparation on the input attributes is performed automatically du
     <copy>
 	select ROUND(prob_typical,5)*100||'%' Probability_BUY
 	from
-	(select 
-	prediction_probability(SVMO_CUST_CLAS_SAMPLE, 1 using 
+	(select
+	prediction_probability(SVMO_CUST_Class_sample, 1 using
 								 44 AS age,
 								 3 AS TIME_AS_CUSTOMER,
 								 'Programmer/Developer' AS PROFESSION,
@@ -311,12 +310,12 @@ Necessary data preparation on the input attributes is performed automatically du
 								 'M' AS SEX,
 								 '20442' AS SALARY,
 								 '0' AS HOUSE_OWNERSHIP
-								 ) prob_typical 
+								 ) prob_typical
 	from dual);
     </copy>
-    ```` 
+    ````
 
-![case-3](/oml4sql/oml4sql1/images/case-3.png)
+![case-3](../oml4sql1/images/case-3.png)
 
 
 * BUSINESS USE CASE 4
@@ -328,25 +327,25 @@ The partition by clause used in the analytic version of the prediction_probabili
 
     ````
     <copy>
-	col MARITAL_STATUS format a30
-	select cust_id, MARITAL_STATUS, rank_anom, anom_det FROM
-	(SELECT cust_id, MARITAL_STATUS, anom_det,
-			rank() OVER (PARTITION BY MARITAL_STATUS 
-						 ORDER BY ROUND(ANOM_PROB,8) DESC,cust_id) rank_anom FROM
-	 (SELECT cust_id, MARITAL_STATUS,
-			PREDICTION_PROBABILITY(OF ANOMALY, 0 USING *) 
-			  OVER (PARTITION BY MARITAL_STATUS) anom_prob,
-			PREDICTION_DETAILS(OF ANOMALY, 0, 3 USING *) 
-			  OVER (PARTITION BY MARITAL_STATUS) anom_det
-	   FROM cust_data_one_class_pv
-	 ))
-	where rank_anom < 3 order by 2, 3;
+    col MARITAL_STATUS format a30
+    select cust_id, MARITAL_STATUS, rank_anom, anom_det FROM
+    (SELECT cust_id, MARITAL_STATUS, anom_det,
+    	rank() OVER (PARTITION BY MARITAL_STATUS
+    				 ORDER BY ROUND(ANOM_PROB,8) DESC,cust_id) rank_anom FROM
+    (SELECT cust_id, MARITAL_STATUS,
+    	PREDICTION_PROBABILITY(OF ANOMALY, 0 USING *)
+    	  OVER (PARTITION BY MARITAL_STATUS) anom_prob,
+    	PREDICTION_DETAILS(OF ANOMALY, 0, 3 USING *)
+    	  OVER (PARTITION BY MARITAL_STATUS) anom_det
+     FROM cust_data_one_class_pv
+    ))
+    where rank_anom < 3 order by 2, 3;
     </copy>
-    ```` 
+    ````
 
-![case-4](/oml4sql/oml4sql1/images/case-4.png)
+![case-4](../oml4sql1/images/case-4.png)
 
-![case-4](/oml4sql/oml4sql1/images/case-4-2.png)
+![case-4](../oml4sql1/images/case-4-2.png)
 
 ## Conclusion
 
@@ -356,9 +355,8 @@ With this practice, we can conclude that the SVM algorithm is very useful to sol
 ## Acknowledgements
 * **Authors** - Milton Wan, Valentin Leonard Tabacaru, Adrian Castillo Mendoza
 * **Last Updated By/Date** -  Adrian Castillo Mendoza, Septiembre 2021
-    
+
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
-    
+
 If you do not have an Oracle Account, click [here](https://profile.oracle.com/myprofile/account/create-account.jspx) to create one.
-    

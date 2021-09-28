@@ -39,7 +39,7 @@ In this lab, you will:
 * **5. Evaluation**: Next, test model accuracy, make sure the model makes sense.
 * **6. Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
 
-* Database Developer to Data Scientist Journey
+Database Developer to Data Scientist Journey
 
 ![process](../oml4sql1/images/process.png)
 
