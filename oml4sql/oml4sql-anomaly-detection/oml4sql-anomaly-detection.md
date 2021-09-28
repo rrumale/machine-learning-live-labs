@@ -30,7 +30,7 @@ In this lab, you will:
 
 * Database Developer to Data Scientist Journey
 
-![process](../oml4sql1/images/process.png)
+![process](../oml4sql-anomaly-detection/images/process.png)
 
 
 ### Prerequisites
@@ -47,11 +47,11 @@ In this lab, you will:
 
 * Data information of insurance clients is like this:
 
-![cust_insur_ltv-table](../oml4sql1/images/cust_insur_ltv-table.png)
+![cust_insur_ltv-table](../oml4sql-anomaly-detection/images/cust_insur_ltv-table.png)
 
 * Sample of single record is like this:
 
-![single-record-sample](../oml4sql1/images/single-record.png)
+![single-record-sample](../oml4sql-anomaly-detection/images/single-record.png)
 
 * The most important field in this use case, is BUY_INSURANCE, because businesses need to know who is their buyer persona typical and atypical.
 
@@ -62,22 +62,22 @@ In this lab, you will:
 
 2. Once installed SQL Developer, you need to configure the remote connection in SSH Hosts of SQL Developer feature, following these instructions:
 
-![view-SSH-Hosts](../oml4sql1/images/view-ssh.png)
+![view-SSH-Hosts](../oml4sql-anomaly-detection/images/view-ssh.png)
 
 3. Rigth clic on SSH Hots and then do clic in New SSH Host, write values in each field and then clic Ok.
 
-![ssh-remote-host](../oml4sql1/images/ssh-remote-host.png)
+![ssh-remote-host](../oml4sql-anomaly-detection/images/ssh-remote-host.png)
 
 4. Rigth clic on the fisrt oml4sql tab in SSH Hosts an clic connect, and then right clic in the submenu oml4sql tab an clic connect.
 Notice how the small padlock closes in both options, which represents that you are already remotely connected to your VM and you are ready to create a connection to your
 
 5. schema from SQL Developer.
 
-![conection-ssh](../oml4sql1/images/conection-ssh.png)
+![conection-ssh](../oml4sql-anomaly-detection/images/conection-ssh.png)
 
 6. Create SQL Developer new database connection with **SYS** user to your Oracle 21c Pluggable Database, and test connectivity with password: **MLlearnPTS#21_**.
 
-![Database-connection-SYS](../oml4sql1/images/Database-connection-SYS.png)
+![Database-connection-SYS](../oml4sql-anomaly-detection/images/Database-connection-SYS.png)
 
 7. Once the database connection is open and SQL Developer Worksheet is ready, execute this script to create the user oml4sql_user and grant privileges to work with OML4SQL API, and generate a copy of table CUST_INSUR_LTV.
 
@@ -106,7 +106,7 @@ Notice how the small padlock closes in both options, which represents that you a
 
 8. Create SQL Developer new database connection with **oml4sql_user** user to your Oracle 21c Pluggable Database, and test connectivity with password: **oml4sql_user**.
 
-![oml4sql_user-connection](../oml4sql1/images/oml4sql_user-connection.png)
+![oml4sql_user-connection](../oml4sql-anomaly-detection/images/oml4sql_user-connection.png)
 
 9. Copy and execute this script with oml4sql_user:
 
@@ -150,7 +150,7 @@ Notice how the small padlock closes in both options, which represents that you a
 
 11. Review your settings table:
 
-![settings-table](../oml4sql1/images/settings-table.png)
+![settings-table](../oml4sql-anomaly-detection/images/settings-table.png)
 
 
 ## Task 4: Modeling
@@ -190,7 +190,7 @@ Notice how the small padlock closes in both options, which represents that you a
     </copy>
     ````
 
-![settings-model](../oml4sql1/images/settings-model.png)
+![settings-model](../oml4sql-anomaly-detection/images/settings-model.png)
 
 * Review your model attributes. DISPLAY MODEL SIGNATURE
 
@@ -203,7 +203,7 @@ Notice how the small padlock closes in both options, which represents that you a
     </copy>
     ````
 
-![model-attributesl](../oml4sql1/images/model-attributes.png)
+![model-attributesl](../oml4sql-anomaly-detection/images/model-attributes.png)
 
 * Review your model details. Model details are available only for SVM models with linear kernel.
 
@@ -226,7 +226,7 @@ Notice how the small padlock closes in both options, which represents that you a
     </copy>
     ```` 	 
 
-![model-details](../oml4sql1/images/model-details.png)
+![model-details](../oml4sql-anomaly-detection/images/model-details.png)
 
 * Review your model views that are generated.
 
@@ -238,7 +238,7 @@ Notice how the small padlock closes in both options, which represents that you a
     </copy>
     ```` 	 
 
-![model-views](../oml4sql1/images/model-views.png)
+![model-views](../oml4sql-anomaly-detection/images/model-views.png)
 
 ## Task 5: Evaluation
 
@@ -266,7 +266,7 @@ Find the top 5 outliers - customers that differ the most from  the rest of the p
     </copy>
     ````
 
-![case-1](../oml4sql1/images/case-1.png)
+![case-1](../oml4sql-anomaly-detection/images/case-1.png)
 
 * BUSINESS CASE 2
 
@@ -286,7 +286,7 @@ These statistics will not be influenced by outliers and are likely to provide a 
     </copy>
     ````
 
-![case-2](../oml4sql1/images/case-2.png)
+![case-2](../oml4sql-anomaly-detection/images/case-2.png)
 
 ## Task 6: Deployment
 
@@ -315,7 +315,7 @@ Necessary data preparation on the input attributes is performed automatically du
     </copy>
     ````
 
-![case-3](../oml4sql1/images/case-3.png)
+![case-3](../oml4sql-anomaly-detection/images/case-3.png)
 
 
 * BUSINESS USE CASE 4
@@ -343,9 +343,9 @@ The partition by clause used in the analytic version of the prediction_probabili
     </copy>
     ````
 
-![case-4](../oml4sql1/images/case-4.png)
+![case-4](../oml4sql-anomaly-detection/images/case-4.png)
 
-![case-4](../oml4sql1/images/case-4-2.png)
+![case-4](../oml4sql-anomaly-detection/images/case-4-2.png)
 
 ## Conclusion
 
