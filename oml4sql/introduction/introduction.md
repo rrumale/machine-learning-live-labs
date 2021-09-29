@@ -6,16 +6,15 @@ This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Or
 
 In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](/oml4sql/oml4sql1/oml4sql-use-case.md) file.
 
-* 1) Find the most atypical members of this customer group (outlier identification).
-* 2) Discover the common demographic characteristics of the most typical customers with insurance.
-* 3) Compute how typical or What probability of purchase have a given new/hypothetical customer is, And grant it to sellers like a tool to qualify better their potential clients since the first contact.
-* 4) Identify rows that are most atypical in the input dataset. Consider each type of marital status to be separate, so the most anomalous rows per marital status group should be returned.
-
+  1. Find the most atypical members of this customer group (outlier identification).
+  2. Discover the common demographic characteristics of the most typical customers with insurance.
+  3. Compute how typical or What probability of purchase have a given new/hypothetical customer is, and grant it to sellers like a tool to qualify better their potential clients since the first contact.
+  4. Identify rows that are most atypical in the input dataset. Consider each type of marital status to be separate, so the most anomalous rows per marital status group should be returned.
 
 Estimated Lab Time: 2 hours
 
 
-### About Oracle Machine Learning for SQL (OML4SQL)
+## About Oracle Machine Learning for SQL (OML4SQL)
 
 OML4SQL provides a powerful, state-of-the-art machine learning capability within Oracle Database. You can use OML4SQL to build and deploy predictive and descriptive machine learning applications, to add intelligent capabilities to existing applications, and to generate predictive queries for data exploration.
 
@@ -32,16 +31,16 @@ For more information about [OML4SQL API Guide,](https://docs.oracle.com/en/datab
 
 In this lab, you will:
 
-* **1. Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-* **2. Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
-* **3. Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
-* **4. Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
-* **5. Evaluation**: Next, test model accuracy, make sure the model makes sense.
-* **6. Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+1. **Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
+2. **Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
+3. **Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
+4. **Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
+5. **Evaluation**: Next, test model accuracy, make sure the model makes sense.
+6. **Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
 
 Database Developer to Data Scientist Journey
 
-![process](../oml4sql1/images/process.png)
+![process](../oml4sql-anomaly-detection/images/process.png)
 
 
 
@@ -51,7 +50,7 @@ Database Developer to Data Scientist Journey
 * Access the Oracle database containing the customer insurance table and run the scripts to configure the user and prepare data.
 * SSH private key with which you created your VM on OCI.
 
-> **Note:** If you have a Free Trial account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)**
+>**Note:** If you have a Free Trial account, when your Free Trial expires your account will be converted to an **Always Free** account. You will not be able to conduct Free Tier workshops unless the Always Free environment is available. **[Click here for the Free Tier FAQ page.](https://www.oracle.com/cloud/free/faq.html)**
 
 ## Learn More
 
@@ -59,8 +58,8 @@ Database Developer to Data Scientist Journey
 
 
 ## Acknowledgements
-* **Authors** - Milton Wan, Valentin Leonard Tabacaru, Adrian Castillo Mendoza
-* **Last Updated By/Date** -  Adrian Castillo Mendoza, Septiembre 2021
+* **Authors** - Adrian Castillo Mendoza, Milton Wan, Valentin Leonard Tabacaru,
+* **Last Updated By/Date** -  Adrian Castillo Mendoza, September 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
