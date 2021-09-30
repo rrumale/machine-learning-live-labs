@@ -2,13 +2,13 @@
 
 ## About this Workshop
 
-This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Oracle Database. OML4SQL supports scalable in-database data exploration and preparation using native SQL & PLSQL syntax, invocation of in-database algorithms for model building and detect anomaly detection for example.
+This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Oracle Database. OML4SQL supports scalable in-database data exploration and preparation using native SQL & PLSQL syntax, invocation of in-database machine learning algorithms for model building. 
 
-In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that describe in [oml4sql-use-case.md](/oml4sql/oml4sql1/oml4sql-use-case.md) file.
+In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that are described in [oml4sql-use-case.md](./oml4sql/oml4sql-use-case/oml4sql-use-case.md) file.
 
   1. Find the most atypical members of this customer group (outlier identification).
   2. Discover the common demographic characteristics of the most typical customers with insurance.
-  3. Compute how typical or What probability of purchase have a given new/hypothetical customer is, and grant it to sellers like a tool to qualify better their potential clients since the first contact.
+  3. Compute the probability of purchase for a new/hypothetical customer, and grant it to sellers to qualify better their potential clients since the first contact.
   4. Identify rows that are most atypical in the input dataset. Consider each type of marital status to be separate, so the most anomalous rows per marital status group should be returned.
 
 Estimated Lab Time: 2 hours
@@ -29,16 +29,16 @@ For more information about [OML4SQL API Guide,](https://docs.oracle.com/en/datab
 
 ### Objectives
 
-In this lab, you will:
+In this lab, you will learn the lifecycle of machine learning:
 
-1. **Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-2. **Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
-3. **Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
-4. **Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
+1. **Business Understanding**: Understand the problem statement. Examine the customer insurance historical data set and understand the business case.
+2. **Data Understanding**: Review the data; does it makes sense?  Understand the meaning of fields.
+3. **Data Preparation**: Prepare the data, create new derived attributes or "engineered features". 
+4. **Modeling**: Training and testing ML models using 60%/40% random samples. First, identify the key attributes that most influence the target attribute.
 5. **Evaluation**: Next, test model accuracy, make sure the model makes sense.
-6. **Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+6. **Deployment**: Apply the models to predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
 
-Database Developer to Data Scientist Journey
+
 
 ![process](../oml4sql-anomaly-detection/images/process.png)
 
@@ -46,7 +46,7 @@ Database Developer to Data Scientist Journey
 
 ### Prerequisites
 
-* Oracle Database 21c installed;
+* Oracle Database 21c installed
 * Access the Oracle database containing the customer insurance table and run the scripts to configure the user and prepare data.
 * SSH private key with which you created your VM on OCI.
 
