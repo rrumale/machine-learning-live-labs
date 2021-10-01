@@ -17,8 +17,6 @@ Estimated Lab Time: 1 hour
 *	Use Postman to score the machine learning model using REST APIs  
 *	Use Curl to score the machine-learning model using REST APIs in command line.
 
-
-
 ### Prerequisites
 * Oracle Cloud Infrastructure (OCI) account
 * Autonomous Database deployed in Oracle Cloud
@@ -389,7 +387,7 @@ We can now use REST APIs to query the model, model scoring and scoring for speci
 
 ## Task 4:   Access the model using REST APIs using POSTMAN
 
-## Task 4.1:*   Prepare the REST calls
+## Task 4.1:   Prepare the REST calls
 
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
@@ -497,7 +495,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
-## Task 4.2:*  Use REST calls to predict customer classification
+## Task 4.2:  Use REST calls to predict customer classification
 
 in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
  - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
