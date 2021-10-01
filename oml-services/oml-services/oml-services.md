@@ -2,7 +2,7 @@
 
 ## Introduction
 
-
+In this section we will leverage the Machine Learning models in Autonomous Database using REST APIs. In a situation where the bulk of the data is in Cloud database, we can easily create multiple models and compare them. In addition to that, using REST APIs we can use the most suitable model and score specific data for in the spot prediction or classification.
 
 In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to predict customers life-time value (LTV), or to classify them in predefined classes based on this predicted value.
 
@@ -11,8 +11,12 @@ In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lif
 Estimated Lab Time: 1 hour
 
 ### Objectives
+*	Load data into Autonomous Database
+*	Prepare the customer insurance date
+*	Use AutoML to create a Machine Learning model.
+*	Use Postman to score the machine learning model using REST APIs  
+*	Use Curl to score the machine-learning model using REST APIs in command line.
 
-In this section we will leverage the Machine Learning models in Autonomous Database using REST APIs. In a situation where the bulk of the data is in Cloud database, we can easily create multiple models and compare them. In addition to that, using REST APIs we can use the most suitable model and score specific data for in the spot prediction or classification.
 
 
 ### Prerequisites
@@ -922,7 +926,7 @@ Notice the predictions are the same as in the REST calls. In SQL statement it is
 
 ## Task 6 Import the Decision Tree model (optional)
 
-In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3.
+In this section of the workshop we will import the Decision Tree model used on the OML4PY < !--  link to OMPL4Py to be added --> workshop Task 3.
 
 We are going to run the next steps:
  1. Extract the saved model to a file;
@@ -1197,8 +1201,9 @@ In this exercise we managed took a model exported in the Python workshop and imp
 
 
 ## Acknowledgements
-* **Authors** - Milton Wan, Andrei Manoliu
-* **Last Updated By/Date** -  Andrei Manoliu
+* **Authors** -  Andrei Manoliu, Milton Wan
+* **Contiributors** - Rajeev Rumale
+* **Last Updated By/Date** -  Andrei Manoliu, October 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.

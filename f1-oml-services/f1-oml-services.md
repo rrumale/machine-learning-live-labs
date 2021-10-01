@@ -7,7 +7,7 @@
 ## prerequisites
 
 * The `csv` files;
-* Auttonomous Database Machine Learning User (in our case `RBRUSER / Welcome12345`)
+* Autonomous Database Machine Learning User (in our case `RBRUSER / Welcome12345`)
 
 ## Data Loading
 
@@ -85,7 +85,7 @@ One insight that we can see is over QUALI_POS = 01 what is the distribution of c
 
 ## Running AutoML
 
-we are going to create multiple ML models for 3 scenarios.
+We are going to create multiple ML models for 3 scenarios.
 
 1. Predict the average lap time per race. we are going to use regression to predict what is going to be the average lap time for a next race looking at past data and driver performance that we have in the `F1_dataset_extended` table.
 
