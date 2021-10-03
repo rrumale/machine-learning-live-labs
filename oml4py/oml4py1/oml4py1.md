@@ -1558,7 +1558,7 @@ In this case, you will execute an automated model tuning process for a classific
 
 
 ## Acknowledgements
-* **Authors** - Milton Wan, Valentin Leonard Tabacaru
+* **Authors** - Valentin Leonard Tabacaru
 * **Last Updated By/Date** -  Valentin Leonard Tabacaru, July 2021
 
 ## Need Help?
