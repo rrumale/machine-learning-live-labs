@@ -1,0 +1,36 @@
+{
+  "workshoptitle": "Oracle Machine Learning for Python (OML4Py)",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+    "title": "Understanding Use Case Dataset",
+    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
+    "filename": "./../../../use-case/use-case.md"
+    },
+    {
+    "title": "Prepare Setup",
+    "description": "How to download your ORM stack and update security rules for an existing VCN.",
+    "filename": "./../../preparation/preparation.md"
+    },
+    {
+      "title": "OML4Py - Part 1",
+      "description": "Handson lab for using OML4Py.",
+      "filename": "./../../oml4py1/oml4py1.md"
+    },
+    {
+      "title": "OML4Py - Part 2 (optional)",
+      "description": "Handson lab for using OML4Py.",
+      "filename": "./../../oml4py2/oml4py2.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
