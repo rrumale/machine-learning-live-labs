@@ -2,7 +2,15 @@
 
 ## Introduction
 
-Oracle Machine Learning for Python (OML4Py) enables you to run Python commands for data transformations and for statistical, machine learning, and graphical analysis on data stored in or accessible through an Oracle database using a Python API.
+Oracle Machine Learning for Python (OML4Py) enables the open source Python programming language and environment to operate on database data at scale. Python users can run Python commands and scripts for statistical analysis and machine learning on data stored in Oracle Database.
+
+With OML4Py, you can do the following:
+
+* Use a wide range of in-database machines learning algorithms
+* Minimize data movement
+* Leverage Oracle Database as a high performance compute engine for data exploration and preparation
+* Use AutoML for automatic algorithm selection, feature selection, and model tuning
+* Execute user-defined Python functions in non-parallel, data-parallel, and task-parallel fashion
 
 In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to predict customers life-time value (LTV), or to classify them in predefined classes based on this predicted value.
 
@@ -18,7 +26,7 @@ In this lab, you will:
 * Use Generalized Linear Model **regression** to predict numeric values;
 * Implement K-Means algorithm to carry out customer **clustering** for marketing segmentation;
 * Use Attribute Importance to rank customer attributes, and Singular Value Decomposition for feature extraction, in order to simplify data models;
-* Use Automated Machine Learning Algorithm Selection, Feature Selection, Model Tuning, and Model Selection. 
+* Use Automated Machine Learning Algorithm Selection, Feature Selection, Model Tuning, and Model Selection.
 
 Optionally (part 2), you can:
 * Identify patterns of association using Association Rules;
@@ -30,9 +38,9 @@ Optionally (part 2), you can:
 
 * Oracle Database 21c installed on-premise;
 * Python, Jupyter Notebook, and required libraries.
-    
-## Task 1: Prepare and explore data 
-    
+
+## Task 1: Prepare and explore data
+
 1. On Jupyter Notebook dashboard, click **New** > **Python 3** to create a new notebook.
 
 2. Click **File** > **Rename**, and name it **LabNotebook[ABC]** where **[ABC]** are your initials.
@@ -40,13 +48,13 @@ Optionally (part 2), you can:
 3. Copy the code lines and paste them in the notebook current cell. Click **Run** to execute the code. Wait until you get a number in front of the cell, meaning the execution is complete.
 
 4. Connect to your Oracle 21c Pluggable Database, and check connectivity.
-    
+
     ````
     <copy>
     import oml
     import pandas as pd
-    oml.connect(user="oml_user", password="MLlearnPTS#21_", 
-                host="<YOUR-HOSTNAME>", port=1521, 
+    oml.connect(user="oml_user", password="MLlearnPTS#21_",
+                host="<YOUR-HOSTNAME>", port=1521,
                 service_name="mlpdb1.sub07141037280.rehevcn.oraclevcn.com",
                 automl=True)
     oml.isconnected()
@@ -54,7 +62,7 @@ Optionally (part 2), you can:
     ````
 
 5. Open a cursor and verify database version.
-   
+
     ````
     <copy>
     cr = oml.cursor()
@@ -64,7 +72,7 @@ Optionally (part 2), you can:
     ````
 
 6. Retrieve user tables from the database schema.
-    
+
     ````
     <copy>
     cr.execute("select table_name, num_rows from user_tables order by 1").fetchall()
@@ -99,7 +107,7 @@ Optionally (part 2), you can:
     print(load_list)
     </copy>
     ````
-    
+
 10. Load Insurance dataset as a Pandas data frame.
 
     ````
@@ -108,21 +116,21 @@ Optionally (part 2), you can:
     claims_df
     </copy>
     ````
-    
+
 11. Create a table in the database schema and return an OML data frame (`oml.DataFrame`) object that is a proxy for the table.
 
     ````
     <copy>
     try:
-       oml.drop('CUST_INSUR_CLAIMS') 
-    except: 
+       oml.drop('CUST_INSUR_CLAIMS')
+    except:
        pass
     oml_claims = oml.create(claims_df, table = 'CUST_INSUR_CLAIMS')
     </copy>
     ````
 
-    > **Note** :  Notice you try to drop `CUST_INSUR_CLAIMS` table before creating it, just to make sure it doesn't exist already and you get an error. 
-    
+    > **Note** :  Notice you try to drop `CUST_INSUR_CLAIMS` table before creating it, just to make sure it doesn't exist already and you get an error.
+
 12. Refresh `OML_USER` tables in SQL Developer, and verify the data in new table `CUST_INSUR_CLAIMS`.
 
     ````
@@ -188,7 +196,7 @@ Optionally (part 2), you can:
     ````
 
 19. Check the type of one element in `col_list` object.
-    
+
     ````
     <copy>
     type(('CUST_INSUR_LTV', 'T_AMOUNT_AUTOM_PAYMENTS', 'NUMBER', 22))
@@ -205,7 +213,7 @@ Optionally (part 2), you can:
     ````
 
 21. Create a new OML data frame object that contains two columns from `oml_claims` object, filtered by `Age`.
-    
+
     ````
     <copy>
     oml_claims_24 = oml_claims[oml_claims["Age"] == '<25',
@@ -240,7 +248,7 @@ Optionally (part 2), you can:
     ````
 
 25. Display the first records in `cust_df` Pandas data frame, by default 10.
-    
+
     ````
     <copy>
     cust_df.head()
@@ -282,9 +290,9 @@ Optionally (part 2), you can:
     <copy>
     import matplotlib.pyplot as plt
     oml.graphics.hist(oml_cust['LTV'], 'auto', color='orange',
-                      linestyle='solid', edgecolor='white') 
+                      linestyle='solid', edgecolor='white')
     plt.title('Customers distribution by LTV')
-    plt.ylabel('Customers') 
+    plt.ylabel('Customers')
     plt.xlabel('LTV')
     </copy>
     ````
@@ -302,7 +310,7 @@ An artificial neural network is composed of a large number of interconnected neu
 > **Note** : For more information, visit [Neural Network](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/neural-network.html#GUID-C45971D9-A874-4546-A0EC-1FF25B229E2B) documentation.
 
 At this step, you will build, test, and tune a neural network that can classify your customers in four `LTV_BIN` classes (*LOW*, *MEDIUM*, *HIGH*, and *VERY HIGH*). You will test both types of classification.
-    
+
 1. Generate an OML data frame from your database table.
 
     ````
@@ -312,12 +320,12 @@ At this step, you will build, test, and tune a neural network that can classify 
     oml_cust.head()
     </copy>
     ````
-    
+
 2. Split the data set into training and test data.
 
     ````
     <copy>
-    ltv_dat = oml_cust.split() 
+    ltv_dat = oml_cust.split()
     [split.shape for split in ltv_dat]
     </copy>
     ````
@@ -326,7 +334,7 @@ At this step, you will build, test, and tune a neural network that can classify 
 
     ````
     <copy>
-    train_x = ltv_dat[0].drop('LTV_BIN') 
+    train_x = ltv_dat[0].drop('LTV_BIN')
     train_y = ltv_dat[0]['LTV_BIN']
     test_ltv = ltv_dat[1]
     </copy>
@@ -337,13 +345,13 @@ At this step, you will build, test, and tune a neural network that can classify 
     ````
     <copy>
     nn_mod = oml.nn(nnet_hidden_layers = 1,
-                    nnet_activations= "'NNET_ACTIVATIONS_LOG_SIG'", 
+                    nnet_activations= "'NNET_ACTIVATIONS_LOG_SIG'",
                     NNET_NODES_PER_LAYER= '30')
     </copy>
     ````
 
     > **Note** : For more information, visit [Algorithm Settings: Neural Network](https://docs.oracle.com/en/database/oracle/oracle-database/21/arpls/DBMS_DATA_MINING.html#GUID-7793F608-2719-45EA-87F9-6F246BA800D4) documentation.
-    
+
     > **Note** : To understand this model, visit the [Neural Network](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/neural-network.html#GUID-27FE0680-91A9-4F44-B69C-134E3D3BEEC8) page in OML user guide.
 
 5. Fit the NN model according to the training data and parameter settings.
@@ -371,14 +379,14 @@ At this step, you will build, test, and tune a neural network that can classify 
                                                     'FIRST','LTV_BIN']]).head(25)
     </copy>
     ````
-    
+
 8. Return the prediction probability.
 
     ````
     <copy>
     nn_mod.predict(test_ltv.drop('LTV_BIN'),
                    supplemental_cols = test_ltv[:, ['CUST_ID','LAST',
-                                                    'FIRST','LTV_BIN']], 
+                                                    'FIRST','LTV_BIN']],
                    proba = True).head(25)
     </copy>
     ````
@@ -395,7 +403,7 @@ At this step, you will build, test, and tune a neural network that can classify 
 
     ````
     <copy>
-    new_setting = {'NNET_NODES_PER_LAYER': '50'} 
+    new_setting = {'NNET_NODES_PER_LAYER': '50'}
     nn_mod.set_params(**new_setting).fit(train_x, train_y)
     </copy>
     ````
@@ -413,8 +421,8 @@ At this step, you will build, test, and tune a neural network that can classify 
     ````
     <copy>
     try:
-       oml.drop('NN_MODEL') 
-    except: 
+       oml.drop('NN_MODEL')
+    except:
        pass
     nn_export = nn_mod.export_sermodel(table='NN_MODEL')
     type(nn_export)
@@ -443,8 +451,8 @@ At this step, you will build, test, and tune a neural network that can classify 
 
     ````
     <copy>
-    ltv_dat = oml_cust.split() 
-    train_x = ltv_dat[0].drop('BUY_INSURANCE') 
+    ltv_dat = oml_cust.split()
+    train_x = ltv_dat[0].drop('BUY_INSURANCE')
     train_y = ltv_dat[0]['BUY_INSURANCE']
     test_ltv = ltv_dat[1]
     </copy>
@@ -454,9 +462,9 @@ At this step, you will build, test, and tune a neural network that can classify 
 
     ````
     <copy>
-    setting = {'nnet_hidden_layers': 1, 
-               'nnet_activations': 'NNET_ACTIVATIONS_LOG_SIG', 
-               'NNET_NODES_PER_LAYER': '30'} 
+    setting = {'nnet_hidden_layers': 1,
+               'nnet_activations': 'NNET_ACTIVATIONS_LOG_SIG',
+               'NNET_NODES_PER_LAYER': '30'}
     nn_mod.set_params(**setting).fit(train_x, train_y)
     </copy>
     ````
@@ -487,7 +495,7 @@ Decision Tree (DT) is a supervised machine learning algorithm used for classifyi
 > **Note** : For more information on this algorithm, visit [Decision Tree](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/decision-tree.html#GUID-14DE1A88-220F-44F0-9AC8-77CA844D4A63) documentation.
 
 In this example, you will not only classify your customers in four `LTV_BIN` classes (*LOW*, *MEDIUM*, *HIGH*, and *VERY HIGH*), but you will also retrieve the rules (conditions) that are behind the customers classification.
-    
+
 1. Create the OML data frame for this step. Drop `LTV` column as you will use only the `LTV_BIN` classes for the predicted value.
 
     ````
@@ -505,28 +513,28 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     oml_cust.shape
     </copy>
     ````
-    
+
 3. Split the data set into training and test data. Use 80% for train and 20% for test ratio.
 
     ````
     <copy>
-    ltv_dat = oml_cust.split(ratio=(.8, .2)) 
+    ltv_dat = oml_cust.split(ratio=(.8, .2))
     [split.shape for split in ltv_dat]
     </copy>
     ````
-    
+
 4. Create training data and test data.
 
     ````
     <copy>
-    train_x = ltv_dat[0].drop('LTV_BIN') 
+    train_x = ltv_dat[0].drop('LTV_BIN')
     train_y = ltv_dat[0]['LTV_BIN']
     test_ltv = ltv_dat[1]
     </copy>
     ````
 
 5. Verify the four `LTV_BIN` classes (*LOW*, *MEDIUM*, *HIGH*, and *VERY HIGH*) in your dataset.
-    
+
     ````
     <copy>
     cr = oml.cursor()
@@ -541,34 +549,34 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     cr.close()
     </copy>
     ````
- 
+
 7. Create a cost matrix table in the database. A cost matrix is a mechanism for influencing the decision making of a model. In this case, the cost matrix will cause the model to minimize costly misclassifications.
 
     ````
     <copy>
     try:
-       oml.drop('LTV_COST_MATRIX') 
-    except: 
+       oml.drop('LTV_COST_MATRIX')
+    except:
        pass
     cost_matrix = [['LOW', 'LOW', 0],
-                   ['LOW', 'MEDIUM', 0.3], 
-                   ['LOW', 'HIGH', 0.3], 
-                   ['LOW', 'VERY HIGH', 0.4], 
-                   ['MEDIUM', 'LOW', 0.4], 
-                   ['MEDIUM', 'MEDIUM', 0], 
-                   ['MEDIUM', 'HIGH', 0.3], 
-                   ['MEDIUM', 'VERY HIGH', 0.3], 
-                   ['HIGH', 'LOW', 0.5], 
-                   ['HIGH', 'MEDIUM', 0.3], 
-                   ['HIGH', 'HIGH', 0], 
-                   ['HIGH', 'VERY HIGH', 0.2], 
-                   ['VERY HIGH', 'LOW', 0.6], 
-                   ['VERY HIGH', 'MEDIUM', 0.3], 
-                   ['VERY HIGH', 'HIGH', 0.1], 
+                   ['LOW', 'MEDIUM', 0.3],
+                   ['LOW', 'HIGH', 0.3],
+                   ['LOW', 'VERY HIGH', 0.4],
+                   ['MEDIUM', 'LOW', 0.4],
+                   ['MEDIUM', 'MEDIUM', 0],
+                   ['MEDIUM', 'HIGH', 0.3],
+                   ['MEDIUM', 'VERY HIGH', 0.3],
+                   ['HIGH', 'LOW', 0.5],
+                   ['HIGH', 'MEDIUM', 0.3],
+                   ['HIGH', 'HIGH', 0],
+                   ['HIGH', 'VERY HIGH', 0.2],
+                   ['VERY HIGH', 'LOW', 0.6],
+                   ['VERY HIGH', 'MEDIUM', 0.3],
+                   ['VERY HIGH', 'HIGH', 0.1],
                    ['VERY HIGH', 'VERY HIGH', 0]]
     cost_matrix = oml.create( pd.DataFrame(cost_matrix,
-                              columns = ['ACTUAL_TARGET_VALUE', 
-                                         'PREDICTED_TARGET_VALUE', 
+                              columns = ['ACTUAL_TARGET_VALUE',
+                                         'PREDICTED_TARGET_VALUE',
                                          'COST']),
                               table = 'LTV_COST_MATRIX')
     </copy>
@@ -576,7 +584,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
 
     > **Note** : For more information, visit [Cost Matrix Table](https://docs.oracle.com/en/database/oracle/oracle-database/21/arpls/DBMS_DATA_MINING.html#GUID-CF6EB584-8FE9-44F5-BAC0-0751DC094CCE__CACBEFFJ) documentation.
 
-    
+
 8. Specify algorithm settings.
 
     ````
@@ -586,7 +594,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     ````
 
     > **Note** : For more information, visit [Algorithm Settings: Decision Tree](https://docs.oracle.com/en/database/oracle/oracle-database/21/arpls/DBMS_DATA_MINING.html#GUID-03435110-D723-42FD-B4EA-39C86A039566) documentation.
-    
+
 9. Create a DT model object.
 
     ````
@@ -594,7 +602,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     dt_mod = oml.dt(**setting)
     </copy>
     ````
-    
+
     > **Note** : To understand this model, visit the [Decision Tree](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/decision-tree.html#GUID-C95E5C76-1778-44C2-A7E3-8BC6433BFF35) page in OML user guide.
 
 10. Fit the DT model according to the training data and parameter settings.
@@ -604,7 +612,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     dt_mod.fit(train_x, train_y, cost_matrix = cost_matrix)
     </copy>
     ````
-    
+
 11. Use the model to make predictions on the test data.
 
     ````
@@ -620,7 +628,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     ````
     <copy>
     predict_dat[['LTV_BIN','PREDICTION',
-                 'CUST_ID']].pivot_table('LTV_BIN', 'PREDICTION', 
+                 'CUST_ID']].pivot_table('LTV_BIN', 'PREDICTION',
                                              aggfunc = oml.DataFrame.count)
     </copy>
     ````
@@ -631,9 +639,9 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     <copy>
     test_predict = test_ltv[['CUST_ID','LAST','FIRST',
                              'LTV_BIN']].merge(other = predict_dat[['CUST_ID',
-                                                                    'PREDICTION']], 
+                                                                    'PREDICTION']],
                                                        on="CUST_ID")
-    test_predict[test_predict['LTV_BIN_l'] != 
+    test_predict[test_predict['LTV_BIN_l'] !=
                  test_predict['PREDICTION_r']].sort_values('CUST_ID')
     </copy>
     ````
@@ -656,12 +664,12 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     <copy>
     test_predict = test_ltv[['CUST_ID','LAST',
                              'FIRST','LTV_BIN']].merge(other = predict_dat[['CUST_ID','PREDICTION',
-                                                                            'PROBABILITY']], 
+                                                                            'PROBABILITY']],
                                                        on="CUST_ID")
     test_predict[test_predict['LTV_BIN_l'] != test_predict['PREDICTION_r']].sort_values('PROBABILITY_r')
     </copy>
     ````
-    
+
 16. Calculate the DT model score. DT model `score` attribute returns the mean accuracy.
 
     ````
@@ -669,7 +677,7 @@ In this example, you will not only classify your customers in four `LTV_BIN` cla
     dt_mod.score(test_ltv.drop('LTV_BIN'), test_ltv[:, ['LTV_BIN']])
     </copy>
     ````
-    
+
 17. Reset `TREE_TERM_MAX_DEPTH` and refit model. This setting represents the maximum number of nodes between the root and any leaf node, including the leaf node. More nodes means longer time to train the DT model. You may grab a coffee until this step is completed.
 
     ````
@@ -719,7 +727,7 @@ Generalized Linear Model (GLM) is a statistical technique used for linear modeli
 > **Note** : For more information on this algorithm, visit [Generalized Linear Model](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/generalized-linear-model.html#GUID-5E59530F-EBD9-414E-8C8B-63F8079772CE) documentation.
 
 In your case, the independent predictors are customer attributes, and the response target value is the customer life-time value.
-    
+
 1. Create an OML data frame proxy object in Python that represents your Oracle Database data set.
 
     ````
@@ -734,7 +742,7 @@ In your case, the independent predictors are customer attributes, and the respon
 
     ````
     <copy>
-    ltv_dat = oml_cust.split() 
+    ltv_dat = oml_cust.split()
     [split.shape for split in ltv_dat]
     </copy>
     ````
@@ -743,13 +751,13 @@ In your case, the independent predictors are customer attributes, and the respon
 
     ````
     <copy>
-    train_x = ltv_dat[0].drop('LTV') 
+    train_x = ltv_dat[0].drop('LTV')
     train_y = ltv_dat[0]['LTV']
     test_ltv = ltv_dat[1]
     [frame.shape for frame in (train_x, train_y, test_ltv)]
     </copy>
     ````
-    
+
 4. Specify settings.
 
     ````
@@ -767,7 +775,7 @@ In your case, the independent predictors are customer attributes, and the respon
     glm_mod = oml.glm('REGRESSION', **setting)
     </copy>
     ````
-    
+
     > **Note** : To understand this model, visit the [Generalized Linear Models](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/general-linearized-model.html#GUID-4464A453-60F0-4751-B231-91BC5708D1F8) page in OML user guide.
 
 6. Fit the GLM model according to the training data and parameter settings. The name of a column that contains unique case identifiers is used for `case_id` parameter.
@@ -811,7 +819,7 @@ In your case, the independent predictors are customer attributes, and the respon
     glm_mod = oml.glm('REGRESSION', **setting)
     </copy>
     ````
-    
+
 12. Refit the GLM model according to the training data and parameter settings.
 
     ````
@@ -842,7 +850,7 @@ In your case, the independent predictors are customer attributes, and the respon
     ````
     <copy>
     glm_mod.predict(test_ltv.drop('LTV'),
-                    supplemental_cols = test_ltv[:, ['CUST_ID','LAST','FIRST','LTV']], 
+                    supplemental_cols = test_ltv[:, ['CUST_ID','LAST','FIRST','LTV']],
                     proba = True)
     </copy>
     ````
@@ -882,7 +890,7 @@ In your case, the independent predictors are customer attributes, and the respon
     ````
     <copy>
     import matplotlib.pyplot as plt
-    plt.stem(ltv_diff.pull()[['LABEL_LTV']], 
+    plt.stem(ltv_diff.pull()[['LABEL_LTV']],
              ltv_diff.pull()[['LTV_DIFFERENCE']], 'b.')
     plt.xlabel('Label LTV value')
     plt.ylabel('LTV difference')
@@ -922,7 +930,7 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
 
     ````
     <copy>
-    ltv_dat = oml_cust_one.split() 
+    ltv_dat = oml_cust_one.split()
     train_ltv = ltv_dat[0]
     test_ltv = ltv_dat[1]
     [frame.shape for frame in (train_ltv, test_ltv)]
@@ -946,7 +954,7 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
     km_mod = oml.km(n_clusters = 4, **setting).fit(train_ltv, case_id = 'CUST_ID')
     </copy>
     ````
-    
+
     > **Note** : To understand this model, visit the [k-Means](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/k-means.html#GUID-7909D96B-D3B9-411B-BAD5-96DAFAF06B42) page in OML user guide.
 
 6. Show KM model details. Did your model converge?
@@ -956,7 +964,7 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
     km_mod
     </copy>
     ````
-    
+
 7. Use the model to cluster the test data.
 
     ````
@@ -966,26 +974,26 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
     predictions
     </copy>
     ````
-    
+
 8. Left merge the `oml_cust` full data set to view if there is a connection between the four clusters and the predefined classes stored in `LTV_BIN` column.
- 
+
     ````
     <copy>
     km_mod.predict(test_ltv,
-                   supplemental_cols = test_ltv[:, 
+                   supplemental_cols = test_ltv[:,
                            ['CUST_ID']]).merge(other=oml_cust[['CUST_ID',
                                                          'LTV_BIN']], on="CUST_ID")
     </copy>
     ````
-    
+
 9. Build a summary to count cluster members grouped by life-time value.
 
     ````
     <copy>
     km_mod.predict(test_ltv,
-       supplemental_cols = test_ltv[:, 
+       supplemental_cols = test_ltv[:,
              ['CUST_ID']]).merge(other=oml_cust[['CUST_ID',
-                            'LTV_BIN']], on="CUST_ID").crosstab('LTV_BIN_r', 
+                            'LTV_BIN']], on="CUST_ID").crosstab('LTV_BIN_r',
                                      'CLUSTER_ID_l').sort_values(by = ['CLUSTER_ID_l','count'])
     </copy>
     ````
@@ -996,13 +1004,13 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
     <copy>
     import matplotlib.pyplot as plt
     plt.rcParams["figure.figsize"] = (8,10)
-    plt.plot(predictions[predictions['CLUSTER_ID'] == 3].pull()[['CLUSTER_ID']].replace({3:1}), 
+    plt.plot(predictions[predictions['CLUSTER_ID'] == 3].pull()[['CLUSTER_ID']].replace({3:1}),
              predictions[predictions['CLUSTER_ID'] == 3].pull()[['LTV']], 'ro',
-             predictions[predictions['CLUSTER_ID'] == 5].pull()[['CLUSTER_ID']].replace({5:2}), 
+             predictions[predictions['CLUSTER_ID'] == 5].pull()[['CLUSTER_ID']].replace({5:2}),
              predictions[predictions['CLUSTER_ID'] == 5].pull()[['LTV']], 'go',
-             predictions[predictions['CLUSTER_ID'] == 6].pull()[['CLUSTER_ID']].replace({6:3}), 
+             predictions[predictions['CLUSTER_ID'] == 6].pull()[['CLUSTER_ID']].replace({6:3}),
              predictions[predictions['CLUSTER_ID'] == 6].pull()[['LTV']], 'bo',
-             predictions[predictions['CLUSTER_ID'] == 7].pull()[['CLUSTER_ID']].replace({7:4}), 
+             predictions[predictions['CLUSTER_ID'] == 7].pull()[['CLUSTER_ID']].replace({7:4}),
              predictions[predictions['CLUSTER_ID'] == 7].pull()[['LTV']], 'mo', alpha=0.15)
     plt.xlabel('Cluster 3-red, 5-green, 6-blue, 7-magenta')
     plt.ylabel('LTV')
@@ -1021,12 +1029,12 @@ You will group customers in four clusters. KM algorithm is more appropriate for 
 
 ## Task 6: Rank customer attributes with Attribute Importance
 
-Oracle Machine Learning supports the Attribute Importance (AI) machine learning function, which ranks attributes according to their importance. Attribute importance does not actually select the features, but ranks them as to their relevance to predicting the result. It is up to the user to review the ranked features and create a data set to include the desired features. 
+Oracle Machine Learning supports the Attribute Importance (AI) machine learning function, which ranks attributes according to their importance. Attribute importance does not actually select the features, but ranks them as to their relevance to predicting the result. It is up to the user to review the ranked features and create a data set to include the desired features.
 
 > **Note** : For more information, visit [About Feature Selection and Attribute Importance](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/feature-selection.html#GUID-FE2DFE18-670E-4E1A-83A8-5C67CA4D8564) documentation.
 
-In this example, you will use the entire data set, however you will drop `LTV` column. This column represents the exact numeric value of your customers LTV, and you already know there is a direct relationship between this column and the customer class represented in `LTV_BIN` column, so LTV value cannot be considered an attribute. 
-    
+In this example, you will use the entire data set, however you will drop `LTV` column. This column represents the exact numeric value of your customers LTV, and you already know there is a direct relationship between this column and the customer class represented in `LTV_BIN` column, so LTV value cannot be considered an attribute.
+
 1. Create an OML data frame proxy object in Python that represents your Oracle Database data set.
 
     ````
@@ -1036,20 +1044,20 @@ In this example, you will use the entire data set, however you will drop `LTV` c
     oml_cust.head()
     </copy>
     ````
-    
+
 2. Split the data set into training and test data. Default 70% train, 30% test. `train_x` are the customer features, and `train_y` specifies the label for each customer, in this case `LTV_BIN` value.
 
     ````
     <copy>
-    dat = oml_cust.split() 
-    train_x = dat[0].drop('LTV_BIN') 
+    dat = oml_cust.split()
+    train_x = dat[0].drop('LTV_BIN')
     train_y = dat[0]['LTV_BIN']
     test_dat = dat[1]
     </copy>
     ````
 
 3. Verify features data frame shape, number or rows and columns.
-    
+
     ````
     <copy>
     train_x.shape
@@ -1057,7 +1065,7 @@ In this example, you will use the entire data set, however you will drop `LTV` c
     ````
 
 4. Verify test data frame shape. Why are they different?
-    
+
     ````
     <copy>
     test_dat.shape
@@ -1073,7 +1081,7 @@ In this example, you will use the entire data set, however you will drop `LTV` c
     ````
 
     > **Note** : For the complete list of settings, check the [`DBMS_DATA_MINING` — Global Settings](https://docs.oracle.com/en/database/oracle/oracle-database/21/arpls/DBMS_DATA_MINING.html#GUID-24047A09-0542-4870-91D8-329F28B0ED75) table.
-        
+
 6. Create an AI model object.
 
     ````
@@ -1092,7 +1100,7 @@ In this example, you will use the entire data set, however you will drop `LTV` c
     </copy>
     ````
 
-8. Show the model details. 
+8. Show the model details.
 
     ````
     <copy>
@@ -1114,7 +1122,7 @@ Singular Value Decomposition (SVD) is an unsupervised algorithm for feature extr
 > **Note** : For more information, visit [Singular Value Decomposition](https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/21/dmcon/singular-value-decomposition.html#GUID-703B237F-D9C5-4543-97DD-31A914BB6A05) documentation.
 
 At this step, you want to identify the most important features and how are these related to your customers attributes.
-    
+
 1. Create an OML data frame proxy object in Python that represents your Oracle Database data set.
 
     ````
@@ -1129,7 +1137,7 @@ At this step, you want to identify the most important features and how are these
 
     ````
     <copy>
-    ltv_dat = oml_cust.split() 
+    ltv_dat = oml_cust.split()
     train_ltv = ltv_dat[0]
     test_ltv = ltv_dat[1]
     </copy>
@@ -1163,7 +1171,7 @@ At this step, you want to identify the most important features and how are these
     svd_mod
     </copy>
     ````
-    
+
 6. Use the model to make predictions on the test data.
 
     ````
@@ -1179,9 +1187,9 @@ At this step, you want to identify the most important features and how are these
 
     ````
     <copy>
-    predictions[predictions['LTV_BIN'] 
+    predictions[predictions['LTV_BIN']
             == 'VERY HIGH'].crosstab('LTV_BIN',
-                                     'FEATURE_ID').sort_values('count', 
+                                     'FEATURE_ID').sort_values('count',
                                                                    ascending=False)
     </copy>
     ````
@@ -1190,9 +1198,9 @@ At this step, you want to identify the most important features and how are these
 
     ````
     <copy>
-    predictions[predictions['LTV_BIN'] 
+    predictions[predictions['LTV_BIN']
             == 'HIGH'].crosstab('LTV_BIN',
-                                     'FEATURE_ID').sort_values('count', 
+                                     'FEATURE_ID').sort_values('count',
                                                                    ascending=False)
     </copy>
     ````
@@ -1201,9 +1209,9 @@ At this step, you want to identify the most important features and how are these
 
     ````
     <copy>
-    predictions[predictions['LTV_BIN'] 
+    predictions[predictions['LTV_BIN']
             == 'MEDIUM'].crosstab('LTV_BIN',
-                                     'FEATURE_ID').sort_values('count', 
+                                     'FEATURE_ID').sort_values('count',
                                                                    ascending=False)
     </copy>
     ````
@@ -1212,9 +1220,9 @@ At this step, you want to identify the most important features and how are these
 
     ````
     <copy>
-    predictions[predictions['LTV_BIN'] 
+    predictions[predictions['LTV_BIN']
             == 'LOW'].crosstab('LTV_BIN',
-                                     'FEATURE_ID').sort_values('count', 
+                                     'FEATURE_ID').sort_values('count',
                                                                    ascending=False)
     </copy>
     ````
@@ -1224,7 +1232,7 @@ At this step, you want to identify the most important features and how are these
     ````
     <copy>
     svd_mod.transform(test_ltv,
-                      supplemental_cols = test_ltv[:, ['CUST_ID', 'LTV_BIN']], 
+                      supplemental_cols = test_ltv[:, ['CUST_ID', 'LTV_BIN']],
                              topN = 2).sort_values(by = ['CUST_ID', 'TOP_1', 'TOP_1_VAL'])
     </copy>
     ````
@@ -1232,7 +1240,7 @@ At this step, you want to identify the most important features and how are these
 12. List the most important customer attributes for the most important feature.
 
     ````
-    svd_mod.features[svd_mod.features['FEATURE_ID'] 
+    svd_mod.features[svd_mod.features['FEATURE_ID']
                      == 1].sort_values('VALUE', ascending=False).head()
     ````
 
@@ -1269,7 +1277,7 @@ At this step, you will use AutoML to select the best Oracle Machine Learning alg
 
     ````
     <copy>
-    train, test = oml_cust_c.split(ratio=(0.8, 0.2), seed = 1234) 
+    train, test = oml_cust_c.split(ratio=(0.8, 0.2), seed = 1234)
     X, y = train.drop('LTV_BIN'), train['LTV_BIN']
     X_test, y_test = test.drop('LTV_BIN'), test['LTV_BIN']
     </copy>
@@ -1293,7 +1301,7 @@ At this step, you will use AutoML to select the best Oracle Machine Learning alg
     algo_ranking_c = asel_c.select(X, y, k=3)
     </copy>
     ````
-    
+
 6. Show the selected and tuned model.
 
     ````
@@ -1301,12 +1309,12 @@ At this step, you will use AutoML to select the best Oracle Machine Learning alg
     [(m, "{:.2f}".format(s)) for m,s in algo_ranking_c]
     </copy>
     ````
-    
+
 7. Split the data set into training and test data for regression task.
 
     ````
     <copy>
-    train, test = oml_cust_r.split(ratio=(0.8, 0.2), seed = 1234) 
+    train, test = oml_cust_r.split(ratio=(0.8, 0.2), seed = 1234)
     X, y = train.drop('LTV'), train['LTV']
     X_test, y_test = test.drop('LTV'), test['LTV']
     </copy>
@@ -1338,7 +1346,7 @@ At this step, you will use AutoML to select the best Oracle Machine Learning alg
     ````
 
 As you can see, AutoML is able to provide you the algorithms and a ranking of the algorithms best for the data set automatically for the Classification and Regression machine learning types.
-    
+
 ## Task 9: Automated Machine Learning: Feature Selection
 
 AutoML Feature Selection identifies the most relevant feature subsets for a training data set and an Oracle Machine Learning algorithm. In a data analytics application, feature selection is a critical data preprocessing step that has a high impact on both runtime and model performance.
@@ -1346,7 +1354,7 @@ AutoML Feature Selection identifies the most relevant feature subsets for a trai
 > **Note** : For more information on this algorithm, visit [Feature Selection](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/feature-selection.html#GUID-576E9C37-6743-4DCC-8939-44772A5C41AB) documentation.
 
 In this AutoML example, you will reduce the number of features of your customers data set, and compare the accuracy score of a Support Vector Machine (SVM) algorithm for a classification task.
-    
+
 1. Create an OML data frame proxy object in Python that represents your Oracle Database data set.
 
     ````
@@ -1361,7 +1369,7 @@ In this AutoML example, you will reduce the number of features of your customers
     ````
     <copy>
     train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234,
-                                 strata_cols = 'LTV_BIN') 
+                                 strata_cols = 'LTV_BIN')
     X_train, y_train = train.drop('LTV_BIN'), train['LTV_BIN']
     X_test, y_test = test.drop('LTV_BIN'), test['LTV_BIN']
     </copy>
@@ -1401,8 +1409,8 @@ In this AutoML example, you will reduce the number of features of your customers
     <copy>
     X_new = X_train[:,subset]
     X_test_new = X_test[:,subset]
-    mod = oml.svm(mining_function='classification').fit(X_new, y_train) 
-    "{:.2} with {:.1f}x feature reduction".format(mod.score(X_test_new, y_test), 
+    mod = oml.svm(mining_function='classification').fit(X_new, y_train)
+    "{:.2} with {:.1f}x feature reduction".format(mod.score(X_test_new, y_test),
                                                   len(X_train.columns)/len(X_new.columns))
     </copy>
     ````
@@ -1412,7 +1420,7 @@ In this AutoML example, you will reduce the number of features of your customers
     ````
     <copy>
     train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234,
-                                 hash_cols='CUST_ID', strata_cols = 'LTV_BIN') 
+                                 hash_cols='CUST_ID', strata_cols = 'LTV_BIN')
     X_train, y_train = train.drop('LTV_BIN'), train['LTV_BIN']
     X_test, y_test = test.drop('LTV_BIN'), test['LTV_BIN']
     </copy>
@@ -1423,7 +1431,7 @@ In this AutoML example, you will reduce the number of features of your customers
     ````
     <copy>
     subset = fs.reduce('svm_linear', X_train,
-                       y_train, case_id='CUST_ID') 
+                       y_train, case_id='CUST_ID')
     "{} features reduced to {} with case_id".format(len(X_train.columns)-1, len(subset))
     </copy>
     ````
@@ -1436,7 +1444,7 @@ AutoML Model Selection automatically selects an Oracle Machine Learning algorith
 > **Note** : For more information, visit [Model Selection](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/model-selection.html#GUID-E2C3D9D2-D685-4AF7-8A04-32127A5CCF07) documentation.
 
 In this example, you will create an AutoML `ModelSelection` object and then use this object to select and tune the best model for your task.
-    
+
 1. Create an OML data frame proxy object that represents your database table.
 
     ````
@@ -1445,17 +1453,17 @@ In this example, you will create an AutoML `ModelSelection` object and then use 
     oml_cust.head()
     </copy>
     ````
-    
+
 2. Split the data set into training and test data for classification.
 
     ````
     <copy>
-    train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234) 
+    train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234)
     X, y = train.drop('LTV_BIN'), train['LTV_BIN']
     X_test, y_test = test.drop('LTV_BIN'), test['LTV_BIN']
     </copy>
     ````
-    
+
 3. Create an automated model selection object with `f1_macro` as the `score_metric` argument.
 
     ````
@@ -1481,15 +1489,15 @@ In this example, you will create an AutoML `ModelSelection` object and then use 
     </copy>
     ````
 
-    
+
 ## Task 11: Automated Machine Learning: Model Tuning
 
-AutoML Model Tuning tunes the hyperparameters for the specified classification or regression algorithm and training data. This feature automates the tuning process using a highly-parallel, asynchronous gradient-based hyperparameter optimization algorithm. 
+AutoML Model Tuning tunes the hyperparameters for the specified classification or regression algorithm and training data. This feature automates the tuning process using a highly-parallel, asynchronous gradient-based hyperparameter optimization algorithm.
 
 > **Note** : For more information on this algorithm, visit [Model Tuning](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/mlpug/model-tuning.html#GUID-0F5153CC-39E5-4189-9615-09D8F39D7FBF) documentation.
 
 In this case, you will execute an automated model tuning process for a classification task using Decision Tree (DT) algorithm.
-    
+
 1. Create an OML data frame proxy object in Python that represents your Oracle Database data set.
 
     ````
@@ -1503,7 +1511,7 @@ In this case, you will execute an automated model tuning process for a classific
 
     ````
     <copy>
-    train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234) 
+    train, test = oml_cust.split(ratio=(0.8, 0.2), seed = 1234)
     X, y = train.drop('LTV_BIN'), train['LTV_BIN']
     X_test, y_test = test.drop('LTV_BIN'), test['LTV_BIN']
     </copy>
@@ -1513,7 +1521,7 @@ In this case, you will execute an automated model tuning process for a classific
 
     ````
     <copy>
-    at = automl.ModelTuning(mining_function='classification', parallel=4, 
+    at = automl.ModelTuning(mining_function='classification', parallel=4,
                             score_metric='accuracy')
     results = at.tune('dt', X, y)
     </copy>
@@ -1525,7 +1533,7 @@ In this case, you will execute an automated model tuning process for a classific
 
     ````
     <copy>
-    tuned_model = results['best_model'] 
+    tuned_model = results['best_model']
     tuned_model
     </copy>
     ````
@@ -1534,7 +1542,7 @@ In this case, you will execute an automated model tuning process for a classific
 
     ````
     <copy>
-    score, params = results['all_evals'][0] 
+    score, params = results['all_evals'][0]
     "{:.2}".format(score), ["{}:{}".format(k, params[k])
                             for k in sorted(params)]
     </copy>
@@ -1550,11 +1558,10 @@ In this case, you will execute an automated model tuning process for a classific
 
 
 ## Acknowledgements
-* **Authors** - Milton Wan, Valentin Leonard Tabacaru
+* **Authors** - Valentin Leonard Tabacaru
 * **Last Updated By/Date** -  Valentin Leonard Tabacaru, July 2021
-    
+
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
-    
+
 If you do not have an Oracle Account, click [here](https://profile.oracle.com/myprofile/account/create-account.jspx) to create one.
-    

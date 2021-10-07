@@ -12,16 +12,16 @@ Estimated Time: 1 hour
 
 ### Objectives
 * Load data into Autonomous Database
-* Prepare the customer insurance date
-* Use AutoML to create a Machine Learning model.
+* Prepare the customer insurance data
+* Use AutoML to create a machine learning model
 * Use Postman to score the machine learning model using REST APIs  
-* Use Curl to score the machine-learning model using REST APIs in command line.
+* Use Curl to score the machine-learning model using REST APIs in command line
 
 
 ### Prerequisites
 * Prior knowledge and familiarity of Machine Learning Algorithms
 * Oracle Cloud Infrastructure (OCI) account
-* Autonomous Database deployed in Oracle Cloud
+* Autonomous Database provisioned in Oracle Cloud
 
 
 ## Learn More
