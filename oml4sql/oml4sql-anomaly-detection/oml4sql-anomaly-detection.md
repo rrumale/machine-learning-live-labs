@@ -21,16 +21,16 @@ Estimated Lab Time: 2 hours
 
 In this lab, you will:
 
-* **1. Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
-* **2. Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
-* **3. Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
-* **4. Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
-* **5. Evaluation**: Next, test model accuracy, make sure the model makes sense.
-* **6. Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
+* **Business Understanding**: (Be extremely specific in the problem statement) Examine the customer insurance historical data set and understand business.
+* **Data Understanding**: (Review the data; does it makes sense?), Understand the meaning of fields.
+* **Data Preparation**: (Prepare the data, create new derived attributes or "engineered features") Examine the new customer data set that you needed to start to work.
+* **Modeling**: (Training and testing ML models using 60%/40% random samples.) First, identify the key attributes that most influence the target attribute.
+* **Evaluation**: Next, test model accuracy, make sure the model makes sense.
+* **Deployment**: Apply the Models to Predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
 
-* Database Developer to Data Scientist Journey
 
-![process](../oml4sql-anomaly-detection/images/process.png)
+
+![Database Developer to Data Scientist Journey](../oml4sql-anomaly-detection/images/process.png =500x500)
 
 
 ### Prerequisites
@@ -41,7 +41,7 @@ In this lab, you will:
 
 ## Task 1: Business Understanding
 
-1. Review Business Objectives that describe in [oml4sql-use-case.md](/oml4sql/oml4sql1/oml4sql-use-case.md) file.
+1. Review Business Objectives that describe in next section [Customer Insurance Use Case to OML4SQL Workshop](/oml4sql/oml4sql1/oml4sql-use-case.md).
 
 ## Task 2: Data Understanding
 

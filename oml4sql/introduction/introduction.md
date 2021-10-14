@@ -2,9 +2,9 @@
 
 ## About this Workshop
 
-This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Oracle Database. OML4SQL supports scalable in-database data exploration and preparation using native SQL & PLSQL syntax, invocation of in-database machine learning algorithms for model building. 
+This workshop introduces you to Oracle Machine Learning for SQL  (OML4SQL) on Oracle Database. OML4SQL supports scalable in-database data exploration and preparation using native SQL & PLSQL syntax, invocation of in-database machine learning algorithms for model building.
 
-In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that are described in [oml4sql-use-case.md](./oml4sql/oml4sql-use-case/oml4sql-use-case.md) file.
+In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to find 4 Business Objectives that are described in section *OML4SQL Use Case*.
 
   1. Find the most atypical members of this customer group (outlier identification).
   2. Discover the common demographic characteristics of the most typical customers with insurance.
@@ -33,7 +33,7 @@ In this lab, you will learn the lifecycle of machine learning:
 
 1. **Business Understanding**: Understand the problem statement. Examine the customer insurance historical data set and understand the business case.
 2. **Data Understanding**: Review the data; does it makes sense?  Understand the meaning of fields.
-3. **Data Preparation**: Prepare the data, create new derived attributes or "engineered features". 
+3. **Data Preparation**: Prepare the data, create new derived attributes or "engineered features".
 4. **Modeling**: Training and testing ML models using 60%/40% random samples. First, identify the key attributes that most influence the target attribute.
 5. **Evaluation**: Next, test model accuracy, make sure the model makes sense.
 6. **Deployment**: Apply the models to predict “Best Customers”, and give this tool to the people in the business who can best take advantage of it.
