@@ -46,111 +46,114 @@ In this lab, you will:
 
 3. Open a Terminal. Run these commands one by one:
 
-    ````
+    ```
+    <copy>
     fixHost
 
     . setEnv
 
-    . oraenv
+    . oraenv</copy>
 
     ORACLE_SID = [mlcdb] ? - Hit Enter
-    ````
+    ```
 
 4. Start the listener.
 
-    ````
-    lsnrctl start
-    ````
+    ```
+    <copy>lsnrctl start</copy>
+    ```
 
 5. Connect to the database and start it up.
 
-    ````
-    sqlplus / as sysdba
+    ```
+    <copy>sqlplus / as sysdba
 
-    startup
-    ````
+    startup</copy>
+    ```
 
 6. Verify the PDB, and exit Sql*Plus.
 
-    ````
-    show pdbs
-    ````
+    ```
+    <copy>show pdbs</copy>
+    ```
 
 7. Verify database services.
 
-    ````
-    lsnrctl status
-    ````
+    ```
+    <copy>lsnrctl status</copy>
+    ```
 
 
 ## Task 3: Start Database Resident Connection Pooling
 
 1. Connect to your PDB as SYSDBA.
 
-    ````
-    sqlplus sys/MLlearnPTS#21_@MLPDB1 as sysdba
-    ````
+    ```
+    <copy>sqlplus sys/MLlearnPTS#21_@MLPDB1 as sysdba</copy>
+    ```
 
 2. Start the pool. Every time you restart the database, you will have to start the pool.
 
-    ````
+    ```
+    <copy>
     exec DBMS_CONNECTION_POOL.start_pool;
 
     exit
-    ````
+    </copy>
+    ```
 
 6. Test DRCP on your PDB.
 
-    ````
-    sqlplus oml_user/MLlearnPTS#21_@MLPDB1P
-    ````
+    ```
+    <copy>sqlplus oml_user/MLlearnPTS#21_@MLPDB1P</copy>
+    ```
 
 
 ## Task 4: Activate Python environment and start Jupyter
 
 1. Go to the Python project folder in Terminal.
 
-    ````
-    cd ~/projects/oml4py/
-    ````
+    ```
+    <copy>cd ~/projects/oml4py/</copy>
+    ```
 
 2. Activate Python environment. Install any Python library in this environment. Ignore the warning message about Pip old version.
 
-    ````
-    . orclvenv/bin/activate
+    ```
+    <copy>. orclvenv/bin/activate
 
-    pip install [library]
-    ````
+    pip install </copy>[library]
+    ```
 
 3. Start Jupyter Notebook.
 
-    ````
-    jupyter notebook --ip=0.0.0.0​
-    ````
+    ```
+    <copy>jupyter notebook --ip=0.0.0.0​</copy>
+    ```
 
 4. Copy the token value from the output. Jupyter Notebook is automatically launched in a browser window.
 
-    ````
+    ```
     http://0.0.0.0​:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
-    ````
+    ```
 
 5. If you want to connect to Jupyter Notebook from your browser, use the Public IP address:
 
-    ````
+    ```
     http://[**Public-IP**]:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
-    ````
+    ```
 
 6. This Terminal window must stay open until you finish and close Jupyter Notebook. To close, press **Ctrl-C** and **y**.
 
-    ````
+    ```
     Shutdown this notebook server (y/[n])? y
-    ````
+    ```
 
 7. To deactivate the Python environment, run:
 
-    ````
-    deactivate
-    ````
+    ```
+    <copy>deactivate</copy>
+    ```
 
 
 ## Acknowledgements
