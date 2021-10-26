@@ -46,11 +46,11 @@ In this lab, you will:
 
 3. Open a Terminal. Run these commands one by one:
 
-    ````
+    ```
     fixHost
 
     . setEnv
-    ````
+    ```
 
 4. This Terminal window must stay open until you finish and close Jupyter Notebook. To close, press **Ctrl-C** and **y**.
 
@@ -65,86 +65,86 @@ In this lab, you will:
 
 2. Set the environment for Oracle database.
 
-    ````
+    ```
     . oraenv
     ORACLE_SID = [oracle] ? mlcdb
     The Oracle base has been set to /u01/app/oracle
-    ````
+    ```
 
 3. Start the listener.
 
-    ````
+    ```
     lsnrctl start
-    ````
+    ```
 
 4. Start the database.
 
-    ````
+    ```
     sqlplus / as sysdba
 
     startup
 
     exit
-    ````
+    ```
 
 5. Go to the Python project folder in Terminal.
 
-    ````
+    ```
     cd ~/projects/oml4py/
-    ````
+    ```
 
 6. Activate Python environment. Install any Python library in this environment. Ignore the warning message about Pip old version.
 
-    ````
+    ```
     . orclvenv/bin/activate
 
     pip install [library]
-    ````
+    ```
 
 7. Start Jupyter Notebook.
 
-    ````
+    ```
     jupyter notebook --ip=0.0.0.0​
-    ````
+    ```
 
 8. Copy the token value from the output. Jupyter Notebook is automatically launched in a browser window.
 
-    ````
+    ```
     http://0.0.0.0​:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
-    ````
+    ```
 
-9. If you want to connect to Jupyter Notebook from your browser, use the Public IP address: 
+9. If you want to connect to Jupyter Notebook from your browser, use the Public IP address:
 
-    ````
+    ```
     http://[**Public-IP**]:8888/?token=deee4a5109aa637deb61784774b61876a650b87970f2c499
-    ````
+    ```
 
 10. This Terminal window must stay open until you finish and close Jupyter Notebook. To close, press **Ctrl-C** and **y**.
 
-    ````
+    ```
     Shutdown this notebook server (y/[n])? y
-    ````
+    ```
 
 11. To deactivate the Python environment, run:
 
-    ````
+    ```
     deactivate
-    ````
+    ```
 
 
 ## Task 4: Connect to RStudio
 
 1. On the remote desktop, launch in a browser window and navigate to:
 
-    ````
+    ```
     localhost​:8787
-    ````
+    ```
 
-2. If you want to connect to RStudio from your browser, use the Public IP address: 
+2. If you want to connect to RStudio from your browser, use the Public IP address:
 
-    ````
+    ```
     [**Public-IP**]:8787
-    ````
+    ```
 
 
 ## Acknowledgements
