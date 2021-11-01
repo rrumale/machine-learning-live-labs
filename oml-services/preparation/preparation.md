@@ -6,7 +6,7 @@ In this lab we would do the setup needed for the labs.
 
 In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lifetime_value) is a prognostication of the net profit contributed to the whole future relationship with a customer.
 
-Estimated Lab Time: 1 hour
+Estimated Lab Time: 10 minutes
 
 ### Objectives
 *	Connect to Autonomous Dataware House ( ADW)
@@ -24,7 +24,7 @@ Estimated Lab Time: 1 hour
 ### Lab Preparation:
 
 
-#### Get Tenancy ID
+## Task 1: Get Tenancy ID
 
 * Connect to the Oracle Cloud Infrastructure (OCI) Console. In the home page click on the user icon on the top right side.
 ![OCI-home](images/prerequisites-screenshot-X01.jpg)
@@ -39,7 +39,7 @@ Estimated Lab Time: 1 hour
 ![OCI-tenancy-ocid](images/prerequisites-screenshot-X04.jpg)
 
 
-#### Get Autonomous Database dbname
+## Task 2: Get Autonomous Database dbname
 
 * Click on the Menu button next to the Oracle Cloud icon.
 ![OCI-menu](images/prerequisites-screenshot-X05.jpg)
@@ -57,7 +57,7 @@ You can save the Database Name somewhere accessible for the duration of the work
 
 
 
-#### Loading the data
+## Task 3: Loading the data
 
 * Connect to the Oracle Cloud Infrastructure (OCI) Console and go to Autonomous Database home page.
 * Click on the target Autonomous Database instance
@@ -108,7 +108,7 @@ The data loading process takes less than a minute. When is completed notice the 
 
 The next step is to create the OML User and to add the data in his schema.
 
-####  Create the OMLUSER user
+## Task 4:  Create the OMLUSER user
 
 * Returning in the Autonomous Database instance Tools tab, click on the **Open Oracle ML User Administration**
 ![ADB-instance-home](images/prerequisites-screenshot-13.jpg)
@@ -139,7 +139,7 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 
 
 
-####  Move the data in OMLUSER schema
+## Task 5:  Move the data in OMLUSER schema
 
 * Returning in the Autonomous Database instance Tools tab.Click **Open Database Actions**.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
@@ -173,3 +173,14 @@ SELECT * FROM CUST_INSUR_LTV;
 ![ADB-sql-web](images/prerequisites-screenshot-21.jpg)
 
 The next part is to use this data and create an AutoML model.
+
+
+## Acknowledgements
+* **Authors** -  Andrei Manoliu, Milton Wan
+* **Contiributors** - Rajeev Rumale
+* **Last Updated By/Date** -  Andrei Manoliu, November 2021
+
+## Need Help?
+Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
+
+If you do not have an Oracle Account, click [here](https://profile.oracle.com/myprofile/account/create-account.jspx) to create one.
