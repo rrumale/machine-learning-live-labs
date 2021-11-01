@@ -15,7 +15,7 @@
     {
     "title": "Prepare Setup",
     "description": "How to download your ORM stack and update security rules for an existing VCN.",
-    "filename": "./../../../preparation/preparation.md"
+    "filename": "./../../preparation/preparation.md"
     },
     {
       "title": "OML using REST Services",
