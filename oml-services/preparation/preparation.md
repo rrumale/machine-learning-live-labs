@@ -13,13 +13,12 @@ Estimated Lab Time: 10 minutes
 *	Obtain information from OCI to connect i.e., Get Tenancy ID,
 * Load data into ADW
 *	Create user account for ML services
-*	Acces VM instance Use Postman to score the machine learning model using REST APIs  
-*	Use Curl to score the machine-learning model using REST APIs in command line.
+*
 
 ### Prerequisites
 * Oracle Cloud Infrastructure (OCI) account
 * Autonomous Database deployed in Oracle Cloud
-* Postman or Curl available on your working station
+
 
 ### Lab Preparation:
 

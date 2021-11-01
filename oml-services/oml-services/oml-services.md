@@ -256,9 +256,11 @@ We can now use REST APIs to query the model, model scoring and scoring for speci
 <copy>./OML-Services/Postman/Postman</copy>
 ````
 
+![Launch Postman](images/automl-screenshot-20.jpg)
+
 Postman registration is not necessary for this workshop therefore you can choose Skip on the login page.
 
-![Launch Postman](images/automl-screenshot-20.jpg)
+![Launch Postman](images/automl-screenshot-201.jpg)
 
 You can close the scratchpad banner and hide the sidebar for a cleaner view.
 
@@ -785,28 +787,15 @@ We are going to run the next steps:
  3. Deploy the model;
  4. Score a customer using the Decision Tree model;
 
-### Task Prerequisites
 
-* Run the OML4PY workshop.
-* Run the OML-Services Workshop.
+## Task 6.1: Extract the saved model to a file (Optional)
 
-## Task 6.1: Extract the saved model to a file
+When running OML-Services standalone you can skip this step and got to Task 6.2. (You can run this task only if you went through the OML4Py workshop and run OML-Services workshop as an added step. )
 
 * Connect to the VM and open a Terminal window.
 
   ![VM-Terminal](images/model-import-01.jpg)
 
-* Run these commands one by one:
-
-````
-. setEnv
-
-. oraenv
-
-ORACLE_SID = [mlcdb] ? - Hit Enter
-````
-
-  ![VM-Terminal](images/model-import-02.jpg)
 
 * Go to the OML_Services folder.
 
@@ -818,9 +807,11 @@ $<copy> cd ~/OML-Services</copy>
 
 
 * Run the `prepare_model_import.sql` script to write the exported DT_MODEL to a file on the operating system.
+Please replace the **`<ServiceName>`** tag with the actual service name of the database instance. For example **`mlpdb1.sub09301404280.omlvcn.oraclevcn.com`**.
+
 
 ````
-$ <copy> sqlplus sys/MLlearnPTS#21_@localhost:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com as sysdba @prepare_model_import.sql</copy>
+$ <copy> sqlplus sys/MLlearnPTS#21_@localhost:1521/<ServiceName> as sysdba @prepare_model_import.sql</copy>
 ````
 
 The script runs the following steps.
@@ -837,7 +828,7 @@ The script runs the following steps.
 To check the exported file run the command:
 
 ````
-$<copy>ls ~/dmuser</copy>
+$<copy>ls -alt </copy>
 ````
 
   ![VM-Terminal](images/model-import-05.jpg)
@@ -885,7 +876,7 @@ URI endpoint:
 In the Headers tab enter the following:
 
 ````
-Content-Type: application/json
+Content-Type: multipart/form-data
 boundary: Boundary
 ````
 
@@ -896,7 +887,7 @@ In the Body tab pick form-data and enter `modelData` in the key field, hover ove
 
   ![Model Import](images/model-import-10.jpg)
 
-Click Select File; go to `/home/oracle/dmuser/` folder and select the **`DTModel.mod`** file created earlier.
+Click Select File; go to `/home/oracle/OML-Services/` folder and select the **`DTModel.mod`** file created earlier.
 
   ![Model Import](images/model-import-11.jpg)
 
@@ -1054,7 +1045,7 @@ In this exercise we managed took a model exported in the Python workshop and imp
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
 * **Contiributors** - Rajeev Rumale
-* **Last Updated By/Date** -  Andrei Manoliu, October 2021
+* **Last Updated By/Date** -  Andrei Manoliu, November 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
