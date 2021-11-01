@@ -6,7 +6,7 @@ In this lab we would do the setup needed for the labs.
 
 In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lifetime_value) is a prognostication of the net profit contributed to the whole future relationship with a customer.
 
-Estimated Lab Time: 10 minutes
+Estimated Lab Time: 15 minutes
 
 ### Objectives
 *	Connect to Autonomous Dataware House ( ADW)

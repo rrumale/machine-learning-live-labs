@@ -24,7 +24,7 @@ Estimated Lab Time: 1 hour
 
 
 
-## Task 1: Introduce Insurance Customer Data
+## Task 1: Display Insurance Customer Data in OML Notebook
 
 * In the Autonomous Database instance details page. Click on the Service Console button.
 ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
@@ -109,7 +109,7 @@ Notice that in the testing table we will not use any of the leading ``LTV`` or `
 
 
 
-## Task 2: Use AutoML from Autonomous Database
+## Task 2: Use AutoML and Autonomous Database
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
 ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -238,9 +238,9 @@ The model will be deployed and a green banner will show the success of the deplo
 
 We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
-## Task 4:   Access the model using REST APIs using POSTMAN
+## Task 4:   Score the model using Postman
 
-## Task 4.1:   Prepare the REST calls
+## Task 4.1:   Prepare REST calls
 
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
@@ -550,9 +550,9 @@ Notice the result in JSON format shows the probability for this customer to be i
 
 
 
-## Task 5:   Access the model using REST APIs using CURL
+## Task 5:   Score the model using CURL
 
-## Task 5.1:   Prepare the REST calls
+## Task 5.1:   Prepare REST calls
 
 To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
@@ -777,7 +777,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 Notice the predictions are the same as in the REST calls. In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
 
 
-## Task 6 Import the Decision Tree model (optional)
+## Task 6 Import the Decision Tree model
 
 In this section of the workshop we will import the Decision Tree model used on the OML4PY < !--  link to OMPL4Py to be added --> workshop Task 3.
 
