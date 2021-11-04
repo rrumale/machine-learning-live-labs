@@ -1,4 +1,4 @@
-# Formula 1 OML services
+# Make predictions for Formula 1 season using Oracle Machine Learning
 
 ## Introduction
 
