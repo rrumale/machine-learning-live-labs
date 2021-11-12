@@ -3,11 +3,6 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-    "title": "Prepare Setup - Old section. To be removed",
-    "description": "How to download your ORM stack and update security rules for an existing VCN.",
-    "filename": "./../../preparation/preparation.md"
-    },
-    {
       "title": "Introduction",
       "description": "Introduction",
       "filename": "../../introduction/introduction.md"
@@ -20,7 +15,7 @@
     {
     "title": "Lab 2: Initialize Environment",
     "description": "Initialize Environment",
-    "filename": "../../initialize-environment/initialize-environment.md"
+    "filename": "../../initialize-environment-novnc/initialize-environment-novnc.md"
     },
 
     {
