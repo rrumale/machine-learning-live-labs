@@ -42,6 +42,8 @@ The labs in this workshop focus on the following:
 * [About Oracle Machine Learning for Python](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/index.html)
 * [Oracle Machine Learning Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/)
 
+You may now [proceed to the next lab](#next).
+
 ## Acknowledgements
 * **Authors** - Valentin Leonard Tabacaru, Milton Wan
 * **Last Updated By/Date** -  Rajeev Rumale

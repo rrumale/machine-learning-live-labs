@@ -42,6 +42,8 @@ Since the data already has the buy insurance and LTV information along with the 
 
 In this workshop, you will pass new records to machine learning models to predict whether the customer will buy insurance and also determine the LTV automatically without humans.  Have fun.
 
+You may now [proceed to the next lab](#next).
+
 ## Acknowledgements
 * **Author** - Valentin Leonard Tabacaru, Milton Wan
 * **Last Updated By/Date** -  Milton Wan, August 2021
