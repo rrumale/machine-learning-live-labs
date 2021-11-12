@@ -34,7 +34,7 @@ This lab assumes you have:
 
 3. Click on the notebook **OML4Py-part-1.ipynb**. This would open the notebook in new tab.
 
-    ![](images/oml4py-open-om;4py-part-1.png " ")
+    ![](images/oml4py-open-oml4py-part-1.png " ")
 
 
 You may now [proceed to the next lab](#next).
