@@ -6,19 +6,15 @@ This lab will show you how to access your NoVNC instance and launch Jupyter Note
 *Estimated Lab Time*: 30 minutes
 
 ### Objectives
-* Access an NoVNC Instance
+* Get familiar with the lab Instance
 * Launch Jupyter Notebooks
-* Test the database connectivity
 
 ### Prerequisites
 This lab assumes you have:
 - You have completed reservation process and able to login to Remote Desktop connection
 
 ## Task 1: Check the Lab setup
-1. The remote desktop has pre-configured all the software and environment needed for this workshop. This includes a 21c Databases & Jupyter Notebooks. The following services would start automatically.  The lab guide is available in a browser session this would allow you to access the lab guide and Jupter Notebooks side by side.
-    - Database Listeners
-    - Database Server Instances
-    - Browser with Lab Guide
+1. The remote desktop instance has pre-configured all the software and environment needed for this workshop. This includes a 21c Databases & Jupyter Notebooks. All services would start automatically.  The lab guide is available in a browser session, this would allow you to access the lab guide and Jupter Notebooks side by side.
 
     ![](./images/oml4py-novnc-guide.png " ")
 
@@ -30,7 +26,7 @@ This lab assumes you have:
     ```
     ![](images/oml4py-startup-jupyter-notebook.png " ")
 
-    **Important** Leave the terminal window open as closing this would close the Jupyter notebooks, you can leave the terminal open in background and switch to browser by clicking on browser.
+    > **Important** Leave the terminal window open as closing this would close the Jupyter notebooks, you can leave the terminal open in background and switch to browser by clicking on browser.
 
 2. A new browser window would open with Jupyter notebook session. Notice there are two notebooks already present, for ease of use the notebooks are already prepared with all the steps we need for this labs.      
 
