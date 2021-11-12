@@ -45,9 +45,18 @@ Optionally (part 2), you can:
 
 2. Click **File** > **Rename**, and name it **LabNotebook[ABC]** where **[ABC]** are your initials.
 
-3. Copy the code lines and paste them in the notebook current cell. Click **Run** to execute the code. Wait until you get a number in front of the cell, meaning the execution is complete.
+3. Copy the code lines and paste them in the notebook current cell. Click **Run** to execute the code. Wait until you get a number in front of the cell, meaning the execution is complete. The first block of Python code retrieves the host name and the database service name from your environment.
 
-4. Connect to your Oracle 21c Pluggable Database, and check connectivity.
+    ```
+    # Run the following commands to get your hostname and pluggable database service name
+    import os
+    print('Hostname: ',os.uname()[1])
+    stream = os.popen('lsnrctl status | grep mlpdb1')
+    print('Database service: ',stream.read())
+    ```
+
+
+4. Connect to your Oracle 21c Pluggable Database, and check connectivity. Verify and change the `host` and `service_name` values with the actual host name and database service name you retrieved in the previous step.
 
     ```
     <copy>
@@ -55,7 +64,7 @@ Optionally (part 2), you can:
     import pandas as pd
     oml.connect(user="oml_user", password="MLlearnPTS#21_",
                 host="<YOUR-HOSTNAME>", port=1521,
-                service_name="mlpdb1.sub07141037280.rehevcn.oraclevcn.com",
+                service_name="<YOUR-SERVICE>",
                 automl=True)
     oml.isconnected()
     </copy>

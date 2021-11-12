@@ -1,7 +1,7 @@
 # Initialize Environment
 
 ## Introduction
-This lab will show you how to access your NoVNC instance and launch Jupyter Notebooks.
+This lab will show you how launch Jupyter Notebooks in your NoVNC instance.
 
 *Estimated Lab Time*: 30 minutes
 
