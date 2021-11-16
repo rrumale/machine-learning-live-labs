@@ -1,7 +1,7 @@
 # Prepare Setup
 
 ## Introduction
-This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file needed to setup the resource needed to run this workshop. This workshop requires a compute instance and a Virtual Cloud Network (VCN) to access the Graphical desktop using NoVNC interface.
+This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file needed to setup the resource needed to run this workshop. We would use in the next lab to create an compute instance needed to run the lab tasks.
 
 *Estimated Lab Time:* 15 minutes
 
@@ -16,7 +16,7 @@ This lab assumes you have:
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [omlvm-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/sDX34HYvxdv1GjdCplfdYt-HSj9NBe4rjsXgltW0Ax5VPGmhSlGBpqm3wVVvhFxR/n/oraclepartnersas/b/omlvm-mkplc-freetier/o/omlvm-mkplc-freetier.zip)
 
-2.  Save in your downloads folder.
+2.  Save the **omlvm-mkplc-freetier.zip** file in your machine and note the folder location.
 
 ## Task 2: Setup Compute   
 Using the details from the two steps above, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
