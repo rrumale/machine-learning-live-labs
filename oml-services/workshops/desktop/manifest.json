@@ -1,0 +1,31 @@
+{
+  "workshoptitle": "Oracle Machine Learning REST Services Workshop",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "./../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started with noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+    "title": "Lab 1: Understanding Dataset",
+    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
+    "filename": "./../../../use-case/use-case.md"
+    },
+    {
+      "title": "OML using REST Services",
+      "description": "OML using REST Services",
+      "filename": "./../../oml-services/oml-services.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
