@@ -9,7 +9,7 @@ In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lif
 Estimated Lab Time: 15 minutes
 
 ### Objectives
-*	Connect to Autonomous Dataware House ( ADW)
+*	Connect to Autonomous Data Warehouse ( ADW)
 *	Obtain information from OCI to connect i.e., Get Tenancy ID,
 * Load data into ADW
 *	Create user account for ML services
@@ -76,7 +76,7 @@ You can save the Database Name somewhere accessible for the duration of the work
 
 * Database Actions Launchpad page is now open. Here we have multiple tools available to easily manage and use the database, develop new applications or REST modules or manage the data inside the database.
 
- We will chose Data Load option in the Data Tools category.
+ We will choose Data Load option in the Data Tools category.
 ![ADB-data-load](images/prerequisites-screenshot-6.jpg)
 
 * In the Data Load menu, chose Load Data and Local File and click Next.
