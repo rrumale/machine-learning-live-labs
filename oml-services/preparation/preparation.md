@@ -13,7 +13,7 @@ Estimated Lab Time: 15 minutes
 *	Obtain information from OCI to connect i.e., Get Tenancy ID,
 * Load data into ADW
 *	Create user account for ML services
-*
+
 
 ### Prerequisites
 * Oracle Cloud Infrastructure (OCI) account

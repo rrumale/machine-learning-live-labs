@@ -19,7 +19,7 @@ This lab assumes you have:
 2.  Save the **omlvm-mkplc-freetier.zip** file in your machine and note the folder location.
 
 ## Task 2: Setup Compute   
-Using the details from the two steps above, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
+Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
   -  Create Stack:  *Compute + Networking*
   -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
 
