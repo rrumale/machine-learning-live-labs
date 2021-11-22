@@ -18,6 +18,11 @@
     "filename": "./../../preparation/preparation.md"
     },
     {
+    "title": "Prepare Setup",
+    "description": "Initialize Environment",
+    "filename": "./../../initialize-environment/initialize-environment.md"
+    },
+    {
       "title": "OML using REST Services",
       "description": "OML using REST Services",
       "filename": "./../../oml-services/oml-services.md"
