@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this section we will leverage the Machine Learning models in Autonomous Database using REST APIs. In a situation where the bulk of the data is in Cloud database, we can easily create multiple models and compare them. In addition to that, using REST APIs we can use the most suitable model and score specific data for on the spot prediction or classification.
+
 
 In this workshop, you have a dataset representing 15k customers of an insurance company. Each customer has around 30 attributes, and our goal is to train our database to predict customers life-time value (LTV), or to classify them in predefined classes based on this predicted value.
 
@@ -11,22 +11,339 @@ In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lif
 Estimated Lab Time: 1 hour
 
 ### Objectives
-*	Load data into Autonomous Database
-*	Prepare the customer insurance date
-*	Use AutoML to create a Machine Learning model.
-*	Use Postman to score the machine learning model using REST APIs  
-*	Use Curl to score the machine-learning model using REST APIs in command line.
+
+In this section we will leverage the Machine Learning models in Autonomous Database using REST APIs. In a situation where the bulk of the data is in Cloud database, we can easily create multiple models and compare them. In addition to that, using REST APIs we can use the most suitable model and score specific data for in the spot prediction or classification.
+
 
 ### Prerequisites
 * Oracle Cloud Infrastructure (OCI) account
 * Autonomous Database deployed in Oracle Cloud
 * Postman or Curl available on your working station
 
+### Lab Preparation:
+
+#### Get Tenancy ID
+
+* Connect to the Oracle Cloud Infrastructure (OCI) Console. In the home page click on the user icon on the top right side.
+![OCI-home](images/prerequisites-screenshot-X01.jpg)
+
+* In the Users menu click on Tenancy: `<tenancy_name>` .
+![OCI-home-user](images/prerequisites-screenshot-X02.jpg)
+
+* The Tenancy Details page is displayed. You can see the full OCID by clicking on the Show button.
+![OCI-tenancy](images/prerequisites-screenshot-X03.jpg)
+
+* The full tenancy OCID is displayed. You can copy it by clicking on the Copy button and save it somewhere accessible for the duration of the workshop. We are going to use it in the next sections of the workshop.
+![OCI-tenancy-ocid](images/prerequisites-screenshot-X04.jpg)
+
+
+#### Get Autonomous Database dbname
+
+* Click on the Menu button next to the Oracle Cloud icon.
+![OCI-menu](images/prerequisites-screenshot-X05.jpg)
+
+* Go to the Oracle Database menu and chose Autonomous Transaction Processing.
+![OCI-menu](images/prerequisites-screenshot-X06.jpg)
+
+* Click on the target Autonomous Database instance.
+![ADB-instance](images/prerequisites-screenshot-1.jpg)
+
+* In the Autonomous Database instance detail page you can see the Database Name.
+![ADB-instance-name](images/prerequisites-screenshot-X07.jpg)
+
+You can save the Database Name somewhere accessible for the duration of the workshop. We are going to use it in the next sections when defining de endpoints to access the OML models.
+
+#### Loading the data
+
+* Connect to the Oracle Cloud Infrastructure (OCI) Console and go to Autonomous Database home page.
+* Click on the target Autonomous Database instance
+![ADB-instance](images/prerequisites-screenshot-1.jpg)
+
+* In the Autonomous Database instance detail page, click on the Tools tab.
+![ADB-instance-home](images/prerequisites-screenshot-2.jpg)
+
+* Database administration and developer tools for Autonomous Database tab is now active. Click **Open Database Actions**.
+![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
+
+* When prompt, enter the **Admin** username.
+![ADB-actions-user](images/prerequisites-screenshot-4.jpg)
+
+* When prompt, enter the password for the Admin user and click Sign in.
+![ADB-actions-pass](images/prerequisites-screenshot-5.jpg)
+
+* Database Actions Launchpad page is now open. Here we have multiple tools available to easily manage and use the database, develop new applications or REST modules or manage the data inside the database.
+
+ We will chose Data Load option in the Data Tools category.
+![ADB-data-load](images/prerequisites-screenshot-6.jpg)
+
+* In the Data Load menu, chose Load Data and Local File and click Next.
+![ADB-data-load](images/prerequisites-screenshot-7.jpg)
+
+* Download the [cust\_insur\_ltv.csv](https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/NIPrIgDVBKsOBi_xnF5_ZHWAnlilwwnUbrgQbUA24iupm6ryoNkvp_KZ9qywzpQE/n/oraclepartnersas/b/ADB_Stage/o/cust_insur_ltv.csv) and load it using Drag and drop or Select Files option.
+![ADB-select-file](images/prerequisites-screenshot-8.jpg)
+
+* The file is parsed and an entry is displayed on the screen. We can check the settings clicking on the pencil icon.
+![ADB-load](images/prerequisites-screenshot-9.jpg)
+
+* The Data Load settings page opens.
+![ADB-load-settings](images/prerequisites-screenshot-10.jpg)
+
+Notice the default options here.
+ - The create table option in case the table doesn't exist.
+ - The default pre-filled table name is the file name.
+ - The default encoding properties to be able to read the CSV file.
+ - The mapping is for the column name and for the data type
+
+Leave the default settings and click Close.
+
+* Click run to start the Data Load.
+![ADB-data-load](images/prerequisites-screenshot-11.jpg)
+
+The data loading process takes less than a minute. When is completed notice the green check mark and click Done.
+![ADB-data-load-completed](images/prerequisites-screenshot-12.jpg)
+
+The next step is to create the OML User and to add the data in his schema.
+
+####  Create the OMLUSER user
+
+* Returning in the Autonomous Database instance Tools tab, click on the **Open Oracle ML User Administration**
+![ADB-instance-home](images/prerequisites-screenshot-13.jpg)
+
+* In the Oracle Machine Learning Database Administrator credentials page enter the username: **ADMIN** and his password.
+![ADB-oml-admin](images/prerequisites-screenshot-14.jpg)
+
+* In the Machine Learning User Administration  we see only the Admin user with the System Administrator role. Click on the Create button to create another user.
+![ADB-oml-admin](images/prerequisites-screenshot-15.jpg)
+
+* In the Create User page enter the following:
+
+
+    - Username: **OMLUSER**;
+    - Email Address: **An email address**;
+    - **Un-check**: Generate password and email the account details to user;
+    - Password: Chose a password. Throughout the workshop we are using **Welcome12345** as a password for OMLUSER;
+    - Confirm Password: **Retype the password**;
+
+
+Click Create.
+![ADB-oml-user](images/prerequisites-screenshot-16.jpg)
+
+* Now we have another user named OMLUSER available.
+![ADB-oml-user](images/prerequisites-screenshot-17.jpg)
+
+OMLUSER is also a database user and for the moment he doesn't have access to the customer insurance data we loaded in the admin user. so the next step is to move the data in the OMLUSER schema.
+
+####  Move the data in OMLUSER schema
+
+* Returning in the Autonomous Database instance Tools tab.Click **Open Database Actions**.
+![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
+
+* When prompt, enter the **Admin** username.
+![ADB-actions-user](images/prerequisites-screenshot-4.jpg)
+
+* When prompt, enter the password for the Admin user and click Sign in.
+![ADB-actions-pass](images/prerequisites-screenshot-5.jpg)
+
+* In the Database Actions Lounchpad click SQL to open Sql Developer web.
+![ADB-actions-sql](images/prerequisites-screenshot-18.jpg)
+
+* SQL Developer web opens.
+![ADB-sql-web](images/prerequisites-screenshot-19.jpg)
+
+Notice that it resembles the look and feel of the Sql Developer application. In the Left side we see the user: Admin and the table owned by the user. in our case it is just the **CUST\_INSUR\_LTV** table.
+
+Write the following script to create the **CUSTOMER_INSURANCE** table in OMLUSER schema and click the Run button.
+
+````
+<copy>
+CREATE TABLE OMLUSER.CUSTOMER_INSURANCE
+AS
+SELECT * FROM CUST_INSUR_LTV;
+
+````
+![ADB-sql-web](images/prerequisites-screenshot-20.jpg)
+
+* The table was created successfully.
+![ADB-sql-web](images/prerequisites-screenshot-21.jpg)
+
+The next part is to use this data and create an AutoML model.
+
+
+## **Task 1:** Introduce Insurance Customer Data
+
+* In the Autonomous Database instance details page. Click on the Service Console button.
+![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
+
+* A new page with the service console is opened. In the Overview section we see the details of this specific instance. We can go to the Development section in the left side.
+![ADB-service-console](images/prerequisites-screenshot-23.jpg)
+
+* In the Development section, click on Oracle Machine Learning Notebooks.
+![ADB-service-console](images/prerequisites-screenshot-24.jpg)
+
+* Connect to OML services in Autonomous Database
+
+Access the OML Services link and connect with the credentials that we created earlier. In our case the creadentials are:
+
+   - Username: **OMLUSER**
+   - Password: **Welcome12345**
+
+
+![ADB-OML-connect](images/prerequisites-screenshot-25.jpg)
+
+
+* Open a Scratchpad
+
+![Open-Scratchpad](images/automl-screenshot-1.jpg)
+
+
+* The notebook server is starting. Once opened we can run a select on the ``CUSTOMER_INSURANCE`` table
 
 
 
+````
+<copy> select * from customer_insurance;  </copy>
+ ````
 
-## Task 3: Deploy the model for REST access using OML Services
+
+
+ ![customer-insurance](images/automl-screenshot-2.jpg)
+
+ Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning.
+
+* Drop training and test tables if they exist
+
+ ````
+<copy> %script
+DROP TABLE Customer_insurance_train_clasification;
+
+DROP TABLE Customer_insurance_test_clasification;
+</copy>
+ ````
+![drop-model-tables](images/automl-screenshot-3.jpg)
+
+If the tables don't exist, the script will return an error. We will create the tables in the next steps
+
+ * Create the training table for our Auto ML
+
+````
+<copy>
+%script
+ create table Customer_insurance_train_clasification as
+select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV_BIN"
+from customer_insurance
+SAMPLE (60) SEED (1)
+where cust_id not in ('CU12350','CU12331', 'CU12286')
+</copy>
+````
+ ![create-training-table](images/automl-screenshot-4.jpg)
+
+ Notice that we skip the ``LTV`` column so it would not influence the results. We keep the ``LTV_BIN`` column to be the target for learning.
+ Our goal is to learn how customers are classified in the 4 groups, that are the ``LTV_BIN`` groups. For this particular workshop we leave outside 3 specific customers so we can use them to demo the test of our models.
+
+
+* Create the test table for our Auto ML
+
+````
+<copy>%script
+ create table Customer_insurance_test_clasification as
+select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK"
+from customer_insurance
+minus
+select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK" from Customer_insurance_train_clasification
+</copy>
+ ````
+ ![create-test-table](images/automl-screenshot-5.jpg)
+
+Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
+
+
+
+## **Task 2:** Use AutoML from Autonomous Database
+
+* Go to the Main menu on the top left side near the Oracle Machine Learning icon.
+![AutoML-menu](images/automl-screenshot-X06.jpg)
+
+
+* Choose AutoML.
+![AutoML-menu](images/automl-screenshot-6.jpg)
+
+
+* Click Create in the AutoML Experiments page
+
+![AutoML-create-experiment](images/automl-screenshot-7.jpg)
+
+* In the Create Experiment page choose the following details:
+
+
+    - Name: **AutoML Classification**
+    - Data Source: chose the **CUSTOMER\_INSURANCE\_TRAIN\_CLASIFICATION** table in the OMLUSER schema.
+    - Predict: **LTV_BIN**
+    - Prediction Type: **CLASSIFICATION**
+    - Case ID: **CUST_ID**
+
+
+![AutoML-create-experiment](images/automl-screenshot-8.jpg)
+
+* To make some customizations you can expand the Additional Settings menu
+
+![AutoML-additional-settings](images/automl-screenshot-9.jpg)
+
+Notice that we can choose the Database Service Level to High, and select by which metric should we compare the algorithms, and which predefined algorithms to include or exclude from this experiment.
+
+ - Choose the following options for your experiment:
+
+    - Database Service Level: **High**
+    - Model Metric: **F1**
+    - Weight Option: **Weighted**
+
+
+
+![AutoML-additional-settings](images/automl-screenshot-9a.jpg)
+
+The F1 score is the harmonic mean of the precision and recall; where the precision is the number of true positive results divided by the number of all positive results, including those not identified correctly, and the recall is the number of true positive results divided by the number of all samples that should have been identified as positive. Precision is also known as positive predictive value, and recall is also known as sensitivity in diagnostic binary classification.
+
+**F1-score = 2 × (precision × recall)/(precision + recall)**
+
+![Precision and Recall](images/Model_metric.jpg)
+
+* Run the Auto ML for classification by clicking **```Start```** and **```Better Accuracy```**.
+
+![Run-AutoML](images/automl-screenshot-10.jpg)
+
+The AutoML Classification will run for several minutes showing which top 5 algorithms have a higher Balanced Accuracy. The running process takes around 10 minutes.
+
+* And the result of the Auto ML
+
+![Classification Experiment Result](images/automl-screenshot-11.jpg)
+
+Each model described here is based on an algorithm and ran against our training data. We can click on the model name and see its details.
+
+![Chose a model](images/automl-screenshot-12.jpg)
+
+The model detail window opens and the first tab is Prediction Impacts.
+
+![Model Prediction Impacts](images/automl-screenshot-13.jpg)
+
+Notice how the other table columns impact differently our model and which column has a higher weight in it. We can click on the Confusion Matrix tab.
+
+![Model Confusion Matrix](images/automl-screenshot-14.jpg)
+
+There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** how may customers are actually in that class and how many are predicted to be in that class.
+
+* We can rename the Support Vector Machine model so it would be easier to recognize in the next sections. For this we can select the model and click on the Rename button.
+
+![Model Rename ](images/automl-screenshot-X14.jpg)
+
+* Enter a new Model Name and click OK. In our case we are going to use **SVMG**.
+
+![Model Rename ](images/automl-screenshot-X114.jpg)
+
+* The model is now renamed in the results page also.
+
+![Model Rename ](images/automl-screenshot-X1114.jpg)
+
+
+## **Task 3:** Deploy the model for REST access using OML Services
 
 The next steps would be to take a model and deploy it for REST access.
 
@@ -70,9 +387,9 @@ The model will be deployed and a green banner will show the success of the deplo
 
 We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
-## Task 4:   Score the model using Postman
+## **Task 4:**   Access the model using REST APIs using POSTMAN
 
-## Task 4.1:   Prepare REST calls
+## ***Task 4.1:***   Prepare the REST calls
 
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
@@ -88,11 +405,9 @@ We can now use REST APIs to query the model, model scoring and scoring for speci
 <copy>./OML-Services/Postman/Postman</copy>
 ````
 
-![Launch Postman](images/automl-screenshot-20.jpg)
-
 Postman registration is not necessary for this workshop therefore you can choose Skip on the login page.
 
-![Launch Postman](images/automl-screenshot-201.jpg)
+![Launch Postman](images/automl-screenshot-20.jpg)
 
 You can close the scratchpad banner and hide the sidebar for a cleaner view.
 
@@ -182,9 +497,9 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
-## Task 4.2:  Use REST calls to predict customer classification
+## ***Task 4.2:***  Use REST calls to predict customer classification
 
-in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_classification table:
+in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
  - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
  - ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK``
  - ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT``
@@ -382,9 +697,9 @@ Notice the result in JSON format shows the probability for this customer to be i
 
 
 
-## Task 5:   Score the model using CURL
+## **Task 5:**   Access the model using REST APIs using CURL
 
-## Task 5.1:   Prepare REST calls
+## ***Task 5.1:***   Prepare the REST calls
 
 To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
@@ -419,7 +734,7 @@ Don't forget to add a single quote at the beginning and at the end.
  ````
 $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA=='</copy>
  ````
-## Task 5.2:  Use REST calls to predict customer classification
+## ***Task 5.2:***  Use REST calls to predict customer classification
 
 * We will check the predicted classification for 3 distinct customers
 
@@ -582,7 +897,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 
 
 
-## Task 5.3:  Verify the classification prediction
+## ***Task 5.3:***  Verify the classification prediction
 
 * Return to OML services in Autonomous Database
 * Run the following SQL statement using the same ``CUST_IDs`` as in the REST call. You can replace the model name with the one used previously.
@@ -596,7 +911,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
         PREDICTION_PROBABILITY(SVMG USING a.*)
         PREDICTION_PROBABILITY,
         b.LTV_BIN
-  FROM Customer_insurance_test_classification a,
+  FROM Customer_insurance_test_clasification a,
   Customer_insurance b
  where a.cust_id = b.cust_id
  and b.cust_id in ('CU12350','CU12331', 'CU12286')
@@ -609,9 +924,9 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 Notice the predictions are the same as in the REST calls. In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
 
 
-## Task 6 Import the Decision Tree model
+## **Task 6** Import the Decision Tree model (optional)
 
-In this section of the workshop we will import the Decision Tree model used on the OML4PY < !--  link to OMPL4Py to be added --> workshop Task 3.
+In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3.
 
 We are going to run the next steps:
  1. Extract the saved model to a file;
@@ -619,15 +934,28 @@ We are going to run the next steps:
  3. Deploy the model;
  4. Score a customer using the Decision Tree model;
 
+## Task Prerequisites
 
-## Task 6.1: Extract the saved model to a file (Optional)
+* Run the OML4PY workshop.
+* Run the OML-Services Workshop.
 
-When running OML-Services standalone you can skip this step and got to Task 6.2. (You can run this task only if you went through the OML4Py workshop and run OML-Services workshop as an added step. )
+## ***Task 6.1***: Extract the saved model to a file
 
 * Connect to the VM and open a Terminal window.
 
   ![VM-Terminal](images/model-import-01.jpg)
 
+* Run these commands one by one:
+
+````
+. setEnv
+
+. oraenv
+
+ORACLE_SID = [mlcdb] ? - Hit Enter
+````
+
+  ![VM-Terminal](images/model-import-02.jpg)
 
 * Go to the OML_Services folder.
 
@@ -639,11 +967,9 @@ $<copy> cd ~/OML-Services</copy>
 
 
 * Run the `prepare_model_import.sql` script to write the exported DT_MODEL to a file on the operating system.
-Please replace the **`<ServiceName>`** tag with the actual service name of the database instance. For example **`mlpdb1.sub09301404280.omlvcn.oraclevcn.com`**.
-
 
 ````
-$ <copy> sqlplus sys/MLlearnPTS#21_@localhost:1521/<ServiceName> as sysdba @prepare_model_import.sql</copy>
+$ <copy> sqlplus sys/MLlearnPTS#21_@localhost:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com as sysdba @prepare_model_import.sql</copy>
 ````
 
 The script runs the following steps.
@@ -660,14 +986,14 @@ The script runs the following steps.
 To check the exported file run the command:
 
 ````
-$<copy>ls -alt </copy>
+$<copy>ls ~/dmuser</copy>
 ````
 
   ![VM-Terminal](images/model-import-05.jpg)
 
 
 
-## Task 6.2: Load the model in the Autonomous Database repository
+## ***Task 6.2***: Load the model in the Autonomous Database repository
 
 *  In the Postman session opened at Task 4 run the following Get method to get the list of models deployed.
 
@@ -708,7 +1034,7 @@ URI endpoint:
 In the Headers tab enter the following:
 
 ````
-Content-Type: multipart/form-data
+Content-Type: application/json
 boundary: Boundary
 ````
 
@@ -719,7 +1045,7 @@ In the Body tab pick form-data and enter `modelData` in the key field, hover ove
 
   ![Model Import](images/model-import-10.jpg)
 
-Click Select File; go to `/home/oracle/OML-Services/` folder and select the **`DTModel.mod`** file created earlier.
+Click Select File; go to `/home/oracle/dmuser/` folder and select the **`DTModel.mod`** file created earlier.
 
   ![Model Import](images/model-import-11.jpg)
 
@@ -739,7 +1065,7 @@ The response is that the model is created.
 Copy the **`modelId`** displayed in the JSON response.
 
 
-## Task 6.3: Deploy the model
+## ***Task 6.3***: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
@@ -786,7 +1112,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## Task 6.4: Score a customer using the Decision Tree model
+## ***Task 6.4***: Score a customer using the Decision Tree model
 
 In this step we are going to score Fran Hobbs against our Decision Tree imported model.
 
@@ -875,9 +1201,8 @@ In this exercise we managed took a model exported in the Python workshop and imp
 
 
 ## Acknowledgements
-* **Authors** -  Andrei Manoliu, Milton Wan
-* **Contiributors** - Rajeev Rumale
-* **Last Updated By/Date** -  Andrei Manoliu, November 2021
+* **Authors** - Milton Wan, Andrei Manoliu
+* **Last Updated By/Date** -  Andrei Manoliu
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.

@@ -1,15 +1,15 @@
-# Using REST Services with Oracle Machine Learning
+# Load and Prepare Data
 
 ## Introduction
 
-In this lab we would do the setup needed for the labs.
+In this lab we would do the setup needed for the labs.  
 
-In marketing, [life-time value (LTV)](https://en.wikipedia.org/wiki/Customer_lifetime_value) is a prognostication of the net profit contributed to the whole future relationship with a customer.
+
 
 Estimated Lab Time: 15 minutes
 
 ### Objectives
-*	Connect to Autonomous Dataware House ( ADW)
+*	Connect to Autonomous Data Warehouse ( ADW)
 *	Obtain information from OCI to connect i.e., Get Tenancy ID,
 * Load data into ADW
 *	Create user account for ML services
