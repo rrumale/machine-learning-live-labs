@@ -1,71 +1,72 @@
 # Scoring OML using Rest Services
 
+In this lab we will learn about accessing ML model using REST services.  We will use postman and curl to test the REST services, the required software is pre-installed on the virtual machine assigned.
+
 
 Estimated Time: 1 hour
 
 ### Objectives
 *
-
+*
+*
 
 ### Prerequisites
 *
 
+##     .
+## Task 1: Access the model using REST APIs using POSTMAN
 
-## **Task 4:**   Access the model using REST APIs using POSTMAN
-
-## ***Task 4.1:***   Prepare the REST calls
+## Task 1.1: Prepare the REST calls
 
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
-
-````
-<copy>http://<Instance IP\>:6080/vnc.html?password=MLlearnPTS#21_&resize=scale&quality=9&autoconnect=true</copy>
-````
+    ````
+    <copy>http://<Instance IP\>:6080/vnc.html?password=MLlearnPTS#21_&resize=scale&quality=9&autoconnect=true</copy>
+    ````
 
 
 * Open a terminal and launch the Postman Application by running
+    ````
+    <copy>./OML-Services/Postman/Postman</copy>
+    ````
 
-````
-<copy>./OML-Services/Postman/Postman</copy>
-````
+  Postman registration is not necessary for this workshop therefore you can choose Skip on the login page.
 
-Postman registration is not necessary for this workshop therefore you can choose Skip on the login page.
+  ![Launch Postman](images/automl-screenshot-20.jpg)
 
-![Launch Postman](images/automl-screenshot-20.jpg)
+  You can close the scratchpad banner and hide the sidebar for a cleaner view.
 
-You can close the scratchpad banner and hide the sidebar for a cleaner view.
-
-![Launch Postman](images/automl-screenshot-21.jpg)
+  ![Launch Postman](images/automl-screenshot-21.jpg)
 
 
-To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
+  To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
-The access token has a life span of one hour and can be refreshed before it expires.
-- A token can be refreshed up to 8 hours.
-- A token can be revoked, and a revoked token cannot be refreshed.
-- Each token can be used many times.
-- The token is tied to the user who authenticates using the database credential.
+  The access token has a life span of one hour and can be refreshed before it expires.
+    - A token can be refreshed up to 8 hours.
+    - A token can be revoked, and a revoked token cannot be refreshed.
+    - Each token can be used many times.
+    - The token is tied to the user who authenticates using the database credential.
 
-#### URL Structure
+    #### URL Structure
 
-Use the following URL structure to access the REST endpoints:
+    Use the following URL structure to access the REST endpoints:
 
-````
-https://adb.<region-prefix>.oraclecloud.com/<resource-path>
-````
+    ````
+    https://adb.<region-prefix>.oraclecloud.com/<resource-path>
+    ````
 
-Where:
- - <region-prefix\>: The URL prefix based on region.
- - <resource-path\>: Relative path that defines the resource.
+    Where:
+     - <region-prefix\>: The URL prefix based on region.
+     - <resource-path\>: Relative path that defines the resource.
 
-For example:
-````
-https://adb.us-ashburn-1.oraclecloud.com/omlusers
-````
+    For example:
+    ````
+    https://adb.us-ashburn-1.oraclecloud.com/omlusers
+    ````
 
-In this example:
- - adb.us-ashburn-1 is the URL prefix based on region. The region here is US.
- - omlusers is the resource path.
+    In this example:
+     - adb.us-ashburn-1 is the URL prefix based on region. The region here is US.
+     - omlusers is the resource path.
 
 
 #### Generate Access Token
@@ -121,7 +122,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
-## ***Task 4.2:***  Use REST calls to predict customer classification
+## Task 1.2:  Use REST calls to predict customer classification
 
 in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
  - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
@@ -321,9 +322,9 @@ Notice the result in JSON format shows the probability for this customer to be i
 
 
 
-## **Task 5:**   Access the model using REST APIs using CURL
+## Task 2: Access the model using REST APIs using CURL
 
-## ***Task 5.1:***   Prepare the REST calls
+## Task 2.1: Prepare the REST calls
 
 To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
@@ -358,7 +359,7 @@ Don't forget to add a single quote at the beginning and at the end.
  ````
 $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA=='</copy>
  ````
-## ***Task 5.2:***  Use REST calls to predict customer classification
+## Task 2.2: Use REST calls to predict customer classification
 
 * We will check the predicted classification for 3 distinct customers
 
@@ -521,7 +522,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 
 
 
-## ***Task 5.3:***  Verify the classification prediction
+## Task 2.3: Verify the classification prediction
 
 * Return to OML services in Autonomous Database
 * Run the following SQL statement using the same ``CUST_IDs`` as in the REST call. You can replace the model name with the one used previously.
@@ -544,14 +545,7 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
 
 ![Classification Prediction](images/automl-screenshot-34.jpg)
 
-
 Notice the predictions are the same as in the REST calls. In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
-
-
-
-## Learn More
-
-*
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
