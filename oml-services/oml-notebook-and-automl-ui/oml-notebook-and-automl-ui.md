@@ -228,9 +228,6 @@ The model will be deployed and a green banner will show the success of the deplo
 
 We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
-## Learn More
-
-*
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
