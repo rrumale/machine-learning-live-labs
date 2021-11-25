@@ -13,7 +13,7 @@ Estimated Time: 1 hour
 ### Prerequisites
 *
 
-##     .
+## Scoring OML using Rest Services
 ## Task 1: Access the model using REST APIs using POSTMAN
 
 ## Task 1.1: Prepare the REST calls
@@ -69,256 +69,254 @@ Estimated Time: 1 hour
      - omlusers is the resource path.
 
 
-#### Generate Access Token
+    #### Generate Access Token
 
-To generate the access token we will need the following details:
+    To generate the access token we will need the following details:
 
-````
-Operation: POST
+    ````
+    Operation: POST
 
-URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlusers/tenants/<tenancy-ocid>/databases/<dbname>/api/oauth2/v1/token </copy>
+    URI endpoint:
+    <copy>https://adb.<region-prefix>.oraclecloud.com/omlusers/tenants/<tenancy-ocid>/databases/<dbname>/api/oauth2/v1/token </copy>
 
-````
+    ````
 
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
- - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation task.
- - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
+   - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+   - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation task.
+   - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
 
 
 
-In the header Tab enter the details:
+    In the header Tab enter the details:
 
-````
---header 'Content-Type: application/json'
---header 'Accept: application/json'
-````
+    ````
+    --header 'Content-Type: application/json'
+    --header 'Accept: application/json'
+    ````
 
-![Postman token headers](images/automl-screenshot-22.jpg)
+    ![Postman token headers](images/automl-screenshot-22.jpg)
 
-In the Body tab, pick RAW format and enter the following:
+    In the Body tab, pick RAW format and enter the following:
 
-````
-<copy>
-{
-   "grant_type":"password",
-   "username":"OMLUSER",
-   "password":"Welcome12345"
-}
-</copy>
-````
-![Postman token body](images/automl-screenshot-23.jpg)
+    ````
+    <copy>
+    {
+       "grant_type":"password",
+       "username":"OMLUSER",
+       "password":"Welcome12345"
+    }
+    </copy>
+    ````
+    ![Postman token body](images/automl-screenshot-23.jpg)
 
-Click Send
+    Click Send
 
-The response in JSON format and it contains the access token:
+    The response in JSON format and it contains the access token:
 
-![Postman token](images/automl-screenshot-24.jpg)
+    ![Postman token](images/automl-screenshot-24.jpg)
 
-Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
+    Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
 
->{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
+    >{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
 
-![Postman token copy](images/automl-screenshot-25.jpg)
+    ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
 ## Task 1.2:  Use REST calls to predict customer classification
 
-in this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
- - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
- - ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK``
- - ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT``
+  In this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
+   - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
+   - ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK``
+   - ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT``
 
 
-Open a new POSTMAN tab.
+  Open a new POSTMAN tab.
 
-![New Postman Tab](images/automl-screenshot-26.jpg)
+  ![New Postman Tab](images/automl-screenshot-26.jpg)
 
-Enter the following details:
+  Enter the following details:
 
-````
-Operation: POST
+    ````
+    Operation: POST
 
-URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/deployment/<model_URI>/score </copy>
+    URI endpoint:
+    <copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/deployment/<model_URI>/score </copy>
+    ````
+   - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+   - Replace **`<model_URI>`** with the model URI that we defined in Task 3: **``classsvmg``**
 
-````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+  ![Postman Model Score](images/automl-screenshot-27.jpg)
 
- - Replace **`<model_URI>`** with the model URI that we defined in Task 3: **``classsvmg``**
+  In the header Tab enter the details:
 
-![Postman Model Score](images/automl-screenshot-27.jpg)
+    ````
+    --header 'Content-Type: application/json'
 
-In the header Tab enter the details:
+    ````
 
-````
---header 'Content-Type: application/json'
+  ![Postman Model Score Header](images/automl-screenshot-28.jpg)
 
-````
+  In the Authorization tab pick **Bearer Token** and paste the token copied above in the field.
 
-![Postman Model Score Header](images/automl-screenshot-28.jpg)
+  ![Postman Model Score Access](images/automl-screenshot-29.jpg)
 
-In the Authorization tab pick **Bearer Token** and paste the token copied above in the field.
+  In the Body tab enter the Fran Hobs data in RAW format. Notice that we are not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data
 
-![Postman Model Score Access](images/automl-screenshot-29.jpg)
+    ````
+    <copy>
+    {
+       "inputRecords":[
+          {
+             "CUST_ID":"CU12350",
+             "LAST":"FRAN",
+             "FIRST":"HOBBS",
+             "STATE":"NV",
+             "REGION":"Southwest",
+             "SEX":"F",
+             "PROFESSION":"Programmer/Developer",
+             "BUY_INSURANCE":"No",
+             "AGE":21,
+             "HAS_CHILDREN":0,
+             "SALARY":66180,
+             "N_OF_DEPENDENTS":5,
+             "CAR_OWNERSHIP":1,
+             "HOUSE_OWNERSHIP":0,
+             "TIME_AS_CUSTOMER":5,
+             "MARITAL_STATUS":"SINGLE",
+             "CREDIT_BALANCE":0,
+             "BANK_FUNDS":500,
+             "CHECKING_AMOUNT":185,
+             "MONEY_MONTLY_OVERDRAWN":53.21,
+             "T_AMOUNT_AUTOM_PAYMENTS":197,
+             "MONTHLY_CHECKS_WRITTEN":4,
+             "MORTGAGE_AMOUNT":0,
+             "N_TRANS_ATM":3,
+             "N_MORTGAGES":0,
+             "N_TRANS_TELLER":2,
+             "CREDIT_CARD_LIMITS":2500,
+             "N_TRANS_KIOSK":4,
+             "N_TRANS_WEB_BANK":0
+          }
+       ]
+    }
+    </copy>
+    ````
 
-In the Body tab enter the Fran Hobs data in RAW format. Notice that we are not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data
+  ![Postman Model Score Fran Hobs](images/automl-screenshot-30.jpg)
 
-````
-<copy>
-{
-   "inputRecords":[
+  Click Send.
+
+  ![Postman Model Score Fran Hobs Result](images/automl-screenshot-31.jpg)
+
+  Notice the result in JSON format shows the probability for this customer to be in each group:
+  + For HIGH is ``4.243616931926422E-6``  therefore it is  ``0.000004243616931926422`` which is 0.0004243616931926422% a very small probability.
+  + For **LOW** is ``0.9981701403896932``  which is 99% very close to 100%.
+  + For MEDIUM is ``1.3669851638941142E-5``  which is 0.00013% a very small probability.
+  + For VERY HIGH is ``0.0018119461417358974``  which is 0.18% a very small probability.
+
+
+      We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click Send.
+
+      ````
+      <copy>
       {
-         "CUST_ID":"CU12350",
-         "LAST":"FRAN",
-         "FIRST":"HOBBS",
-         "STATE":"NV",
-         "REGION":"Southwest",
-         "SEX":"F",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"No",
-         "AGE":21,
-         "HAS_CHILDREN":0,
-         "SALARY":66180,
-         "N_OF_DEPENDENTS":5,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":0,
-         "TIME_AS_CUSTOMER":5,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":500,
-         "CHECKING_AMOUNT":185,
-         "MONEY_MONTLY_OVERDRAWN":53.21,
-         "T_AMOUNT_AUTOM_PAYMENTS":197,
-         "MONTHLY_CHECKS_WRITTEN":4,
-         "MORTGAGE_AMOUNT":0,
-         "N_TRANS_ATM":3,
-         "N_MORTGAGES":0,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":2500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":0
+         "inputRecords":[
+            {
+               "CUST_ID":"CU12331",
+               "LAST":"AL",
+               "FIRST":"FRANK",
+               "STATE":"WA",
+               "REGION":"West",
+               "SEX":"M",
+               "PROFESSION":"Programmer/Developer",
+               "BUY_INSURANCE":"No",
+               "AGE":21,
+               "HAS_CHILDREN":0,
+               "SALARY":75415,
+               "N_OF_DEPENDENTS":3,
+               "CAR_OWNERSHIP":1,
+               "HOUSE_OWNERSHIP":0,
+               "TIME_AS_CUSTOMER":3,
+               "MARITAL_STATUS":"SINGLE",
+               "CREDIT_BALANCE":0,
+               "BANK_FUNDS":250,
+               "CHECKING_AMOUNT":25,
+               "MONEY_MONTLY_OVERDRAWN":53.06,
+               "T_AMOUNT_AUTOM_PAYMENTS":257,
+               "MONTHLY_CHECKS_WRITTEN":0,
+               "MORTGAGE_AMOUNT":0,
+               "N_TRANS_ATM":0,
+               "N_MORTGAGES":0,
+               "N_TRANS_TELLER":2,
+               "CREDIT_CARD_LIMITS":1500,
+               "N_TRANS_KIOSK":4,
+               "N_TRANS_WEB_BANK":0
+            }
+         ]
       }
-   ]
-}
-</copy>
-````
+      </copy>
+      ````
 
-![Postman Model Score Fran Hobs](images/automl-screenshot-30.jpg)
-
-Click Send.
-
-![Postman Model Score Fran Hobs Result](images/automl-screenshot-31.jpg)
-
-Notice the result in JSON format shows the probability for this customer to be in each group:
-+ For HIGH is ``4.243616931926422E-6``  therefore it is  ``0.000004243616931926422`` which is 0.0004243616931926422% a very small probability.
-+ For **LOW** is ``0.9981701403896932``  which is 99% very close to 100%.
-+ For MEDIUM is ``1.3669851638941142E-5``  which is 0.00013% a very small probability.
-+ For VERY HIGH is ``0.0018119461417358974``  which is 0.18% a very small probability.
+  ![Postman Model Score Al Frank Result](images/automl-screenshot-32.jpg)
 
 
-We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click Send.
-
-````
-<copy>
-{
-   "inputRecords":[
-      {
-         "CUST_ID":"CU12331",
-         "LAST":"AL",
-         "FIRST":"FRANK",
-         "STATE":"WA",
-         "REGION":"West",
-         "SEX":"M",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"No",
-         "AGE":21,
-         "HAS_CHILDREN":0,
-         "SALARY":75415,
-         "N_OF_DEPENDENTS":3,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":0,
-         "TIME_AS_CUSTOMER":3,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":250,
-         "CHECKING_AMOUNT":25,
-         "MONEY_MONTLY_OVERDRAWN":53.06,
-         "T_AMOUNT_AUTOM_PAYMENTS":257,
-         "MONTHLY_CHECKS_WRITTEN":0,
-         "MORTGAGE_AMOUNT":0,
-         "N_TRANS_ATM":0,
-         "N_MORTGAGES":0,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":1500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":0
-      }
-   ]
-}
-</copy>
-````
-
-![Postman Model Score Al Frank Result](images/automl-screenshot-32.jpg)
+  Notice the result in JSON format shows the probability for this customer to be in each group:
+  - For HIGH is ``0.0022210521197792597`` which is 0.22% a very small probability.
+  - For LOW is ``9.765441243777847E-9``  which is 0.00000009% a very small probability.
+  - For **MEDIUM** is ``0.9977784176843738``  which is 99.7% very close to 100%.
+  - For VERY HIGH is ``5.20430405663427E-7``  which is 0.0000052% a very small probability.
 
 
-Notice the result in JSON format shows the probability for this customer to be in each group:
-- For HIGH is ``0.0022210521197792597`` which is 0.22% a very small probability.
-- For LOW is ``9.765441243777847E-9``  which is 0.00000009% a very small probability.
-- For **MEDIUM** is ``0.9977784176843738``  which is 99.7% very close to 100%.
-- For VERY HIGH is ``5.20430405663427E-7``  which is 0.0000052% a very small probability.
+  We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click Send.
+
+  ````
+  <copy>
+  {
+     "inputRecords":[
+        {
+           "CUST_ID":"CU12286",
+           "LAST":"ELLIOT",
+           "FIRST":"PADGETT",
+           "STATE":"NV",
+           "REGION":"Southwest",
+           "SEX":"M",
+           "PROFESSION":"Programmer/Developer",
+           "BUY_INSURANCE":"Yes",
+           "AGE":23,
+           "HAS_CHILDREN":0,
+           "SALARY":69724,
+           "N_OF_DEPENDENTS":3,
+           "CAR_OWNERSHIP":1,
+           "HOUSE_OWNERSHIP":1,
+           "TIME_AS_CUSTOMER":3,
+           "MARITAL_STATUS":"SINGLE",
+           "CREDIT_BALANCE":0,
+           "BANK_FUNDS":500,
+           "CHECKING_AMOUNT":81,
+           "MONEY_MONTLY_OVERDRAWN":52.96,
+           "T_AMOUNT_AUTOM_PAYMENTS":164,
+           "MONTHLY_CHECKS_WRITTEN":4,
+           "MORTGAGE_AMOUNT":250,
+           "N_TRANS_ATM":2,
+           "N_MORTGAGES":1,
+           "N_TRANS_TELLER":2,
+           "CREDIT_CARD_LIMITS":1500,
+           "N_TRANS_KIOSK":4,
+           "N_TRANS_WEB_BANK":250
+        }
+     ]
+  }
+  </copy>
+  ````
+
+  ![Postman Model Score ELLIOT PADGETT Result](images/automl-screenshot-33.jpg)
 
 
-We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click Send.
-
-````
-<copy>
-{
-   "inputRecords":[
-      {
-         "CUST_ID":"CU12286",
-         "LAST":"ELLIOT",
-         "FIRST":"PADGETT",
-         "STATE":"NV",
-         "REGION":"Southwest",
-         "SEX":"M",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"Yes",
-         "AGE":23,
-         "HAS_CHILDREN":0,
-         "SALARY":69724,
-         "N_OF_DEPENDENTS":3,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":1,
-         "TIME_AS_CUSTOMER":3,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":500,
-         "CHECKING_AMOUNT":81,
-         "MONEY_MONTLY_OVERDRAWN":52.96,
-         "T_AMOUNT_AUTOM_PAYMENTS":164,
-         "MONTHLY_CHECKS_WRITTEN":4,
-         "MORTGAGE_AMOUNT":250,
-         "N_TRANS_ATM":2,
-         "N_MORTGAGES":1,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":1500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":250
-      }
-   ]
-}
-</copy>
-````
-
-![Postman Model Score ELLIOT PADGETT Result](images/automl-screenshot-33.jpg)
-
-
-Notice the result in JSON format shows the probability for this customer to be in each group:
-- For **HIGH** is ``0.9999980387263148`` which is 99.9% very close to 100%.
-- For LOW is ``1.8967182019052724E-6``  which is 0.00001% a very small probability.
-- For MEDIUM is ``6.451060389893198E-8``  which is 0.00000064% a very small probability.
-- For VERY HIGH is ``4.4879376221183636E-11``  which is 0.0000000004% a very small probability.
+  Notice the result in JSON format shows the probability for this customer to be in each group:
+  - For **HIGH** is ``0.9999980387263148`` which is 99.9% very close to 100%.
+  - For LOW is ``1.8967182019052724E-6``  which is 0.00001% a very small probability.
+  - For MEDIUM is ``6.451060389893198E-8``  which is 0.00000064% a very small probability.
+  - For VERY HIGH is ``4.4879376221183636E-11``  which is 0.0000000004% a very small probability.
 
 
 
@@ -330,44 +328,44 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 
 * In the VM with CURL, export the environment
 
-````
-<copy>
-export omlserver=https://adb.<region-prefix>.oraclecloud.com
-export tenant=<tenancy-ocid>
-export database=<dbname>
-export username=OMLUSER
-export password=Welcome12345
-</copy>
-````
+  ````
+  <copy>
+  export omlserver=https://adb.<region-prefix>.oraclecloud.com
+  export tenant=<tenancy-ocid>
+  export database=<dbname>
+  export username=OMLUSER
+  export password=Welcome12345
+  </copy>
+  ````
 
-- Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
- - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation Task.
- - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
+  - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+  - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation Task.
+  - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
 
 * Run this statement to get the token to be used later  (replace what is needed)
 
-````
-$<copy>curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"grant_type":"password", "username":"'${username}'", "password":"'${password}'"}' "${omlserver}/omlusers/tenants/${tenant}/databases/${database}/api/oauth2/v1/token"</copy>
+    ````
+    $<copy>curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"grant_type":"password", "username":"'${username}'", "password":"'${password}'"}' "${omlserver}/omlusers/tenants/${tenant}/databases/${database}/api/oauth2/v1/token"</copy>
 
-{"accessToken":"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA==","expiresIn":3600,"tokenType":"Bearer"}
-````
-Copy the token starting from ``:"``  up until ``==``. In the above example the token is:
-`` eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA==``
+    {"accessToken":"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA==","expiresIn":3600,"tokenType":"Bearer"}
+    ````
+    Copy the token starting from ``:"``  up until ``==``. In the above example the token is:
+    `` eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA==``
 
-Don't forget to add a single quote at the beginning and at the end.
+    Don't forget to add a single quote at the beginning and at the end.
 
- ````
-$<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA=='</copy>
- ````
+    ````
+    $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA=='</copy>
+    ````
 ## Task 2.2: Use REST calls to predict customer classification
 
 * We will check the predicted classification for 3 distinct customers
 
- ````
-<copy>curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
---header "Authorization: Bearer ${token}" \
---header 'Content-Type: application/json' \
--d '{
+  ````
+  <copy>curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
+  --header "Authorization: Bearer ${token}" \
+  --header 'Content-Type: application/json' \
+  -d '{
    "inputRecords":[
       {
          "CUST_ID":"CU12350",
@@ -401,9 +399,9 @@ $<copy> export token='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hb
          "N_TRANS_WEB_BANK":0
       }
    ]
-}'
-</copy>
- ````
+  }'
+  </copy>
+  ````
 
   The results for the customer with ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS`` are similar to:
  ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":4.3624052479934053E-7},{"label":"LOW","probability":0.9999549438897685},{"label":"MEDIUM","probability":3.252624363364432E-5},{"label":"VERY HIGH","probability":1.2093626073239925E-5}]}]}``

@@ -1,32 +1,26 @@
 # Loading an OML  model and score it using Rest Services
 
+In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3.
 
 Estimated Time: 1 hour
 
 ### Objectives
-*
+We are going to run the next steps:
+* Extract the saved model to a file;
+* Load the model in the Autonomous Database repository;
+* Deploy the model;
+* Score a customer using the Decision Tree model;
 
 
 ### Prerequisites
-*
-
-
-## **Task 6** Import the Decision Tree model (optional)
-
-In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3.
-
-We are going to run the next steps:
- 1. Extract the saved model to a file;
- 2. Load the model in the Autonomous Database repository;
- 3. Deploy the model;
- 4. Score a customer using the Decision Tree model;
-
-## Task Prerequisites
-
 * Run the OML4PY workshop.
 * Run the OML-Services Workshop.
 
-## ***Task 6.1***: Extract the saved model to a file
+
+##Import the Decision Tree model (optional)
+
+
+## Task 1: Extract the saved model to a file
 
 * Connect to the VM and open a Terminal window.
 
@@ -80,7 +74,7 @@ $<copy>ls ~/dmuser</copy>
 
 
 
-## ***Task 6.2***: Load the model in the Autonomous Database repository
+## Task: 2: Load the model in the Autonomous Database repository
 
 *  In the Postman session opened at Task 4 run the following Get method to get the list of models deployed.
 
@@ -152,7 +146,7 @@ The response is that the model is created.
 Copy the **`modelId`** displayed in the JSON response.
 
 
-## ***Task 6.3***: Deploy the model
+## Task: 3: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
@@ -199,7 +193,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## ***Task 6.4***: Score a customer using the Decision Tree model
+## Task: 4: Score a customer using the Decision Tree model
 
 In this step we are going to score Fran Hobbs against our Decision Tree imported model.
 
@@ -284,11 +278,6 @@ Notice the response for this scoring.
 In this case the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our Support Vector Machine Gaussian model.
 
 In this exercise we managed took a model exported in the Python workshop and imported, deployed and scored it in Autonomous Database using the REST API interface.
-
-
-## Learn More
-
-*
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
