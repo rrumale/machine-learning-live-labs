@@ -3,15 +3,17 @@
 In this lab we will learn about accessing ML model using REST services.  We will use postman and curl to test the REST services, the required software is pre-installed on the virtual machine assigned.
 
 
-Estimated Time: 1 hour
+Estimated Time: 15 minutes
 
 ### Objectives
-*
-*
-*
+* Run POSTMAN call to get the Authentication Token
+* Score the model using POSTMAN
+* Run the CURL call to get the Authentication Token
+* Score the model using CURL
 
 ### Prerequisites
-*
+* The OML model saved and deployed in Autonomous Database.
+* POSTMAN and CURL available on your working environment
 
 ## Scoring OML using Rest Services
 ## Task 1: Access the model using REST APIs using POSTMAN
@@ -518,32 +520,7 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 - For VERY HIGH is ``1.9267768518468563E-7``  which is 0.0000019% a very small probability.
 
 
-
-
-## Task 2.3: Verify the classification prediction
-
-* Return to OML services in Autonomous Database
-* Run the following SQL statement using the same ``CUST_IDs`` as in the REST call. You can replace the model name with the one used previously.
-
- ````
- <copy>%sql
-  SELECT a.cust_id,
-        a. Last,
-        a.First,
-        PREDICTION(SVMG USING a.*) PREDICTION,
-        PREDICTION_PROBABILITY(SVMG USING a.*)
-        PREDICTION_PROBABILITY,
-        b.LTV_BIN
-  FROM Customer_insurance_test_clasification a,
-  Customer_insurance b
- where a.cust_id = b.cust_id
- and b.cust_id in ('CU12350','CU12331', 'CU12286')
- </copy>
- ````
-
-![Classification Prediction](images/automl-screenshot-34.jpg)
-
-Notice the predictions are the same as in the REST calls. In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
+  Notice the predictions made using the CURL calls are the same as using POSTMAN or using SQL in the OML Notebooks.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan

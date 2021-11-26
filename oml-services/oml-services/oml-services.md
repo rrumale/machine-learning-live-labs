@@ -20,12 +20,6 @@ In this section we will leverage the Machine Learning models in Autonomous Datab
 * Autonomous Database deployed in Oracle Cloud
 * Postman or Curl available on your working station
 
-
-
-
-
-
-
 ## Acknowledgements
 * **Authors** - Milton Wan, Andrei Manoliu
 * **Last Updated By/Date** -  Andrei Manoliu

@@ -1,14 +1,20 @@
 # Loading an ONNX model and score it using Rest Services
 
 
-Estimated Time: 1 hour
+In this section of the workshop we will import a Neural Network model saved on ONNX format in our Autonomous Database and score it using REST APIs
+
+Estimated Time: 20 minutes
 
 ### Objectives
-*
+We are going to run the next steps:
+* Load the model in the Autonomous Database repository;
+* Deploy the model;
+* Score a customer using the Neural Network model;
 
 
 ### Prerequisites
-*
+* Autonomous Database created
+* OML user created in Autonomous database
 
 ## Tasks
 
