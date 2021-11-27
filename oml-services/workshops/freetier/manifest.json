@@ -8,19 +8,45 @@
       "filename": "./../../introduction/introduction.md"
     },
     {
-    "title": "Understanding Use Case Dataset",
+    "title": "Getting Started",
+    "description": "This is the prerequisites for customers using Free Trial and Paid tenancies, and Always Free accounts (if applicable). The title of the lab and the Contents Menu title (the title above) match for Prerequisite lab. This lab is always first.",
+    "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/cloud-login/pre-register-free-tier-account.md"
+    },
+    {
+    "title": "Understanding Use Case",
     "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
     "filename": "./../../../use-case/use-case.md"
     },
     {
-    "title": "Prepare Setup",
-    "description": "How to download your ORM stack and update security rules for an existing VCN.",
+    "title": "Lab 1: Prepare Setup",
+    "description": "How to download your ORM stack",
+    "publisheddate": "11/12/2021",
+    "filename": "../../prepare-setup/prepare-setup.md"
+    },
+    {
+    "title": "Load and Prepare Data",
+    "description": "Load and Prepare Data",
     "filename": "./../../preparation/preparation.md"
     },
     {
-      "title": "OML using REST Services",
-      "description": "OML using REST Services",
-      "filename": "./../../oml-services/oml-services.md"
+      "title": "Creating models using OML Notebook and AutoML UI",
+      "description": "Section 1: Creating models using OML Notebook and AutoML UI",
+      "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
+    },
+    {
+      "title": "Scoring OML using Rest Services",
+      "description": "Section 2: Scoring OML using Rest Services",
+      "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
+    },
+    {
+      "title": "Loading an OML  model and score it using Rest Services",
+      "description": "Section 3: Loading an ONNX model and score it using Rest Services",
+      "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
+    },
+    {
+      "title": "Loading an ONNX model and score it using Rest Services",
+      "description": "Section 4: Loading an ONNX model and score it using Rest Services",
+      "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },
     {
       "title": "Need Help?",

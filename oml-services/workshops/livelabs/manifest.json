@@ -38,11 +38,6 @@
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },
     {
-      "title": "OML using REST Services (original file)",
-      "description": "OML using REST Services",
-      "filename": "./../../oml-services/oml-services.md"
-    },
-    {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
