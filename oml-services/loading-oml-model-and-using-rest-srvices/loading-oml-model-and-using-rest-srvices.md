@@ -16,10 +16,11 @@ We are going to run the next steps:
 * Run the OML4PY workshop. (Optional)
 * Autonomous Database created
 * OML user created in Autonomous database
+* ``DTModel.mod`` on the VM
 
+##Import the Decision Tree model
 
-##Import the Decision Tree model (optional)
-
+Task 1 can be performed only if OML4PY workshop was ran on the same VM prior the OML-Services workshop, otherwise you can **skip to Task 2**.
 
 ## Task 1: Extract the saved model to a file
 
@@ -77,18 +78,18 @@ $<copy>ls ~/dmuser</copy>
 
 ## Task: 2: Load the model in the Autonomous Database repository
 
-*  In the Postman session opened at Task 4 run the following Get method to get the list of models deployed.
+*  In the Postman session opened run the following Get method to get the list of models deployed.
 
 ````
 Operation: GET
 
 URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models </copy>
+<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models</copy>
 
 ````
  - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
 
- In the Authorization tab pick **Bearer Token** and paste the token copied from Task 4.
+ In the Authorization tab pick **Bearer Token** and paste the token copied from *Scoring OML using Rest Services Task 1*.
 
  ![Model Import](images/model-import-06.jpg)
 
@@ -96,7 +97,7 @@ The response is just the **SVMG** model we used in our previous tasks.
 
   ![Model Import](images/model-import-07.jpg)
 
-In case you get the Expired Token Error, rerun the generate Token command explained in **Task 4.1**.
+In case you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
 * Open a new tab in Postman and run the following POST command to load the model in Autonomous Database.
 
@@ -116,7 +117,7 @@ URI endpoint:
 In the Headers tab enter the following:
 
 ````
-Content-Type: application/json
+Content-Type: multipart/form-data
 boundary: Boundary
 ````
 
@@ -127,7 +128,7 @@ In the Body tab pick form-data and enter `modelData` in the key field, hover ove
 
   ![Model Import](images/model-import-10.jpg)
 
-Click Select File; go to `/home/oracle/dmuser/` folder and select the **`DTModel.mod`** file created earlier.
+Click Select File; go to `/home/oracle/OML-Services/` folder and select the **`DTModel.mod`** file created earlier.
 
   ![Model Import](images/model-import-11.jpg)
 
@@ -278,7 +279,6 @@ Notice the response for this scoring.
 
 In this case the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our Support Vector Machine Gaussian model.
 
-In this exercise we managed took a model exported in the Python workshop and imported, deployed and scored it in Autonomous Database using the REST API interface.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
