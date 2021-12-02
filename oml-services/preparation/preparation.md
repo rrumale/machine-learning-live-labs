@@ -64,10 +64,7 @@ You can save the Database Name somewhere accessible for the duration of the work
 * Click on the target Autonomous Database instance
 ![ADB-instance](images/prerequisites-screenshot-1.jpg)
 
-* In the Autonomous Database instance detail page, click on the Tools tab.
-![ADB-instance-home](images/prerequisites-screenshot-2.jpg)
-
-* Database administration and developer tools for Autonomous Database tab is now active. Click **Open Database Actions**.
+* In the Autonomous Database instance detail page, click on the Database Actions button.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
 
 * When prompt, enter the **Admin** username.
@@ -111,7 +108,7 @@ The next step is to create the OML User and to add the data in his schema.
 
 ## Task 4:  Create the OMLUSER user
 
-* Returning in the Autonomous Database instance Tools tab, click on the **Open Oracle ML User Administration**
+* Returning in the Autonomous Database instance, click on Tools tab and click on the **Open Oracle ML User Administration**
 ![ADB-instance-home](images/prerequisites-screenshot-13.jpg)
 
 * In the Oracle Machine Learning Database Administrator credentials page enter the username: **ADMIN** and his password.
@@ -142,7 +139,7 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 
 ## Task 5:  Move the data in OMLUSER schema
 
-* Returning in the Autonomous Database instance Tools tab.Click **Open Database Actions**.
+* Returning in the Autonomous Database instance .Click **Database Actions**.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
 
 * When prompt, enter the **Admin** username.

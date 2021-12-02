@@ -32,10 +32,11 @@ Estimated Time: 15 minutes
     <copy>./OML-Services/Postman/Postman</copy>
     ````
 
+    ![Launch Postman](images/automl-screenshot-20.jpg)
+
   Postman registration is not necessary for this workshop therefore you can choose Skip on the login page.
 
-  ![Launch Postman](images/automl-screenshot-20.jpg)
-
+     ![Launch Postman](images/automl-screenshot-20a.jpg)
   You can close the scratchpad banner and hide the sidebar for a cleaner view.
 
   ![Launch Postman](images/automl-screenshot-21.jpg)
@@ -328,7 +329,7 @@ Estimated Time: 15 minutes
 
 To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
-* In the VM with CURL, export the environment
+* In the VM open a terminal and export the environment
 
   ````
   <copy>

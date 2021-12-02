@@ -76,7 +76,7 @@ Estimated Time: 15 minutes
     create table Customer_insurance_train_classification as
     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV_BIN"
     from customer_insurance
-    SAMPLE (60) SEED (1)
+    SAMPLE (85) SEED (1)
     where cust_id not in ('CU12350','CU12331', 'CU12286')
     </copy>
     ````
@@ -168,7 +168,7 @@ Estimated Time: 15 minutes
 
   ![Model Confusion Matrix](images/automl-screenshot-14.jpg)
 
-  There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** how may customers are actually in that class and how many are predicted to be in that class.
+  There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** what percentage of customers are actually in that class and what percentage are predicted to be in that class.
 
 * We can rename the Support Vector Machine model so it would be easier to recognize in the next sections. For this we can select the model and click on the Rename button.
 
@@ -228,7 +228,14 @@ The next steps would be to take a model and deploy it for REST access.
 
 ## Task 4: Verify the classification prediction
 
-  * Return to the OML Notebook we created earlier in this section.
+  * Return to the OML Notebook Scratchpad we created earlier. Click on the menu and chose Notebooks.
+  ![Classification Prediction](images/automl-screenshot-21.jpg)
+
+
+  * Click on the Scratchpad notebook.
+    ![Classification Prediction](images/automl-screenshot-22.jpg)
+
+
   * Run the following SQL statement using the ``CUST_IDs`` we picked in the train test split. You can replace the model name with the one used previously.
 
    ````
@@ -240,7 +247,7 @@ The next steps would be to take a model and deploy it for REST access.
           PREDICTION_PROBABILITY(SVMG USING a.*)
           PREDICTION_PROBABILITY,
           b.LTV_BIN
-    FROM Customer_insurance_test_clasification a,
+    FROM Customer_insurance_test_classification a,
     Customer_insurance b
    where a.cust_id = b.cust_id
    and b.cust_id in ('CU12350','CU12331', 'CU12286')
