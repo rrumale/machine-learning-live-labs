@@ -406,57 +406,57 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
   ````
 
   The results for the customer with ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS`` are similar to:
- ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":4.3624052479934053E-7},{"label":"LOW","probability":0.9999549438897685},{"label":"MEDIUM","probability":3.252624363364432E-5},{"label":"VERY HIGH","probability":1.2093626073239925E-5}]}]}``
+   ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":4.3624052479934053E-7},{"label":"LOW","probability":0.9999549438897685},{"label":"MEDIUM","probability":3.252624363364432E-5},{"label":"VERY HIGH","probability":1.2093626073239925E-5}]}]}``
 
- Notice the probability for this customer to be in each group:
-+ For HIGH is ``4.3624052479934053E-7``  therefore it is  ``0.00000043624052479934053`` which is 0.000043624052479934053% a very small probability.
-+ For LOW is ``0.9999549438897685``  which is 99% very close to 100%.
-+ For MEDIUM is ``3.252624363364432E-5``  which is 0.00032% a very small probability.
-+ For VERY HIGH is ``1.2093626073239925E-5``  which is 0.00012% a very small probability.
+   Notice the probability for this customer to be in each group:
+    + For HIGH is ``4.3624052479934053E-7``  therefore it is  ``0.00000043624052479934053`` which is 0.000043624052479934053% a very small probability.
+    + For LOW is ``0.9999549438897685``  which is 99% very close to 100%.
+    + For MEDIUM is ``3.252624363364432E-5``  which is 0.00032% a very small probability.
+    + For VERY HIGH is ``1.2093626073239925E-5``  which is 0.00012% a very small probability.
 
 
-````
-<copy>
-  curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
---header "Authorization: Bearer ${token}" \
---header 'Content-Type: application/json' \
--d '{
-   "inputRecords":[
-      {
-         "CUST_ID":"CU12331",
-         "LAST":"AL",
-         "FIRST":"FRANK",
-         "STATE":"WA",
-         "REGION":"West",
-         "SEX":"M",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"No",
-         "AGE":21,
-         "HAS_CHILDREN":0,
-         "SALARY":75415,
-         "N_OF_DEPENDENTS":3,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":0,
-         "TIME_AS_CUSTOMER":3,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":250,
-         "CHECKING_AMOUNT":25,
-         "MONEY_MONTLY_OVERDRAWN":53.06,
-         "T_AMOUNT_AUTOM_PAYMENTS":257,
-         "MONTHLY_CHECKS_WRITTEN":0,
-         "MORTGAGE_AMOUNT":0,
-         "N_TRANS_ATM":0,
-         "N_MORTGAGES":0,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":1500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":0
-      }
-   ]
-}'
-</copy>
- ````
+  ````
+  <copy>
+    curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
+  --header "Authorization: Bearer ${token}" \
+  --header 'Content-Type: application/json' \
+  -d '{
+     "inputRecords":[
+        {
+           "CUST_ID":"CU12331",
+           "LAST":"AL",
+           "FIRST":"FRANK",
+           "STATE":"WA",
+           "REGION":"West",
+           "SEX":"M",
+           "PROFESSION":"Programmer/Developer",
+           "BUY_INSURANCE":"No",
+           "AGE":21,
+           "HAS_CHILDREN":0,
+           "SALARY":75415,
+           "N_OF_DEPENDENTS":3,
+           "CAR_OWNERSHIP":1,
+           "HOUSE_OWNERSHIP":0,
+           "TIME_AS_CUSTOMER":3,
+           "MARITAL_STATUS":"SINGLE",
+           "CREDIT_BALANCE":0,
+           "BANK_FUNDS":250,
+           "CHECKING_AMOUNT":25,
+           "MONEY_MONTLY_OVERDRAWN":53.06,
+           "T_AMOUNT_AUTOM_PAYMENTS":257,
+           "MONTHLY_CHECKS_WRITTEN":0,
+           "MORTGAGE_AMOUNT":0,
+           "N_TRANS_ATM":0,
+           "N_MORTGAGES":0,
+           "N_TRANS_TELLER":2,
+           "CREDIT_CARD_LIMITS":1500,
+           "N_TRANS_KIOSK":4,
+           "N_TRANS_WEB_BANK":0
+        }
+     ]
+  }'
+  </copy>
+   ````
 
   The results for the customer ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK`` are similar to:
  ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":0.03644200787288413},{"label":"LOW","probability":7.010119418858265E-7},{"label":"MEDIUM","probability":0.9635568775103579},{"label":"VERY HIGH","probability":4.136048160814146E-7}]}]}``
@@ -467,48 +467,48 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 - For MEDIUM is ``0.9635568775103579``  which is 96.3% very close to 100%.
 - For VERY HIGH is ``4.136048160814146E-7``  which is 0.0000041% a very small probability.
 
- ````
- <copy>
-  curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
---header "Authorization: Bearer ${token}" \
---header 'Content-Type: application/json' \
--d '{
-   "inputRecords":[
-      {
-         "CUST_ID":"CU12286",
-         "LAST":"ELLIOT",
-         "FIRST":"PADGETT",
-         "STATE":"NV",
-         "REGION":"Southwest",
-         "SEX":"M",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"Yes",
-         "AGE":23,
-         "HAS_CHILDREN":0,
-         "SALARY":69724,
-         "N_OF_DEPENDENTS":3,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":1,
-         "TIME_AS_CUSTOMER":3,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":500,
-         "CHECKING_AMOUNT":81,
-         "MONEY_MONTLY_OVERDRAWN":52.96,
-         "T_AMOUNT_AUTOM_PAYMENTS":164,
-         "MONTHLY_CHECKS_WRITTEN":4,
-         "MORTGAGE_AMOUNT":250,
-         "N_TRANS_ATM":2,
-         "N_MORTGAGES":1,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":1500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":250
-      }
-   ]
-}'
-</copy>
- ````
+    ````
+    <copy>
+    curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
+    --header "Authorization: Bearer ${token}" \
+    --header 'Content-Type: application/json' \
+    -d '{
+    "inputRecords":[
+        {
+           "CUST_ID":"CU12286",
+           "LAST":"ELLIOT",
+           "FIRST":"PADGETT",
+           "STATE":"NV",
+           "REGION":"Southwest",
+           "SEX":"M",
+           "PROFESSION":"Programmer/Developer",
+           "BUY_INSURANCE":"Yes",
+           "AGE":23,
+           "HAS_CHILDREN":0,
+           "SALARY":69724,
+           "N_OF_DEPENDENTS":3,
+           "CAR_OWNERSHIP":1,
+           "HOUSE_OWNERSHIP":1,
+           "TIME_AS_CUSTOMER":3,
+           "MARITAL_STATUS":"SINGLE",
+           "CREDIT_BALANCE":0,
+           "BANK_FUNDS":500,
+           "CHECKING_AMOUNT":81,
+           "MONEY_MONTLY_OVERDRAWN":52.96,
+           "T_AMOUNT_AUTOM_PAYMENTS":164,
+           "MONTHLY_CHECKS_WRITTEN":4,
+           "MORTGAGE_AMOUNT":250,
+           "N_TRANS_ATM":2,
+           "N_MORTGAGES":1,
+           "N_TRANS_TELLER":2,
+           "CREDIT_CARD_LIMITS":1500,
+           "N_TRANS_KIOSK":4,
+           "N_TRANS_WEB_BANK":250
+        }
+      ]
+    }'
+    </copy>
+    ````
 
  The results for the customer ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT`` are similar to:
  {"scoringResults":[{"classifications":[{"label":"HIGH","probability":0.9998831800626283},{"label":"LOW","probability":2.0777460784672917E-6},{"label":"MEDIUM","probability":1.1454951360792583E-4},{"label":"VERY HIGH","probability":1.9267768518468563E-7}]}]}
@@ -519,8 +519,7 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 - For MEDIUM is ``1.1454951360792583E-4``  which is 0.0011% a very small probability.
 - For VERY HIGH is ``1.9267768518468563E-7``  which is 0.0000019% a very small probability.
 
-
-  Notice the predictions made using the CURL calls are the same as using POSTMAN or using SQL in the OML Notebooks.
+> Notice the predictions made using the CURL calls are the same as using POSTMAN or using SQL in the OML Notebooks.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
