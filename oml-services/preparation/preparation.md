@@ -2,17 +2,19 @@
 
 ## Introduction
 
-In this lab we would do the setup needed for the labs.  
+In this lab we will start from a newly created database and prepare it for our workshop.
 
+ We will collect the connection details like Tenancy ID, database name, create the users and passwords. After we will load the data into Autonomous Database and prepare to use it in the Machine Learning Notebooks.
 
 
 Estimated Lab Time: 15 minutes
 
 ### Objectives
-*	Connect to Autonomous Data Warehouse ( ADW)
-*	Obtain information from OCI to connect i.e., Get Tenancy ID,
-* Load data into ADW
-*	Create user account for ML services
+*	Get the Tenancy ID.
+*	Get Autonomous Database dbname
+* Load data into ADB
+*	Create the OMLUSER user
+* Move the data in OMLUSER schema
 
 
 ### Prerequisites

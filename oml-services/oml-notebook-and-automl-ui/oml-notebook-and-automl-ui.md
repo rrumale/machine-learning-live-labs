@@ -1,14 +1,21 @@
 # Creating models using OML Notebook and AutoML UI
 
+In this section we will connect to OML notebooks and split the data in train and test chunks. We will use the train data to run the AutoML UI and create a good model to make our prediction. The model we will deploy it to be used with rest services in the next sections.
 
-Estimated Time: 1 hour
+Estimated Time: 15 minutes
 
 ### Objectives
-*
+
+* Create an OML Notebook
+* Split the data into Train and Test Data
+* Use AutoML UI to create the models
+* See the models created and Deploy one
 
 
 ### Prerequisites
-*
+* Autonomous Database created
+* Data loaded in the database
+* OML user created
 
 ## Task 1: Introduce Insurance Customer Data
 
@@ -52,9 +59,9 @@ Estimated Time: 1 hour
 
     ````
     <copy> %script
-    DROP TABLE Customer_insurance_train_clasification;
+    DROP TABLE Customer_insurance_train_classification;
 
-    DROP TABLE Customer_insurance_test_clasification;
+    DROP TABLE Customer_insurance_test_classification;
     </copy>
     ````
     ![drop-model-tables](images/automl-screenshot-3.jpg)
@@ -66,7 +73,7 @@ Estimated Time: 1 hour
     ````
     <copy>
     %script
-    create table Customer_insurance_train_clasification as
+    create table Customer_insurance_train_classification as
     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV_BIN"
     from customer_insurance
     SAMPLE (60) SEED (1)
@@ -83,11 +90,11 @@ Estimated Time: 1 hour
 
     ````
     <copy>%script
-    create table Customer_insurance_test_clasification as
+    create table Customer_insurance_test_classification as
     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK"
     from customer_insurance
     minus
-    select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK" from Customer_insurance_train_clasification
+    select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK" from Customer_insurance_train_classification
     </copy>
     ````
     ![create-test-table](images/automl-screenshot-5.jpg)
@@ -112,7 +119,7 @@ Estimated Time: 1 hour
 * In the Create Experiment page choose the following details:
 
     - Name: **AutoML Classification**
-    - Data Source: chose the **CUSTOMER\_INSURANCE\_TRAIN\_CLASIFICATION** table in the OMLUSER schema.
+    - Data Source: chose the **CUSTOMER\_INSURANCE\_TRAIN\_CLASSIFICATION** table in the OMLUSER schema.
     - Predict: **LTV_BIN**
     - Prediction Type: **CLASSIFICATION**
     - Case ID: **CUST_ID**
@@ -218,6 +225,31 @@ The next steps would be to take a model and deploy it for REST access.
 
   We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
+
+## Task 4: Verify the classification prediction
+
+  * Return to the OML Notebook we created earlier in this section.
+  * Run the following SQL statement using the ``CUST_IDs`` we picked in the train test split. You can replace the model name with the one used previously.
+
+   ````
+   <copy>%sql
+    SELECT a.cust_id,
+          a. Last,
+          a.First,
+          PREDICTION(SVMG USING a.*) PREDICTION,
+          PREDICTION_PROBABILITY(SVMG USING a.*)
+          PREDICTION_PROBABILITY,
+          b.LTV_BIN
+    FROM Customer_insurance_test_clasification a,
+    Customer_insurance b
+   where a.cust_id = b.cust_id
+   and b.cust_id in ('CU12350','CU12331', 'CU12286')
+   </copy>
+   ````
+
+  ![Classification Prediction](images/automl-screenshot-34.jpg)
+
+ In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
