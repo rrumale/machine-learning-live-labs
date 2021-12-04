@@ -3,7 +3,7 @@
 ## Introduction
 This lab will show you how to connect to the Lab VM, Autonomous Database on Oracle cloud & explore the various tools to interact with it and loading the sample dataset.
 
-*Estimated Lab Time*: 15 minutes
+Estimated Time: 15 minutes
 
 ### Objectives
 * Connecting to Autonomous Database instance
