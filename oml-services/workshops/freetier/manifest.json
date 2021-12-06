@@ -39,13 +39,13 @@
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {
-      "title": "Loading an OML model and score it using OML Services",
-      "description": "Section 3: Loading an ONNX model and score it using OML Services REST API",
+      "title": "Storing an OML model and score it using OML Services",
+      "description": "Section 3: Storing an OML model and score it using OML Services REST API",
       "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
     },
     {
-      "title": "Loading an ONNX model and score it using OML Services",
-      "description": "Section 4: Loading an ONNX model and score it using OML Services REST API",
+      "title": "Storing an ONNX model and score it using OML Services",
+      "description": "Section 4: Storing an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },
     {
