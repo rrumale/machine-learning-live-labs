@@ -34,18 +34,18 @@
       "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
     },
     {
-      "title": "Scoring OML using Rest Services",
-      "description": "Section 2: Scoring OML using Rest Services",
+      "title": "Scoring OML model using OML Services",
+      "description": "Section 2: Scoring OML model using OML Services REST API",
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {
-      "title": "Loading an OML  model and score it using Rest Services",
-      "description": "Section 3: Loading an ONNX model and score it using Rest Services",
+      "title": "Loading an OML model and score it using OML Services",
+      "description": "Section 3: Loading an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
     },
     {
-      "title": "Loading an ONNX model and score it using Rest Services",
-      "description": "Section 4: Loading an ONNX model and score it using Rest Services",
+      "title": "Loading an ONNX model and score it using OML Services",
+      "description": "Section 4: Loading an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },
     {

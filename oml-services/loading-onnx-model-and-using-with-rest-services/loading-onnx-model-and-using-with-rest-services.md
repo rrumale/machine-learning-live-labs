@@ -1,18 +1,24 @@
-# Loading an ONNX model and score it using Rest Services
+# Loading an ONNX model and score it using OML Services
 
 
-In this section of the workshop we will import a Neural Network model saved on ONNX format in our Autonomous Database and score it using REST APIs
+In this section of the workshop we will import a Neural Network model saved on ONNX format in our Autonomous Database and score it using OML Services REST APIs
 
-The ONNX model is already pre-build and on the VM.  To create it we ran the following steps:
+The ONNX model is already pre-build and on the VM. To create it we ran the following steps:
 *  create a pipeline to process the columns. We are putting first the character columns named ``categorical_data`` and after the numeric columns named ``numeric_data``. The categorical columns are encoded with OneHotEncoder.
-      ``preprocessor = ColumnTransformer(
+
+      ```
+      preprocessor = ColumnTransformer(
           transformers=[
               ('num', numeric_transformer, numeric_feat_index),
               ('cat', categorical_transformer, categorical_feat_index)
-          ])``
+          ])
+      ```
+
 * define the Neural Network classification model using SKlearn:
+
       ``classifier = MLPClassifier(random_state=1, max_iter=300)``
 * create the model from the pipeline
+
       ``model = Pipeline(steps=[
           ('preprocessor', preprocessor),
           ('classifier', classifier)
@@ -20,21 +26,26 @@ The ONNX model is already pre-build and on the VM.  To create it we ran the foll
 
 * create the onnx model from the pipeline:
 
-Define how the input data looks:
+When converting a model to ONNX, the initial types are required. sklearn does not store information about the training data, so it is not always possible to retrieve the number of features or their types. For this reason, convert_sklearn contains an argument called initial_types to define the model input types.
+
       ``initial_types = [('categorical_data', StringTensorType(shape=[None, 9])),
           ('numeric_data', FloatTensorType([None, 20]))]
-      initial_typea``
+      ``
 
 Convert the model:
-      `` onnxclassnn = convert_sklearn(model,initial_types=initial_types,target_opset=12)``
+
+      ``onnxclassnn = convert_sklearn(model,initial_types=initial_types,target_opset=12)``
+
       ``onnxmltools.utils.save_model(onnxclassnn, 'onnxclassnn.onnx')``
 
 * create the manifest files
+
       ``metadata = {"function": "classification", "classificationProbOutput": "output_probability"}``
       ``with open('metadata.json', mode='w') as f:
           json.dump(metadata, f)``
 
 * save all in the zip archive
+
       ``with ZipFile('onnx_class_NN.model.zip', mode='w') as zf:
           zf.write('metadata.json')
           zf.write('onnxclassnn.onnx')``
@@ -43,11 +54,12 @@ Convert the model:
 With the **``onnx_class_NN.model.zip``** in place we will load it in the Autonomous Database repository and score customers against it.
 
 
+
 Estimated Time: 20 minutes
 
 ### Objectives
 We are going to run the next steps:
-* Load the model in the Autonomous Database repository;
+* Store the model in the OML Services repository;
 * Deploy the model;
 * Score a customer using the Neural Network model;
 
@@ -55,9 +67,9 @@ We are going to run the next steps:
 ### Prerequisites
 * Autonomous Database created
 * OML user created in Autonomous database
-* ``onnx_class_NN.model.zip`` fil on the VM.
+* ``onnx_class_NN.model.zip`` file on the VM.
 
-## Task: 1: List the models in the Autonomous Database repository
+## Task: 1: List the models in the OML Services repository
 
 *  In the Postman session opened run the Get method to get the list of models deployed.
 
@@ -81,7 +93,7 @@ The response is with both the Decistion Tree Model **DTModel** and the Support V
 In case you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
 
-## Task: 2: Load an ONNX model in the Autonomous Database repository
+## Task: 2: Store an ONNX model in the OML Services repository
 
 * Open a new tab in Postman and run the following POST command to load the model in Autonomous Database.
 
@@ -180,7 +192,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## Task: 4: Score a customer using ONNX Neural Network Model.
+## Task: 4: Score a customer using ONNX Neural Network Model
 
 In this step we are going to score Fran Hobbs against our Neural Network imported model.
 
@@ -311,7 +323,7 @@ Notice the response for this scoring.
 In this case the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our previous models.
 
 
-## Task: 5: Score multiple customers using ONNX Neural Network Model.
+## Task: 5: Score multiple customers using ONNX Neural Network Model
 
 In this step we are going to score all three customers against our Neural Network imported model.
 
