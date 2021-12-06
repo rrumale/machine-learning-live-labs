@@ -108,7 +108,7 @@ URI endpoint:
 <copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models </copy>
 
 ````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+ - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_. 
 
  In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 

@@ -28,9 +28,9 @@ Estimated Time: 15 minutes
 * In the Development section, click on Oracle Machine Learning Notebooks.
 ![ADB-service-console](images/prerequisites-screenshot-24.jpg)
 
-* Connect to OML services in Autonomous Database
+* Connect to OML Machine Learning Notebooks in Autonomous Database
 
-  Access the OML Services link and connect with the credentials that we created earlier. In our case the credentials are:
+  Access the OML Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case the credentials are:
 
    - Username: **OMLUSER**
    - Password: **Welcome12345**
@@ -68,7 +68,7 @@ Estimated Time: 15 minutes
 
     If the tables don't exist, the script will return an error. We will create the tables in the next steps
 
- * Create the training table for our Auto ML
+ * Create the training table for our Auto ML UI
 
     ````
     <copy>
@@ -86,7 +86,7 @@ Estimated Time: 15 minutes
     Our goal is to learn how customers are classified in the 4 groups, that are the ``LTV_BIN`` groups. For this particular workshop we leave outside 3 specific customers so we can use them to demo the test of our models.
 
 
-* Create the test table for our Auto ML
+* Create the test table for our Auto ML UI
 
     ````
     <copy>%script
@@ -103,7 +103,7 @@ Estimated Time: 15 minutes
 
 
 
-## Task 2: Use AutoML from Autonomous Database
+## Task 2: Use AutoML UI from Autonomous Database
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
 ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -152,7 +152,7 @@ Estimated Time: 15 minutes
 
   The AutoML Classification will run for several minutes showing which top 5 algorithms have a higher Balanced Accuracy. The running process takes around 10 minutes.
 
-* And the result of the Auto ML
+* And the result of the Auto ML Classification
 
   ![Classification Experiment Result](images/automl-screenshot-11.jpg)
 
@@ -183,9 +183,9 @@ Estimated Time: 15 minutes
   ![Model Rename ](images/automl-screenshot-X1114.jpg)
 
 
-## Task 3: Deploy the model for REST access using OML Services
+## Task 3: Deploy the model for REST API access using OML Services
 
-The next steps would be to take a model and deploy it for REST access.
+The next steps would be to take a model and deploy it for OML Services Rest API access.
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
   ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -193,7 +193,7 @@ The next steps would be to take a model and deploy it for REST access.
 * Choose Models.
   ![Models Menu](images/automl-screenshot-15.jpg)
 
-* We see the list of models created by the AutoML with their specific algorithm and target value.
+* We see the list of models created by the AutoML UI with their specific algorithm and target value.
   ![Models List](images/automl-screenshot-16.jpg)
 
 * Click on the the  **SVMG** model based on the **Support Vector Machines Gaussian** algorithm and click Deploy. It is a powerful classification algorithm with very high F1 score
