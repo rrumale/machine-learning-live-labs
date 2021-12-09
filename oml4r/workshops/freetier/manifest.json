@@ -1,0 +1,11 @@
+{
+  "workshoptitle": "Oracle Machine Learning for R Workshop",
+  "help": "ravi.sharma@oracle.com",
+  "tutorials": [
+    {
+      "title": "OML4R Workshop",
+      "description": "Introduction",
+      "filename": "../../oml4r-workshop.md"
+    }
+  ]
+}
