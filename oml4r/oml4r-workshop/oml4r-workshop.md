@@ -20,11 +20,7 @@ In this lab, you will:
 * Use an OML4R Classification models for LTV_BIN assignment for unassigned customers
 * Validate predictions using RMSE (Root Mean Squared Error) and Confusion Matrix methods
 
-Note:
-* AutoML is currently not available for OML4R (it is only available for OML4Py)
-* AutoML UI is currently available for ADB ONLY
-* OML4R is currently not available for ADB
-* Therefore, we will not be using AutoML in this lab
+Note: AutoML is currently not available for OML4R (it is only available for OML4Py). AutoML UI is currently available for ADB ONLY. However, OML4R is currently not available for ADB.Therefore, we will not be using AutoML in this lab.
 
 ### Prerequisites
 
@@ -65,12 +61,13 @@ You will be running all the lab steps in the RStudio R Script window.
   library(OREdplyr)
   library(caTools)
 
-  options(ore.warn.order=FALSE)
   ```
 
 4. A Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database.
 
   ```
+  options(ore.warn.order=FALSE)
+  
   ore.connect(user="oml_user",
               conn_string="MLPDB1",
               host=<hostname>,
@@ -80,7 +77,7 @@ You will be running all the lab steps in the RStudio R Script window.
 
 Note: Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
 
-By specifying “all = TRUE”, proxy objects are loaded for all tables in the target schema. You can use ore.disconnect() to explicitly disconnect the database session.
+By specifying “all = TRUE”, proxy objects are loaded for all tables in the target schema to which you are connecting. If needed, you can use ore.disconnect() to explicitly disconnect the database session.
 
 Example:
 
@@ -92,50 +89,40 @@ Example:
               all=TRUE)
   ```
 
-5. Check if connection to database is established.
+5. Check if connection to database is established. An output of "TRUE" indicates you are connected. 
 
   ```
   ore.is.connected()
   ```
 
- Note: ore.is.connected returns TRUE if you are connected to an Oracle Database.
 
-
-6. Use the ore.ls function call to check which tables are in the database schema you are connected to.
+6. Use the ore.ls function call to list tables in the database schema you are connected to. Database tables appear as ORE frames in the output.
 
   ```
   ore.ls()
   ```
 
-Note: Database tables appear as ORE frames.
-
-
 
 ## Task 2: Explore data
 
-In this section, we will do basic data exploration, looking at database objects, and understanding the data to some extent.
+In this section, we will do basic data exploration, looking at database objects, and try to understand the data to some extent.
 
-7. Check class of an object (data table)
+7. Check class of an object (data table). The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
 
   ```
    class(CUST_INSUR_LTV)
   ```
 
-Note: The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
-
-
- 8. Get column names of a table
+ 8. Get column names for a table. The column names appear in an ordered list and can be referenced based on this order.
 
   ```
   colnames(CUST_INSUR_LTV)
   ```
 
-  Note: The column list appears as an ordered list.
-
   ![boxplot](./images/col-names.png)
 
 
- 9. Check object dimensions (which are row and column counts)
+ 9. Check object dimensions. The dimensions represents the number of rows (records) and number of columns (attributes) in the given frame (table).
 
   ```
   dim(CUST_INSUR_LTV)
@@ -143,18 +130,17 @@ Note: The database table appears as "ore.frame". ore.frame is the R object repre
 
   Your result should be: 15342  31
 
-10. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc.
+10. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the first 20 columns (attributes) of the table using the order numbers for the columns. You can specify one or more, or a range of columns to see the summary of only those columns.
 
   ```
   summary(CUST_INSUR_LTV[,1:20])
   ```
 
-  Note: You can specify one or more, or a range of columns to see the summary of only those columns.
 
   ![summary-cust](./images/summary-cust.png)
 
 
-11. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table (ore.frame)
+11. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table. For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
 
   ```
   min(CUST_INSUR_LTV$SALARY)
