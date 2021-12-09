@@ -43,11 +43,11 @@ You will be running all the lab steps in the RStudio R Script window.
 
 1. Point browser to RStudio Web to connect with the url below.
 
-````
-http://<ip-address>:8787
-````
+  ```
+  http://<ip-address>:8787
+  ```
 
-Note: Alternatively, you can use RStudio Desktop, if you prefer.  
+  Note: Alternatively, you can use RStudio Desktop, if you prefer.  
 
 2. Connect to RStudio with username: omluser and password: MLlearnPTS#21_
 
@@ -60,24 +60,24 @@ Note: Alternatively, you can use RStudio Desktop, if you prefer.
 
  The caTools package contains several basic utility functions including: moving (rolling, running) window statistic functions, read/write for GIF and ENVI binary files, fast calculation of AUC, LogitBoost classifier, base64 encoder/decoder, round-off-error-free sum and cumsum, etc.  
 
-````
-library(ORE)
-library(dplyr)
-library(OREdplyr)
-library(caTools)
+  ```
+  library(ORE)
+  library(dplyr)
+  library(OREdplyr)
+  library(caTools)
 
-options(ore.warn.order=FALSE)
-````
+  options(ore.warn.order=FALSE)
+  ```
 
 4. A Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database.
 
-````
-ore.connect(user="oml_user",
-            conn_string="MLPDB1",
-            host=<hostname>,
-            password=<password>,
-            all=TRUE)
-````
+  ```
+  ore.connect(user="oml_user",
+              conn_string="MLPDB1",
+              host=<hostname>,
+              password=<password>,
+              all=TRUE)
+  ```
 
 Note: Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
 
@@ -85,31 +85,28 @@ By specifying “all = TRUE”, proxy objects are loaded for all tables in the t
 
 Example:
 
-```
-ore.connect(user="oml_user",
-            conn_string="MLPDB1",
-            host="130.61.185.99",
-            password="MLlearnPTS#21_",
-            all=TRUE)
-```
-
-
-
+  ```
+  ore.connect(user="oml_user",
+              conn_string="MLPDB1",
+              host="130.61.185.99",
+              password="MLlearnPTS#21_",
+              all=TRUE)
+  ```
 
 5. Check if connection to database is established.
 
-````
-ore.is.connected()
-````
+  ```
+  ore.is.connected()
+  ```
 
  Note: ore.is.connected returns TRUE if you are connected to an Oracle Database.
 
 
 6. Use the ore.ls function call to check which tables are in the database schema you are connected to.
 
-````
-ore.ls()
-````
+  ```
+  ore.ls()
+  ```
 
 Note: Database tables appear as ORE frames.
 
@@ -117,94 +114,94 @@ Note: Database tables appear as ORE frames.
 
 ## Task 2: Explore data
 
- In this section, we will do basic data exploration, looking at database objects, and understanding the data to some extent.
+In this section, we will do basic data exploration, looking at database objects, and understanding the data to some extent.
 
 7. Check class of an object (data table)
 
-````
- class(CUST_INSUR_LTV)
-````
+  ```
+   class(CUST_INSUR_LTV)
+  ```
 
 Note: The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
 
 
  8. Get column names of a table
 
-````
-colnames(CUST_INSUR_LTV)
-````
+  ```
+  colnames(CUST_INSUR_LTV)
+  ```
 
- Note: The column list appears as an ordered list.
+  Note: The column list appears as an ordered list.
 
-![boxplot](./images/col-names.png)
+  ![boxplot](./images/col-names.png)
 
 
  9. Check object dimensions (which are row and column counts)
 
-````
-dim(CUST_INSUR_LTV)
-````
+  ```
+  dim(CUST_INSUR_LTV)
+  ```
 
-Your result should be: 15342  31
+  Your result should be: 15342  31
 
 10. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc.
 
-````
-summary(CUST_INSUR_LTV[,1:20])
-````
+  ```
+  summary(CUST_INSUR_LTV[,1:20])
+  ```
 
- Note: You can specify one or more, or a range of columns to see the summary of only those columns.
+  Note: You can specify one or more, or a range of columns to see the summary of only those columns.
 
-![summary-cust](./images/summary-cust.png)
+  ![summary-cust](./images/summary-cust.png)
 
 
 11. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table (ore.frame)
 
-````
-min(CUST_INSUR_LTV$SALARY)
-max(CUST_INSUR_LTV$AGE)
-unique(CUST_INSUR_LTV$N_OF_DEPENDENTS)
-unique(CUST_INSUR_LTV$REGION)
-````
+  ```
+  min(CUST_INSUR_LTV$SALARY)
+  max(CUST_INSUR_LTV$AGE)
+  unique(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+  unique(CUST_INSUR_LTV$REGION)
+  ```
 
- 12. Statistical exploration: Check average value in a numeric column (note that MEAN is the statistical average)
+12. Statistical exploration: Check average value in a numeric column (note that MEAN is the statistical average)
 
-````
- mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
-````
+  ```
+   mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+  ```
 
 Your result should be: 2.068
 
 13. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
 
-````
-x <- CUST_INSUR_LTV$N_OF_DEPENDENTS     
-names(table(x))[table(x)==max(table(x))]
-````
+  ```
+  x <- CUST_INSUR_LTV$N_OF_DEPENDENTS     
+  names(table(x))[table(x)==max(table(x))]
+  ```
 
-Your result should be: 3
+  Your result should be: 3
 
 14. Statistical exploration: Check percentiles (this may be useful to identify outlier limits)
 
-````
-lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
-lower_bound
-upper_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.975)
-upper_bound
-````
+  ```
+  lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
+  lower_bound
+  upper_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.975)
+  upper_bound
+  ```
 
-Your result should be:  2.5% 55158,  97.5% 88925
+  Your result should be:  2.5% 55158,  97.5% 88925
 
 15. Data exploration: Group data, filter data etc.
 
-````
-CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
-CUSTBIN
+  ```
+  CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
+  CUSTBIN
 
-filter(CUST_INSUR_LTV, region == “NORTHEAST”)
-CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE))
+  filter(CUST_INSUR_LTV, region == “NORTHEAST”)
+  CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE))
 
-````
+  ```
 
 
 ## Task 3: Visualize data
@@ -214,37 +211,37 @@ In this section we will try to visualize some of the data provided in the datase
 
 16. Data visualization: Plot the age attribute using box plot. This can help see the concentration of customers in specific age bands and relative number of outliers, etc.
 
-```` 
-boxplot(CUST_INSUR_LTV$AGE)
-````
+  ``` 
+  boxplot(CUST_INSUR_LTV$AGE)
+  ```
 
-![boxplot](./images/boxplot.png)
+  ![boxplot](./images/boxplot.png)
 
 17: Data visualization: Simple plot (salary).
 
-````
-plot(CUST_INSUR_LTV$SALARY/1000)
-````
+  ```
+  plot(CUST_INSUR_LTV$SALARY/1000)
+  ```
 
-![hist](./images/plot.png)
+  ![hist](./images/plot.png)
 
 18. Data visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
 
-````
-hist(CUST_INSUR_LTV$SALARY/1000)
-````
+  ```
+  hist(CUST_INSUR_LTV$SALARY/1000)
+  ```
 
-![hist](./images/hist.png)
+  ![hist](./images/hist.png)
 
 19. Data visualization: Check outliers on a box plot.
 
-````
-out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
-boxplot(CUST_INSUR_LTV$AGE, ylab = "Age")
-mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
-````
+  ```
+  out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
+  boxplot(CUST_INSUR_LTV$AGE, ylab = "Age")
+  mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
+  ```
 
-![hist](./images/boxplot-outlier.png)
+  ![hist](./images/boxplot-outlier.png)
 
 ## Task 4: Perform exploratory data analysis
 
@@ -253,42 +250,42 @@ mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
 
 
 
-````
-CIL <- CUST_INSUR_LTV
-CIL$LTV <- NULL
-dim(CIL)
+  ```
+  CIL <- CUST_INSUR_LTV
+  CIL$LTV <- NULL
+  dim(CIL)
 
-ore.odmAI(LTV_BIN ~ ., CIL)
-````
+  ore.odmAI(LTV_BIN ~ ., CIL)
+  ```
 
-Note: The output lists all the important attributes and their relative influence on the target attribute. Since LTV_BIN is directly related to LTV for a customer, we excluded LTV from the data frame before running ore.odmAI.
+  Note: The output lists all the important attributes and their relative influence on the target attribute. Since LTV_BIN is directly related to LTV for a customer, we excluded LTV from the data frame before running ore.odmAI.
 
-Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
+  Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
 
-![ai](./images/attrib-imp.png)          
+  ![ai](./images/attrib-imp.png)          
 
 21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV_BIN) in the given dataset. 
 
 AI for LTV_BIN (Exclude LTV_BIN from dataset)
 
-````
-CIL <- CUST_INSUR_LTV
-CIL$LTV_BIN <- NULL
-dim(CIL)
-ore.odmAI(LTV ~ ., CIL)
-````
+  ```
+  CIL <- CUST_INSUR_LTV
+  CIL$LTV_BIN <- NULL
+  dim(CIL)
+  ore.odmAI(LTV ~ ., CIL)
+  ```
 
-Note: Attribute importance ranks attributes according to their significance in predicting a target. 
+  Note: Attribute importance ranks attributes according to their significance in predicting a target. 
 
 
 22. Perform principal component analysis (PCA)
 
-````
-prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
-summary(prc0)
-````
+  ```
+  prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
+  summary(prc0)
+  ```
 
-Note: Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. 
+  Note: Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. 
 
 
 
@@ -296,34 +293,34 @@ Note: Principal Component Analysis (PCA) is a technique used for exploratory dat
 
 23. Create row names. You can use the primary key of a database table to order an ore.frame object.
 
-````
-set.seed(1)
-head(CUST_INSUR_LTV)
-CIL <- CUST_INSUR_LTV
-row.names(CIL) <- CIL$CUST_ID
-head(row.names(CIL))
-````
+  ```
+  set.seed(1)
+  head(CUST_INSUR_LTV)
+  CIL <- CUST_INSUR_LTV
+  row.names(CIL) <- CIL$CUST_ID
+  head(row.names(CIL))
+  ```
 
-Your result should be:
+  Your result should be:
 
-![head](./images/head-row.png)
+  ![head](./images/head-row.png)
 
-Note: The data in an Oracle Database table is not necessarily ordered. For some R operations, ordering is useful. By ordering an #ore.frame, you are able to index the ore.frame object by using either integer or character indexes. Using an ordered ore.frame object #that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, OML4R attempts to create ordered ore.frame #objects by default.
+  Note: The data in an Oracle Database table is not necessarily ordered. For some R operations, ordering is useful. By ordering an #ore.frame, you are able to index the ore.frame object by using either integer or character indexes. Using an ordered ore.frame object #that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, OML4R attempts to create ordered ore.frame #objects by default.
 
 24. Partition dataset for training and testing. Split the dataset into two buckets (training data set (~70%), and testing data set (~30%))
 
-````
-set.seed(1)
-sampleSize <- 4600
-ind <- sample(1:nrow(CIL),sampleSize)
-group <- as.integer(1:nrow(CIL) %in% ind)
-CIL.train <- CIL[group==FALSE,]
-dim(CIL.train)
-class(CIL.train)
-CIL.test <- CIL[group==TRUE,]
-dim(CIL.test)
-class(CIL.test)
-````
+  ```
+  set.seed(1)
+  sampleSize <- 4600
+  ind <- sample(1:nrow(CIL),sampleSize)
+  group <- as.integer(1:nrow(CIL) %in% ind)
+  CIL.train <- CIL[group==FALSE,]
+  dim(CIL.train)
+  class(CIL.train)
+  CIL.test <- CIL[group==TRUE,]
+  dim(CIL.test)
+  class(CIL.test)
+  ```
 
 
 ## Task 6: Build ML models
@@ -333,37 +330,37 @@ Use a Regression Model for LTV Prediction
 
 25. Build regression model to predict customer LTV using the training data set
 
-````
-oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
-oreFit1 %>% print()
-class(oreFit1)
-summary(oreFit1)
-names(oreFit1)
-oreFit1$formula
-oreFit1$ridge
-````
+  ```
+  oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
+  oreFit1 %>% print()
+  class(oreFit1)
+  summary(oreFit1)
+  names(oreFit1)
+  oreFit1$formula
+  oreFit1$ridge
+  ```
 
  Note: # Change TYPE parameter (check in ore.odmGLM doc) 
 
 
 26. Generate predictions
 
-````
-predA = ore.predict(oreFit1, newdata = CIL.test)
-predA
-````
+  ```
+  predA = ore.predict(oreFit1, newdata = CIL.test)
+  predA
+  ```
 
 27. Compare actual and predicted values and validate
 
-````
-oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
-CIL <- CUST_INSUR_LTV
-CIL_pred <- ore.predict(oreFit1, CIL, se.fit = TRUE, interval = "prediction")
-CIL <- cbind(CIL, CIL_pred)
-head(CIL)
-library(OREdplyr)
-head(select (CIL, LTV, PREDICTION))
-````
+  ```
+  oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
+  CIL <- CUST_INSUR_LTV
+  CIL_pred <- ore.predict(oreFit1, CIL, se.fit = TRUE, interval = "prediction")
+  CIL <- cbind(CIL, CIL_pred)
+  head(CIL)
+  library(OREdplyr)
+  head(select (CIL, LTV, PREDICTION))
+  ```
 
 
  Use a Classification Model for LTV_BIN Prediction
@@ -371,65 +368,65 @@ head(select (CIL, LTV, PREDICTION))
 
 28. Exclude highly correlated columns from the data frame
 
-````
-CIL <- CUST_INSUR_LTV
-CIL$LTV_BIN <- NULL
-dim(CIL)
-````
+  ```
+  CIL <- CUST_INSUR_LTV
+  CIL$LTV_BIN <- NULL
+  dim(CIL)
+  ```
 
 29. Build Classification model to predict customer LTV_BIN assignment using the training data set
 
-````
-oreFit2 <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
-oreFit2 %>% print()
-summary(oreFit2)
-names(oreFit2)
-oreFit2$formula
- 
-CIL <- CUST_INSUR_LTV
-nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
-nb.res <- predict (nb, CIL.test, "LTV_BIN")
-head(nb.res,10)
-with(nb.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
-````
+  ```
+  oreFit2 <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
+  oreFit2 %>% print()
+  summary(oreFit2)
+  names(oreFit2)
+  oreFit2$formula
+   
+  CIL <- CUST_INSUR_LTV
+  nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
+  nb.res <- predict (nb, CIL.test, "LTV_BIN")
+  head(nb.res,10)
+  with(nb.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
+  ```
 
-![class-model](./images/class-model.png)
+  ![class-model](./images/class-model.png)
 
 30. Generate predictions
 
-````
-predB = ore.predict(oreFit2, newdata = CIL.test)
-predB
-````
+  ```
+  predB = ore.predict(oreFit2, newdata = CIL.test)
+  predB
+  ```
 
 ## Task 7: Validate predictions
 
 31. Validate LTV predictions using RMSE
 
-````
-ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
-localPredictions <- ore.pull(ans)
-ore.rmse <- function (pred, obs) {
-  sqrt(mean(pred-obs)^2)
-}
-ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
-````
+  ```
+  ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
+  localPredictions <- ore.pull(ans)
+  ore.rmse <- function (pred, obs) {
+    sqrt(mean(pred-obs)^2)
+  }
+  ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
+  ```
 
-Mean square error is a useful way to determine the extent to which a regression model is capable of integrating a dataset.
-The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. #In the same way, the smaller RMSE that indicates the better the model.
-Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better.
+  Mean square error is a useful way to determine the extent to which a regression model is capable of integrating a dataset.
+  The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. #In the same way, the smaller RMSE that indicates the better the model.
+  Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better.
 
 32. Produce confusion matrix for LTV_BIN predictions
 
-````
-confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
-dim(test$LTV_BIN)
-class(test$LTV_BIN)
-dim(predB)
-class(predB)
-confusion.matrix
-summary(confusion.matrix)
-````
+  ```
+  confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
+  dim(test$LTV_BIN)
+  class(test$LTV_BIN)
+  dim(predB)
+  class(predB)
+  confusion.matrix
+  summary(confusion.matrix)
+  ```
 
 33. Observe and evaluate accuracy of predictions
 
