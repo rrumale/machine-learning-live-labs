@@ -1,13 +1,13 @@
-# Loading an OML  model and score it using Rest Services
+# Loading an OML  model and score it using OML Services
 
-In this section of the workshop we will import the Decision Tree model used on the OML4PY workshop Step 3 in our Autonomous Database and score it using REST APIs
+In this section of the workshop we will import and score the Decision Tree model used on the OML4PY workshop Step 3 in our Autonomous Database and score it using REST APIs
 
 Estimated Time: 20 minutes
 
 ### Objectives
 We are going to run the next steps:
 * Extract the saved model to a file;
-* Load the model in the Autonomous Database repository;
+* Store the model in the OML Services repository;
 * Deploy the model;
 * Score a customer using the Decision Tree model;
 
@@ -18,7 +18,7 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
 
-##Import the Decision Tree model
+## Import the Decision Tree model
 
 Task 1 can be performed only if OML4PY workshop was ran on the same VM prior the OML-Services workshop, otherwise you can **skip to Task 2**.
 
@@ -76,7 +76,7 @@ $<copy>ls ~/dmuser</copy>
 
 
 
-## Task: 2: Load the model in the Autonomous Database repository
+## Task: 2: Store the model in the OML Services repository
 
 *  In the Postman session opened run the following Get method to get the list of models deployed.
 
@@ -108,7 +108,7 @@ URI endpoint:
 <copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models </copy>
 
 ````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+ - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_. 
 
  In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 
