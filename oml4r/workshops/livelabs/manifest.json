@@ -1,0 +1,31 @@
+{
+  "description": "OML4R Workshop using the Insurance dataset to predict customer's LTV value",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction",
+      "filename": "./../../introduction/introduction.md"
+    },
+    {
+    "title": "Understanding Use Case",
+    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
+    "filename": "./../../../use-case/use-case.md"
+    },
+    {
+    "title": "Load and Prepare Data",
+    "description": "Load and Prepare Data",
+    "filename": "./../../preparation/preparation.md"
+    },
+    {
+      "title": "OML4R Workshop",
+      "description": "OML4R Workshop using the Insurance dataset to predict customer's LTV value",
+      "filename": "./../../oml4r-workshop/oml4r-workshop.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ## Oracle Machine Learning for R (OML4R)
 
-Oracle Machine Learning for R (OML4R) enables you to use R (a statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. This allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing 
+Oracle Machine Learning for R (OML4R) enables you to use R (a statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. This allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing
 data.  OML4R is the new name for Oracle R Enterprise.
 
 In this workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer has about 30 attributes, and the goal is to train the model to predict a given customer's life-time value (LTV) using regression algorithms, and additionally, using classification algorithms to classify customers as LOW, MEDIUM, HIGH, or VERY  HIGH LTV (using binned LTV categories). 
@@ -10,13 +10,12 @@ Note: In marketing, the life-time value (LTV) of a customer is an estimate of th
 Estimated Lab Time: 2 hours
 
 
-## Objectives
-
+### Objectives
 
 In this lab, you will:
 
 * Establish a connection from RStudio to your Oracle Database instance to prepare, explore, and visualize data.
-* Use R for exploratory data analysis, data visualization, data organization (bucketing of data in train and test buckets), 
+* Use R for exploratory data analysis, data visualization, data organization (bucketing of data in train and test buckets),
 * Use Attribute Importance, Principle Component Analysis, Model Building, and Model Validations techniques
 * Use an OML4R Regression models for estimating customer life-time value (LTV)
 * Use an OML4R Classification models for LTV_BIN assignment for unassigned customers
@@ -53,11 +52,11 @@ Note: Alternatively, you can use RStudio Desktop, if you prefer.
 2. Connect to RStudio with username: omluser and password: MLlearnPTS#21_
 
 
-3. Load useful ORE libraries. The ORE library is a package that contains many useful R functions. 
+3. Load useful ORE libraries. The ORE library is a package that contains many useful R functions.
 
  The standard dplyr R package provides grammar of data manipulation, which gives a consistent set of verbs that help you solve the most common data manipulation challenges
 
- OREdplyr is an overloaded package that provides much of the dplyr functionality extending the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes because operations are not constrained by R client memory, the latency of data movement, or single-threaded execution, but leverage Oracle Database as a high performance compute engine. 
+ OREdplyr is an overloaded package that provides much of the dplyr functionality extending the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes because operations are not constrained by R client memory, the latency of data movement, or single-threaded execution, but leverage Oracle Database as a high performance compute engine.
 
  The caTools package contains several basic utility functions including: moving (rolling, running) window statistic functions, read/write for GIF and ENVI binary files, fast calculation of AUC, LogitBoost classifier, base64 encoder/decoder, round-off-error-free sum and cumsum, etc.  
 
@@ -80,7 +79,7 @@ ore.connect(user="oml_user",
             all=TRUE)
 ````
 
-Note: Your database connection is to the database schema where the data resides. The connection port defaults to 1521. 
+Note: Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
 
 By specifying “all = TRUE”, proxy objects are loaded for all tables in the target schema. You can use ore.disconnect() to explicitly disconnect the database session.
 
@@ -103,7 +102,7 @@ ore.connect(user="oml_user",
 ore.is.connected()
 ````
 
- Note: ore.is.connected returns TRUE if you are connected to an Oracle Database. 
+ Note: ore.is.connected returns TRUE if you are connected to an Oracle Database.
 
 
 6. Use the ore.ls function call to check which tables are in the database schema you are connected to.
@@ -114,9 +113,9 @@ ore.ls()
 
 Note: Database tables appear as ORE frames.
 
- 
 
-## Task 2: Explore data 
+
+## Task 2: Explore data
 
  In this section, we will do basic data exploration, looking at database objects, and understanding the data to some extent.
 
@@ -221,7 +220,7 @@ boxplot(CUST_INSUR_LTV$AGE)
 
 ![boxplot](./images/boxplot.png)
 
-17: Data visualization: Simple plot (salary). 
+17: Data visualization: Simple plot (salary).
 
 ````
 plot(CUST_INSUR_LTV$SALARY/1000)
@@ -237,7 +236,7 @@ hist(CUST_INSUR_LTV$SALARY/1000)
 
 ![hist](./images/hist.png)
 
-19. Data visualization: Check outliers on a box plot. 
+19. Data visualization: Check outliers on a box plot.
 
 ````
 out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
@@ -314,16 +313,16 @@ Note: The data in an Oracle Database table is not necessarily ordered. For some 
 24. Partition dataset for training and testing. Split the dataset into two buckets (training data set (~70%), and testing data set (~30%))
 
 ````
-set.seed(1) 
-sampleSize <- 4600 
-ind <- sample(1:nrow(CIL),sampleSize) 
-group <- as.integer(1:nrow(CIL) %in% ind) 
-CIL.train <- CIL[group==FALSE,] 
-dim(CIL.train) 
-class(CIL.train) 
-CIL.test <- CIL[group==TRUE,] 
-dim(CIL.test) 
-class(CIL.test) 
+set.seed(1)
+sampleSize <- 4600
+ind <- sample(1:nrow(CIL),sampleSize)
+group <- as.integer(1:nrow(CIL) %in% ind)
+CIL.train <- CIL[group==FALSE,]
+dim(CIL.train)
+class(CIL.train)
+CIL.test <- CIL[group==TRUE,]
+dim(CIL.test)
+class(CIL.test)
 ````
 
 
@@ -361,7 +360,7 @@ oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, dat
 CIL <- CUST_INSUR_LTV
 CIL_pred <- ore.predict(oreFit1, CIL, se.fit = TRUE, interval = "prediction")
 CIL <- cbind(CIL, CIL_pred)
-head(CIL) 
+head(CIL)
 library(OREdplyr)
 head(select (CIL, LTV, PREDICTION))
 ````
@@ -433,3 +432,10 @@ summary(confusion.matrix)
 ````
 
 33. Observe and evaluate accuracy of predictions
+
+
+
+
+## Acknowledgements
+* **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
+* **Last Updated By/Date** -  Rajeev Rumale

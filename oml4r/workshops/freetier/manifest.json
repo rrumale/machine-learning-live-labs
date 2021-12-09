@@ -4,7 +4,7 @@
   "tutorials": [
     {
       "title": "OML4R Workshop",
-      "description": "Introduction",
+      "description": "OML4R Workshop using the Insurance dataset to predict customer's LTV value",
       "filename": "../../oml4r-workshop.md"
     }
   ]
