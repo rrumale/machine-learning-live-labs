@@ -253,7 +253,8 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![ai](./images/attrib-imp.png)          
 
-21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV_BIN) in the given dataset. 
+21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV_BIN) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
+
 
 AI for LTV_BIN (Exclude LTV_BIN from dataset)
 
