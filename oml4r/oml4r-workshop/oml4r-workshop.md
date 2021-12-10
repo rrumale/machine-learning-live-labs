@@ -200,7 +200,10 @@ In this section we will try to visualize some of the data provided in the datase
   boxplot(CUST_INSUR_LTV$AGE)
   ```
 
+A boxplot displays distribution of data based on a 5-number summary (“minimum”, first quartile (Q1), median, third quartile (Q3), and “maximum”). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
+
   ![boxplot](./images/boxplot.png)
+
 
 17: Data visualization: Simple plot (salary).
 
