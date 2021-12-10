@@ -149,7 +149,7 @@ In this section, we will do basic data exploration, looking at database objects,
   unique(CUST_INSUR_LTV$REGION)
   ```
 
-12. Statistical exploration: Check average value in a numeric column (note that MEAN is the statistical average)
+12. Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
 
   ```
    mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
@@ -164,7 +164,7 @@ Your result should be: 2.068
   names(table(x))[table(x)==max(table(x))]
   ```
 
-  Your result should be: 3
+  Your result should be: 3. This indicates that most number of customers have three dependents.
 
 14. Statistical exploration: Check percentiles (this may be useful to identify outlier limits)
 
@@ -175,9 +175,9 @@ Your result should be: 2.068
   upper_bound
   ```
 
-  Your result should be:  2.5% 55158,  97.5% 88925
+  Your result should be:  2.5% 55158,  97.5% 88925. Thus, if you so choose, salary below $55,158 and salary above $88,925 may be consider outliers and could potentially be excluded if otherwise appropriate.
 
-15. Data exploration: Group data, filter data etc.
+15. Data exploration: Group data, filter data etc. The 'aggregate' function allows for grouping of data by a list of columns. The 'filter' function allows for filtering of the dataset based on attribute values. The 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from data if they are coded as NA.
 
   ```
   CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
