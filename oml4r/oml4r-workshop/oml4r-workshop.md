@@ -267,14 +267,13 @@ AI for LTV_BIN (Exclude LTV_BIN from dataset)
   Note: Attribute importance ranks attributes according to their significance in predicting a target. 
 
 
-22. Perform principal component analysis (PCA)
+22. Perform principal component analysis (PCA). Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables.
 
   ```
   prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
   summary(prc0)
   ```
-
-  Note: Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. 
+ 
 
 
 
@@ -332,7 +331,7 @@ Use a Regression Model for LTV Prediction
  Note: # Change TYPE parameter (check in ore.odmGLM doc) 
 
 
-26. Generate predictions
+26. Generate predictions using ore.predict. The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score.
 
   ```
   predA = ore.predict(oreFit1, newdata = CIL.test)
