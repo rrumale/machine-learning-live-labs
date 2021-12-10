@@ -166,7 +166,7 @@ Your result should be: 2.068
 
   Your result should be: 3. This indicates that most number of customers have three dependents.
 
-14. Statistical exploration: Check percentiles (this may be useful to identify outlier limits)
+14. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. 
 
   ```
   lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
