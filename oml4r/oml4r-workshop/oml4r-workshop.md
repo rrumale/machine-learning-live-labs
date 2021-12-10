@@ -89,14 +89,14 @@ Example:
               all=TRUE)
   ```
 
-5. Check if connection to database is established. An output of "TRUE" indicates you are connected. 
+5. Check if connection to database is established. An output of "TRUE" indicates you are connected. Otherwise, it returns "FALSE" as the output.
 
   ```
   ore.is.connected()
   ```
 
 
-6. Use the ore.ls function call to list tables in the database schema you are connected to. Database tables appear as ORE frames in the output.
+6. The ore.ls function returns all OML4R proxy objects. Use the ore.ls function call to list tables in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and enabled by the OML4R transparency layer.
 
   ```
   ore.ls()
