@@ -224,9 +224,9 @@ A boxplot displays distribution of data based on a 5-number summary (â€œminimumâ
 19. Data visualization: Check outliers on a box plot. The outlier values are listed on top as illustrated in the output.
 
   ```
-  out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
-  boxplot(CUST_INSUR_LTV$AGE, ylab = "Age")
-  mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
+out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
+boxplot(CUST_INSUR_LTV$AGE, xlab = "BOXPLOT (CUSTOMER AGE)", ylab = "Age", horizontal=TRUE)
+mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
   ```
 
   ![hist](./images/boxplot-outlier.png)
