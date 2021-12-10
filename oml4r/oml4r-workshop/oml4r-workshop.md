@@ -294,9 +294,11 @@ AI for LTV_BIN (Exclude LTV_BIN from dataset)
 
   ![head](./images/head-row.png)
 
-  Note: The data in an Oracle Database table is not necessarily ordered. For some R operations, ordering is useful. By ordering an #ore.frame, you are able to index the ore.frame object by using either integer or character indexes. Using an ordered ore.frame object #that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, OML4R attempts to create ordered ore.frame #objects by default.
+Note: The data in an Oracle Database table is not necessarily ordered. For some R operations, ordering is useful. By ordering an ore.frame, you are able to index the ore.frame object by using either integer or character indexes. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, OML4R attempts to create ordered ore.frame #objects by default.
 
-24. Partition dataset for training and testing. Split the dataset into two buckets (training data set (~70%), and testing data set (~30%)). Note, that setting a seed (can be any value) ensures the same output is reproduced if your run the code again. This can be helpful for consistency and debugging.
+24. Now lets partition the original dataset for training and testing purposes. We will split the dataset into two buckets - training data set (~70%), and testing data set (~30%). 
+
+Setting a 'seed' (can be any value) ensures the same output is reproduced by the R psuedonumber generator, if your run the code again. This can be helpful for consistency and debugging. 
 
   ```
   set.seed(1)
