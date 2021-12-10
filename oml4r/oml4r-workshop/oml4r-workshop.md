@@ -205,7 +205,7 @@ A boxplot displays distribution of data based on a 5-number summary (â€œminimumâ
   ![boxplot](./images/boxplot.png)
 
 
-17: Data visualization: Simple plot (salary).
+17: Data visualization: Simple plot of salary.
 
   ```
   plot(CUST_INSUR_LTV$SALARY/1000)
@@ -221,7 +221,7 @@ A boxplot displays distribution of data based on a 5-number summary (â€œminimumâ
 
   ![hist](./images/hist.png)
 
-19. Data visualization: Check outliers on a box plot.
+19. Data visualization: Check outliers on a box plot. The outlier values are listed on top as illustrated in the output.
 
   ```
   out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
