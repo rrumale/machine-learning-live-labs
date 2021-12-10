@@ -362,7 +362,7 @@ Use a Regression Model for LTV Prediction
   dim(CIL)
   ```
 
-29. Build Classification model to predict customer LTV_BIN assignment using the training data set
+29. Build Classification Model using Decision Tree algorithm and the training data set for predicting customer LTV_BIN assignment.
 
   ```
   oreFit2 <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
@@ -370,7 +370,9 @@ Use a Regression Model for LTV Prediction
   summary(oreFit2)
   names(oreFit2)
   oreFit2$formula
-   
+
+30. Additionally, build a Classification Model using Naive Bayes algorithm and the training dataset for predicting customer LTV_BIN assignment.
+
   CIL <- CUST_INSUR_LTV
   nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
   nb.res <- predict (nb, CIL.test, "LTV_BIN")
@@ -380,7 +382,7 @@ Use a Regression Model for LTV Prediction
 
   ![class-model](./images/class-model.png)
 
-30. Generate predictions
+31. Generate predictions using the new classification model and the test dataset.
 
   ```
   predB = ore.predict(oreFit2, newdata = CIL.test)
@@ -390,7 +392,7 @@ Use a Regression Model for LTV Prediction
 
 ## Task 7: Validate predictions
 
-31. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
+32. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
   ```
   ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -402,7 +404,7 @@ Use a Regression Model for LTV Prediction
   ```
 
 
-32. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
+33. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
   ```
   confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
@@ -414,7 +416,7 @@ Use a Regression Model for LTV Prediction
   summary(confusion.matrix)
   ```
 
-33. Observe and evaluate accuracy of predictions
+34. Observe and assess accuracy of predictions
 
 
 
