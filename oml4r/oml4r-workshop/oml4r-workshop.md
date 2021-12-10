@@ -404,7 +404,7 @@ Use a Regression Model for LTV Prediction
   The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. #In the same way, the smaller RMSE that indicates the better the model.
   Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better.
 
-32. Produce confusion matrix for LTV_BIN predictions
+32. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
   ```
   confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
