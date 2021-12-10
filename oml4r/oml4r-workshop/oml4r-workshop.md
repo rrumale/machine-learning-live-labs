@@ -231,6 +231,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/boxplot-outlier.png)
 
+
 ## Task 4: Perform exploratory data analysis
 
 
@@ -387,9 +388,10 @@ Use a Regression Model for LTV Prediction
   predB
   ```
 
+
 ## Task 7: Validate predictions
 
-31. Validate LTV predictions using RMSE
+31. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
   ```
   ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -400,9 +402,6 @@ Use a Regression Model for LTV Prediction
   ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
   ```
 
-  Mean square error is a useful way to determine the extent to which a regression model is capable of integrating a dataset.
-  The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. #In the same way, the smaller RMSE that indicates the better the model.
-  Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better.
 
 32. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
