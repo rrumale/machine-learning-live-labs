@@ -28,6 +28,7 @@ Note: AutoML is currently not available for OML4R (it is only available for OML4
 * R, RStudio, and required libraries
 
 
+
 ## Task 1: Connect to RStudio client and establish database connection
 
 RStudio provides a GUI/BUI IDE for R. RStudio has been pre-configured on your VM running the database server.  
@@ -194,7 +195,7 @@ Your result should be: 2.068
 In this section we will try to visualize some of the data provided in the dataset. This includes drawing plots, graphs, and histograms, etc.
 
 
-16. Data visualization: Plot the age attribute using box plot. This can help see the concentration of customers in specific age bands and relative number of outliers, etc.
+16. Data visualization: Plot the age attribute using boxplot. A boxplot can help see the concentration of customers in specific age bands and relative number of outliers, etc. We can improve upon the display of a boxplot as you will see in a later section.
 
   ``` 
   boxplot(CUST_INSUR_LTV$AGE)
@@ -205,7 +206,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   ![boxplot](./images/boxplot.png)
 
 
-17: Data visualization: Simple plot of salary.
+17: Data visualization: Draw a simple and quick plot of customer salary. This illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K. We can improve upon the display of a plot as you will see in a later section.
 
   ```
   plot(CUST_INSUR_LTV$SALARY/1000)
@@ -218,7 +219,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   ```
      hist(CUST_INSUR_LTV$SALARY/1000,
      main="Customer Salary Data",
-     xlab="Salary($, Thousands)",
+     xlab="Salary($K)",
      xlim=c(40,100),
      col="darkmagenta",
      freq=TRUE)
@@ -226,7 +227,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/hist-1.png)
 
-19. Data visualization: Check outliers on a box plot. The outlier values are listed on top as illustrated in the output.
+19. Data visualization: Check outliers on a boxplot. The outlier values are listed on top of the displayed box in the output.
 
   ```
   x <- CIL$AGE
@@ -249,9 +250,11 @@ Let us first assess attribute importance for dependent variable LTV_BIN. We know
   CIL <- CUST_INSUR_LTV
   CIL$LTV <- NULL
   dim(CIL)
+  ````
 
 Now let us run the odmAI function to identify ordered importance of attribute for target variable LTV_BIN.
 
+  ````
   ore.odmAI(LTV_BIN ~ ., CIL)
   ```
 
@@ -279,11 +282,9 @@ Note: The output lists all the important attributes and their relative influence
   prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
   summary(prc0)
   ```
- 
 
 
-
-## Task 5: Prepare data for model creation 
+## Task 5: Prepare data for model creation  
 
 23. Create row names. You can use the primary key of a database table to order an ore.frame object.
 
@@ -358,9 +359,7 @@ Use a Regression Model for LTV Prediction
   head(select (CIL, LTV, PREDICTION))
   ```
 
-
- Use a Classification Model for LTV_BIN Prediction
-
+ Now, lets use a Classification Model for LTV_BIN Prediction
 
 28. Exclude highly correlated columns from the data frame
 
@@ -424,8 +423,30 @@ Use a Regression Model for LTV Prediction
   summary(confusion.matrix)
   ```
 
-34. Observe and assess accuracy of predictions
+## Task 8: Try embedded R execution for batch data processing
 
+34. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
+[NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]
+
+row.names(CIL) <- CIL$CUST_ID
+CIL <- CUST_INSUR_LTV
+CIL_PRED <- CIL
+CIL_PRED$PRED <- "A"
+class(oreFit1)
+class(CIL.test)
+class(CIL_PRED)
+row.names(CIL.test) <- CIL.test$CUST_ID
+dat <- CIL.test
+res <- ore.tableApply(
+  CIL,
+  function(dat, mod) {
+    dat$PRED <- ore.predict-glm(mod, newdata = dat)
+    dat
+  }, mod = ore.pull(oreFit1), FUN.VALUE = CIL_PRED) 
+class(res)
+typeof(res)
+res
+head(res)
 
 
 
