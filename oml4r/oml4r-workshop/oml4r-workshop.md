@@ -426,8 +426,11 @@ Use a Regression Model for LTV Prediction
   ## Task 8: Try embedded R execution for batch data processing
 
 34. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
-[NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]
 
+**[NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]**
+
+
+```
 row.names(CIL) <- CIL$CUST_ID
 CIL <- CUST_INSUR_LTV
 CIL_PRED <- CIL
@@ -447,8 +450,11 @@ class(res)
 typeof(res)
 res
 head(res)
+```
 
+Now, let us list the original (actual) and predicted values side by side.
 
+< SELECT QUERY >
 
 ## Acknowledgements
 * **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
