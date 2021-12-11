@@ -230,7 +230,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
   ```
 
-  ![hist](./images/boxplot-2.png)
+  ![boxplot](./images/boxplot-2.png)
 
 
 ## Task 4: Perform exploratory data analysis
