@@ -238,26 +238,25 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
 20. Use Attribute Importance (ore.odmAI) function to identify important attributes (listed in order of importance) for a given dependent attribute (LTV_BIN) in the given dataset. To do this we first exclude the most significant dependent attribute from the data frame.  In database terms, we are looking for the most important columns (attributes) to predict the target column (attribute).
 
-
+Let us first assess attribute importance for dependent variable LTV_BIN. We know that LTV_BIN is highly correlated with LTV. Thus let us first exclude LTV from the data frame.
 
   ```
   CIL <- CUST_INSUR_LTV
   CIL$LTV <- NULL
   dim(CIL)
 
+Now let us run the odmAI function to identify ordered importance of attribute for target variable LTV_BIN.
+
   ore.odmAI(LTV_BIN ~ ., CIL)
   ```
 
-  Note: The output lists all the important attributes and their relative influence on the target attribute. Since LTV_BIN is directly related to LTV for a customer, we excluded LTV from the data frame before running ore.odmAI.
+Note: The output lists all the important attributes and their relative influence on the target attribute. Since LTV_BIN is directly related to LTV for a customer, we excluded LTV from the data frame before running ore.odmAI.
 
-  Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
+ Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
 
   ![ai](./images/AI-4-LTV-BIN.png)          
 
-21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV_BIN) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
-
-
-AI for LTV_BIN (Exclude LTV_BIN from dataset)
+21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
   ```
   CIL <- CUST_INSUR_LTV
