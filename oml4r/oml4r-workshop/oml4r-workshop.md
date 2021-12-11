@@ -250,11 +250,11 @@ Let us first assess attribute importance for dependent variable LTV_BIN. We know
   CIL <- CUST_INSUR_LTV
   CIL$LTV <- NULL
   dim(CIL)
-  ````
+  ```
 
 Now let us run the odmAI function to identify ordered importance of attribute for target variable LTV_BIN.
 
-  ````
+  ```
   ore.odmAI(LTV_BIN ~ ., CIL)
   ```
 
@@ -282,9 +282,9 @@ Note: The output lists all the important attributes and their relative influence
   prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
   summary(prc0)
   ```
-
-
-## Task 5: Prepare data for model creation  
+ 
+ 
+## Task 5: Prepare data for model creation
 
 23. Create row names. You can use the primary key of a database table to order an ore.frame object.
 
@@ -320,7 +320,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
   ```
 
 
-## Task 6: Build ML models
+  ## Task 6: Build ML models
 
 
 Use a Regression Model for LTV Prediction
@@ -397,7 +397,7 @@ Use a Regression Model for LTV Prediction
   ```
 
 
-## Task 7: Validate predictions
+  ## Task 7: Validate predictions
 
 32. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
@@ -423,7 +423,7 @@ Use a Regression Model for LTV Prediction
   summary(confusion.matrix)
   ```
 
-## Task 8: Try embedded R execution for batch data processing
+  ## Task 8: Try embedded R execution for batch data processing
 
 34. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
 [NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]
