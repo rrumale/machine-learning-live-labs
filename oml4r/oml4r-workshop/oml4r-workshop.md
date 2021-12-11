@@ -216,10 +216,15 @@ A boxplot displays distribution of data based on a 5-number summary (â€œminimumâ
 18. Data visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
 
   ```
-  hist(CUST_INSUR_LTV$SALARY/1000)
+     hist(CUST_INSUR_LTV$SALARY/1000,
+     main="Customer Salary Data",
+     xlab="Salary($, Thousands)",
+     xlim=c(40,100),
+     col="darkmagenta",
+     freq=TRUE)
   ```
 
-  ![hist](./images/hist.png)
+  ![hist](./images/hist-1.png)
 
 19. Data visualization: Check outliers on a box plot. The outlier values are listed on top as illustrated in the output.
 
