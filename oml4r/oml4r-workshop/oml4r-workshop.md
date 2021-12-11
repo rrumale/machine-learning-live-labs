@@ -454,7 +454,15 @@ head(res)
 
 Now, let us list the original (actual) and predicted values side by side.
 
+```
 < SELECT QUERY >
+```
+
+25. Conclusion
+
+As you can see, OML4R makes it fast and easy to apply Machine Learning to database resident data. Further, OML4R is able to leverage database compute power, data and task parallism, and security features to work efficiently and securely on enterprise data. By applying Machine Learning algorithms to their data residing in Oracle Databases, businesses are able to quickly create significant value.
+
+This is the end of this workshop.
 
 ## Acknowledgements
 * **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
