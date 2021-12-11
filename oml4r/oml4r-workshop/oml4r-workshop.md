@@ -229,7 +229,7 @@ boxplot(CUST_INSUR_LTV$AGE, xlab = "BOXPLOT (CUSTOMER AGE)", ylab = "Age", horiz
 mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
   ```
 
-  ![hist](./images/boxplot-outlier.png)
+  ![hist](./images/boxplot-1.png)
 
 
 ## Task 4: Perform exploratory data analysis
