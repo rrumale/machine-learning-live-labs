@@ -84,12 +84,12 @@ $<copy>ls ~/dmuser</copy>
 Operation: GET
 
 URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models</copy>
+<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
 
 ````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+ - Replace **`<oml-cloud-service-location-url>`** with your URL saved in chapter "Scoring OML model using OML Services" Task 1.2: Authorize OML Services User
 
- In the Authorization tab pick **Bearer Token** and paste the token copied from *Scoring OML using Rest Services Task 1*.
+ In the Authorization tab pick **Bearer Token** and paste the token copied from *Scoring OML using OML Services Task 1*.
 
  ![Model Import](images/model-import-06.jpg)
 
@@ -99,16 +99,16 @@ The response is just the **SVMG** model we used in our previous tasks.
 
 In case you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
-* Open a new tab in Postman and run the following POST command to load the model in Autonomous Database.
+* Open a new tab in Postman and run the following POST command to store the model in OML Services repository.
 
 ````
 Operation: POST
 
 URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/models </copy>
+<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
 
 ````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_. 
+ - Replace **`<oml-cloud-service-location-url>`** with your URL saved.
 
  In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 
@@ -156,10 +156,11 @@ Copy the **`modelId`** displayed in the JSON response.
 Operation: POST
 
 URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/deployment </copy>
+<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment</copy>
 
 ````
-  - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+ - Replace **`<oml-cloud-service-location-url>`** with your URL saved.
+
 
 In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 
@@ -205,10 +206,10 @@ Enter the following details:
 Operation: POST
 
 URI endpoint:
-<copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/deployment/<model_URI>/score </copy>
+<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score </copy>
 
 ````
- - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+- Replace **`<oml-cloud-service-location-url>`** with your URL saved.
 
  - Replace **`<model_URI>`** with the model URI that we defined in previous task: **`dtmodel`**
 

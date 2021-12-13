@@ -25,40 +25,7 @@ Estimated Lab Time: 15 minutes
 ### Lab Preparation:
 
 
-## Task 1: Get Tenancy ID
-
-* Connect to the Oracle Cloud Infrastructure (OCI) Console. In the home page click on the user icon on the top right side.
-![OCI-home](images/prerequisites-screenshot-X01.jpg)
-
-* In the Users menu click on Tenancy: `<tenancy_name>` .
-![OCI-home-user](images/prerequisites-screenshot-X02.jpg)
-
-* The Tenancy Details page is displayed. You can see the full OCID by clicking on the Show button.
-![OCI-tenancy](images/prerequisites-screenshot-X03.jpg)
-
-* The full tenancy OCID is displayed. You can copy it by clicking on the Copy button and save it somewhere accessible for the duration of the workshop. We are going to use it in the next sections of the workshop.
-![OCI-tenancy-ocid](images/prerequisites-screenshot-X04.jpg)
-
-
-## Task 2: Get Autonomous Database dbname
-
-* Click on the Menu button next to the Oracle Cloud icon.
-![OCI-menu](images/prerequisites-screenshot-X05.jpg)
-
-* Go to the Oracle Database menu and chose Autonomous Transaction Processing.
-![OCI-menu](images/prerequisites-screenshot-X06.jpg)
-
-* Click on the target Autonomous Database instance.
-![ADB-instance](images/prerequisites-screenshot-1.jpg)
-
-* In the Autonomous Database instance detail page you can see the Database Name.
-![ADB-instance-name](images/prerequisites-screenshot-X07.jpg)
-
-You can save the Database Name somewhere accessible for the duration of the workshop. We are going to use it in the next sections when defining de endpoints to access the OML models.
-
-
-
-## Task 3: Loading the data
+## Task 1: Loading the data
 
 * Connect to the Oracle Cloud Infrastructure (OCI) Console and go to Autonomous Database home page.
 * Click on the target Autonomous Database instance
@@ -106,7 +73,7 @@ The data loading process takes less than a minute. When is completed notice the 
 
 The next step is to create the OML User and to add the data in his schema.
 
-## Task 4:  Create the OMLUSER user
+## Task 2:  Create the OMLUSER user
 
 * Returning in the Autonomous Database instance, click on Tools tab and click on the **Open Oracle ML User Administration**
 ![ADB-instance-home](images/prerequisites-screenshot-13.jpg)
@@ -137,7 +104,7 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 
 
 
-## Task 5:  Move the data in OMLUSER schema
+## Task 3:  Move the data in OMLUSER schema
 
 * Returning in the Autonomous Database instance .Click **Database Actions**.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
