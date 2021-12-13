@@ -18,8 +18,8 @@ Estimated Time: 15 minutes
 
 ## Task 1: Access the model using REST APIs using POSTMAN
 
-### Task 1.1: Prepare the REST calls
 
+### Task 1.1: Prepare the REST calls
 
 * Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
     ````
@@ -42,6 +42,8 @@ Estimated Time: 15 minutes
   ![Launch Postman](images/automl-screenshot-21.jpg)
 
 
+### Task 1.2: Authorize OML Services User
+
   To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
   The access token has a life span of one hour and can be refreshed before it expires.
@@ -50,56 +52,58 @@ Estimated Time: 15 minutes
     - Each token can be used many times.
     - The token is tied to the user who authenticates using the database credential.
 
-    #### URL Structure
-
-    Use the following URL structure to access the REST endpoints:
+  Use the following URL structure to access the REST endpoints:
 
     ````
-    https://adb.<region-prefix>.oraclecloud.com/<resource-path>
+    https://<oml-cloud-service-location-url>.oraclecloudapps.com
     ````
 
-    Where:
-     - <region-prefix\>: The URL prefix based on region.
-     - <resource-path\>: Relative path that defines the resource.
+  Where:
+     - `<oml-cloud-service-location-url>`: is a variable containing the REST server portion of the Oracle Machine Learning User Management Cloud Service instance URL that includes the tenancy ID and database name.
 
-    For example:
-    ````
-    https://adb.us-ashburn-1.oraclecloud.com/omlusers
-    ````
+#### Obtain the `oml-cloud-service-location-url` URL
 
-    In this example:
-     - adb.us-ashburn-1 is the URL prefix based on region. The region here is US.
-     - omlusers is the resource path.
+* In the Autonomous Database instance details page. Click on the Service Console button.
+![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
 
+* The service console is opened. Go to the Development section in the left side.
+![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
-    #### Generate Access Token
+* In the Development section, notice the **Oracle Machine Learning RESTful services** section.
+![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
 
-    To generate the access token we will need the following details:
+The 2 important URLs from this section:
++ The URL to obtain a REST authentication token for OML-provided REST APIs:
+`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
+
++ All OML Services REST APIs use the following common base URL:
+`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
+
+#### Generate Access Token
+
+To generate the access token we will need the following details:
 
     ````
     Operation: POST
 
     URI endpoint:
-    <copy>https://adb.<region-prefix>.oraclecloud.com/omlusers/tenants/<tenancy-ocid>/databases/<dbname>/api/oauth2/v1/token </copy>
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/api/oauth2/v1/token</copy>
 
     ````
 
-   - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
-   - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation task.
-   - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
+   - Replace **`<oml-cloud-service-location-url>`** with your URL.
 
 
-
-    In the header Tab enter the details:
+In the header Tab enter the details:
 
     ````
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'
     ````
 
-    ![Postman token headers](images/automl-screenshot-22.jpg)
+![Postman token headers](images/automl-screenshot-22.jpg)
 
-    In the Body tab, pick RAW format and enter the following:
+In the Body tab, pick RAW format and enter the following:
 
     ````
     <copy>
@@ -110,22 +114,22 @@ Estimated Time: 15 minutes
     }
     </copy>
     ````
-    ![Postman token body](images/automl-screenshot-23.jpg)
+![Postman token body](images/automl-screenshot-23.jpg)
 
-    Click Send
+Click Send
 
-    The response in JSON format and it contains the access token:
+The response in JSON format and it contains the access token:
 
-    ![Postman token](images/automl-screenshot-24.jpg)
+![Postman token](images/automl-screenshot-24.jpg)
 
-    Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
+Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
 
     >{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
 
-    ![Postman token copy](images/automl-screenshot-25.jpg)
+![Postman token copy](images/automl-screenshot-25.jpg)
 
 
-### Task 1.2:  Use REST calls to predict customer classification
+### Task 1.3:  Use REST calls to predict customer classification
 
   In this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
    - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
@@ -143,9 +147,11 @@ Estimated Time: 15 minutes
     Operation: POST
 
     URI endpoint:
-    <copy>https://adb.<region-prefix>.oraclecloud.com/omlmod/v1/deployment/<model_URI>/score </copy>
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score</copy>
+
     ````
-   - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
+
+   - Replace **`<oml-cloud-service-location-url>`** with your URL.
    - Replace **`<model_URI>`** with the model URI that we defined in Task 3: **``classsvmg``**
 
   ![Postman Model Score](images/automl-screenshot-27.jpg)
@@ -212,13 +218,13 @@ Estimated Time: 15 minutes
   ![Postman Model Score Fran Hobs Result](images/automl-screenshot-31.jpg)
 
   Notice the result in JSON format shows the probability for this customer to be in each group:
-  + For HIGH is ``4.243616931926422E-6``  therefore it is  ``0.000004243616931926422`` which is 0.0004243616931926422% a very small probability.
-  + For **LOW** is ``0.9981701403896932``  which is 99% very close to 100%.
-  + For MEDIUM is ``1.3669851638941142E-5``  which is 0.00013% a very small probability.
-  + For VERY HIGH is ``0.0018119461417358974``  which is 0.18% a very small probability.
+  + For HIGH is ``6.998515445640917E-4``  therefore it is  ``0.0006998515445640917`` which is 0.0006% a very small probability.
+  + For **LOW** is ``0.9990535462218914``  which is 99% very close to 100%.
+  + For MEDIUM is ``1.284866588349918E-4``  which is 0.00012% a very small probability.
+  + For VERY HIGH is ``1.1811557470959117E-4``  which is 0.001% a very small probability.
 
 
-      We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click Send.
+  We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click Send.
 
       ````
       <copy>
@@ -264,10 +270,10 @@ Estimated Time: 15 minutes
 
 
   Notice the result in JSON format shows the probability for this customer to be in each group:
-  - For HIGH is ``0.0022210521197792597`` which is 0.22% a very small probability.
-  - For LOW is ``9.765441243777847E-9``  which is 0.00000009% a very small probability.
-  - For **MEDIUM** is ``0.9977784176843738``  which is 99.7% very close to 100%.
-  - For VERY HIGH is ``5.20430405663427E-7``  which is 0.0000052% a very small probability.
+  - For HIGH is ``0.11283194843494257`` which is 1,1% a very small probability.
+  - For LOW is ``7.999161383001122E-7``  which is 0.0000007% a very small probability.
+  - For **MEDIUM** is ``0.8871672012998799``  which is 88.7%  close to 100%.
+  - For VERY HIGH is ``5.034903924262419E-8``  which is 0.00000005% a very small probability.
 
 
   We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click Send.
@@ -316,10 +322,10 @@ Estimated Time: 15 minutes
 
 
   Notice the result in JSON format shows the probability for this customer to be in each group:
-  - For **HIGH** is ``0.9999980387263148`` which is 99.9% very close to 100%.
-  - For LOW is ``1.8967182019052724E-6``  which is 0.00001% a very small probability.
-  - For MEDIUM is ``6.451060389893198E-8``  which is 0.00000064% a very small probability.
-  - For VERY HIGH is ``4.4879376221183636E-11``  which is 0.0000000004% a very small probability.
+  - For **HIGH** is ``0.9973930279636027`` which is 99.7% very close to 100%.
+  - For LOW is ``1.5931860729876854E-6``  which is 0.00001% a very small probability.
+  - For MEDIUM is ``0.0026053528320562043``  which is 0.2% a very small probability.
+  - For VERY HIGH is ``2.601826805465904E-8``  which is 0.00000002% a very small probability.
 
 
 
@@ -333,22 +339,20 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 
   ````
   <copy>
-  export omlserver=https://adb.<region-prefix>.oraclecloud.com
-  export tenant=<tenancy-ocid>
-  export database=<dbname>
+  export omlserver=https://<oml-cloud-service-location-url>.oraclecloudapps.com
   export username=OMLUSER
   export password=Welcome12345
   </copy>
   ````
 
-  - Replace **`<region-prefix>`** with your region. In our case: _eu-frankfurt-1_.
-  - Replace **`<tenancy-ocid>`** with your the tenancy OCID as described in the Preparation Task.
-  - Replace **`<dbname>`** with your Autonomous Transaction Processing database name. You can review the Preparation Task for the Autonomous database name.
+  - Replace **`<oml-cloud-service-location-url>`** with your URL.
+
+
 
 * Run this statement to get the token to be used later  (replace what is needed)
 
     ````
-    $<copy>curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"grant_type":"password", "username":"'${username}'", "password":"'${password}'"}' "${omlserver}/omlusers/tenants/${tenant}/databases/${database}/api/oauth2/v1/token"</copy>
+    $<copy>curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"grant_type":"password", "username":"'${username}'", "password":"'${password}'"}' "${omlserver}/omlusers/api/oauth2/v1/token"</copy>
 
     {"accessToken":"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJPTUxVU0VSIiwidGVuYW50X25hbWUiOiJPQ0lEMS5URU5BTkNZLk9DMS4uQUFBQUFBQUFGSjM3TVlUWDIyT1FVT1JDWk5MRlVINzdDRDQ1SU5UN1RUN0ZPMjdUVUVKU0ZRQllCWlJRIiwiZGF0YWJhc2VfbmFtZSI6IkFUUDA0Iiwicm9sZXMiOiJbe1wicm9sZVwiOlwiT01MX0RFVkVMT1BFUlwiLFwiY29tbW9uXCI6ZmFsc2V9XSIsImlzcyI6IkIxOTBDQUJBMEY3ODYxQUFFMDUzNkYxODAwMEE1M0JDIiwiZXhwIjoxNjI2NzkwNTMyLCJpYXQiOjE2MjY3ODY5MzJ9.V61pqfjXRWe4v-nqaxSPGvdCLWDvrUszLOCc_GWdKNJWXaNAsxR_b_BgwbrSBY2rJJJ0XchlDP9khFX1vhBVgHxUJfHGW9sdYPyu5KgGozRENldjte57E2XeupUqNkQot7APTu0mmpMufF_HOSW__I65TpXxPrB9Rv3EHkT9gaOhFQTj_xByAXTqZI7inSxxa5p6AOszoEuylF7wikO1WAT_GcJaCmUqLevsoc8QNNQFCUo3g_918wgiJWYqtf5qw6ZuxNi6HOjUCR8Pi722PP6H7Q1E5WwIIl9qSnMPQTeYcMO34wD58MngkJ9N0D51BK5QS6K0Da4QLPrLmDFACQ!NL/okRBiTH9JfS2eeuG+mRlNUOwD4Qxq6/VGDYIBuQrYN4E+8en/OmEjKEdduFcJZe+747aXXrVfA61zJ38AjIvWOCdS7WnoJ156Ohx541/a28+vpBbwXhkCxogyDXphpqE63oKP75hCKgKPDZWWhPKhJaWeMcFy2xpRq1bt0Vz4zthhv7XHANx2TZDs1oj684PiPSAXX1seJSy4TFgyV9OrOgCThkZe5rPs7LIlR46bKCuYb4mXs47i8crqu71Jv2bit7dgtMetrwlgVywz9PZSl3WPrHEzxeqH9iF82DEIa6tlH/EUy0B9OC6Fc5LB4WeeQfUwiumoXMr0iEdACA==","expiresIn":3600,"tokenType":"Bearer"}
     ````
@@ -407,14 +411,17 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
   ````
 
   The results for the customer with ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS`` are similar to:
-   ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":4.3624052479934053E-7},{"label":"LOW","probability":0.9999549438897685},{"label":"MEDIUM","probability":3.252624363364432E-5},{"label":"VERY HIGH","probability":1.2093626073239925E-5}]}]}``
+   ```
+   {"scoringResults":[{"classifications":[{"label":"HIGH","probability":6.998515445640917E-4},{"label":"LOW","probability":0.9990535462218914},{"label":"MEDIUM","probability":1.284866588349918E-4},{"label":"VERY HIGH","probability":1.1811557470959117E-4}]}]}
+   ```
 
    Notice the probability for this customer to be in each group:
-    + For HIGH is ``4.3624052479934053E-7``  therefore it is  ``0.00000043624052479934053`` which is 0.000043624052479934053% a very small probability.
-    + For LOW is ``0.9999549438897685``  which is 99% very close to 100%.
-    + For MEDIUM is ``3.252624363364432E-5``  which is 0.00032% a very small probability.
-    + For VERY HIGH is ``1.2093626073239925E-5``  which is 0.00012% a very small probability.
+   + For HIGH is ``6.998515445640917E-4``  therefore it is  ``0.0006998515445640917`` which is 0.0006% a very small probability.
+   + For **LOW** is ``0.9990535462218914``  which is 99% very close to 100%.
+   + For MEDIUM is ``1.284866588349918E-4``  which is 0.00012% a very small probability.
+   + For VERY HIGH is ``1.1811557470959117E-4``  which is 0.001% a very small probability.
 
+Now we will score all 3 customers in the same command:
 
   ````
   <copy>
@@ -453,28 +460,38 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
            "CREDIT_CARD_LIMITS":1500,
            "N_TRANS_KIOSK":4,
            "N_TRANS_WEB_BANK":0
-        }
-     ]
-  }'
-  </copy>
-   ````
-
-  The results for the customer ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK`` are similar to:
- ``{"scoringResults":[{"classifications":[{"label":"HIGH","probability":0.03644200787288413},{"label":"LOW","probability":7.010119418858265E-7},{"label":"MEDIUM","probability":0.9635568775103579},{"label":"VERY HIGH","probability":4.136048160814146E-7}]}]}``
-
- Notice the probability for this customer to be in each group:
-- For HIGH is ``0.03644200787288413`` which is 3.6% a very small probability.
-- For LOW is ``7.010119418858265E-7``  which is 0.000007% a very small probability.
-- For MEDIUM is ``0.9635568775103579``  which is 96.3% very close to 100%.
-- For VERY HIGH is ``4.136048160814146E-7``  which is 0.0000041% a very small probability.
-
-    ````
-    <copy>
-    curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
-    --header "Authorization: Bearer ${token}" \
-    --header 'Content-Type: application/json' \
-    -d '{
-    "inputRecords":[
+        },
+        {
+           "CUST_ID":"CU12350",
+           "LAST":"FRAN",
+           "FIRST":"HOBBS",
+           "STATE":"NV",
+           "REGION":"Southwest",
+           "SEX":"F",
+           "PROFESSION":"Programmer/Developer",
+           "BUY_INSURANCE":"No",
+           "AGE":21,
+           "HAS_CHILDREN":0,
+           "SALARY":66180,
+           "N_OF_DEPENDENTS":5,
+           "CAR_OWNERSHIP":1,
+           "HOUSE_OWNERSHIP":0,
+           "TIME_AS_CUSTOMER":5,
+           "MARITAL_STATUS":"SINGLE",
+           "CREDIT_BALANCE":0,
+           "BANK_FUNDS":500,
+           "CHECKING_AMOUNT":185,
+           "MONEY_MONTLY_OVERDRAWN":53.21,
+           "T_AMOUNT_AUTOM_PAYMENTS":197,
+           "MONTHLY_CHECKS_WRITTEN":4,
+           "MORTGAGE_AMOUNT":0,
+           "N_TRANS_ATM":3,
+           "N_MORTGAGES":0,
+           "N_TRANS_TELLER":2,
+           "CREDIT_CARD_LIMITS":2500,
+           "N_TRANS_KIOSK":4,
+           "N_TRANS_WEB_BANK":0
+        },
         {
            "CUST_ID":"CU12286",
            "LAST":"ELLIOT",
@@ -506,19 +523,21 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
            "N_TRANS_KIOSK":4,
            "N_TRANS_WEB_BANK":250
         }
-      ]
-    }'
-    </copy>
-    ````
+     ],
+     "topN":1
+  }'
+  </copy>
+   ````
+Here, topN filters the classification result showing the N highest probabilities, in our case only the highest probability.
+  The results should be similar to:
 
- The results for the customer ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT`` are similar to:
- {"scoringResults":[{"classifications":[{"label":"HIGH","probability":0.9998831800626283},{"label":"LOW","probability":2.0777460784672917E-6},{"label":"MEDIUM","probability":1.1454951360792583E-4},{"label":"VERY HIGH","probability":1.9267768518468563E-7}]}]}
+```
+ {"scoringResults":[{"classifications":[{"label":"MEDIUM","probability":0.8871672012998799}]},{"classifications":[{"label":"LOW","probability":0.9990535462218914}]},{"classifications":[{"label":"HIGH","probability":0.9973930279636027}]}]}
+```
 
-  Notice the probability for this customer to be in each group:
-- For HIGH is ``0.9998831800626283`` which is 99.9% very close to 100%.
-- For LOW is ``2.0777460784672917E-6``  which is 0.00002% a very small probability.
-- For MEDIUM is ``1.1454951360792583E-4``  which is 0.0011% a very small probability.
-- For VERY HIGH is ``1.9267768518468563E-7``  which is 0.0000019% a very small probability.
+For  "AL FRANK", the highest probability is "MEDIUM" with 0.8871672012998799.
+For  "FRAN HOBBS"", the highest probability is "LOW" with :0.9990535462218914.
+For  "ELLIOT PADGETT", the highest probability is "HIGH" with 0.9973930279636027.
 
 > Notice the predictions made using the CURL calls are the same as using POSTMAN or using SQL in the OML Notebooks.
 

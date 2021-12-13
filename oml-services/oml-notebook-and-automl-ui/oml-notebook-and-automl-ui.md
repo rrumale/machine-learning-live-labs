@@ -25,7 +25,18 @@ Estimated Time: 15 minutes
 * A new page with the service console is opened. In the Overview section we see the details of this specific instance. We can go to the Development section in the left side.
 ![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
-* In the Development section, click on Oracle Machine Learning Notebooks.
+* In the Development section, notice the **Oracle Machine Learning RESTful services** section.
+![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
+
+Note 2 important URLs from this section:
++ The URL to obtain a REST authentication token for OML-provided REST APIs:
+`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
+
++ All OML Services REST APIs use the following common base URL:
+`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
+
+
+* Click on Oracle Machine Learning Notebooks.
 ![ADB-service-console](images/prerequisites-screenshot-24.jpg)
 
 * Connect to OML Machine Learning Notebooks in Autonomous Database
