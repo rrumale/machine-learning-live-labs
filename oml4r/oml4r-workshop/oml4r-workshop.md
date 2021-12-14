@@ -64,11 +64,20 @@ The standard dplyr R package provides grammar of data manipulation, which gives 
 
   ```
 
-4. An Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database.
+4. Oracle Machine Learning for R provides the ability to create ordered or unordered ore.frame objects. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object. 
+
+The ore.warn.order global option specifies whether you want OML4R to display a warning message if you use an unordered ore.frame object in a function that requires ordering. If you know what to expect in an operation, then you might want to turn the warnings off so they do not appear in the output. 
+
 
   ```
   options(ore.warn.order=FALSE)
+  ```
+
+
+5. An Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database using the ore.connect() function.
+
   
+  ```
   ore.connect(user="oml_user",
               conn_string="MLPDB1",
               host=<hostname>,
@@ -90,14 +99,14 @@ Example:
               all=TRUE)
   ```
 
-5. Check if connection to database is established. An output of "TRUE" indicates you are connected. Otherwise, it returns "FALSE" as the output.
+6. Check if connection to database is established. An output of "TRUE" indicates you are connected. Otherwise, it returns "FALSE" as the output.
 
   ```
   ore.is.connected()
   ```
 
 
-6. The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and enabled by the OML4R transparency layer.
+7. The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and enabled by the OML4R transparency layer.
 
   ```
   ore.ls()
@@ -108,13 +117,13 @@ Example:
 
 In this section, we will do basic data exploration, looking at database objects, and try to understand the data to some extent.
 
-7. Check class of an object (data table). The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
+8. Check class of an object (data table). The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
 
   ```
    class(CUST_INSUR_LTV)
   ```
 
- 8. Get column names for a table. The column names appear in an ordered list and can be referenced based on this order.
+ 9. Get column names for a table. The column names appear in an ordered list and can be referenced based on this order.
 
   ```
   colnames(CUST_INSUR_LTV)
@@ -123,7 +132,7 @@ In this section, we will do basic data exploration, looking at database objects,
   ![boxplot](./images/col-names.png)
 
 
- 9. Check object dimensions. The dimensions represents the number of rows (records) and number of columns (attributes) in the given frame (table).
+ 10. Check object dimensions. The dimensions represents the number of rows (records) and number of columns (attributes) in the given frame (table).
 
   ```
   dim(CUST_INSUR_LTV)
@@ -131,7 +140,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
   Your result should be: 15342  31
 
-10. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the first 20 columns (attributes) of the table using the order numbers for the columns. You can specify one or more, or a range of columns to see the summary of only those columns.
+11. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the first 20 columns (attributes) of the table using the order numbers for the columns. You can specify one or more, or a range of columns to see the summary of only those columns.
 
   ```
   summary(CUST_INSUR_LTV[,1:20])
@@ -141,7 +150,7 @@ In this section, we will do basic data exploration, looking at database objects,
   ![summary-cust](./images/summary-cust.png)
 
 
-11. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table. For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
+12. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table. For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
 
   ```
   min(CUST_INSUR_LTV$SALARY)
@@ -150,7 +159,7 @@ In this section, we will do basic data exploration, looking at database objects,
   unique(CUST_INSUR_LTV$REGION)
   ```
 
-12. Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
+13. Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
 
   ```
    mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
@@ -158,7 +167,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
 Your result should be: 2.068
 
-13. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
+14. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
 
   ```
   x <- CUST_INSUR_LTV$N_OF_DEPENDENTS     
@@ -167,7 +176,7 @@ Your result should be: 2.068
 
   Your result should be: 3. This indicates that most number of customers have three dependents.
 
-14. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. 
+15. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. 
 
   ```
   lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
@@ -176,14 +185,19 @@ Your result should be: 2.068
   upper_bound
   ```
 
-  Your result should be:  2.5% 55158,  97.5% 88925. Thus, if you so choose, salary below $55,158 and salary above $88,925 may be consider outliers and could potentially be excluded if otherwise appropriate.
+Your result should be:  2.5% 55158,  97.5% 88925. Thus, if you so choose, salary below $55,158 and salary above $88,925 may be consider outliers and could potentially be excluded if otherwise appropriate.
 
-15. Data exploration: Group data, filter data etc. The 'aggregate' function allows for grouping of data by a list of columns. The 'filter' function allows for filtering of the dataset based on attribute values. The 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from data if they are coded as NA.
+16. Data exploration: GROUP DATA - The 'aggregate' function allows for grouping of data by a list of columns.
 
   ```
   CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
   CUSTBIN
+  ```
 
+17. Data exploration: FILTER DATA - The 'filter' function allows for filtering of the dataset based on attribute values. The 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from data if they are coded as NA.
+
+
+  ```
   filter(CUST_INSUR_LTV, region == “NORTHEAST”)
   CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE))
 
@@ -195,7 +209,7 @@ Your result should be: 2.068
 In this section we will try to visualize some of the data provided in the dataset. This includes drawing plots, graphs, and histograms, etc.
 
 
-16. Data visualization: Plot the age attribute using boxplot. A boxplot can help see the concentration of customers in specific age bands and relative number of outliers, etc. We can improve upon the display of a boxplot as you will see in a later section.
+18. Data visualization: Plot the age attribute using boxplot. A boxplot can help see the concentration of customers in specific age bands and relative number of outliers, etc. We can improve upon the display of a boxplot as you will see in a later section.
 
   ``` 
   boxplot(CUST_INSUR_LTV$AGE)
@@ -206,7 +220,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   ![boxplot](./images/boxplot.png)
 
 
-17: Data visualization: Draw a simple and quick plot of customer salary. This illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K. We can improve upon the display of a plot as you will see in a later section.
+19: Data visualization: Draw a simple and quick plot of customer salary. This illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K. We can improve upon the display of a plot as you will see in a later section.
 
   ```
   plot(CUST_INSUR_LTV$SALARY/1000)
@@ -214,7 +228,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/plot.png)
 
-18. Data visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
+20. Data visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
 
   ```
      hist(CUST_INSUR_LTV$SALARY/1000,
@@ -227,7 +241,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/hist-1.png)
 
-19. Data visualization: Check outliers on a boxplot. The outlier values are listed on top of the displayed box in the output.
+21. Data visualization: Check outliers on a boxplot. The outlier values are listed on top of the displayed box in the output.
 
   ```
   x <- CIL$AGE
@@ -242,7 +256,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 ## Task 4: Perform exploratory data analysis
 
 
-20. Use Attribute Importance (ore.odmAI) function to identify important attributes (listed in order of importance) for a given dependent attribute (LTV_BIN) in the given dataset. To do this we first exclude the most significant dependent attribute from the data frame.  In database terms, we are looking for the most important columns (attributes) to predict the target column (attribute).
+22. Use Attribute Importance (ore.odmAI) function to identify important attributes (listed in order of importance) for a given dependent attribute (LTV_BIN) in the given dataset. To do this we first exclude the most significant dependent attribute from the data frame.  In database terms, we are looking for the most important columns (attributes) to predict the target column (attribute).
 
 Let us first assess attribute importance for dependent variable LTV_BIN. We know that LTV_BIN is highly correlated with LTV. Thus let us first exclude LTV from the data frame.
 
@@ -264,7 +278,7 @@ Note: The output lists all the important attributes and their relative influence
 
   ![ai](./images/AI-4-LTV-BIN.png)          
 
-21. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
+23. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
   ```
   CIL <- CUST_INSUR_LTV
@@ -276,7 +290,7 @@ Note: The output lists all the important attributes and their relative influence
   Note: Attribute importance ranks attributes according to their significance in predicting a target. 
 
 
-22. Perform principal component analysis (PCA). Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
+24. Perform principal component analysis (PCA). Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
 
   ```
   prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
@@ -284,10 +298,14 @@ Note: The output lists all the important attributes and their relative influence
   ```
  
  ![pca](./images/PCA-1.png)
- 
+
+
+
 ## Task 5: Prepare data for model creation
 
-23. Create row names. You can use the primary key of a database table to order an ore.frame object.
+25. Create row names. You can use the primary key of a database table to order an ore.frame object. 
+
+Note: The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
 
   ```
   set.seed(1)
@@ -303,7 +321,7 @@ Note: The output lists all the important attributes and their relative influence
 
 Note: The data in an Oracle Database table is not necessarily ordered. For some R operations, ordering is useful. By ordering an ore.frame, you are able to index the ore.frame object by using either integer or character indexes. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, OML4R attempts to create ordered ore.frame #objects by default.
 
-24. Now lets partition the original dataset for training and testing purposes. We will split the dataset into two buckets - training data set (~70%), and testing data set (~30%). 
+26. Now lets partition the original dataset for training and testing purposes. We will split the dataset into two buckets - training data set (~70%), and testing data set (~30%). 
 
 Setting a 'seed' (can be any value) ensures the same output is reproduced by the R psuedonumber generator, if your run the code again. This can be helpful for consistency and debugging. 
 
