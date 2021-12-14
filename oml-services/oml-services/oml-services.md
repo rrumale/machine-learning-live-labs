@@ -22,7 +22,7 @@ In this section we will leverage the Machine Learning models in Autonomous Datab
 
 ## Acknowledgements
 * **Authors** - Milton Wan, Andrei Manoliu
-* **Last Updated By/Date** -  Andrei Manoliu
+* **Last Updated By/Date** -  Andrei Manoliu, December 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.

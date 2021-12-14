@@ -15,9 +15,8 @@ Estimated Time: 15 minutes
 * The OML model saved and deployed in Autonomous Database.
 * POSTMAN and CURL available on your working environment
 
-
+##                                        
 ## Task 1: Access the model using REST APIs using POSTMAN
-
 
 ### Task 1.1: Prepare the REST calls
 
@@ -54,9 +53,9 @@ Estimated Time: 15 minutes
 
   Use the following URL structure to access the REST endpoints:
 
-    ````
-    https://<oml-cloud-service-location-url>.oraclecloudapps.com
-    ````
+  ````
+  https://<oml-cloud-service-location-url>.oraclecloudapps.com
+  ````
 
   Where:
      - `<oml-cloud-service-location-url>`: is a variable containing the REST server portion of the Oracle Machine Learning User Management Cloud Service instance URL that includes the tenancy ID and database name.
@@ -83,37 +82,37 @@ The 2 important URLs from this section:
 
 To generate the access token we will need the following details:
 
-    ````
-    Operation: POST
+````
+Operation: POST
 
-    URI endpoint:
-    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/api/oauth2/v1/token</copy>
+URI endpoint:
+<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/api/oauth2/v1/token</copy>
 
-    ````
+````
 
    - Replace **`<oml-cloud-service-location-url>`** with your URL.
 
 
 In the header Tab enter the details:
 
-    ````
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
-    ````
+````
+--header 'Content-Type: application/json'
+--header 'Accept: application/json'
+````
 
 ![Postman token headers](images/automl-screenshot-22.jpg)
 
 In the Body tab, pick RAW format and enter the following:
 
-    ````
-    <copy>
-    {
-       "grant_type":"password",
-       "username":"OMLUSER",
-       "password":"Welcome12345"
-    }
-    </copy>
-    ````
+````
+<copy>
+{
+   "grant_type":"password",
+   "username":"OMLUSER",
+   "password":"Welcome12345"
+}
+</copy>
+````
 ![Postman token body](images/automl-screenshot-23.jpg)
 
 Click Send
@@ -124,7 +123,7 @@ The response in JSON format and it contains the access token:
 
 Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
 
-    >{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
+>{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
 
 ![Postman token copy](images/automl-screenshot-25.jpg)
 
@@ -278,45 +277,45 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 
   We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click Send.
 
-  ````
-  <copy>
-  {
-     "inputRecords":[
-        {
-           "CUST_ID":"CU12286",
-           "LAST":"ELLIOT",
-           "FIRST":"PADGETT",
-           "STATE":"NV",
-           "REGION":"Southwest",
-           "SEX":"M",
-           "PROFESSION":"Programmer/Developer",
-           "BUY_INSURANCE":"Yes",
-           "AGE":23,
-           "HAS_CHILDREN":0,
-           "SALARY":69724,
-           "N_OF_DEPENDENTS":3,
-           "CAR_OWNERSHIP":1,
-           "HOUSE_OWNERSHIP":1,
-           "TIME_AS_CUSTOMER":3,
-           "MARITAL_STATUS":"SINGLE",
-           "CREDIT_BALANCE":0,
-           "BANK_FUNDS":500,
-           "CHECKING_AMOUNT":81,
-           "MONEY_MONTLY_OVERDRAWN":52.96,
-           "T_AMOUNT_AUTOM_PAYMENTS":164,
-           "MONTHLY_CHECKS_WRITTEN":4,
-           "MORTGAGE_AMOUNT":250,
-           "N_TRANS_ATM":2,
-           "N_MORTGAGES":1,
-           "N_TRANS_TELLER":2,
-           "CREDIT_CARD_LIMITS":1500,
-           "N_TRANS_KIOSK":4,
-           "N_TRANS_WEB_BANK":250
-        }
-     ]
-  }
-  </copy>
-  ````
+    ````
+    <copy>
+    {
+       "inputRecords":[
+          {
+             "CUST_ID":"CU12286",
+             "LAST":"ELLIOT",
+             "FIRST":"PADGETT",
+             "STATE":"NV",
+             "REGION":"Southwest",
+             "SEX":"M",
+             "PROFESSION":"Programmer/Developer",
+             "BUY_INSURANCE":"Yes",
+             "AGE":23,
+             "HAS_CHILDREN":0,
+             "SALARY":69724,
+             "N_OF_DEPENDENTS":3,
+             "CAR_OWNERSHIP":1,
+             "HOUSE_OWNERSHIP":1,
+             "TIME_AS_CUSTOMER":3,
+             "MARITAL_STATUS":"SINGLE",
+             "CREDIT_BALANCE":0,
+             "BANK_FUNDS":500,
+             "CHECKING_AMOUNT":81,
+             "MONEY_MONTLY_OVERDRAWN":52.96,
+             "T_AMOUNT_AUTOM_PAYMENTS":164,
+             "MONTHLY_CHECKS_WRITTEN":4,
+             "MORTGAGE_AMOUNT":250,
+             "N_TRANS_ATM":2,
+             "N_MORTGAGES":1,
+             "N_TRANS_TELLER":2,
+             "CREDIT_CARD_LIMITS":1500,
+             "N_TRANS_KIOSK":4,
+             "N_TRANS_WEB_BANK":250
+          }
+       ]
+    }
+    </copy>
+    ````
 
   ![Postman Model Score ELLIOT PADGETT Result](images/automl-screenshot-33.jpg)
 
@@ -337,13 +336,13 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 
 * In the VM open a terminal and export the environment
 
-  ````
-  <copy>
-  export omlserver=https://<oml-cloud-service-location-url>.oraclecloudapps.com
-  export username=OMLUSER
-  export password=Welcome12345
-  </copy>
-  ````
+    ````
+    <copy>
+    export omlserver=https://<oml-cloud-service-location-url>.oraclecloudapps.com
+    export username=OMLUSER
+    export password=Welcome12345
+    </copy>
+    ````
 
   - Replace **`<oml-cloud-service-location-url>`** with your URL.
 
@@ -368,52 +367,52 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
 
 * We will check the predicted classification for 3 distinct customers
 
-  ````
-  <copy>curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
-  --header "Authorization: Bearer ${token}" \
-  --header 'Content-Type: application/json' \
-  -d '{
-   "inputRecords":[
-      {
-         "CUST_ID":"CU12350",
-         "LAST":"FRAN",
-         "FIRST":"HOBBS",
-         "STATE":"NV",
-         "REGION":"Southwest",
-         "SEX":"F",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"No",
-         "AGE":21,
-         "HAS_CHILDREN":0,
-         "SALARY":66180,
-         "N_OF_DEPENDENTS":5,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":0,
-         "TIME_AS_CUSTOMER":5,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":500,
-         "CHECKING_AMOUNT":185,
-         "MONEY_MONTLY_OVERDRAWN":53.21,
-         "T_AMOUNT_AUTOM_PAYMENTS":197,
-         "MONTHLY_CHECKS_WRITTEN":4,
-         "MORTGAGE_AMOUNT":0,
-         "N_TRANS_ATM":3,
-         "N_MORTGAGES":0,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":2500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":0
-      }
-   ]
-  }'
-  </copy>
-  ````
+    ````
+    <copy>curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
+    --header "Authorization: Bearer ${token}" \
+    --header 'Content-Type: application/json' \
+    -d '{
+     "inputRecords":[
+        {
+           "CUST_ID":"CU12350",
+           "LAST":"FRAN",
+           "FIRST":"HOBBS",
+           "STATE":"NV",
+           "REGION":"Southwest",
+           "SEX":"F",
+           "PROFESSION":"Programmer/Developer",
+           "BUY_INSURANCE":"No",
+           "AGE":21,
+           "HAS_CHILDREN":0,
+           "SALARY":66180,
+           "N_OF_DEPENDENTS":5,
+           "CAR_OWNERSHIP":1,
+           "HOUSE_OWNERSHIP":0,
+           "TIME_AS_CUSTOMER":5,
+           "MARITAL_STATUS":"SINGLE",
+           "CREDIT_BALANCE":0,
+           "BANK_FUNDS":500,
+           "CHECKING_AMOUNT":185,
+           "MONEY_MONTLY_OVERDRAWN":53.21,
+           "T_AMOUNT_AUTOM_PAYMENTS":197,
+           "MONTHLY_CHECKS_WRITTEN":4,
+           "MORTGAGE_AMOUNT":0,
+           "N_TRANS_ATM":3,
+           "N_MORTGAGES":0,
+           "N_TRANS_TELLER":2,
+           "CREDIT_CARD_LIMITS":2500,
+           "N_TRANS_KIOSK":4,
+           "N_TRANS_WEB_BANK":0
+        }
+     ]
+    }'
+    </copy>
+    ````
 
   The results for the customer with ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS`` are similar to:
-   ```
-   {"scoringResults":[{"classifications":[{"label":"HIGH","probability":6.998515445640917E-4},{"label":"LOW","probability":0.9990535462218914},{"label":"MEDIUM","probability":1.284866588349918E-4},{"label":"VERY HIGH","probability":1.1811557470959117E-4}]}]}
-   ```
+    ```
+    {"scoringResults":[{"classifications":[{"label":"HIGH","probability":6.998515445640917E-4},{"label":"LOW","probability":0.9990535462218914},{"label":"MEDIUM","probability":1.284866588349918E-4},{"label":"VERY HIGH","probability":1.1811557470959117E-4}]}]}
+    ```
 
    Notice the probability for this customer to be in each group:
    + For HIGH is ``6.998515445640917E-4``  therefore it is  ``0.0006998515445640917`` which is 0.0006% a very small probability.
@@ -421,14 +420,14 @@ To access Oracle Machine Learning Services using the REST API, you must provide 
    + For MEDIUM is ``1.284866588349918E-4``  which is 0.00012% a very small probability.
    + For VERY HIGH is ``1.1811557470959117E-4``  which is 0.001% a very small probability.
 
-Now we will score all 3 customers in the same command:
+   Now we will score all 3 customers in the same command:
 
-  ````
-  <copy>
+    ````
+    <copy>
     curl -X POST "${omlserver}/omlmod/v1/deployment/classsvmg/score" \
-  --header "Authorization: Bearer ${token}" \
-  --header 'Content-Type: application/json' \
-  -d '{
+    --header "Authorization: Bearer ${token}" \
+    --header 'Content-Type: application/json' \
+    -d '{
      "inputRecords":[
         {
            "CUST_ID":"CU12331",
@@ -525,26 +524,29 @@ Now we will score all 3 customers in the same command:
         }
      ],
      "topN":1
-  }'
-  </copy>
-   ````
-Here, topN filters the classification result showing the N highest probabilities, in our case only the highest probability.
-  The results should be similar to:
+    }'
+    </copy>
+    ````
+    Here, topN filters the classification result showing the N highest probabilities, in our case only the highest probability.
+    The results should be similar to:
 
-```
- {"scoringResults":[{"classifications":[{"label":"MEDIUM","probability":0.8871672012998799}]},{"classifications":[{"label":"LOW","probability":0.9990535462218914}]},{"classifications":[{"label":"HIGH","probability":0.9973930279636027}]}]}
-```
+    ```
+     {"scoringResults":[{"classifications":[{"label":"MEDIUM","probability":0.8871672012998799}]},{"classifications":[{"label":"LOW","probability":0.9990535462218914}]},{"classifications":[{"label":"HIGH","probability":0.9973930279636027}]}]}
+    ```
 
-For  "AL FRANK", the highest probability is "MEDIUM" with 0.8871672012998799.
-For  "FRAN HOBBS"", the highest probability is "LOW" with :0.9990535462218914.
-For  "ELLIOT PADGETT", the highest probability is "HIGH" with 0.9973930279636027.
+    For "AL FRANK", the highest probability is "MEDIUM" with 0.8871672012998799.
+
+    For "FRAN HOBBS"", the highest probability is "LOW" with :0.9990535462218914.
+
+    For "ELLIOT PADGETT", the highest probability is "HIGH" with 0.9973930279636027.
+
 
 > Notice the predictions made using the CURL calls are the same as using POSTMAN or using SQL in the OML Notebooks.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
 * **Contributors** - Rajeev Rumale
-* **Last Updated By/Date** -  Andrei Manoliu, October 2021
+* **Last Updated By/Date** -  Andrei Manoliu, December 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.

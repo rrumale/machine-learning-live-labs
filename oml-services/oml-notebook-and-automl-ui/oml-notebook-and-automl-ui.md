@@ -17,27 +17,29 @@ Estimated Time: 15 minutes
 * Data loaded in the database
 * OML user created
 
+##                                           
+
 ## Task 1: Introduce Insurance Customer Data
 
 * In the Autonomous Database instance details page. Click on the Service Console button.
-![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
+  ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
 
 * A new page with the service console is opened. In the Overview section we see the details of this specific instance. We can go to the Development section in the left side.
-![ADB-service-console](images/prerequisites-screenshot-23.jpg)
+  ![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
 * In the Development section, notice the **Oracle Machine Learning RESTful services** section.
-![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
+  ![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
 
-Note 2 important URLs from this section:
-+ The URL to obtain a REST authentication token for OML-provided REST APIs:
-`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
+  Note 2 important URLs from this section:
+  + The URL to obtain a REST authentication token for OML-provided REST APIs:
+  `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
 
-+ All OML Services REST APIs use the following common base URL:
-`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
+  + All OML Services REST APIs use the following common base URL:
+  `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
 
 
 * Click on Oracle Machine Learning Notebooks.
-![ADB-service-console](images/prerequisites-screenshot-24.jpg)
+  ![ADB-service-console](images/prerequisites-screenshot-24.jpg)
 
 * Connect to OML Machine Learning Notebooks in Autonomous Database
 
@@ -46,9 +48,7 @@ Note 2 important URLs from this section:
    - Username: **OMLUSER**
    - Password: **Welcome12345**
 
-
    ![ADB-OML-connect](images/prerequisites-screenshot-25.jpg)
-
 
 * Open a Scratchpad
 
@@ -59,8 +59,6 @@ Note 2 important URLs from this section:
     ````
     <copy> select * from customer_insurance;  </copy>
     ````
-
-
 
     ![customer-insurance](images/automl-screenshot-2.jpg)
 
@@ -111,7 +109,6 @@ Note 2 important URLs from this section:
     ![create-test-table](images/automl-screenshot-5.jpg)
 
     Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
-
 
 
 ## Task 2: Use AutoML UI from Autonomous Database
@@ -249,21 +246,21 @@ The next steps would be to take a model and deploy it for OML Services Rest API 
 
   * Run the following SQL statement using the ``CUST_IDs`` we picked in the train test split. You can replace the model name with the one used previously.
 
-   ````
-   <copy>%sql
-    SELECT a.cust_id,
-          a. Last,
-          a.First,
-          PREDICTION(SVMG USING a.*) PREDICTION,
-          PREDICTION_PROBABILITY(SVMG USING a.*)
-          PREDICTION_PROBABILITY,
-          b.LTV_BIN
-    FROM Customer_insurance_test_classification a,
-    Customer_insurance b
-   where a.cust_id = b.cust_id
-   and b.cust_id in ('CU12350','CU12331', 'CU12286')
-   </copy>
-   ````
+     ````
+     <copy>%sql
+      SELECT a.cust_id,
+            a. Last,
+            a.First,
+            PREDICTION(SVMG USING a.*) PREDICTION,
+            PREDICTION_PROBABILITY(SVMG USING a.*)
+            PREDICTION_PROBABILITY,
+            b.LTV_BIN
+      FROM Customer_insurance_test_classification a,
+      Customer_insurance b
+     where a.cust_id = b.cust_id
+     and b.cust_id in ('CU12350','CU12331', 'CU12286')
+     </copy>
+     ````
 
   ![Classification Prediction](images/automl-screenshot-34.jpg)
 
@@ -272,7 +269,7 @@ The next steps would be to take a model and deploy it for OML Services Rest API 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
 * **Contributors** - Rajeev Rumale
-* **Last Updated By/Date** -  Andrei Manoliu, October 2021
+* **Last Updated By/Date** -  Andrei Manoliu, December 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.

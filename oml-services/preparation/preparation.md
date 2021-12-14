@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab we will start from a newly created database and prepare it for our workshop.
+In this lab we will start from a newly created Oracle Autonomous database and prepare it for our workshop.
 
  We will collect the connection details like Tenancy ID, database name, create the users and passwords. After we will load the data into Autonomous Database and prepare to use it in the Machine Learning Notebooks.
 
@@ -94,8 +94,8 @@ The next step is to create the OML User and to add the data in his schema.
     - Confirm Password: **Retype the password**;
 
 
-Click Create.
-![ADB-oml-user](images/prerequisites-screenshot-16.jpg)
+    Click Create.
+    ![ADB-oml-user](images/prerequisites-screenshot-16.jpg)
 
 * Now we have another user named OMLUSER available.
 ![ADB-oml-user](images/prerequisites-screenshot-17.jpg)
@@ -121,18 +121,18 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 * SQL Developer web opens.
 ![ADB-sql-web](images/prerequisites-screenshot-19.jpg)
 
-Notice that it resembles the look and feel of the Sql Developer application. In the Left side we see the user: Admin and the table owned by the user. in our case it is just the **CUST\_INSUR\_LTV** table.
+  Notice that it resembles the look and feel of the Sql Developer application. In the Left side we see the user: Admin and the table owned by the user. in our case it is just the **CUST\_INSUR\_LTV** table.
 
-Write the following script to create the **CUSTOMER_INSURANCE** table in OMLUSER schema and click the Run button.
+  Write the following script to create the **CUSTOMER_INSURANCE** table in OMLUSER schema and click the Run button.
 
-````
-<copy>
-CREATE TABLE OMLUSER.CUSTOMER_INSURANCE
-AS
-SELECT * FROM CUST_INSUR_LTV;
-</copy>
-````
-![ADB-sql-web](images/prerequisites-screenshot-20.jpg)
+    ````
+    <copy>
+    CREATE TABLE OMLUSER.CUSTOMER_INSURANCE
+    AS
+    SELECT * FROM CUST_INSUR_LTV;
+    </copy>
+    ````
+  ![ADB-sql-web](images/prerequisites-screenshot-20.jpg)
 
 * The table was created successfully.
 ![ADB-sql-web](images/prerequisites-screenshot-21.jpg)
@@ -143,7 +143,7 @@ The next part is to use this data and create an AutoML model.
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
 * **Contiributors** - Rajeev Rumale
-* **Last Updated By/Date** -  Andrei Manoliu, November 2021
+* **Last Updated By/Date** -  Andrei Manoliu, December 2021
 
 ## Need Help?
 Please submit feedback or ask for help using our [LiveLabs Support Forum](https://community.oracle.com/tech/developers/categories/livelabsdiscussions). Please click the **Log In** button and login using your Oracle Account. Click the **Ask A Question** button to the left to start a *New Discussion* or *Ask a Question*.  Please include your workshop name and lab name.  You can also include screenshots and attach files.  Engage directly with the author of the workshop.
