@@ -4,7 +4,7 @@ Oracle Machine Learning for R (OML4R) enables you to use R (a statistical progra
 
 In this workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer has about 30 attributes, and the goal is to train the model to predict a given customer's life-time value (LTV) using regression algorithms, and additionally, using classification algorithms to classify customers as LOW, MEDIUM, HIGH, or VERY  HIGH LTV (using binned LTV categories). 
 
-Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributable to a given customer relationship over its lifetime.
+Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
 
 Estimated Lab Time: 2 hours
 
@@ -15,23 +15,23 @@ In this lab, you will:
 
 * Establish a connection from RStudio to your Oracle Database instance to prepare, explore, and visualize data.
 * Use R for exploratory data analysis, data visualization, data organization (bucketing of data in train and test buckets),
-* Use Attribute Importance, Principle Component Analysis, Model Building, and Model Validations techniques
+* Use Attribute Importance, Principle Component Analysis, model building, and model validations techniques
 * Use an OML4R Regression models for estimating customer life-time value (LTV)
 * Use an OML4R Classification models for LTV_BIN assignment for unassigned customers
 * Validate predictions using RMSE (Root Mean Squared Error) and Confusion Matrix methods
 
-Note: AutoML is currently not available for OML4R (it is only available for OML4Py). AutoML UI is currently available for ADB ONLY. However, OML4R is currently not available for ADB.Therefore, we will not be using AutoML in this lab.
+Note: AutoML is currently not available for OML4R (it is only available for OML4Py). AutoML UI is currently available for ADB ONLY. However, OML4R is currently not available for ADB. Therefore, we will not be using AutoML in this lab.
 
 ### Prerequisites
 
 * Oracle Database 21c, 19c, or 18c installed on-premises (or in a VM in Cloud);
-* R, RStudio, and required libraries
+* R, RStudio Server, and required libraries
 
 
 
 ## Task 1: Connect to RStudio client and establish database connection
 
-RStudio provides a GUI/BUI IDE for R. RStudio has been pre-configured on your VM running the database server.  
+RStudio provides a GUI (Graphical User Interface) and BUI (Browser User Interface) IDE for R. Note that RStudio Server has been pre-configured on your VM running the database server.  
 
 ![rstudio](./images/rstudio-desc.png)
 
@@ -48,9 +48,9 @@ You will be running all the lab steps in the RStudio R Script window.
 2. Connect to RStudio with username: omluser and password: MLlearnPTS#21_
 
 
-3. Load useful ORE libraries. The ORE library is a package that contains many useful R functions.
+3. Load useful ORE libraries. The ORE libraries are a set of packages that contains many useful R functions.
 
- The standard dplyr R package provides grammar of data manipulation, which gives a consistent set of verbs that help you solve the most common data manipulation challenges
+The standard dplyr R package provides grammar of data manipulation, which gives a consistent set of verbs that help you solve the most common data manipulation challenges
 
  OREdplyr is an overloaded package that provides much of the dplyr functionality extending the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes because operations are not constrained by R client memory, the latency of data movement, or single-threaded execution, but leverage Oracle Database as a high performance compute engine.
 
@@ -64,7 +64,7 @@ You will be running all the lab steps in the RStudio R Script window.
 
   ```
 
-4. A Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database.
+4. An Oracle 21c database instance (MLPDB1) has been provisioned for your to run this lab. Connect to the provided database.
 
   ```
   options(ore.warn.order=FALSE)
@@ -97,7 +97,7 @@ Example:
   ```
 
 
-6. The ore.ls function returns all OML4R proxy objects. Use the ore.ls function call to list tables in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and enabled by the OML4R transparency layer.
+6. The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and enabled by the OML4R transparency layer.
 
   ```
   ore.ls()
@@ -283,6 +283,7 @@ Note: The output lists all the important attributes and their relative influence
   summary(prc0)
   ```
  
+ ![pca](./images/PCA-1.png)
  
 ## Task 5: Prepare data for model creation
 
@@ -443,7 +444,7 @@ dat <- CIL.test
 res <- ore.tableApply(
   CIL,
   function(dat, mod) {
-    dat$PRED <- ore.predict-glm(mod, newdata = dat)
+    dat$PRED <- predict(mod, newdata = dat)
     dat
   }, mod = ore.pull(oreFit1), FUN.VALUE = CIL_PRED) 
 class(res)
