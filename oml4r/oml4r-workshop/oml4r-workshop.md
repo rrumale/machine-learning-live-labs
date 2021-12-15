@@ -343,7 +343,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
   ## Task 6: Build ML models
 
 
-Use a Regression Model for LTV Prediction
+### Building a Regression Model for LTV Prediction
 
 27. Build regression model to predict customer LTV using the training data set
 
@@ -378,6 +378,8 @@ Use a Regression Model for LTV Prediction
   library(OREdplyr)
   head(select (CIL, LTV, PREDICTION))
   ```
+
+### Building a Classification Model for LTV_BIN Prediction
 
  Now, lets use a Classification Model for LTV_BIN Prediction
 
