@@ -404,10 +404,17 @@ Use a Regression Model for LTV Prediction
   nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
   nb.res <- predict (nb, CIL.test, "LTV_BIN")
   head(nb.res,10)
+  ```
+
+  ![class-model](./images/class-model-1.png)
+
+33.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
+  
+  ```
   with(nb.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
   ```
 
-  ![class-model](./images/class-model.png)
+  ![class-model](./images/class-model-2.png)
 
 33. Generate predictions using the new classification model and the test dataset.
 
