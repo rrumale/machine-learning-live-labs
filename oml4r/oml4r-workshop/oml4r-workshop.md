@@ -298,7 +298,7 @@ Note: The output lists all the important attributes and their relative influence
   summary(prc0)
   ```
  
- ![pca](./images/PCA-1.png)
+ ![pca](./images/PRC0.png)
 
 
 
