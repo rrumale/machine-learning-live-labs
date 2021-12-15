@@ -344,7 +344,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
 
 Use a Regression Model for LTV Prediction
 
-25. Build regression model to predict customer LTV using the training data set
+27. Build regression model to predict customer LTV using the training data set
 
   ```
   oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
@@ -359,14 +359,14 @@ Use a Regression Model for LTV Prediction
  Note: # Change TYPE parameter (check in ore.odmGLM doc) 
 
 
-26. Generate predictions using ore.predict. The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score.
+28. Generate predictions using ore.predict. The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score.
 
   ```
   predA = ore.predict(oreFit1, newdata = CIL.test)
   predA
   ```
 
-27. Compare actual and predicted values and validate
+29. Compare actual and predicted values and validate
 
   ```
   oreFit1 <- ore.odmGLM(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
@@ -380,7 +380,7 @@ Use a Regression Model for LTV Prediction
 
  Now, lets use a Classification Model for LTV_BIN Prediction
 
-28. Exclude highly correlated columns from the data frame
+30. Exclude highly correlated columns from the data frame
 
   ```
   CIL <- CUST_INSUR_LTV
@@ -388,7 +388,7 @@ Use a Regression Model for LTV Prediction
   dim(CIL)
   ```
 
-29. Build Classification Model using Decision Tree algorithm and the training data set for predicting customer LTV_BIN assignment.
+31. Build Classification Model using Decision Tree algorithm and the training data set for predicting customer LTV_BIN assignment.
 
   ```
   oreFit2 <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
@@ -397,7 +397,7 @@ Use a Regression Model for LTV Prediction
   names(oreFit2)
   oreFit2$formula
 
-30. Additionally, build a Classification Model using Naive Bayes algorithm and the training dataset for predicting customer LTV_BIN assignment.
+32. Additionally, build a Classification Model using Naive Bayes algorithm and the training dataset for predicting customer LTV_BIN assignment.
 
   CIL <- CUST_INSUR_LTV
   nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
@@ -408,7 +408,7 @@ Use a Regression Model for LTV Prediction
 
   ![class-model](./images/class-model.png)
 
-31. Generate predictions using the new classification model and the test dataset.
+33. Generate predictions using the new classification model and the test dataset.
 
   ```
   predB = ore.predict(oreFit2, newdata = CIL.test)
@@ -418,7 +418,7 @@ Use a Regression Model for LTV Prediction
 
   ## Task 7: Validate predictions
 
-32. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
+34. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
   ```
   ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -430,7 +430,7 @@ Use a Regression Model for LTV Prediction
   ```
 
 
-33. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
+35. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
   ```
   confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
@@ -444,7 +444,7 @@ Use a Regression Model for LTV Prediction
 
   ## Task 8: Try embedded R execution for batch data processing
 
-34. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
+36. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
 
 **[NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]**
 
@@ -477,7 +477,7 @@ Now, let us list the original (actual) and predicted values side by side.
 < SELECT QUERY >
 ```
 
-35. Conclusion
+37. Conclusion
 
 As you can see, OML4R makes it fast and easy to apply Machine Learning to database resident data. Further, OML4R is able to leverage database compute power, data and task parallism, and security features to work efficiently and securely on enterprise data. By applying Machine Learning algorithms to their data residing in Oracle Databases, businesses are able to quickly create significant value.
 
