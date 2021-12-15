@@ -456,35 +456,36 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
 
 36. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
 
-**[NOTE: PLACEHOLDER - THE FOLLOWING IS NOT FINAL CODE - STILL BEING TROUBLEHOOTED]**
-
 
 ```
-row.names(CIL) <- CIL$CUST_ID
-CIL <- CUST_INSUR_LTV
-CIL_PRED <- CIL
-CIL_PRED$PRED <- "A"
-class(oreFit1)
-class(CIL.test)
-class(CIL_PRED)
-row.names(CIL.test) <- CIL.test$CUST_ID
-dat <- CIL.test
-res <- ore.tableApply(
-  CIL,
-  function(dat, mod) {
-    dat$PRED <- predict(mod, newdata = dat)
-    dat
-  }, mod = ore.pull(oreFit1), FUN.VALUE = CIL_PRED) 
-class(res)
-typeof(res)
+test <- function() {
+  library(ORE)
+  ore.connect(user="oml_user",
+              conn_string="MLPDB1",
+              host="rinst5d",
+              password="oml_user",
+              all=TRUE)
+  CIL <- ore.pull(CUST_INSUR_LTV)
+  row.names(CIL) <- CIL$CUST_ID
+  sampleSize <- 4600 
+  set.seed(1) 
+  ind <- sample(1:nrow(CIL),sampleSize) 
+  group <- as.integer(1:nrow(CIL) %in% ind) 
+  CIL.test <- CIL[group==TRUE,] 
+  CIL.train <- CIL[group==FALSE,] 
+  glmfit1 <- glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train)
+  pred <- predict(glmfit1, newdata = CIL.test)
+  pred 
+}
+
+```
+
+Now, let us see the predicted values. You can of course, use it in different ways in an application.
+
+```
+res <- ore.doEval(FUN=test)
 res
-head(res)
-```
 
-Now, let us list the original (actual) and predicted values side by side.
-
-```
-< SELECT QUERY >
 ```
 
 37. Conclusion
