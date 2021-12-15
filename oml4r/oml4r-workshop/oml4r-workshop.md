@@ -163,9 +163,10 @@ In this section, we will do basic data exploration, looking at database objects,
 
   ```
    mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+   mean(CUST_INSUR_LTV$LTV)
   ```
 
-Your result should be: 2.068
+Your result should be: 2.068 for the number of dependents. Knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes.
 
 14. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
 
@@ -176,7 +177,7 @@ Your result should be: 2.068
 
   Your result should be: 3. This indicates that most number of customers have three dependents.
 
-15. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. 
+15. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
 
   ```
   lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
