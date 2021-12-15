@@ -399,9 +399,11 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
   summary(oreFit2)
   names(oreFit2)
   oreFit2$formula
+  ```
 
 32. Additionally, build a Classification Model using Naive Bayes algorithm and the training dataset for predicting customer LTV_BIN assignment.
 
+  ```
   CIL <- CUST_INSUR_LTV
   nb <- ore.odmNB(LTV_BIN ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, CIL.train)
   nb.res <- predict (nb, CIL.test, "LTV_BIN")
@@ -418,7 +420,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
 
   ![class-model](./images/class-model-2.png)
 
-33. Generate predictions using the new classification model and the test dataset.
+34. Generate predictions using the new classification model and the test dataset.
 
   ```
   predB = ore.predict(oreFit2, newdata = CIL.test)
@@ -428,7 +430,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
 
   ## Task 7: Validate predictions
 
-34. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
+35. Validate LTV predictions using RMSE (Root Mean Square Error). RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
   ```
   ans <- predict(oreFit1, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -440,7 +442,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
   ```
 
 
-35. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
+36. Produce confusion matrix for LTV_BIN predictions. A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
   ```
   confusion.matrix <- table(test$LTV_BIN, predB$PREDICTION)
@@ -454,7 +456,7 @@ Setting a 'seed' (can be any value) ensures the same output is reproduced by the
 
   ## Task 8: Try embedded R execution for batch data processing
 
-36. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
+37. Here, we are going to use a previously generated ML model to work on a database table and populate the predicted value attribute. 
 
 
 ```
@@ -488,11 +490,12 @@ res
 
 ```
 
-37. Conclusion
+38. Conclusion
 
 As you can see, OML4R makes it fast and easy to apply Machine Learning to database resident data. Further, OML4R is able to leverage database compute power, data and task parallism, and security features to work efficiently and securely on enterprise data. By applying Machine Learning algorithms to their data residing in Oracle Databases, businesses are able to quickly create significant value.
 
 This is the end of this workshop.
+
 
 ## Acknowledgements
 * **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
