@@ -163,10 +163,11 @@ In this section, we will do basic data exploration, looking at database objects,
 
   ```
    mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+   
    mean(CUST_INSUR_LTV$LTV)
   ```
 
-Your result should be: 2.068 for the number of dependents. Knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes.
+Your result should be: 2.068 for the number of dependents. Knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
 
 14. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
 
