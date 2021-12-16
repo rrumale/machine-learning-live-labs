@@ -268,7 +268,7 @@ Let us first assess attribute importance for dependent variable LTV_BIN. We know
   dim(CIL)
   ```
 
-Now let us run the odmAI function to identify ordered importance of attribute for target variable LTV_BIN.
+Notice the dimensions show (15342 30), not (15342 31). Now let us run the odmAI function to identify ordered importance of attribute for target variable LTV_BIN.
 
   ```
   ore.odmAI(LTV_BIN ~ ., CIL)
