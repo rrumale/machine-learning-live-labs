@@ -147,7 +147,7 @@ In this section, we will do basic data exploration, looking at database objects,
   ```
 
 
-  ![summary-cust](./images/summary-cust.png)
+  ![summary-cust](./images/summary9-31.png)
 
 
 12. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table. For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
