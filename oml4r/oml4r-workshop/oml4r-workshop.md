@@ -307,7 +307,9 @@ Note: The output lists all the important attributes and their relative influence
 
 25. Create row names. You can use the primary key of a database table to order an ore.frame object. 
 
-Note: The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
+The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
+
+This example ensures that CUST_INSUR_LTV is an ordered ore.frame by assigning the values of the CUST_ID column as the row names of CUST_INSUR_LTV.
 
   ```
   set.seed(1)
