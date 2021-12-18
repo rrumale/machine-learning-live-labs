@@ -266,7 +266,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![boxplot](./images/boxplot-2.png)
 
-The above graph illustrates a minimum value of 0, a maximum value of 74, and an interquartile range from 27 to 46, with a median right in the center (36). Values ranging from 75 to 84 are shown as outliers. 
+The above boxplot illustrates the distribution of data with a smallest (not minimum) value of 0, a highest (not maximum) value of 74, and an interquartile range from 27 to 46, with a median right in the center of these two (at 36) as depicted by the solid line. Values ranging from 75 to 84 are shown as outliers. 
 
 ## Task 4: Perform exploratory data analysis
 
