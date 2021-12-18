@@ -115,15 +115,15 @@ Example:
 
 ## Task 2: Explore data
 
-In this section, we will do basic data exploration, looking at database objects, and try to understand the data to some extent.
+In this section, we will do basic data exploration, looking at database objects, and try to understand the target data to some extent.
 
-8. Check class of an object (data table). The database table appears as "ore.frame". ore.frame is the R object representation of the data table.
+8. Data Exploration: Check class of an object (data table). The database table appears as "ore.frame". An ore.frame is the R object representation of the data table.
 
   ```
    class(CUST_INSUR_LTV)
   ```
 
- 9. Get column names for a table. The column names appear in an ordered list and can be referenced based on this order.
+ 9. Data Exploration: Get column names (attributes) for a table. The column names appear in an ordered list and can be referenced based on this order.
 
   ```
   colnames(CUST_INSUR_LTV)
@@ -132,7 +132,7 @@ In this section, we will do basic data exploration, looking at database objects,
   ![boxplot](./images/col-names.png)
 
 
- 10. Check object dimensions. The dimensions represents the number of rows (records) and number of columns (attributes) in the given frame (table).
+ 10. Data Exploration: Check object dimensions. The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or attributes) in the given frame (table).
 
   ```
   dim(CUST_INSUR_LTV)
@@ -140,7 +140,9 @@ In this section, we will do basic data exploration, looking at database objects,
 
   Your result should be: 15342  31
 
-11. Check data summary for a given object.  This will summarize all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the first 20 columns (attributes) of the table using the order numbers for the columns. You can specify one or more, or a range of columns to see the summary of only those columns.
+11. Data Exploration: Check data summary for a given object.  The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns. 
+
+You can also specify one or more, or a range of columns to see the summary of only those columns.
 
   ```
   summary(CUST_INSUR_LTV[,1:20])
@@ -150,16 +152,21 @@ In this section, we will do basic data exploration, looking at database objects,
   ![summary-cust](./images/summary9-31.png)
 
 
-12. Statistical exploration: Check min(), max(), unique() etc. for different attributes in the given table. For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
+12. Data Exploration: Check min(), max(), unique() etc. for different attributes in the given table. 
+
+For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
 
   ```
   min(CUST_INSUR_LTV$SALARY)
+  
   max(CUST_INSUR_LTV$AGE)
+  
   unique(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+  
   unique(CUST_INSUR_LTV$REGION)
   ```
 
-13. Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
+13. Data Exploration: Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
 
   ```
    mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
@@ -167,9 +174,11 @@ In this section, we will do basic data exploration, looking at database objects,
    mean(CUST_INSUR_LTV$LTV)
   ```
 
-Your result should be: 2.068 for the number of dependents. Knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
+For the number of dependents your result should be: 2.068. 
 
-14. Statistical exploration: Check MODE (i.e., the most frequently occurring observation for an attribute)
+Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
+
+14. Data Exploration: Check MODE for the N_OF_DEPENDENTS attribute (i.e., the most frequently occurring observation for this attribute)
 
   ```
   x <- CUST_INSUR_LTV$N_OF_DEPENDENTS     
@@ -178,7 +187,7 @@ Your result should be: 2.068 for the number of dependents. Knowing the actual me
 
   Your result should be: 3. This indicates that most number of customers have three dependents.
 
-15. Statistical exploration: Check quantiles for the given dataset. This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
+15. Data Exploration: : Check quantiles for the given dataset. This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
 
   ```
   lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
@@ -187,20 +196,24 @@ Your result should be: 2.068 for the number of dependents. Knowing the actual me
   upper_bound
   ```
 
-Your result should be:  2.5% 55158,  97.5% 88925. Thus, if you so choose, salary below $55,158 and salary above $88,925 may be consider outliers and could potentially be excluded if otherwise appropriate.
+Your result should be:  2.5% 55158,  97.5% 88925. Measurements like these can sometimes be used to set outlier limits for the dataset.
 
-16. Data exploration: GROUP DATA - The 'aggregate' function allows for grouping of data by a list of columns.
+16. Data Exploration: The 'aggregate' function allows for grouping of data by a list of columns.
 
   ```
   CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
+  
   CUSTBIN
   ```
 
-17. Data exploration: FILTER DATA - The 'filter' function allows for filtering of the dataset based on attribute values. The 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from data if they are coded as NA.
+17. Data Exploration: The 'filter' function allows for filtering of the dataset based on attribute values. 
+
+Note that the 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from the dataset if they are coded as NA.
 
 
   ```
-  filter(CUST_INSUR_LTV, region == “NORTHEAST”)
+  filter(CUST_INSUR_LTV, region == "NORTHEAST")
+  
   CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE))
 
   ```
@@ -210,8 +223,7 @@ Your result should be:  2.5% 55158,  97.5% 88925. Thus, if you so choose, salary
 
 In this section we will try to visualize some of the data provided in the dataset. This includes drawing plots, graphs, and histograms, etc.
 
-
-18. Data visualization: Plot the age attribute using boxplot. A boxplot can help see the concentration of customers in specific age bands and relative number of outliers, etc. We can improve upon the display of a boxplot as you will see in a later section.
+18. Data Visualization: Plot the age attribute using a simple boxplot. A boxplot can help see the concentration of customers in specific age bands and relative number of outliers, etc. We can improve upon the display of a boxplot as you will see in a later section.
 
   ``` 
   boxplot(CUST_INSUR_LTV$AGE)
@@ -222,7 +234,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   ![boxplot](./images/boxplot.png)
 
 
-19: Data visualization: Draw a simple and quick plot of customer salary. This illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K. We can improve upon the display of a plot as you will see in a later section.
+19: Data Visualization: Draw a simple and quick plot of customer salary (in thousands). This illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K. We can improve upon the display of a plot as you will see in a later section.
 
   ```
   plot(CUST_INSUR_LTV$SALARY/1000)
@@ -230,7 +242,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/plot.png)
 
-20. Data visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
+20. Data Visualization: Histograms help see distribution of data / attributes in range bands. R/ORE transparently identifies what it sees as appropriate band ranges. See data in histogram, bar chart.
 
   ```
      hist(CUST_INSUR_LTV$SALARY/1000,
@@ -243,7 +255,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 
   ![hist](./images/hist-1.png)
 
-21. Data visualization: Check outliers on a boxplot. The outlier values are listed on top of the displayed box in the output.
+21. Data Visualization: Check outliers on a boxplot. The outlier values are listed on top of the displayed box in the output.
 
   ```
   x <- CIL$AGE
@@ -280,7 +292,9 @@ Note: The output lists all the important attributes and their relative influence
 
   ![ai](./images/AI-4-LTV-BIN.png)          
 
-23. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
+23. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. 
+
+Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. ore.odmAI models differ from Oracle Data Mining AI models in these ways: a model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
   ```
   CIL <- CUST_INSUR_LTV
@@ -292,7 +306,9 @@ Note: The output lists all the important attributes and their relative influence
   Note: Attribute importance ranks attributes according to their significance in predicting a target. 
 
 
-24. Perform principal component analysis (PCA). Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
+24. Perform principal component analysis (PCA). 
+
+Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
 
   ```
   prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale. = TRUE)
