@@ -270,7 +270,9 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
 ## Task 4: Perform exploratory data analysis
 
 
-22. Use Attribute Importance (ore.odmAI) function to identify important attributes (listed in order of importance) for a given dependent attribute (LTV_BIN) in the given dataset. To do this we first exclude the most significant dependent attribute from the data frame.  In database terms, we are looking for the most important columns (attributes) to predict the target column (attribute).
+22. Use Attribute Importance (ore.odmAI) function to identify attributes that are important in predicting the given dependent attribute (LTV_BIN) in the given dataset. 
+
+In order to use the ore.odmAI() function effectively, we first exclude the most significant dependent attributes from the data frame. For example, we exclude LTV attribute when predicting LTV_BIN and we exclude LTV_BIN when predicting LTV.
 
 Let us first assess attribute importance for dependent variable LTV_BIN. We know that LTV_BIN is highly correlated with LTV. Thus let us first exclude LTV from the data frame.
 
