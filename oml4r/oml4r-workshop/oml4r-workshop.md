@@ -57,12 +57,11 @@ The standard dplyr R package provides grammar of data manipulation, which gives 
  The caTools package contains several basic utility functions including: moving (rolling, running) window statistic functions, read/write for GIF and ENVI binary files, fast calculation of AUC, LogitBoost classifier, base64 encoder/decoder, round-off-error-free sum and cumsum, etc.  
 
   ```
-  <copy>
   library(ORE)
   library(dplyr)
   library(OREdplyr)
   library(caTools)
-  </copy>
+  
   ```
 
 4. Oracle Machine Learning for R provides the ability to create ordered or unordered ore.frame objects. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object. 
