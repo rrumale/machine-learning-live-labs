@@ -146,7 +146,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
 4. Data Exploration: Check data summary for a given object.  
 
-    The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
+    The summary command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
 
   You can also specify one or more, or a range of columns to see the summary of only those columns.
 
@@ -170,6 +170,7 @@ In this section, we will do basic data exploration, looking at database objects,
       unique(CUST_INSUR_LTV$N_OF_DEPENDENTS)
 
       unique(CUST_INSUR_LTV$REGION)
+      
     ```
 
 6. Data Exploration: Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
