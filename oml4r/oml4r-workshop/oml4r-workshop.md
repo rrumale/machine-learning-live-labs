@@ -511,7 +511,6 @@ This example ensures that CUST_INSUR_LTV is an ordered ore.frame by assigning th
 
   ```
   set.seed(1)
-  head(CUST_INSUR_LTV)
   CIL <- CUST_INSUR_LTV
   row.names(CIL) <- CIL$CUST_ID
   head(row.names(CIL))
@@ -583,7 +582,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 7.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
   
   ```
-  with(oreFit3.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
+  with(oreFit2A.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
   ```
 
   ![class-model](./images/class-model-2.png)
@@ -595,12 +594,10 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   CIL$LTV_BIN <- NULL
   dim(CIL)
 
-  oreFit2A <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
-  oreFit2A <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
-  oreFit2A %>% print()
-  summary(oreFit2A)
-  names(oreFit2A)
-  oreFit2A$formula
+  oreFit2B <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
+  oreFit2B <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
+  oreFit2B %>% print()
+  summary(oreFit2B)
 
   oreFit2A.res <- predict (oreFit2A, CIL.test, "LTV_BIN")
   head(oreFit2A.res,10)
