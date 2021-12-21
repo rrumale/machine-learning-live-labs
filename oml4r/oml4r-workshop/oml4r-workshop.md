@@ -186,15 +186,25 @@ Check min(), max(), mean(), median() etc. for various attributes in the given ta
   ```
   min(CUST_INSUR_LTV$SALARY)
   max(CUST_INSUR_LTV$AGE)
+  
   mean(CUST_INSUR_LTV$SALARY)
   mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
+  
   median(CUST_INSUR_LTV$AGE)
   
   mean(CUST_INSUR_LTV$LTV)
   
   ```
   
-  Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
+  Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. 
+  
+  
+  ```
+  mean(CUST_INSUR_LTV$LTV)
+  
+  ```
+  
+  You results should show a mean LTV of 22266.67.
 
 6. Data Exploration: Perform more statistical exploration.
 
@@ -457,7 +467,7 @@ Note that the sample size is specified as 4600 (about 30% of the dataset volume)
 
   ```
 
-4. Check various attributes of the REGRESSION MODEL created above.
+5. Check various attributes of the REGRESSION MODEL created above.
 
   ```
   class(oreFit1A)
@@ -469,7 +479,7 @@ Note that the sample size is specified as 4600 (about 30% of the dataset volume)
   head(oreFit1A$residuals)
   ```
 
-5. Generate LTV predictions using ore.predict. 
+6. Generate LTV predictions using ore.predict. 
 
 The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score the model.
 
@@ -479,7 +489,7 @@ The ore.predict function is invoked on a model. For example, the following code 
   head(pred1A)
   ```
 
-6. Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced by the model.
+7. Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced by the model.
 
   ```
   ans <- predict(oreFit1A, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -491,13 +501,14 @@ The ore.predict function is invoked on a model. For example, the following code 
   ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
   ```
 
-7. Compare actual and predicted values and validate
+8. Compare actual and predicted values and validate
 
   ```
   CIL_pred <- ore.predict(oreFit1A, CIL, se.fit = TRUE, interval = "prediction")
   CIL <- cbind(CIL, CIL_pred)
   head(select (CIL, LTV, PREDICTION))
   ```
+
 
 ## Task 6: Build CLASSIFICATION MODEL for LTV_BIN Prediction
 
