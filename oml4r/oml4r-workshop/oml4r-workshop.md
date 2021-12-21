@@ -359,7 +359,7 @@ Note: The output lists all the important attributes and their relative influence
 
 Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
 
-  ![ai](./images/AI-LTV-BIN.png)           
+  ![ai](./images/AI-LTV_BIN.png)           
 
 
 24. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. 
@@ -391,6 +391,7 @@ Principal Component Analysis (PCA) is a technique used for exploratory data anal
  
  ![pca](./images/PRC.png)
 
+The above output illistrates the relative significance of the principal components used from the dataset.
 
 
   ## Task 5: Build REGRESSION MODEL for LTV Prediction
