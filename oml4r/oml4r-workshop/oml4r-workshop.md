@@ -132,7 +132,7 @@ The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function
 
 In this section, we will do basic data exploration, look at database objects, and try to develop basic understanding of the target dataset.
 
-8. Data Exploration: Check class of an object (data table). 
+1. Data Exploration: Check class of an object (data table). 
 
 
   ```
@@ -142,7 +142,7 @@ In this section, we will do basic data exploration, look at database objects, an
   The database table appears as "ore.frame". An ore.frame is the R object representation of the data table.
 
 
- 9. Data Exploration: Get column names (attributes) for a table.
+ 2. Data Exploration: Get column names (attributes) for a table.
 
   ```
   colnames(CUST_INSUR_LTV)
@@ -153,7 +153,7 @@ In this section, we will do basic data exploration, look at database objects, an
   ![boxplot](./images/col-names.png)
 
 
- 10. Data Exploration: Check object dimensions. 
+ 3. Data Exploration: Check object dimensions. 
 
   ```
   dim(CUST_INSUR_LTV)
@@ -163,7 +163,7 @@ In this section, we will do basic data exploration, look at database objects, an
 
   Your result should be: "15342  31", which means there are 15342 records (rows) in the table and each record has 31 attributes (columns).
 
-11. Data Exploration: Check data summary for a given object. 
+4. Data Exploration: Check data summary for a given object. 
 
 You can also specify one or more, or a range of columns to see the summary of only those columns.
 
@@ -178,7 +178,7 @@ You can also specify one or more, or a range of columns to see the summary of on
   ![summary-cust8-31](./images/Summary8-31.png#thumbnail)
 
 
-12. Data Exploration: Perform basic statistical exploration.
+5. Data Exploration: Perform basic statistical exploration.
 
 Check min(), max(), mean(), median() etc. for various attributes in the given table. 
 
@@ -196,7 +196,7 @@ Check min(), max(), mean(), median() etc. for various attributes in the given ta
   
   Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
 
-13. Data Exploration: Perform more statistical exploration.
+6. Data Exploration: Perform more statistical exploration.
 
 Statistical exploration: Check ranges and unique values.
 
@@ -212,7 +212,7 @@ Statistical exploration: Check ranges and unique values.
 
 
 
-14. Data Exploration: Check MODE for the N_OF_DEPENDENTS attribute (i.e., the most frequently occurring observation for this attribute)
+7. Data Exploration: Check MODE for the N_OF_DEPENDENTS attribute (i.e., the most frequently occurring observation for this attribute)
 
   ```
   x <- CUST_INSUR_LTV$N_OF_DEPENDENTS     
@@ -221,7 +221,7 @@ Statistical exploration: Check ranges and unique values.
 
   Your result should be: 3. This indicates that most number of customers have three dependents.
 
-15. Data Exploration: : Check quantiles for the given dataset. 
+8. Data Exploration: : Check quantiles for the given dataset. 
 
 This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
 
@@ -234,7 +234,7 @@ This may be useful to identify outlier limits. The generic function 'quantile()'
 
 Your result should be:  2.5% 55158,  97.5% 88925. Measurements like these can sometimes be used to set outlier limits for the dataset.
 
-16. Data Exploration: Check aggregate data for given attributes.
+9. Data Exploration: Check aggregate data for given attributes.
 
 The 'aggregate' function allows for grouping of data by a list of columns.
 
@@ -244,7 +244,7 @@ The 'aggregate' function allows for grouping of data by a list of columns.
   
   ```
 
-17. Data Exploration: Filter data based on a criteria. 
+10. Data Exploration: Filter data based on a criteria. 
 
 The 'filter' function allows for filtering of the dataset based on attribute values. 
 
@@ -265,7 +265,7 @@ Note that the 'na.rm' specification directs treatment of non-available measureme
 
 In this section you will try to visualize the data provided in the dataset using plots, graphs, and histograms, etc.
 
-18. Data Visualization: Plot the age attribute using a simple boxplot. 
+1. Data Visualization: Plot the age attribute using a simple boxplot. 
 
 A simple boxplot can help you quickly see the concentration of customers in specific bands.
 
@@ -278,7 +278,7 @@ A boxplot displays distribution of data based on a 5-number summary (“minimum�
   ![boxplot](./images/boxplot.png)
 
 
-19: Data Visualization: Draw a simple and quick plot of customer salary. 
+2: Data Visualization: Draw a simple and quick plot of customer salary. 
 
 This basic plot illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K.
 
@@ -288,7 +288,7 @@ This basic plot illustrates the overall distribution of cusomer's salary and the
 
   ![hist](./images/plot.png)
 
-20. Data Visualization: Plot a more marked up histogram for customer salary data.
+3. Data Visualization: Plot a more marked up histogram for customer salary data.
 
 Histograms help see distribution of data in range bands. Note, R / ORE transparently identifies what it sees as appropriate band ranges. 
 
@@ -303,7 +303,7 @@ Histograms help see distribution of data in range bands. Note, R / ORE transpare
 
   ![hist](./images/hist-1.png)
 
-21. Data Visualization: Check outliers on a boxplot.
+4. Data Visualization: Check outliers on a boxplot.
 
 Notice, the outlier values are listed on top of the displayed box in the output.
 
@@ -319,7 +319,7 @@ Notice, the outlier values are listed on top of the displayed box in the output.
 
 The above boxplot illustrates the distribution of data with a smallest (not minimum) value of 0, a highest (not maximum) value of 74, and an interquartile range from 27 to 46, with a median right in the center of these two (at 36) as depicted by the solid line. Values ranging from 75 to 84 are shown as outliers. 
 
-22. Data Visualization: Draw a pie chart.
+5. Data Visualization: Draw a pie chart.
 
 
  ```
@@ -335,7 +335,7 @@ The above boxplot illustrates the distribution of data with a smallest (not mini
 ## Task 4: Perform exploratory data analysis
 
 
-23. Use Attribute Importance to identify attributes of high relevance in predicting target dependent variable.
+1. Use Attribute Importance to identify attributes of high relevance in predicting target dependent variable.
 
 The ore.odmAI() function can be used to run Attribute Importnace on the given dataset. This helps identify attributes in the given dataset that are important in predicting the given dependent attribute (LTV_BIN in this case). 
 
@@ -362,7 +362,7 @@ Your result should look like the ranking below with House Ownership as the highe
   ![ai](./images/AI-LTV_BIN.png)           
 
 
-24. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. 
+2. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. 
 
 Attribute importance ranks attributes according to their significance in predicting a target. ore.odmAI produces a ranking of attributes and their importance values. 
 
@@ -380,7 +380,7 @@ As seen below, Attribute Importance (AI) ranks attributes according to their sig
   ![ai](./images/AI-LTV.png)       
 
 
-25. Perform Principal Component Analysis (PCA). 
+3. Perform Principal Component Analysis (PCA). 
 
 Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
 
@@ -396,7 +396,7 @@ The above output illistrates the relative significance of the principal componen
 
   ## Task 5: Build REGRESSION MODEL for LTV Prediction
 
-26. Create ordered ore.frame using row names.
+1. Create ordered ore.frame using row names.
 
 Use the primary key of a database table to order an ore.frame object. 
 
@@ -419,7 +419,7 @@ This example ensures that CUST_INSUR_LTV is an ordered ore.frame by assigning th
 Note: Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object. 
 
 
-27. Partition the original dataset for training and testing purposes. 
+2. Partition the original dataset for training and testing purposes. 
 
 Split the dataset into two buckets - training data set (~70%), and testing data set (~30%). 
 
@@ -438,7 +438,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   class(CIL.test)
   ```
 
-28. Build a REGRESSION MODEL to predict customer LTV using the training data set.
+3. Build a REGRESSION MODEL to predict customer LTV using the training data set.
 
   ```
   oreFit1A <- ore.odmGLM(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
@@ -447,7 +447,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 
   ```
 
-29. Check the REGRESSION MODEL just created.
+4. Check the REGRESSION MODEL just created.
 
   ```
   class(oreFit1A)
@@ -463,7 +463,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   head(oreFit1A$residuals)
   ```
 
-30. Generate LTV predictions using ore.predict. 
+5. Generate LTV predictions using ore.predict. 
 
 The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score.
 
@@ -473,7 +473,7 @@ The ore.predict function is invoked on a model. For example, the following code 
   head(pred1A)
   ```
 
-31. Check Root Mean Squared Error (RMSE) to assess prediction accuracy.
+6. Check Root Mean Squared Error (RMSE) to assess prediction accuracy.
 
   ```
   ans <- predict(oreFit1A, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -485,7 +485,7 @@ The ore.predict function is invoked on a model. For example, the following code 
   ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
   ```
 
-32. Compare actual and predicted values and validate
+7. Compare actual and predicted values and validate
 
   ```
   CIL_pred <- ore.predict(oreFit1A, CIL, se.fit = TRUE, interval = "prediction")
@@ -495,7 +495,7 @@ The ore.predict function is invoked on a model. For example, the following code 
 
 ## Task 6: Build CLASSIFICATION MODEL for LTV_BIN Prediction
 
-33. Create ordered ore.frame using row names.
+1. Create ordered ore.frame using row names.
 
 Use the primary key of a database table to order an ore.frame object. 
 
@@ -518,7 +518,7 @@ This example ensures that CUST_INSUR_LTV is an ordered ore.frame by assigning th
 Note: Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object. 
 
 
-34. Partition the original dataset for training and testing purposes. 
+2. Partition the original dataset for training and testing purposes. 
 
 Split the dataset into two buckets - training data set (~70%), and testing data set (~30%). 
 
@@ -538,7 +538,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ```
 
 
-35. Build a CLASIFICATION MODEL using NAIVE BAYES algorithm and the training data set for predicting customer LTV_BIN assignment.
+3. Build a CLASIFICATION MODEL using NAIVE BAYES algorithm and the training data set for predicting customer LTV_BIN assignment.
 
   ```
   oreFit2A <- ore.odmNB(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
@@ -549,7 +549,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   oreFit2A$formula
   ```
 
-36. Check the classification model created above
+4. Check the classification model created above
 
 ```
   summary(oreFit2A)
@@ -560,7 +560,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ```
 
 
-37. Generate predictions using the new classification model and the test dataset.
+5. Generate predictions using the new classification model and the test dataset.
 
   ```
   predB = ore.predict(oreFit2A, newdata = CIL.test)
@@ -569,7 +569,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ```
 
 
-38.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
+6.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
   
   ```
   with(oreFit3.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
@@ -582,7 +582,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ## Task 7: Validate predictions
 
 
-39. Validate LTV predictions using RMSE (Root Mean Square Error). 
+1. Validate LTV predictions using RMSE (Root Mean Square Error). 
 
 RMSE is a useful way to determine the extent to which a regression model is capable of integrating a dataset. The larger the difference indicates a larger gap between the predicted and observed values, which means poor regression model fit. In the same way, the smaller RMSE that indicates the better the model. Based on RMSE we can compare the two different models with each other and be able to identify which model fits the data better. There is no ideal value for RMSE as it depends on the magnitude of the measure. 
 
@@ -596,7 +596,7 @@ RMSE is a useful way to determine the extent to which a regression model is capa
   ```
 
 
-40. Produce confusion matrix for LTV_BIN predictions. 
+2. Produce confusion matrix for LTV_BIN predictions. 
 
 A confusion matrix is used to describe the performance of a classification model on a test dataset for which the actual or true values are known. It is usually presented in a table format. The consusion matrix depicts TRUE POSITIVES, TRUE NEGATIVES, FALSE POSITIVES, and FALSE NEGATIVES. The accuracy is easy to calculate by computing (TP + TN / TOTAL SAMPLE SIZE).
 
@@ -614,7 +614,7 @@ A confusion matrix is used to describe the performance of a classification model
 
 Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R allows you to store and run R scripts in the database through either an R interface or a SQL interface, or both the interfaces. 
 
-41. Create an Embedded R function.
+1. Create an Embedded R function.
 
 
 ```
@@ -645,7 +645,7 @@ Note: The above example function performs a number of steps including preparing 
 Now, check the predicted values. You can of course, use it in different ways in an application.
 
 
-42. Check prediction results.
+2. Check prediction results.
 
 ```
 res <- ore.doEval(FUN=test)
@@ -653,7 +653,7 @@ res
 
 ```
 
-43. Conclusion
+3. Conclusion
 
 As you can see, OML4R makes it fast and easy to apply Machine Learning to database resident data. Further, OML4R is able to leverage database compute power, data and task parallism, and security features to work efficiently and securely on enterprise data. By applying Machine Learning algorithms to their data residing in Oracle Databases, businesses are able to quickly create significant value.
 
