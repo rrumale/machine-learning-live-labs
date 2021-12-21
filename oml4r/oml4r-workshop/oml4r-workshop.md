@@ -31,7 +31,7 @@ Note: AutoML is currently not available for OML4R (it is only available for OML4
 
 ## Task 1: Connect to RStudio client and establish database connection
 
-  RStudio provides a GUI (Graphical User Interface) and BUI (Browser User Interface) IDE for R. Note that RStudio Server has been pre-configured on your VM running the database server.  
+  RStudio provides an IDE for R with a GUI (Graphical User Interface) and BUI (Browser User Interface). Note that RStudio Server has been pre-configured on your VM running the database server.  
 
   ![rstudio](./images/rstudio-desc.png)
 
@@ -113,15 +113,17 @@ Note: AutoML is currently not available for OML4R (it is only available for OML4
 
 ## Task 2: Explore data
 
-In this section, we will do basic data exploration, looking at database objects, and try to understand the target data to some extent.
+In this section, we will do basic data exploration, looking at database objects, and try to develop basic understanding of the target dataset.
 
-8. Data Exploration: Check class of an object (data table). The database table appears as "ore.frame". An ore.frame is the R object representation of the data table.
+1. Data Exploration: Check class of an object (data table). 
+    The database table appears as "ore.frame". An ore.frame is the R object representation of the data table.
 
     ```
       class(CUST_INSUR_LTV)
     ```
 
-9. Data Exploration: Get column names (attributes) for a table. The column names appear in an ordered list and can be referenced based on this order.
+2. Data Exploration: Get column names (attributes) for a table. 
+    The column names appear in an ordered list and can be referenced based on this order.
 
     ```
       colnames(CUST_INSUR_LTV)
@@ -130,7 +132,8 @@ In this section, we will do basic data exploration, looking at database objects,
     ![boxplot](./images/col-names.png)
 
 
-10. Data Exploration: Check object dimensions. The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or attributes) in the given frame (table).
+3. Data Exploration: Check object dimensions. 
+    The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or attributes) in the given frame (table).
 
     ```
       dim(CUST_INSUR_LTV)
