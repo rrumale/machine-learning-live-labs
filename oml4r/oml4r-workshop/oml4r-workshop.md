@@ -588,6 +588,28 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 
   ![class-model](./images/class-model-2.png)
 
+8. As an optional step, build a classification model for LTV_BIN prediction using an alternate algorithm (e.g., DECISION TREE).
+
+  ```
+  CIL <- CUST_INSUR_LTV
+  CIL$LTV_BIN <- NULL
+  dim(CIL)
+
+  oreFit2A <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
+  oreFit2A <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
+  oreFit2A %>% print()
+  summary(oreFit2A)
+  names(oreFit2A)
+  oreFit2A$formula
+
+  oreFit2A.res <- predict (oreFit2A, CIL.test, "LTV_BIN")
+  head(oreFit2A.res,10)
+  with(oreFit2A.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
+
+  ```
+
+9. Compare the confusion matrix generated for LTV_BIN prediction using the Naive Bayes and Decision Tree algorithms.
+
 
 
   ## Task 7: Validate predictions
