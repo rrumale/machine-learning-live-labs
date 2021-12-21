@@ -116,6 +116,7 @@ Note: AutoML is currently not available for OML4R (it is only available for OML4
 In this section, we will do basic data exploration, looking at database objects, and try to develop basic understanding of the target dataset.
 
 1. Data Exploration: Check class of an object (data table). 
+    
     The database table appears as "ore.frame". An ore.frame is the R object representation of the data table.
 
     ```
@@ -123,6 +124,7 @@ In this section, we will do basic data exploration, looking at database objects,
     ```
 
 2. Data Exploration: Get column names (attributes) for a table. 
+    
     The column names appear in an ordered list and can be referenced based on this order.
 
     ```
@@ -133,6 +135,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
 
 3. Data Exploration: Check object dimensions. 
+    
     The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or attributes) in the given frame (table).
 
     ```
@@ -141,7 +144,9 @@ In this section, we will do basic data exploration, looking at database objects,
 
   Your result should be: 15342  31
 
-11. Data Exploration: Check data summary for a given object.  The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
+4. Data Exploration: Check data summary for a given object.  
+
+    The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
 
   You can also specify one or more, or a range of columns to see the summary of only those columns.
 
@@ -153,7 +158,7 @@ In this section, we will do basic data exploration, looking at database objects,
     ![summary-cust](./images/summary9-31.png)
 
 
-12. Data Exploration: Check min(), max(), unique() etc. for different attributes in the given table.
+5. Data Exploration: Check min(), max(), unique() etc. for different attributes in the given table.
 
   For example, the minimum salary in the customer base, the maximum age, the unique count of dependents, the unique list of regions, etc.
 
@@ -167,7 +172,7 @@ In this section, we will do basic data exploration, looking at database objects,
       unique(CUST_INSUR_LTV$REGION)
     ```
 
-13. Data Exploration: Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
+6. Data Exploration: Statistical exploration: Check average value for a numeric column. MEAN is the statistical average.
 
     ```
       mean(CUST_INSUR_LTV$N_OF_DEPENDENTS)
@@ -179,7 +184,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
   Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. You results should show a mean LTV of 22266.67.
 
-14. Data Exploration: Check MODE for the N_OF_DEPENDENTS attribute (i.e., the most frequently occurring observation for this attribute)
+7. Data Exploration: Check MODE for the N_OF_DEPENDENTS attribute (i.e., the most frequently occurring observation for this attribute)
 
     ```
       x <- CUST_INSUR_LTV$N_OF_DEPENDENTS
@@ -188,7 +193,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
     Your result should be: 3. This indicates that most number of customers have three dependents.
 
-15. Data Exploration: : Check quantiles for the given dataset. This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
+8. Data Exploration: : Check quantiles for the given dataset. This may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the given probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
 
     ```
       lower_bound <- quantile(CUST_INSUR_LTV$SALARY, 0.025)
@@ -199,7 +204,7 @@ In this section, we will do basic data exploration, looking at database objects,
 
     Your result should be:  2.5% 55158,  97.5% 88925. Measurements like these can sometimes be used to set outlier limits for the dataset.
 
-16. Data Exploration: The 'aggregate' function allows for grouping of data by a list of columns.
+9. Data Exploration: The 'aggregate' function allows for grouping of data by a list of columns.
 
     ```
       CUSTBIN = aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
@@ -207,7 +212,7 @@ In this section, we will do basic data exploration, looking at database objects,
       CUSTBIN
     ```
 
-17. Data Exploration: The 'filter' function allows for filtering of the dataset based on attribute values.
+10. Data Exploration: The 'filter' function allows for filtering of the dataset based on attribute values.
 
     Note that the 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from the dataset if they are coded as NA.
 
