@@ -359,7 +359,7 @@ Note: The output lists all the important attributes and their relative influence
 
 Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
 
-  ![ai](./images/AI-4-LTV-BIN.png)           
+  ![ai](./images/AI-LTV-BIN.png)           
 
 
 24. Use Attribute Importance (AI) to identify important attributes for a given dependent attribute (LTV) in the given dataset. 
@@ -377,7 +377,7 @@ Note: The ore.odmAI models differ from Oracle Data Mining AI models in these way
 
 As seen below, Attribute Importance (AI) ranks attributes according to their significance in predicting a target. 
 
-  ![ai](./images/AI-4-LTV.png)       
+  ![ai](./images/AI-LTV.png)       
 
 
 25. Perform Principal Component Analysis (PCA). 
@@ -389,7 +389,7 @@ Principal Component Analysis (PCA) is a technique used for exploratory data anal
   summary(prc0)
   ```
  
- ![pca](./images/PRC0.png)
+ ![pca](./images/PRC.png)
 
 
 
