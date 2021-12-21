@@ -175,7 +175,7 @@ You can also specify one or more, or a range of columns to see the summary of on
   The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
 
 
-  ![Summary9-31](./images/Summary9-31.png#thumbnail)
+  ![summary](./images/summary9-31.png#thumbnail)
 
 
 5. Data Exploration: Perform basic statistical exploration.
