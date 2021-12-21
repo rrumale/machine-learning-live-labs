@@ -427,18 +427,28 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 
   ```
   set.seed(1)
+  
   sampleSize <- 4600
+ 
   ind <- sample(1:nrow(CIL),sampleSize)
   group <- as.integer(1:nrow(CIL) %in% ind)
   CIL.train <- CIL[group==FALSE,]
-  dim(CIL.train)
-  class(CIL.train)
   CIL.test <- CIL[group==TRUE,]
-  dim(CIL.test)
-  class(CIL.test)
   ```
 
-3. Build a REGRESSION MODEL to predict customer LTV using the training data set.
+Note that the sample size is specified as 4600 (about 30% of the dataset volume).
+
+3. Check class and dimension of the CIL.train and CIL.test frames.
+
+  ```
+  class(CIL.train)
+  dim(CIL.train)
+  class(CIL.test)
+  dim(CIL.test)
+  ```
+
+
+4. Build a REGRESSION MODEL to predict customer LTV using the training data set.
 
   ```
   oreFit1A <- ore.odmGLM(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
@@ -447,25 +457,21 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 
   ```
 
-4. Check the REGRESSION MODEL just created.
+4. Check various attributes of the REGRESSION MODEL created above.
 
   ```
   class(oreFit1A)
   
   summary(oreFit1A)
 
-  names(oreFit1A)
-  
   oreFit1A$formula
-  
-  oreFit1A$ridge
-  
+    
   head(oreFit1A$residuals)
   ```
 
 5. Generate LTV predictions using ore.predict. 
 
-The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score.
+The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict on the oreFit1 model produced above and uses CIL.test dataset to score the model.
 
   ```
   pred1A = ore.predict(oreFit1A, newdata = CIL.test)
@@ -473,7 +479,7 @@ The ore.predict function is invoked on a model. For example, the following code 
   head(pred1A)
   ```
 
-6. Check Root Mean Squared Error (RMSE) to assess prediction accuracy.
+6. Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced by the model.
 
   ```
   ans <- predict(oreFit1A, newdata = CIL.test, supplemental.cols = 'LTV')
@@ -530,15 +536,20 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ind <- sample(1:nrow(CIL),sampleSize)
   group <- as.integer(1:nrow(CIL) %in% ind)
   CIL.train <- CIL[group==FALSE,]
-  dim(CIL.train)
-  class(CIL.train)
   CIL.test <- CIL[group==TRUE,]
-  dim(CIL.test)
+  ```
+
+3. Check class and dimension of the CIL.train and CIL.test frames.
+
+  ```
+  class(CIL.train)
+  dim(CIL.train)
   class(CIL.test)
+  dim(CIL.test)
   ```
 
 
-3. Build a CLASIFICATION MODEL using NAIVE BAYES algorithm and the training data set for predicting customer LTV_BIN assignment.
+4. Build a CLASIFICATION MODEL using NAIVE BAYES algorithm and the training data set for predicting customer LTV_BIN assignment.
 
   ```
   oreFit2A <- ore.odmNB(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
@@ -549,9 +560,9 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   oreFit2A$formula
   ```
 
-4. Check the classification model created above
+5. Check the classification model created above
 
-```
+  ```
   summary(oreFit2A)
   
   names(oreFit2A)
@@ -560,7 +571,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ```
 
 
-5. Generate predictions using the new classification model and the test dataset.
+6. Generate predictions using the new classification model and the test dataset.
 
   ```
   predB = ore.predict(oreFit2A, newdata = CIL.test)
@@ -569,7 +580,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   ```
 
 
-6.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
+7.  Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
   
   ```
   with(oreFit3.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
