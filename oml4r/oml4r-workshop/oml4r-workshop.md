@@ -609,12 +609,18 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   oreFit2B <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
   oreFit2B %>% print()
   summary(oreFit2B)
+  names(oreFit2B)
+  oreFit2B$formula
 
-  oreFit2A.res <- predict (oreFit2A, CIL.test, "LTV_BIN")
-  head(oreFit2A.res,10)
-  with(oreFit2A.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
-
+  oreFit2B.res <- predict (oreFit2B, CIL.test, "LTV_BIN")
+  head(oreFit2B.res,10)
+  with(oreFit2B.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
   ```
+
+The confusion matrix now looks as follows. Do you see the difference as compared to the Naive Bayes model?
+
+![class-model](./images/class-model-3.png)
+
 
 9. Compare the confusion matrix generated for LTV_BIN prediction using the Naive Bayes and Decision Tree algorithms.
 
