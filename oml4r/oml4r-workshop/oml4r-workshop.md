@@ -161,7 +161,7 @@ In this section, we will do basic data exploration, look at database objects, an
   
   The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or attributes) in the given frame (table).
 
-  Your result should be: "15342  31", which means there are 15342 records (rows) in the table and each record has 31 attributes (columns).
+  Your result should be: "15342  31", which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
 4. Data Exploration: Check data summary for a given object. 
 
@@ -172,7 +172,7 @@ You can also specify one or more, or a range of columns to see the summary of on
   
   ```
   
-  The "summary" command summarizes all the attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns.
+  The "summary" command summarizes all the mentioned attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given columns (attributes) of the table using the order numbers for the columns. You can also see a summary of individual attributes by specifying a specific column by name or number.
 
 
   ![summary](./images/summary9-31.png#thumbnail)
@@ -196,7 +196,7 @@ Check min(), max(), mean(), median() etc. for various attributes in the given ta
   
   ```
   
-  Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. 
+  Mean represents the statistical average. Note that knowing the actual mean (average) LTV for the dataset will be useful later for reference purposes. 
   
   
   ```
@@ -242,7 +242,7 @@ This may be useful to identify outlier limits. The generic function 'quantile()'
   
   ```
 
-Your result should be:  2.5% 55158,  97.5% 88925. Measurements like these can sometimes be used to set outlier limits for the dataset.
+Your result should be:  2.5% 55158,  97.5% 88925. Quantiles can sometimes be used to set outlier limits for the dataset.
 
 9. Data Exploration: Check aggregate data for given attributes.
 
