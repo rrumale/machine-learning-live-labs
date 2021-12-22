@@ -596,7 +596,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
   with(oreFit2A.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
   ```
 
-  ![class-model](./images/class-model-2.png)
+  ![class-model](./images/CM-2A.png)
 
 8. As an optional step, build a classification model for LTV_BIN prediction using an alternate algorithm (e.g., DECISION TREE).
 
@@ -619,7 +619,7 @@ The 'seed' can be set to any value. Setting a 'seed' ensures the same output is 
 
 The confusion matrix now looks as follows. Do you see the difference as compared to the Naive Bayes model?
 
-![class-model](./images/class-model-3.png)
+![class-model](./images/CM-2B.png)
 
 
 9. Compare the confusion matrix generated for LTV_BIN prediction using the Naive Bayes and Decision Tree algorithms.
