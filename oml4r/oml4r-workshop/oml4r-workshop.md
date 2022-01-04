@@ -341,6 +341,19 @@ The above boxplot illustrates the distribution of data with a smallest (not mini
   ![boxplot](./images/nRpie.png)
 
 
+6. Data Visualization: Draw a ggplot for visualizing LTV for various regions.
+
+
+ ```
+ class(CUST_INSUR_LTV)
+ CIL <- ore.pull(CUST_INSUR_LTV)
+ class(CIL)
+ CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot() 
+ 
+ ```
+
+  ![boxplot](./images/nggplot.png)
+
 
 ## Task 4: Perform exploratory data analysis
 
