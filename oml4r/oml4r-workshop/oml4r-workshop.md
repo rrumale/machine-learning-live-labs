@@ -504,6 +504,9 @@ The ore.predict function is invoked on a model. For example, the following code 
 
 7. Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced by the model.
 
+Root Mean Square Error (RMSE) is a metric that indicates the average distance between the predicted values from a model and the actual values in the dataset. A lower RMSE is desirable. Lower RMSE indicates a better “fit” of the model for the given dataset.
+
+
   ```
   ans <- predict(oreFit1A, newdata = CIL.test, supplemental.cols = 'LTV')
   localPredictions <- ore.pull(ans)
@@ -513,6 +516,8 @@ The ore.predict function is invoked on a model. For example, the following code 
 
   ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
   ```
+
+Recall that the average (mean) LTV as calucated previously was more than $22266.67. Thus a value of 48.46 is relatively low, suggesting a good model fit.
 
 8. Compare actual and predicted values and validate
 
