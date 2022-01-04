@@ -517,7 +517,7 @@ Root Mean Square Error (RMSE) is a metric that indicates the average distance be
   ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
   ```
 
-Recall that the average (mean) LTV as calucated previously was more than $22266.67. Thus a value of 48.46 is relatively low, suggesting a good model fit.
+Recall that the average (mean) LTV as calucated previously was $22266.67. Thus a value of 48.46 is relatively low, suggesting a good model fit.
 
 8. Compare actual and predicted values and validate
 
