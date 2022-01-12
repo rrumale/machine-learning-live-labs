@@ -134,6 +134,7 @@ ore.ls()
 
 ![ls](./images/ls-1.png)
 
+            
 ## Task 2: Explore Data Using R
 
 Exploratory Data Analysis is the process of visualizing and analyzing data to develop better understanding of the data and gain insight into the data.
@@ -475,7 +476,7 @@ The output below should illustrate the relative significance of the principal co
 The summary() function in the result object shows standard deviation, proportion of variance explained by each principal component, and the cumulative proportion of variance.
 
 
-Task 3: Build Regression Model for LTV Prediction & Validate Model
+## Task 3: Build Regression Model for LTV Prediction & Validate Model
 
 
 
@@ -637,7 +638,7 @@ ore.save(oreFit1A)
 ```
 
 
-Task 4: Build Classification Model for LTV_BIN Prediction  & Validate Model
+## Task 4: Build Classification Model for LTV_BIN Prediction  & Validate Model
 
 4.1: Create Ordered ORE Frame
 
@@ -781,7 +782,7 @@ Your results should be as follows.
 How does the confusion matrix compare with the one generated previously?
 
 
-Task 5: Use Embedded R Functions To Leverage In-Database Parallel Processing
+## Task 5: Use Embedded R Functions To Leverage In-Database Parallel Processing
 
 5.1: Embedded R For Real-Time Model Building And Predictions
 
@@ -861,7 +862,7 @@ summary(res2.local)
 
 <>
 
-Task 6: Conclusion
+## Task 6: Conclusion
 
 61:  Conclusion
 
@@ -873,5 +874,3 @@ a) Sign-up: OCI Always Free Tier
 Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects.
 b) Get Certified: Oracle Machine Learning with Oracle Autonomous Database Certification
 Consider taking the Oracle Machine Learning with Oracle Autonomous Database Certification offered by Oracle University.
-
-— 
