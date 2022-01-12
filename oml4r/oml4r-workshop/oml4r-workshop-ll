@@ -1,4 +1,4 @@
-OML4R Introduction
+## OML4R Introduction
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R is the new name for Oracle R Enterprise.
 
@@ -6,9 +6,9 @@ In this workshop, you will use a dataset representing about 15,000 customers of 
 
 Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
 
-Estimated Lab Time: 2 Hours
+#### Estimated Lab Time: 2 Hours
 
-Objectives
+###Objectives
 
 In this lab, you will:
 
@@ -24,12 +24,12 @@ Note:
 1. We will not be using AutoML UI in this lab. AutoML UI is currently not available for OML4R (it is only available for OML4Py). 
 2. We will not be using Autonomous Database as OML4R is currently not available for Autonomous Database.
 
-Pre-requisites
+### Pre-requisites
 
 * Oracle Database 21c, 19c, or 18c installed on-premises (or in a VM in Cloud)
 * R, RStudio Server, and required libraries
 
-Task 1: Connect to RStudio Client and Establish Database Connection
+## Task 1: Connect to RStudio Client and Establish Database Connection
 
 RStudio provides an IDE (Integrated Development Environment) for R with a GUI (Graphical User Interface) and BUI (Browser User Interface). Note that RStudio Server has been pre-configured on your VM that is running the database server.
 
