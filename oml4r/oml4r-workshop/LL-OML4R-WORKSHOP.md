@@ -371,9 +371,11 @@ Note that ggplot works against a data frame. The ore.pull command takes the ORE 
 Use the filter() function to filter data based on given criteria.
 
 ```
-filter(CUST_INSUR_LTV, REGION == "NorthEast")
+nrow(CUST_INSUR_LTV)
 
-filter(CUST_INSUR_LTV, SALARY > 110000)
+nrow(filter(CUST_INSUR_LTV, REGION == "NorthEast"))
+
+nrow(filter(CUST_INSUR_LTV, SALARY > 110000))
 
 nrow(CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE)))
 ```
@@ -417,14 +419,16 @@ You should see output as follows.
 Check existence of duplicate data.
 
 ```
-nrow(get_dupes(CXL, CUST_ID))
+CXL <- ore.pull(CUST_INSUR_LTV)
+class(CXL)
+nrow(CXL %>% get_dupes(CUST_ID))
 ```
 
 Remove data from the frame where customer age is zero or not specified.
 
 ```
 dim(CUST_INSUR_LTV)
-CUST_INSUR_LTV <- (CUST_INSUR_LTV %>% filter(AGE > 1, na.rm = TRUE))
+nrow(CUST_INSUR_LTV %>% filter(AGE < 1))
 nrow(CUST_INSUR_LTV)
 ```
 
