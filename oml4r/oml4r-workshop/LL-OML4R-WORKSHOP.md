@@ -157,8 +157,6 @@ class(CUST_INSUR_LTV)
 
 The database table appears as "ore.frame". An ore.frame is the R object representation of the CUST_INSUR_LTV table in the database. 
 
-![claas](./images/class-1.png)
-
 There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance. It is the OML4R equivalent of a data.frame.
 
 2A.2: Get List Of Column Names (‘colnames’)
@@ -181,6 +179,9 @@ The dimensions represents the number of rows (i.e., records or observations ) an
 
 Your result should be: "15342 31", which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
+            
+![basic](./images/basic-1.png)            
+            
 2A.4: Summary (Categorical and Numerical Variables)
 
 ```
