@@ -2,7 +2,7 @@
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R is the new name for Oracle R Enterprise.
 
-In this workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer record has about 30 attributes. Your goal is to train a Machine Learning model to predict a given customer's life-time value (or LTV) and their LTV_BIN placement. You will use a regression algorithm to predict LTV, and a classification algorithm to predicts customers’ LTV_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH)
+In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer record has about 30 attributes. Your goal is to train a Machine Learning model to predict a given customer's life-time value (or LTV) and their LTV_BIN placement. You will use a regression algorithm to predict LTV, and a classification algorithm to predicts customers’ LTV_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH)
 
 Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
 
