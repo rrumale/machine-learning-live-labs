@@ -35,8 +35,6 @@ RStudio provides an IDE (Integrated Development Environment) for R with a GUI (G
 
 You will be running all the lab steps in the RStudio R Script window as shown below.
 
-<IMAGE>
-
 1.1: Point Browser To RStudio Web
 
 ```
@@ -176,7 +174,7 @@ dim(CUST_INSUR_LTV)
 
 The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or variable, or attributes) in the given frame (table).
 
-Your result should be: "15342 31", which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
+Your result should be: 15342 31, which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
             
 ![basic](./images/basics-1.png)            
@@ -184,14 +182,14 @@ Your result should be: "15342 31", which means there are 15342 records or observ
 2A.4: Summary (Categorical and Numerical Variables)
 
 ```
-summary(CUST_INSUR_LTV[,8:31])
+summary(CUST_INSUR_LTV[,1:31])
 ```
 
 You can also specify one or more, or a range of columns to see the summary of only those columns.
 
 ![summary](./images/summary-1.png)
 
-The "summary" command summarizes all the mentioned attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given set of columns (attributes) of the table using the order numbers for the columns. You can also see a summary of individual attributes by specifying a specific column by name or number.
+The summary() call summarizes all the mentioned attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given set of columns (attributes) of the table using the order numbers for the columns. You can also see a summary of individual attributes by specifying a specific column by name or number.
 
 2A.5: Statistical Functions (min, max, mean, mode, median, range, unique, quantile)
 
@@ -402,12 +400,14 @@ nrow(CUST_INSUR_LTV %>% filter(AGE < 1, na.rm = TRUE))
 
 2C.3: Removing & Adding Variables (Columns)
 
+```
 dim(CUST_INSUR_LTV)
 CUST_INSUR_LTV <- subset(CUST_INSUR_LTV, select = -c(LTV_BIN))
 dim(CUST_INSUR_LTV)
 CUST_INSUR_LTV$LTV_BIN_PRED <- ""
 dim(CUST_INSUR_LTV)
-
+```
+            
 You should see output as follows.
 
 ![rmadd](./images/rmadd-1.png)
