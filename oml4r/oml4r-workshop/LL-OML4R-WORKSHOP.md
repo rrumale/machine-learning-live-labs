@@ -795,18 +795,28 @@ ore.save(oreFit2A)
 
 For example, the following creates a classification model using the DECISION TREE algorithm. 
 
+Remove the LTV_BIN column.
+
 ```
 CIL <- CUST_INSUR_LTV
 CIL$LTV_BIN <- NULL
 dim(CIL)
+```
 
+Fit the model with training data.
+
+```
 oreFit2B <- ore.odmDT(LTV_BIN ~ ., data = CIL.train)
 oreFit2B <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
 oreFit2B %>% print()
 summary(oreFit2B)
 names(oreFit2B)
 oreFit2B$formula
+```
 
+Generate the confusion matrix.
+
+```
 oreFit2B.res <- predict (oreFit2B, CIL.test, "LTV_BIN")
 head(oreFit2B.res,10)
 with(oreFit2B.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
