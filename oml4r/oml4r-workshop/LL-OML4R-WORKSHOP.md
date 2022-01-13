@@ -445,7 +445,7 @@ You should see output as follows.
 ![filter](./images/filter-1.png)
 
 
-2C.4: Assess Attribute Importance For LTV_BIN Prediction
+2C.5: Assess Attribute Importance For LTV_BIN Prediction
 
 Use Attribute Importance to identify attributes of high relevance in predicting target dependent variable.
 
@@ -471,9 +471,9 @@ Note: The output lists all the important attributes and their relative influence
 
 Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
 
-![ailtvbin](./images/ailtvbin-1.png)
+![ailtvbin](./images/ai-1.png)
 
-2C.5: Assess Attribute Importance For LTV Prediction
+2C.6: Assess Attribute Importance For LTV Prediction
 
 Use Attribute Importance (the ore.odmAI() function) to identify attributes of relative importance for a LTV prediction with the given dataset.
 
@@ -488,13 +488,13 @@ Attribute importance ranks attributes according to their significance in predict
 
 As seen below, Attribute Importance (AI) ranks attributes according to their significance in predicting a target. 
 
-![ailtv](./images/ailtv-1.png)
+![ailtv](./images/ai-2.png)
 
 The model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
 Do you notice the difference between AI output for LTV and for LTV_BIN?.
 
-2C.6: Principal Component Analysis
+2C.7: Principal Component Analysis
 
 Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (where each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
 
@@ -508,7 +508,7 @@ Setting the argument scale=TRUE, standardizes the input data so that it has zero
 
 The output below should illustrate the relative significance of the principal components used from the dataset.
 
-![prcomp](./images/prcomp-1.png)
+![prcomp](./images/prc-1.png)
 
 The summary() function in the result object shows standard deviation, proportion of variance explained by each principal component, and the cumulative proportion of variance.
 
