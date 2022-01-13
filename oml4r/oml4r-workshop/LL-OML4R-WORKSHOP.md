@@ -534,7 +534,7 @@ head(row.names(CIL))
 
 The output should show the following.
 
-![prcomp](./images/prcomp-1.png)
+![prcomp](./images/rownames-1.png)
 
 Note: Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object.
 
@@ -656,7 +656,9 @@ Recall that the average (mean) LTV as calculated previously was $22266.67. Thus 
 
 Plot the predictions alongside actual LTV value.
 
+```
 localPredictions %>% ggplot(aes(x=PREDICTION, y=LTV, color=PREDICTION)) + geom_point()
+```
 
 Your output should show the following:
 
