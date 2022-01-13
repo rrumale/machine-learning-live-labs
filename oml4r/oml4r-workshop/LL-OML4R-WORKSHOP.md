@@ -180,7 +180,7 @@ The dimensions represents the number of rows (i.e., records or observations ) an
 Your result should be: "15342 31", which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
             
-![basic](./images/basic-1.png)            
+![basic](./images/basics-1.png)            
             
 2A.4: Summary (Categorical and Numerical Variables)
 
