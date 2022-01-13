@@ -890,8 +890,11 @@ class(res1.local)
 summary(res1.local)
 ```
 
+![tableapply-1](./images/tableapply-1.png)
+
 Using ore.groupApply
 
+```
 res2 <- ore.groupApply(CUST_INSUR_LTV,
                        INDEX = CUST_INSUR_LTV$CUST_ID,
                        function(dat) {
@@ -901,6 +904,9 @@ res2 <- ore.groupApply(CUST_INSUR_LTV,
 res2.local <- ore.pull(res2)
 class(res2.local)
 summary(res2.local)
+```
+
+![groupapply-1](./images/groupapply-1.png)
 
 5.3: Embedded R for Real-Time LTV Prediction Using Pre-Built Regression Model
 
