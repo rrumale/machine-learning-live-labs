@@ -278,6 +278,8 @@ text(x=fivenum(x), labels = fivenum(x), y=1.35)
 mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
 ```
 
+Your output should look as follows.
+
 ![boxplot](./images/boxplot-1.png)
 
 A boxplot displays distribution of data based on a 5-number summary (“minimum”, first quartile (Q1), median, third quartile (Q3), and “maximum”). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
@@ -299,6 +301,8 @@ col="darkred”,
 freq=TRUE)
 ```
 
+Your output should look as follows.
+            
 ![histogram](./images/histogram-1.png)
 
 2B.4: Pie Chart
@@ -309,7 +313,10 @@ Generate a pie chart for region wise distribution of customers.
 pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution Across Regions", clockwise = TRUE)  
 ```
 
-![piechart](./images/piechart-1.png)
+Your output should look as follows.
+            
+            
+![pie](./images/pie-1.png)
 
 Note that CLOCKWISE signifies the alphabetical order. 
 
