@@ -760,9 +760,9 @@ Your results should be as follows.
 4.6: Generate Predictions for LTV_BIN
 
 ```
-predB = ore.predict(oreFit2A, newdata = CIL.test)
+predB <- ore.predict(oreFit2A, newdata = CIL.test)
 
-predB
+head(predB,10)
 ```
 
 Your results should be as follows.
