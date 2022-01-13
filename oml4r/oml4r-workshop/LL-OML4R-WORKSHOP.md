@@ -167,7 +167,6 @@ colnames(CUST_INSUR_LTV)
 
 The column names appear in an ordered list and can be referenced based on this order.
 
-![colnames](./images/colnames-1.png)
 
 2A.3: Check Object or Frame Dimensions
 
