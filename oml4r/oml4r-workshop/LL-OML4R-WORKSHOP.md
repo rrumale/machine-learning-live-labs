@@ -754,8 +754,8 @@ oreFit2A$formula
 
 Your results should be as follows.
 
-![orefit2adetails](./images/orefit2adetails-1.png)
-
+![orefit2adetails](./images/orefit2adetails-1a.png)
+![orefit2adetails](./images/orefit2adetails-1b.png)
 
 4.6: Generate Predictions for LTV_BIN
 
