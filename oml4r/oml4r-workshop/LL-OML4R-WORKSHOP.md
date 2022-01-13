@@ -1,4 +1,4 @@
-## OML4R Introduction
+## OML4R Live Lab
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R is the new name for Oracle R Enterprise.
 
@@ -6,7 +6,7 @@ In this workshop, you will use a dataset representing about 15,000 customers of 
 
 Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
 
-Estimated Lab Time: 2 Hours
+### Estimated Lab Time: 2 Hours
 
 ### Objectives
 
@@ -20,7 +20,7 @@ In this lab, you will:
 * Use an OML4R classification algorithm for building and training a ML model for LTV_BIN assignment
 * Validate predictions using RMSE (Root Mean Squared Error) and Confusion Matrix methods
 
-#### Note: 
+Note: 
 1. We will not be using AutoML UI in this lab. AutoML UI is currently not available for OML4R (it is only available for OML4Py). 
 2. We will not be using Autonomous Database as OML4R is currently not available for Autonomous Database.
 
@@ -49,8 +49,16 @@ Alternatively, you can use RStudio Desktop as your IDE, if you prefer.
 
 Use the provided username and password to connect to the database schema.
 
+```
 Username: omluser 
 Password: MLlearnPTS#21_
+```
+            
+![connect](./images/connect-1.png)
+
+The RStudio interface looks as follows.
+
+![rstudio](./images/rstudio-1.png)
 
 1.3: Install packages
 
@@ -134,12 +142,11 @@ ore.ls()
 
 ![ls](./images/ls-1.png)
 
-            
 ## Task 2: Explore Data Using R
 
 Exploratory Data Analysis is the process of visualizing and analyzing data to develop better understanding of the data and gain insight into the data.
 
-BASIC DATA EXPLORATION USING STATISTICAL FUNCTIONS
+### BASIC DATA EXPLORATION USING STATISTICAL FUNCTIONS
 
 
 2A.1: Check ‘class’ Of Object
@@ -240,7 +247,7 @@ Your results should show the following outputs.
 ![stats](./images/stats-1.png)
 
 
-DATA VISUALIZATION 
+### DATA VISUALIZATION 
 
 2B.1: Simple Plot
 
@@ -249,7 +256,7 @@ Draw a simple and quick plot of customer salary.
 This basic plot illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K.
 
 ```
-plot(CUST_INSUR_LTV$SALARY/1000)
+plot(CUST_INSUR_LTV$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", main = "Customer Salary Plot")
 ```
 
 Your plot should look as follows.
@@ -263,23 +270,17 @@ Plot the age attribute using a simple boxplot.
 A simple boxplot can help you quickly see the concentration of customers in specific bands.
 
 ```
-boxplot(CUST_INSUR_LTV$AGE)
+CIL <- CUST_INSUR_LTV
+x <- CIL$AGE
+out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
+boxplot(CUST_INSUR_LTV$AGE, xlab = "Boxplot (AGE)", horizontal=TRUE)
+text(x=fivenum(x), labels = fivenum(x), y=1.35)
+mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
 ```
 
 ![boxplot](./images/boxplot-1.png)
 
 A boxplot displays distribution of data based on a 5-number summary (“minimum”, first quartile (Q1), median, third quartile (Q3), and “maximum”). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
-
-
-```
-x <- CUST_INSUR_LTV$AGE
-
-boxplot(x, horizontal = TRUE, axes = TRUE, steplewex = 1) 
-text(x=fivenum(x), labels = fivenum(x), y=1.35)
-mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
-```
-
-![boxplot](./images/boxplot-2.png)
 
 The above boxplot illustrates the distribution of data with a smallest (not minimum) value of 0, a highest (not maximum) value of 74, and an interquartile range from 27 to 46, with a median right in the center of these two (at 36) as depicted by the solid line. Values ranging from 75 to 84 are shown as outliers.
 
@@ -293,8 +294,8 @@ Histograms help see distribution of data in range bands. Note, R / ORE transpare
 hist(CUST_INSUR_LTV$SALARY/1000,
 main="Customer Salary Data",
 xlab="Salary($K)",
-xlim=c(40,100),
-col="darkmagenta",
+xlim=c(20,100),
+col="darkred”,
 freq=TRUE)
 ```
 
@@ -308,7 +309,7 @@ Generate a pie chart for region wise distribution of customers.
 pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution Across Regions", clockwise = TRUE)  
 ```
 
-![piechart](./images/pie-1.png)
+![piechart](./images/piechart-1.png)
 
 Note that CLOCKWISE signifies the alphabetical order. 
 
@@ -324,12 +325,41 @@ class(CIL)
 CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot() 
 ```
 
-Note that ggplot works against a data frame. The ore.pull command takes the ORE frame and converts it into an R data frame.
+Your output should look as follows.
 
 ![ggplot](./images/ggplot-1.png)
 
+Let’s look at another ggplot for Salary distribution in all regions.
 
-TARGETED DATA EXPLORATION
+```
+class(CUST_INSUR_LTV)
+CIL <- ore.pull(CUST_INSUR_LTV)
+class(CIL)
+suppressWarnings(print(CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count") ))
+```
+
+Your output should look as follows.
+
+![ggplot](./images/ggplot-2.png)
+
+Let’s also look at the age distribution in the customer base.
+
+```
+class(CUST_INSUR_LTV)
+CIL <- ore.pull(CUST_INSUR_LTV)
+class(CIL)
+suppressWarnings(print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count") ))
+```
+
+Your output should look as follows.
+
+![ggplot](./images/ggplot-3.png)
+
+
+Note that ggplot works against a data frame. The ore.pull command takes the ORE frame and converts it into an R data frame.
+
+
+### TARGETED DATA EXPLORATION
 
 2C.1: Filtering Data and Aggregate Data View
 
@@ -434,9 +464,6 @@ Your result should look like the ranking below with House Ownership as the highe
 
 2C.5: Assess Attribute Importance For LTV Prediction
 
-
-LTV
-
 Use Attribute Importance (the ore.odmAI() function) to identify attributes of relative importance for a LTV prediction with the given dataset.
 
 ```
@@ -455,7 +482,6 @@ As seen below, Attribute Importance (AI) ranks attributes according to their sig
 The model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
 Do you notice the difference between AI output for LTV and for LTV_BIN?.
-
 
 2C.6: Principal Component Analysis
 
@@ -477,7 +503,6 @@ The summary() function in the result object shows standard deviation, proportion
 
 
 ## Task 3: Build Regression Model for LTV Prediction & Validate Model
-
 
 
 3.1: Create Ordered ORE Frame
@@ -833,18 +858,24 @@ Your results should be as follows.
 
 Using ore.tableApply
 
+```
 res1 <- ore.tableApply(CUST_INSUR_LTV, 
   function(dat){
     mod1 <- ore.lm(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT, dat)   
     mod1
   })
+```
 
+Save the results and verify.
+
+```
 ore.save(res1, name="MY_DS", overwrite=TRUE)
 class(res1)
 typeof(res1)
 res1.local <- ore.pull(res1)
 class(res1.local)
 summary(res1.local)
+```
 
 Using ore.groupApply
 
@@ -871,6 +902,9 @@ OML4R enables you to leverage the power of R, a leading statistical programming 
 6.2: Next Steps
 
 a) Sign-up: OCI Always Free Tier
+
 Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects.
+
 b) Get Certified: Oracle Machine Learning with Oracle Autonomous Database Certification
 Consider taking the Oracle Machine Learning with Oracle Autonomous Database Certification offered by Oracle University.
+
