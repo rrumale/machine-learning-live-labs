@@ -902,7 +902,7 @@ summary(res1.local)
 
 ![tableapply-1](./images/tableapply-1.png)
 
-Using ore.groupApply
+You can also use ore.groupApply and ore.rowApply functions as needed to leverage embedded R capabilities. For example:
 
 ```
 res2 <- ore.groupApply(CUST_INSUR_LTV,
@@ -916,11 +916,6 @@ class(res2.local)
 summary(res2.local)
 ```
 
-![groupapply-1](./images/groupapply-1.png)
-
-5.3: Embedded R for Real-Time LTV Prediction Using Pre-Built Regression Model
-
-<>
 
 ## Task 6: Conclusion
 
