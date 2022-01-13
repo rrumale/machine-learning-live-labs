@@ -308,7 +308,7 @@ Generate a pie chart for region wise distribution of customers.
 pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution Across Regions", clockwise = TRUE)  
 ```
 
-![piechart](./images/piechart-1.png)
+![piechart](./images/pie-1.png)
 
 Note that CLOCKWISE signifies the alphabetical order. 
 
