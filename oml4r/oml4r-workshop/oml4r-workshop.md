@@ -54,7 +54,7 @@ Password: MLlearnPTS#21_
             
 ![connect](./images/connect-1.png)
 
-The RStudio interface looks as follows.
+The RStudio interface looks as follows. Notice the multiple windows marked for their function.
 
 ![rstudio](./images/rstudio-1.png)
 
