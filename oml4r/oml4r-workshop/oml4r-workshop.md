@@ -249,10 +249,10 @@ Your results should show the following outputs.
 
 Draw a simple and quick plot of customer salary.
 
-This basic plot illustrates the overall distribution of cusomer's salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K.
+This basic plot illustrates the overall distribution of salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K.
 
 ```
-plot(CUST_INSUR_LTV$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", main = "Customer Salary Plot")
+plot(CUST_INSUR_LTV$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", col = "darkred", main = "Customer Salary Plot")
 ```
 
 Your plot should look as follows.
@@ -269,7 +269,7 @@ A simple boxplot can help you quickly see the concentration of customers in spec
 CIL <- CUST_INSUR_LTV
 x <- CIL$AGE
 out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
-boxplot(CUST_INSUR_LTV$AGE, xlab = "Boxplot (AGE)", horizontal=TRUE)
+boxplot(CUST_INSUR_LTV$AGE, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
 text(x=fivenum(x), labels = fivenum(x), y=1.35)
 mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
 ```
@@ -284,9 +284,9 @@ The above boxplot illustrates the distribution of data with a smallest (not mini
 
 2B.3: Histogram
 
-Plot a marked up histogram for customer salary data.
+Plot a histogram for customer salary data.
 
-Histograms help see distribution of data in range bands. Note, R / ORE transparently identifies what it sees as appropriate band ranges.
+Histograms help see distribution of data in range bands. Note, the hist() function uses the Sturges method by default to identify appropriate breaks.
 
 ```
 hist(CUST_INSUR_LTV$SALARY/1000,
@@ -303,10 +303,10 @@ Your output should look as follows.
 
 2B.4: Pie Chart
 
-Generate a pie chart for region wise distribution of customers.
+Generate a pie chart for distribution of customers by region.
 
 ```
-pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution Across Regions", clockwise = TRUE)  
+pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution by Region", clockwise = TRUE)  
 ```
 
 Your output should look as follows.
@@ -314,12 +314,14 @@ Your output should look as follows.
             
 ![pie](./images/pie-1.png)
 
-Note that CLOCKWISE signifies the alphabetical order. 
+Note that CLOCKWISE signifies to use alphabetical order. 
 
 
-2B.5: ggPlot
+2B.5: ggplot2
 
-Generate a ggplot for visualizing LTV for various regions.
+Use the package ggplot2 to generate a plot for visualizing LTV for various regions.
+
+When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory. 
 
 ```
 class(CUST_INSUR_LTV)
@@ -332,13 +334,11 @@ Your output should look as follows.
 
 ![ggplot](./images/ggplot-1.png)
 
-Let’s look at another ggplot for Salary distribution in all regions.
+Let’s look at another plot using ggplot2 for Salary distribution in all regions.
 
 ```
-class(CUST_INSUR_LTV)
-CIL <- ore.pull(CUST_INSUR_LTV)
 class(CIL)
-suppressWarnings(print(CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count") ))
+print(CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count"))
 ```
 
 Your output should look as follows.
@@ -348,18 +348,13 @@ Your output should look as follows.
 Let’s also look at the age distribution in the customer base.
 
 ```
-class(CUST_INSUR_LTV)
-CIL <- ore.pull(CUST_INSUR_LTV)
-class(CIL)
-suppressWarnings(print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count") ))
+print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count"))
 ```
 
 Your output should look as follows.
 
 ![ggplot](./images/ggplot-3.png)
 
-
-Note that ggplot works against a data frame. The ore.pull command takes the ORE frame and converts it into an R data frame.
 
 
 ### TARGETED DATA EXPLORATION
