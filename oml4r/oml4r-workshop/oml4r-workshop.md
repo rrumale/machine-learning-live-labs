@@ -151,11 +151,11 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
 class(CUST_INSUR_LTV)
 ```
 
-The database table appears as "ore.frame". An ore.frame is the R object representation of the CUST_INSUR_LTV table in the database. 
+The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST_INSUR_LTV table in the database. 
 
-There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance. It is the OML4R equivalent of a data.frame.
+There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance. The class ore.frame inherits from data.frame and overloads many data.frame functions.
 
-2A.2: Get List Of Column Names (‘colnames’)
+2A.2: Get List of Column Names (‘colnames’)
 
 ```
 colnames(CUST_INSUR_LTV)
@@ -170,7 +170,7 @@ The column names appear in an ordered list and can be referenced based on this o
 dim(CUST_INSUR_LTV)
 ```
 
-The dimensions represents the number of rows (i.e., records or observations ) and number of columns (or variable, or attributes) in the given frame (table).
+The dimensions represents the number of rows (i.e., records or observations) and number of columns (or variable, or attributes) in the given frame (table).
 
 Your result should be: 15342 31, which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
@@ -183,11 +183,11 @@ Your result should be: 15342 31, which means there are 15342 records or observat
 summary(CUST_INSUR_LTV[,1:31])
 ```
 
-You can also specify one or more, or a range of columns to see the summary of only those columns.
+You can also specify one, multiple, or a range of columns to see the summary statistics of those columns.
 
 ![summary](./images/summary-1.png)
 
-The summary() call summarizes all the mentioned attributes, how many, how much, minimum values, maximum values, etc. Notice the reference to the given set of columns (attributes) of the table using the order numbers for the columns. You can also see a summary of individual attributes by specifying a specific column by name or number.
+The summary() call summarizes all the specified attributes, along with statistics for frequency counts, minimum values, maximum values, etc. Notice the reference to the given set of columns (attributes) of the table using the order numbers for the columns. You can also see a summary of individual attributes by specifying a specific column by name or number.
 
 2A.5: Statistical Functions (min, max, mean, mode, median, range, unique, quantile)
 
