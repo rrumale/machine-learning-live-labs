@@ -324,9 +324,6 @@ Use the package ggplot2 to generate a plot for visualizing LTV for various regio
 When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory. 
 
 ```
-class(CUST_INSUR_LTV)
-CIL <- ore.pull(CUST_INSUR_LTV)
-class(CIL)
 CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot() 
 ```
 
@@ -337,8 +334,7 @@ Your output should look as follows.
 Let’s look at another plot using ggplot2 for Salary distribution in all regions.
 
 ```
-class(CIL)
-print(CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count"))
+CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count", color = "darkred", fill = "#69b3a2")  
 ```
 
 Your output should look as follows.
@@ -348,7 +344,7 @@ Your output should look as follows.
 Let’s also look at the age distribution in the customer base.
 
 ```
-print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count"))
+print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
 ```
 
 Your output should look as follows.
