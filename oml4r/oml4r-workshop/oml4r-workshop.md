@@ -1,10 +1,10 @@
 ## OML4R Live Lab
 
-Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R is the new name for Oracle R Enterprise.
+Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R was formerly known as Oracle R Enterprise (ORE).
 
-In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer record has about 30 attributes. Your goal is to train a Machine Learning model to predict a given customer's life-time value (or LTV) and their LTV_BIN placement. You will use a regression algorithm to predict LTV, and a classification algorithm to predicts customers’ LTV_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH)
+In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. Each customer record has 31 attributes. Your goal is to train machine learning models to predict a given customer's lifetime value (or LTV) and a four-level category representation of their LTV(LTV_BIN). You will use a regression algorithm to predict LTV, and a classification algorithm to predicts customers’ LTV_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH)
 
-Note: In marketing, the life-time value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
+Note: In marketing, the lifetime value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over its lifetime.
 
 ### Estimated Lab Time: 2 Hours
 
@@ -14,14 +14,14 @@ In this lab, you will:
 
 * Establish a connection from RStudio Web to your Oracle Database instance.
 * Explore, visualize, and prepare data for analysis and machine learning.
-* Use R for exploratory data analysis, data visualization, data organization (e.g., bucketing of data in train and test buckets),
-* Use Attribute Importance, Principle Component Analysis, model building, and model validations techniques
-* Use an OML4R regression algorithm for building and training a ML model for estimating customer life-time value (LTV)
-* Use an OML4R classification algorithm for building and training a ML model for LTV_BIN assignment
-* Validate predictions using RMSE (Root Mean Squared Error) and Confusion Matrix methods
+* Use R for exploratory data analysis, data visualization, data organization (e.g., splitting data in train and test sets),
+* Use Attribute Importance and Principle Component Analysis
+* Use an OML4R in-database regression algorithm for building a machine learning model for estimating customer lifetime value (LTV)
+* Use an OML4R in-database classification algorithm for building a machine learning model for predicting LTV_BIN
+* Assess model quality using RMSE (Root Mean Squared Error) for regression and a confusion matrix for classification
 
 Note: 
-1. We will not be using AutoML UI in this lab. AutoML UI is currently not available for OML4R (it is only available for OML4Py). 
+1. AutoML is not available for OML4R. AutoML is a feature of OML4Py and is available with Autonomous Database through the OML AutoML UI. 
 2. We will not be using Autonomous Database as OML4R is currently not available for Autonomous Database.
 
 ### Pre-requisites
@@ -35,7 +35,7 @@ RStudio provides an IDE (Integrated Development Environment) for R with a GUI (G
 
 You will be running all the lab steps in the RStudio R Script window as shown below.
 
-1.1: Point Browser To RStudio Web
+1.1: Point browser to RStudio Web
 
 ```
 http://<ip-address>:8787
