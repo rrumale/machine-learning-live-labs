@@ -369,7 +369,7 @@ nrow(filter(CUST_INSUR_LTV, SALARY > 110000))
 nrow(CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE)))
 ```
 
-Note that the 'na.rm' specification directs treatment of non-available measurements. 'na.rm = TRUE' removes missing values from the dataset if they are coded as NA.
+Note that the 'na.rm' specification directs treatment of missing values. 'na.rm = TRUE' removes missing values from the dataset if they are coded as NA.
 
 Use the aggregate() function to group data based on given column or set of columns.
 
@@ -383,7 +383,7 @@ You should see output as follows.
 
 2C.2: Missing and Zero Values
 
-Check number of observations (records) where customer age is specified as 0.
+Check the number of observations (records) where customer age is specified less than 1.
 
 ```
 nrow(CUST_INSUR_LTV %>% filter(AGE < 1, na.rm = TRUE))
@@ -403,9 +403,9 @@ You should see output as follows.
 
 ![rmadd](./images/rmadd-1.png)
 
-2C.4 Fine Tuning The Given Dataset
+2C.4 Fine tuning the given gataset
 
-Check existence of duplicate data.
+Check for the existence of duplicate data.
 
 ```
 CXL <- ore.pull(CUST_INSUR_LTV)
@@ -440,15 +440,15 @@ Use Attribute Importance to identify attributes of high relevance in predicting 
 
 The ore.odmAI() function can be used to run Attribute Importance on the given dataset. This helps identify attributes in the given dataset that are important in predicting the given dependent attribute (LTV_BIN in this case). 
 
-In order to use the ore.odmAI() function effectively, you should first exclude the most significant dependent attributes from the data frame. For example, exclude LTV attribute when predicting LTV_BIN and exclude LTV_BIN when predicting LTV.
-
-Assess attribute importance for dependent variable LTV_BIN. As you know that LTV_BIN is highly correlated with LTV. Thus first exclude LTV from the data frame.
+In order to use the ore.odmAI() function effectively, you should first exclude the most significant dependent attributes from the data frame. For example, exclude LTV attribute when predicting LTV_BIN and exclude LTV_BIN when predicting LTV, since LTV_BIN was derived from LTV.
 
 ```
 CIL <- CUST_INSUR_LTV
 CIL$LTV <- NULL
 dim(CIL)
 ```
+
+You could also exclude a column using the R Formula itself. For example use (LTV_BIN ~ . - CUST_ID) to remove the CUST_ID column from the dataset.
 
 Notice the dimensions now show (15342 30), and not (15342 31) as was originally the case. Now, run the odmAI() function to identify ordered importance of attribute for target variable LTV_BIN.
 
