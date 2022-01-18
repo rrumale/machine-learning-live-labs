@@ -68,11 +68,11 @@ if (!require("caTools")) install.packages("caTools")
 if (!require(“janitor”)) install.packages(“janitor”) 
 ```
 
-The above checks the existence of the given package in the present installation. It only installs the package if the given package is not already already installed, thus eliminating redundant installation of packages.
+The above checks the existence of the given package in the present installation. It only installs the package if the given package is not already installed, thus eliminating redundant installation of packages.
 
 1.4: Load Libraries
 
-The library() function call installs (loads) the given library in to memory and makes the included functions available. If a call to a function is made and the corresponding library is not already installed, you get an error.
+The library() function call installs attaches the given library in memory and makes the included functions available. If a call to a function is made and the corresponding library is not already attached, you get an error.
 
 ```
 library(ORE)
@@ -86,17 +86,15 @@ dplyr - The standard dplyr R package provides grammar of data manipulation, whic
 
 OREdplyr - The OREdplyr package is an overloaded package that provides much of the dplyr functionality. It extends the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes. Further, using the transparency layer operations are not constrained by R client memory, the latency of data movement, or single-threaded execution. 
 
-1.5: Set Global Options To Disable Unnecessary Warning Messages
+1.5: Set Global Options to Disable Unnecessary Warning Messages
 
-Oracle Machine Learning for R provides the ability to create ordered or unordered ore.frame objects. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object.
-
-The ore.warn.order global option specifies whether you want OML4R to display a warning message if you use an unordered ore.frame object in a function that requires ordering. If you know what to expect in an operation, then you might want to turn the warnings off so they do not appear in the output.
+Turn off warnings to simplify the flow.
 
 ```
 options(ore.warn.order=FALSE)
 ```
 
-1.6: Connect To Database
+1.6: Connect to the Database
 
 An Oracle 21c database instance (named MLPDB1) has been provisioned for you to run this lab. Connect to the provided database using the ore.connect() function as follows:
 
@@ -128,7 +126,7 @@ ore.connect(user="oml_user",
 ore.is.connected()
 ```
 
-If needed, you can use ore.disconnect() call to explicitly disconnect the database session.
+If needed, you can use ore.disconnect() call to explicitly disconnect the database session. As we will discuss later, if you do this, then any temporary table, view, or model proxy objects will be automatically deleted.
 
 1.8: List Database Objects
 
