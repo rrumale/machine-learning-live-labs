@@ -504,12 +504,17 @@ The output below should illustrate the relative significance of the principal co
 The summary() function in the result object shows standard deviation, proportion of variance explained by each principal component, and the cumulative proportion of variance.
 
 
-## Task 3: Build Regression Model for LTV Prediction & Validate Model
+## Task 3: Build Regression Model for LTV Prediction and Evaluate Model
 
 
 3.1: Create Ordered ORE Frame
 
-Use the primary key of a database table to order an ore.frame object.
+Use the primary key of a database table to order an ore.frame object. 
+
+/* Oracle Machine Learning for R provides the ability to create ordered or unordered ore.frame objects. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object.
+
+The ore.warn.order global option specifies whether you want OML4R to display a warning message if you use an unordered ore.frame object in a function that requires ordering. If you know what to expect in an operation, then you might want to turn the warnings off so they do not appear in the output. */
+
 
 The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
 
