@@ -1,14 +1,16 @@
-# Creating models using OML Notebook and AutoML UI
+# Creating models using OML Notebooks and OML AutoML UI
 
-In this section we will connect to OML notebooks and split the data in train and test chunks. We will use the train data to run the AutoML UI and create a good model to make our prediction. The model we will deploy it to be used with rest services in the next sections.
+In this section we will connect to OML Notebooks and split the data in train and test chunks. We will use the train data to run the OML AutoML UI and create a good model to make our prediction. We will deploy the model for use with OML Services REST endpoints in the next sections.
+
+
 
 Estimated Time: 15 minutes
 
 ### Objectives
 
-* Create an OML Notebook
+* Create an OML notebook
 * Split the data into Train and Test Data
-* Use AutoML UI to create the models
+* Use OML AutoML UI to create the models
 * See the models created and Deploy one
 
 
@@ -19,7 +21,7 @@ Estimated Time: 15 minutes
 
 ##                                           
 
-## Task 1: Introduce Insurance Customer Data
+## Task 1: Connect to OML Notebooks and display Insurance Customer Data
 
 * In the Autonomous Database instance details page. Click on the Service Console button.
   ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
@@ -27,23 +29,13 @@ Estimated Time: 15 minutes
 * A new page with the service console is opened. In the Overview section we see the details of this specific instance. We can go to the Development section in the left side.
   ![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
-* In the Development section, notice the **Oracle Machine Learning RESTful services** section.
-  ![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
 
-  Note 2 important URLs from this section:
-  + The URL to obtain a REST authentication token for OML-provided REST APIs:
-  `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
-
-  + All OML Services REST APIs use the following common base URL:
-  `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
-
-
-* Click on Oracle Machine Learning Notebooks.
+* Click on Oracle Machine Learning User Interface.
   ![ADB-service-console](images/prerequisites-screenshot-24.jpg)
 
-* Connect to OML Machine Learning Notebooks in Autonomous Database
+* Login to OML Machine Learning User Interface in Autonomous Database
 
-  Access the OML Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case the credentials are:
+  Access the Oracle Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case the credentials are:
 
    - Username: **OMLUSER**
    - Password: **Welcome12345**
@@ -91,8 +83,8 @@ Estimated Time: 15 minutes
     ````
     ![create-training-table](images/automl-screenshot-4.jpg)
 
-    Notice that we skip the ``LTV`` column so it would not influence the results. We keep the ``LTV_BIN`` column to be the target for learning.
-    Our goal is to learn how customers are classified in the 4 groups, that are the ``LTV_BIN`` groups. For this particular workshop we leave outside 3 specific customers so we can use them to demo the test of our models.
+    Notice that we skip the ``LTV`` column so it would not influence the results. We keep the ``LTV_BIN`` column to be the target for our supervised learning classification model.
+    Our goal is to build a model that can predict which LTV category each customer likely belongs to. For this particular workshop we exclude 3 specific customers so we will score 3 different models using their data.
 
 
 * Create the test table for our Auto ML UI
@@ -111,7 +103,7 @@ Estimated Time: 15 minutes
     Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
 
 
-## Task 2: Use AutoML UI from Autonomous Database
+## Task 2: Use OML AutoML UI from Oracle Autonomous Database
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
 ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -138,7 +130,7 @@ Estimated Time: 15 minutes
 
     ![AutoML-additional-settings](images/automl-screenshot-9.jpg)
 
-    Notice that we can choose the Database Service Level to High, and select by which metric should we compare the algorithms, and which predefined algorithms to include or exclude from this experiment.
+    Notice that we can set the Database Service Level to High, and select by which metric we should compare the models, and which predefined algorithms to include or exclude from this experiment.
 
       - Choose the following options for your experiment:
 
@@ -154,17 +146,17 @@ Estimated Time: 15 minutes
 
     ![Precision and Recall](images/Model_metric.jpg)
 
-* Run the Auto ML for classification by clicking **```Start```** and **```Better Accuracy```**.
+* Run OML Auto ML experiment by clicking **```Start```** and **```Better Accuracy```**.
 
   ![Run-AutoML](images/automl-screenshot-10.jpg)
 
-  The AutoML Classification will run for several minutes showing which top 5 algorithms have a higher Balanced Accuracy. The running process takes around 10 minutes.
+  The AutoML Classification will run for several minutes showing which top 5 algorithms have a Better Accuracy. The running process takes around 10 minutes.
 
-* And the result of the Auto ML Classification
+* And the result of the experiment
 
   ![Classification Experiment Result](images/automl-screenshot-11.jpg)
 
-  Each model described here is based on an algorithm and ran against our training data. We can click on the model name and see its details.
+  Each model described here is based on one of the automatically selected algorithms. We can click on the model name and see its details.
 
   ![Chose a model](images/automl-screenshot-12.jpg)
 
@@ -172,11 +164,12 @@ Estimated Time: 15 minutes
 
   ![Model Prediction Impacts](images/automl-screenshot-13.jpg)
 
-  Notice how the other table columns impact differently our model and which column has a higher weight in it. We can click on the Confusion Matrix tab.
+  Notice how the other predictor columns impact our model differently and which columns have a higher weight. We can click on the Confusion Matrix tab.
 
   ![Model Confusion Matrix](images/automl-screenshot-14.jpg)
 
-  There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** what percentage of customers are actually in that class and what percentage are predicted to be in that class.
+  There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** what percentage of customers correctly predicted for each combination of actual and predicted values.
+
 
 * We can rename the Support Vector Machine model so it would be easier to recognize in the next sections. For this we can select the model and click on the Rename button.
 
@@ -186,14 +179,14 @@ Estimated Time: 15 minutes
 
   ![Model Rename ](images/automl-screenshot-X114.jpg)
 
-* The model is now renamed in the results page also.
+* The model is now renamed in the Leader Board.
 
   ![Model Rename ](images/automl-screenshot-X1114.jpg)
 
 
 ## Task 3: Deploy the model for REST API access using OML Services
 
-The next steps would be to take a model and deploy it for OML Services Rest API access.
+The next steps are to take a model and deploy it for OML Services for access via Rest endpoints.
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
   ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -236,7 +229,7 @@ The next steps would be to take a model and deploy it for OML Services Rest API 
 
 ## Task 4: Verify the classification prediction
 
-  * Return to the OML Notebook Scratchpad we created earlier. Click on the menu and chose Notebooks.
+  * Return to the OML Notebooks Scratchpad we created earlier. Click on the menu and chose Notebooks.
   ![Classification Prediction](images/automl-screenshot-21.jpg)
 
 
@@ -264,7 +257,7 @@ The next steps would be to take a model and deploy it for OML Services Rest API 
 
   ![Classification Prediction](images/automl-screenshot-34.jpg)
 
- In SQL statement it is returned the most probable group or class for the data provided. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
+ The SQL statement returns the most probable group or class for the data provided in the column PREDICTION with it’s corresponding prediction probabilty. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan

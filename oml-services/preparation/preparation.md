@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab we will start from a newly created Oracle Autonomous database and prepare it for our workshop.
+In this lab we will start from a newly created Oracle Autonomous Database instance and prepare it the workshop.
 
- We will collect the connection details like Tenancy ID, database name, create the users and passwords. After we will load the data into Autonomous Database and prepare to use it in the Machine Learning Notebooks.
+ You will collect the connection details like Tenancy ID, database name, create the users and passwords. After you will load the data into Autonomous Database and prepare to use it in Oracle Machine Learning Notebooks.
 
 
 Estimated Lab Time: 15 minutes
@@ -34,13 +34,13 @@ Estimated Lab Time: 15 minutes
 * In the Autonomous Database instance detail page, click on the Database Actions button.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
 
-* When prompt, enter the **Admin** username.
+* When prompted, enter the **Admin** username.
 ![ADB-actions-user](images/prerequisites-screenshot-4.jpg)
 
-* When prompt, enter the password for the Admin user and click Sign in.
+* When prompted, enter the password for the Admin user and click Sign in.
 ![ADB-actions-pass](images/prerequisites-screenshot-5.jpg)
 
-* Database Actions Launchpad page is now open. Here we have multiple tools available to easily manage and use the database, develop new applications or REST modules or manage the data inside the database.
+* The Database Actions launchpad page is now open. Here we have multiple tools available to easily manage and use the database, develop new applications or REST modules or manage data inside the database.
 
  We will choose Data Load option in the Data Tools category.
 ![ADB-data-load](images/prerequisites-screenshot-6.jpg)
@@ -78,10 +78,10 @@ The next step is to create the OML User and to add the data in his schema.
 * Returning in the Autonomous Database instance, click on Tools tab and click on the **Open Oracle ML User Administration**
 ![ADB-instance-home](images/prerequisites-screenshot-13.jpg)
 
-* In the Oracle Machine Learning Database Administrator credentials page enter the username: **ADMIN** and his password.
+* In the Oracle Machine Learning Database Administrator credentials page enter the username: **ADMIN** and password.
 ![ADB-oml-admin](images/prerequisites-screenshot-14.jpg)
 
-* In the Machine Learning User Administration  we see only the Admin user with the System Administrator role. Click on the Create button to create another user.
+* In the Machine Learning User Administration  we see only the ADMIN user with the System Administrator role. Click on the Create button to create another user.
 ![ADB-oml-admin](images/prerequisites-screenshot-15.jpg)
 
 * In the Create User page enter the following:
@@ -97,7 +97,7 @@ The next step is to create the OML User and to add the data in his schema.
     Click Create.
     ![ADB-oml-user](images/prerequisites-screenshot-16.jpg)
 
-* Now we have another user named OMLUSER available.
+* Now we have a new user named OMLUSER available.
 ![ADB-oml-user](images/prerequisites-screenshot-17.jpg)
 
 OMLUSER is also a database user and for the moment he doesn't have access to the customer insurance data we loaded in the admin user. so the next step is to move the data in the OMLUSER schema.
@@ -109,19 +109,19 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 * Returning in the Autonomous Database instance .Click **Database Actions**.
 ![ADB-instance-tools](images/prerequisites-screenshot-3.jpg)
 
-* When prompt, enter the **Admin** username.
+* When prompted, enter the **Admin** username.
 ![ADB-actions-user](images/prerequisites-screenshot-4.jpg)
 
-* When prompt, enter the password for the Admin user and click Sign in.
+* When prompted, enter the password for the Admin user and click Sign in.
 ![ADB-actions-pass](images/prerequisites-screenshot-5.jpg)
 
-* In the Database Actions Lounchpad click SQL to open Sql Developer web.
+* In the Database Actions Launchpad click SQL to open SQL Developer web.
 ![ADB-actions-sql](images/prerequisites-screenshot-18.jpg)
 
 * SQL Developer web opens.
 ![ADB-sql-web](images/prerequisites-screenshot-19.jpg)
 
-  Notice that it resembles the look and feel of the Sql Developer application. In the Left side we see the user: Admin and the table owned by the user. in our case it is just the **CUST\_INSUR\_LTV** table.
+  Notice that it resembles the look and feel of the SQL Developer application. In the Left side we see the user: Admin and the table owned by the user. in our case it is just the **CUST\_INSUR\_LTV** table.
 
   Write the following script to create the **CUSTOMER_INSURANCE** table in OMLUSER schema and click the Run button.
 
@@ -137,12 +137,12 @@ OMLUSER is also a database user and for the moment he doesn't have access to the
 * The table was created successfully.
 ![ADB-sql-web](images/prerequisites-screenshot-21.jpg)
 
-The next part is to use this data and create an AutoML model.
+The next step is to use this data and create an AutoML model.
 
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
-* **Contiributors** - Rajeev Rumale
+* **Contiributors** - Rajeev Rumale, Mark Hornick, Sherry LaMonica
 * **Last Updated By/Date** -  Andrei Manoliu, December 2021
 
 ## Need Help?

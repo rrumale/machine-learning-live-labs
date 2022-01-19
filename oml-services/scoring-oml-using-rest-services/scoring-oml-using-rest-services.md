@@ -1,19 +1,19 @@
-# Scoring OML model using OML Services
+# Scoring Data using OML Services
 
-In this lab we will learn about accessing ML model using OML Services REST API.  We will use postman and curl to test the REST services, the required software is pre-installed on the virtual machine assigned.
+In this lab we will learn about accessing our deployed machine learning model using the OML Services REST API.  We will use Postman and cURL to invoke the REST API, the required software is pre-installed on the virtual machine assigned.
 
 
 Estimated Time: 15 minutes
 
 ### Objectives
-* Run POSTMAN call to get the Authentication Token
-* Score the model using POSTMAN
-* Run the CURL call to get the Authentication Token
-* Score the model using CURL
+* Use POSTMAN to invoke a REST endpoint to get the Authentication Token
+* Use the model to score data using POSTMAN
+* Run the cURL command to get the Authentication Token
+* Use the model to score data using CURL
 
 ### Prerequisites
-* The OML model saved and deployed in Autonomous Database.
-* POSTMAN and CURL available on your working environment
+* The OML model deployed to OML Services.
+* POSTMAN and cURL available on your working environment
 
 ##                                        
 ## Task 1: Access the model using REST APIs using POSTMAN
@@ -43,7 +43,7 @@ Estimated Time: 15 minutes
 
 ### Task 1.2: Authorize OML Services User
 
-  To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
+  To access OML Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the OML User Management Cloud Service REST endpoint /oauth2/v1/token.
 
   The access token has a life span of one hour and can be refreshed before it expires.
     - A token can be refreshed up to 8 hours.
@@ -58,7 +58,7 @@ Estimated Time: 15 minutes
   ````
 
   Where:
-     - `<oml-cloud-service-location-url>`: is a variable containing the REST server portion of the Oracle Machine Learning User Management Cloud Service instance URL that includes the tenancy ID and database name.
+     - `<oml-cloud-service-location-url>`: is a variable containing the REST server portion of the Oracle Machine Learning User Management Cloud Service instance URL that includes the tenancy ID, region and database name.
 
 #### Obtain the `oml-cloud-service-location-url` URL
 
@@ -168,7 +168,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 
   ![Postman Model Score Access](images/automl-screenshot-29.jpg)
 
-  In the Body tab enter the Fran Hobs data in RAW format. Notice that we are not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data
+  In the Body tab enter the Fran Hobs data in RAW format.
 
     ````
     <copy>
@@ -328,11 +328,11 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 
 
 
-## Task 2: Access the model using REST APIs using CURL
+## Task 2: Access the model using REST APIs using cURL
 
 ### Task 2.1: Prepare the REST calls
 
-To access Oracle Machine Learning Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your Oracle Machine Learning Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
+To access OML Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use cURL with the -d option to pass the user name and password for your OML Services account against the Oracle Machine Learning User Management Cloud Service REST endpoint /oauth2/v1/token.
 
 * In the VM open a terminal and export the environment
 
