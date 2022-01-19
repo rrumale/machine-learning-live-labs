@@ -38,7 +38,7 @@ Convert the model:
 
       ``onnxmltools.utils.save_model(onnxclassnn, 'onnxclassnn.onnx')``
 
-* create the manifest files
+* create the metadata.json file containing the function description.
 
       ``metadata = {"function": "classification", "classificationProbOutput": "output_probability"}``
       ``with open('metadata.json', mode='w') as f:
@@ -370,7 +370,7 @@ In the Body tab we are providing the data in the format with ``categorical_data`
 </copy>
 ```
 
-Notice that we are still not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data.
+
 Here, topN filters the classification result showing the N highest probabilities, as shown in the scoring results below:
 
 Click Send
