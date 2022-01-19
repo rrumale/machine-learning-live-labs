@@ -493,6 +493,8 @@ prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALA
 summary(prc0)
 ```
 
+Note: The prcomp() function is overloaded to build a model on an ore.frame.
+
 Setting the argument scale=TRUE, standardizes the input data so that it has zero mean and variance one before doing PCA.
 
 The output below should illustrate the relative significance of the principal components used from the dataset.
