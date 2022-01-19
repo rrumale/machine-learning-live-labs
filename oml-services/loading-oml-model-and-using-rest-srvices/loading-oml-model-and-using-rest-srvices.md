@@ -1,6 +1,6 @@
-# Loading an OML  model and score it using OML Services
+# Loading an OML model in OML Services and using it
 
-In this section of the workshop we will import and score the Decision Tree model used on the OML4PY workshop Step 3 in our Autonomous Database and score it using REST APIs
+In this section of the workshop we will import and score the Decision Tree model used on the OML4Py workshop Step 3 in our Autonomous Database and score it using REST APIs
 
 Estimated Time: 20 minutes
 
@@ -13,7 +13,7 @@ We are going to run the next steps:
 
 
 ### Prerequisites
-* Run the OML4PY workshop. (Optional)
+* Run the OML4Py workshop. (Optional)
 * Autonomous Database created
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
