@@ -470,7 +470,9 @@ Use Attribute Importance (the ore.odmAI() function) to identify attributes of re
 CIL <- CUST_INSUR_LTV
 CIL$LTV_BIN <- NULL
 dim(CIL)
-ore.odmAI(LTV ~ ., CIL)
+ltvai <- ore.odmAI(LTV ~ ., CIL)
+class(ltvai)  
+print(ltvai)
 ```
 
 Attribute importance ranks attributes according to their significance in predicting a target. The ore.odmAI() function produces a ranking of attributes and their importance expressed as a fraction.
@@ -478,8 +480,6 @@ Attribute importance ranks attributes according to their significance in predict
 As seen below, Attribute Importance (AI) ranks attributes according to their significance in predicting a target. 
 
 ![ailtv](./images/ai-2.png)
-
-The model object is not retained, and an R model object is not returned. Only the importance ranking created by the model is returned.
 
 Do you notice the difference between AI output for LTV and for LTV_BIN?.
 
