@@ -527,13 +527,13 @@ The output should show the following.
 
 ![prcomp](./images/rownames-1.png)
 
-Note: Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object.
+Note: Using an ordered ore.frame proxy object can result in certain overheads for a large data set. This is because ordering (sorting) of the result set is performed, which can be time consuming. Therefore, although OML4R attempts to create ordered ore.frame objects by default if a primary key is specified, unordered frames can be made ordered and vice-versa by using the row.names() function.
 
-3.2: Partition Data For Training & Testing
+3.2: Partition Data for Training & Testing
 
 Split the dataset into two buckets - training data set (~70%), and testing data set (~30%).
 
-The 'seed' can be set to any value. Setting a 'seed' ensures the same output is reproduced by the R psuedonumber generator, if your run the code again. This can be helpful for consistency and debugging purposes.
+The 'seed' can be set to any value. Setting a 'seed' ensures the same output is reproduced by the R psuedonumber generator, when you rerun your code. This can be helpful for consistency and debugging purposes.
 
 ```
 set.seed(1)
@@ -548,7 +548,7 @@ CIL.test <- CIL[group==TRUE,]
 
 Note that the sample size is specified as 4600 (about 30% of the dataset volume).
 
-3.3: Check Class & Dimensions Of Training And Test Datasets
+3.3: Check Class and Dimensions of Training and Test Datasets
 
 ```
 class(CIL.train)
@@ -610,7 +610,7 @@ Your output should look as follows.
 ![orefit1preds](./images/orefit1preds-1.png)
 
 
-3.7: Compare Actual & Predicted Values
+3.7: Compare Actual and Predicted Values
 
 ```
 CIL_pred <- ore.predict(oreFit1A, CIL, se.fit = TRUE, interval = "prediction")
