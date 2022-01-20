@@ -1,4 +1,4 @@
-## OML4R Live Lab
+## About this workshop
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R was formerly known as Oracle R Enterprise (ORE).
 
@@ -509,12 +509,7 @@ The summary() function in the result object shows standard deviation, proportion
 
 3.1: Create Ordered ORE Frame
 
-Use the primary key of a database table to order an ore.frame object. 
-
-/* Oracle Machine Learning for R provides the ability to create ordered or unordered ore.frame objects. Using an ordered ore.frame object that is a proxy for a SQL query can be time-consuming for a large data set. Therefore, although OML4R attempts to create ordered ore.frame objects by default, it also provides the means of creating an unordered ore.frame object.
-
-The ore.warn.order global option specifies whether you want OML4R to display a warning message if you use an unordered ore.frame object in a function that requires ordering. If you know what to expect in an operation, then you might want to turn the warnings off so they do not appear in the output. */
-
+Most operations in R do not needed an ordered frame. Therefore, usually use.keys is set to FALSE. However, for sampling and partitioning etc. ordering of frames is necessary. Since you will be sampling data at this stage, use the primary key of a database table to order an ore.frame object. 
 
 The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
 
