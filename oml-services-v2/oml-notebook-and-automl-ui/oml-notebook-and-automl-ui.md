@@ -56,52 +56,7 @@ Estimated Time: 15 minutes
 
  Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning.
 
-* Drop training and test tables if they exist
-
-    ````
-    <copy> %script
-    DROP TABLE Customer_insurance_train_classification;
-
-    DROP TABLE Customer_insurance_test_classification;
-    </copy>
-    ````
-    ![drop-model-tables](images/automl-screenshot-3.jpg)
-
-    If the tables don't exist, the script will return an error. We will create the tables in the next steps
-
- * Create the training table for our Auto ML UI
-
-    ````
-    <copy>
-    %script
-    create table Customer_insurance_train_classification as
-    select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV_BIN"
-    from customer_insurance
-    SAMPLE (85) SEED (1)
-    where cust_id not in ('CU12350','CU12331', 'CU12286')
-    </copy>
-    ````
-    ![create-training-table](images/automl-screenshot-4.jpg)
-
-    Notice that we skip the ``LTV`` column so it would not influence the results. We keep the ``LTV_BIN`` column to be the target for our supervised learning classification model.
-    Our goal is to build a model that can predict which LTV category each customer likely belongs to. For this particular workshop we exclude 3 specific customers so we will score 3 different models using their data.
-
-
-* Create the test table for our Auto ML UI
-
-    ````
-    <copy>%script
-    create table Customer_insurance_test_classification as
-    select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK"
-    from customer_insurance
-    minus
-    select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK" from Customer_insurance_train_classification
-    </copy>
-    ````
-    ![create-test-table](images/automl-screenshot-5.jpg)
-
-    Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
-
+    Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process.
 
 ## Task 2: Use OML AutoML UI from Oracle Autonomous Database
 
@@ -135,16 +90,13 @@ Estimated Time: 15 minutes
       - Choose the following options for your experiment:
 
         - Database Service Level: **High**
-        - Model Metric: **F1**
-        - Weight Option: **Weighted**
+        - Model Metric: **BALANCED ACCURACY**
+        - Weight Option: **??????**
 
     ![AutoML-additional-settings](images/automl-screenshot-9a.jpg)
 
-    The F1 score is the harmonic mean of the precision and recall; where the precision is the number of true positive results divided by the number of all positive results, including those not identified correctly, and the recall is the number of true positive results divided by the number of all samples that should have been identified as positive. Precision is also known as positive predictive value, and recall is also known as sensitivity in diagnostic binary classification.
 
-    **F1-score = 2 × (precision × recall)/(precision + recall)**
-
-    ![Precision and Recall](images/Model_metric.jpg)
+### Remove columns: LTV, First Name, Last Name
 
 * Run OML Auto ML experiment by clicking **```Start```** and **```Better Accuracy```**.
 
@@ -227,7 +179,7 @@ The next steps are to take a model and deploy it for OML Services for access via
   We can now use REST APIs to query the model, model scoring and scoring for specific data.
 
 
-## Task 4: Verify the classification prediction
+## Task 4: Score data against the model using SQL
 
   * Return to the OML Notebooks Scratchpad we created earlier. Click on the menu and chose Notebooks.
   ![Classification Prediction](images/automl-screenshot-21.jpg)
