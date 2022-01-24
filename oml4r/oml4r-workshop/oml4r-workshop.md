@@ -823,11 +823,11 @@ Your results should be as follows.
 How does the confusion matrix compare with the one generated previously?
 
 
-## Task 5: Use Embedded R Functions To Leverage In-Database Parallel Processing
+## Task 5: Use Embedded R Functions to Leverage In-Database Parallel Processing
 
-5.1: Embedded R For Real-Time Model Building And Predictions
+5.1: Embedded R For Real-Time Model Building and Predictions
 
-Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R allows you to store and run R scripts in the database through either an R interface or a SQL interface, or both the interfaces.
+Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R execution allows you to store and run R scripts in the database using R and SQL interfaces.
 
 ```
 test <- function() {
