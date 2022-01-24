@@ -858,6 +858,8 @@ Your results should be as follows.
 
 Note: The above example function performs several steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
 
+R objects, including OML4R proxy objects, exist for the duration of the current R session unless you explicitly save them in a datastore. You can store database objects, such as Machine Learning models, in the Oracle Database using OML4R datastores. A datastore persists in the database when you end the R session. You use ore.save() function to store the object in the datastore and ore.load() function to retrieve it for scoring. 
+
 Now, check the predicted values. You can of course, use it in different ways in an application.
 
 ```
