@@ -597,13 +597,15 @@ Your output should look as follows.
 
 Generate LTV predictions using ore.predict.
 
-The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict() on the oreFit1 model produced above and uses CIL.test dataset to score the model.
+The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.predict() on the oreFit1 model produced above and uses CIL.test dataset to score the model.
 
 ```
 pred1A = ore.predict(oreFit1A, newdata = CIL.test)
 
 head(pred1A)
 ```
+
+Note: Using the ore.predict function to score data in the database allows the use of R-generated models to score in-database data (in an ore.frame object). The ore.predict function maximizes the use of Oracle Database as a compute engine which provides a commercial grade, high performance, scalable scoring engine.
 
 Your output should look as follows.
 
