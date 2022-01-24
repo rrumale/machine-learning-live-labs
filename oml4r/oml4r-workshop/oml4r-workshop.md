@@ -914,18 +914,18 @@ summary(res2.local)
 
 61:  Conclusion
 
-OML4R enables you to leverage the power of R, a leading statistical programming language, with the Oracle Database, the world’s most advanced, and high-performance database. OML4R provides simple, easy to use functions to perform exploratory data analysis including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle database backend to eliminate the need for data movement while utilizing in-database parallel processing. Embedded R enables you to use advanced machine learning capabilities in real-time and creates the possibility of generating unprecedented value from your database resident data.
+OML4R enables you to leverage the power of R, a leading statistical programming language, with Oracle Database, the world’s most advanced, and high-performance database. OML4R provides simple, easy to use functions to perform exploratory data analysis including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle Database to eliminate the need for data movement while utilizing in-database parallel processing.
 
 6.2: Next Steps
 
 a) Sign-up: OCI Always Free Tier
 
-Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects.
+Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects. Note that OML4R is currently not supported on Autonomous Database. However, you can use Oracle Database installed in a compute VM and OML4R.
 
 b) Get Certified: Oracle Machine Learning with Oracle Autonomous Database Certification
 Consider taking the Oracle Machine Learning with Oracle Autonomous Database Certification offered by Oracle University.
 
 
 ## Acknowledgements
-* **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
-* **Last Updated By/Date** -  Ravi Sharma, 01/13/2022
+* **Authors** - Ravi Sharma, Rajeev Rumale, Milton Wan
+* **Last Updated By/Date** -  Ravi Sharma, 01/24/2022
