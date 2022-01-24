@@ -856,7 +856,7 @@ Your results should be as follows.
 ![embedded-1](./images/embedded-1.png)
 
 
-Note: The above example function performs a number of steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
+Note: The above example function performs several steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
 
 Now, check the predicted values. You can of course, use it in different ways in an application.
 
