@@ -503,6 +503,15 @@ The output below should illustrate the relative significance of the principal co
 
 The summary() function in the result object shows standard deviation, proportion of variance explained by each principal component, and the cumulative proportion of variance.
 
+2C.8 Save the object in a datastore
+
+```
+ore.save(prc0, name = "MY_PRC", overwrite = TRUE)
+ore.datastore()
+ore.datastore(name = "MY_PRC", type = c("all"))
+```
+
+If you do not want to overwrite but append the object to the datastore, you can use "append = TRUE".
 
 ## Task 3: Build Regression Model for LTV Prediction and Evaluate Model
 
