@@ -674,7 +674,8 @@ There is no ideal value for RMSE as it depends on the magnitude of the measure.
 3.9: Store (Save) Model In Database
 
 ```
-ore.save(oreFit1A)
+ore.save(oreFit1A, name = "OREFIT1A")
+ore.datastore()
 ```
 
 
