@@ -791,7 +791,8 @@ A confusion matrix is used to describe the performance of a classification model
 4.8: Store (Save) Model In Database
 
 ```
-ore.save(oreFit2A)
+ore.save(oreFit2A, name = "OREFIT2A")
+ore.datastore()
 ```
 
 4.9: Optionally, use another algorithm to create a different model and compare the results. 
@@ -829,6 +830,13 @@ Your results should be as follows.
 
 ![orefit2b](./images/orefit2b-1.png)
 
+
+You may save this model in the datastore as follows:
+
+```
+ore.save(oreFit2B, name = "OREFIT2B")
+ore.datastore()
+```
 
 How does the confusion matrix compare with the one generated previously?
 
