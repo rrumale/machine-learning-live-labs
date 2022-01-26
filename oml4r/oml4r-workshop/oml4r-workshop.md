@@ -503,6 +503,15 @@ The output below should illustrate the relative significance of the principal co
 
 The summary() function in the result object shows standard deviation, proportion of variance explained by each principal component, and the cumulative proportion of variance.
 
+2C.8 Save the object in a datastore
+
+```
+ore.save(prc0, name = "MY_PRC", overwrite = TRUE)
+ore.datastore()
+ore.datastore(name = "MY_PRC", type = c("all"))
+```
+
+If you do not want to overwrite but append the object to the datastore, you can use "append = TRUE".
 
 ## Task 3: Build Regression Model for LTV Prediction and Evaluate Model
 
@@ -597,13 +606,15 @@ Your output should look as follows.
 
 Generate LTV predictions using ore.predict.
 
-The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.oredict() on the oreFit1 model produced above and uses CIL.test dataset to score the model.
+The ore.predict function is invoked on a model. For example, the following code generates predictions (predA) by invoking ore.predict() on the oreFit1 model produced above and uses CIL.test dataset to score the model.
 
 ```
 pred1A = ore.predict(oreFit1A, newdata = CIL.test)
 
 head(pred1A)
 ```
+
+Note: Using the ore.predict function to score data in the database allows the use of R-generated models to score in-database data (in an ore.frame object). The ore.predict function maximizes the use of Oracle Database as a compute engine which provides a commercial grade, high performance, scalable scoring engine.
 
 Your output should look as follows.
 
@@ -821,11 +832,11 @@ Your results should be as follows.
 How does the confusion matrix compare with the one generated previously?
 
 
-## Task 5: Use Embedded R Functions To Leverage In-Database Parallel Processing
+## Task 5: Use Embedded R Functions to Leverage In-Database Parallel Processing
 
-5.1: Embedded R For Real-Time Model Building And Predictions
+5.1: Embedded R For Real-Time Model Building and Predictions
 
-Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R allows you to store and run R scripts in the database through either an R interface or a SQL interface, or both the interfaces.
+Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R execution allows you to store and run R scripts in the database using R and SQL interfaces.
 
 ```
 test <- function() {
@@ -854,7 +865,9 @@ Your results should be as follows.
 ![embedded-1](./images/embedded-1.png)
 
 
-Note: The above example function performs a number of steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
+Note: The above example function performs several steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
+
+R objects, including OML4R proxy objects, exist for the duration of the current R session unless you explicitly save them in a datastore. You can store database objects, such as Machine Learning models, in the Oracle Database using OML4R datastores. A datastore persists in the database when you end the R session. You use ore.save() function to store the object in the datastore and ore.load() function to retrieve it for scoring. 
 
 Now, check the predicted values. You can of course, use it in different ways in an application.
 
@@ -912,18 +925,18 @@ summary(res2.local)
 
 61:  Conclusion
 
-OML4R enables you to leverage the power of R, a leading statistical programming language, with the Oracle Database, the world’s most advanced, and high-performance database. OML4R provides simple, easy to use functions to perform exploratory data analysis including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle database backend to eliminate the need for data movement while utilizing in-database parallel processing. Embedded R enables you to use advanced machine learning capabilities in real-time and creates the possibility of generating unprecedented value from your database resident data.
+OML4R enables you to leverage the power of R, a leading statistical programming language, with Oracle Database, the world’s most advanced, and high-performance database. OML4R provides simple, easy to use functions to perform exploratory data analysis including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle Database to eliminate the need for data movement while utilizing in-database parallel processing.
 
 6.2: Next Steps
 
 a) Sign-up: OCI Always Free Tier
 
-Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects.
+Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects. Note that OML4R is currently not supported on Autonomous Database. However, you can use Oracle Database installed in a compute VM and OML4R.
 
 b) Get Certified: Oracle Machine Learning with Oracle Autonomous Database Certification
 Consider taking the Oracle Machine Learning with Oracle Autonomous Database Certification offered by Oracle University.
 
 
 ## Acknowledgements
-* **Authors** - Ravi Sharma, Pedro Torres, Milton Wan
-* **Last Updated By/Date** -  Ravi Sharma, 01/13/2022
+* **Authors** - Ravi Sharma, Rajeev Rumale, Milton Wan
+* **Last Updated By/Date** -  Ravi Sharma, 01/24/2022
