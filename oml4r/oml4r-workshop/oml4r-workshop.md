@@ -849,6 +849,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
 5.1: Import libraries and connect to the database
 
+```
 library(ORE)
 options(ore.warn.order=FALSE)
 
@@ -859,27 +860,34 @@ ore.connect(user="oml_user",
             all=TRUE)
 
 ore.is.connected()
+```
 
 5.2 Select Algorithm and Build Machine Learning Model  
 
 Let us first invoke a script with table as input and test using open source R test and the local R data frame.
 
+```
 cust_insur_ltv_loc <- ore.pull(CUST_INSUR_LTV)
 class(cust_insur_ltv_loc)
+```
 
+```
 glm.fit <- function(dat){
              glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = dat)}
 
 mod.loc <- glm.fit(cust_insur_ltv_loc)
 mod.loc
 class(mod.loc)
+```
 
 Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to “pull” data out.
 
+```
 glm.fit.oml4r <- ore.tableApply(CUST_INSUR_LTV, FUN=glm.fit)
 glm.fit.oml4r
 class(glm.fit.oml4r)
 ore.pull(glm.fit.oml4r)
+```
 
 5.3 Save Model in Datastore and 
 
@@ -922,8 +930,6 @@ scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
 class(scores.oml4r)
 ore.pull(scores.oml4r)
 ```
-
-
 
 ## Task 6: Conclusion
 
