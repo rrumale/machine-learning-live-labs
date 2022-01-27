@@ -862,6 +862,10 @@ ore.connect(user="oml_user",
 ore.is.connected()
 ```
 
+Your output should look as follows:
+
+![embr](./images/EmbR-1.png)
+
 5.2 Select Algorithm and Build Machine Learning Model  
 
 Let us first invoke a script with table as input and test using open source R test and the local R data frame.
@@ -880,6 +884,11 @@ mod.loc
 class(mod.loc)
 ```
 
+Your output should look as follows:
+
+![embr](./images/EmbR-2.png)
+
+
 Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to “pull” data out.
 
 ```
@@ -888,6 +897,11 @@ glm.fit.oml4r
 class(glm.fit.oml4r)
 ore.pull(glm.fit.oml4r)
 ```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-3.png)
+
 
 5.3 Save Model in Datastore and 
 
@@ -905,6 +919,11 @@ glm.pred <- function(dat, mod){
               return(data.frame(pred=predict(mod, newdata = dat), LTV=dat$LTV))}
 ```
 
+Your output should look as follows:
+
+![embr](./images/EmbR-4.png)
+
+
 5.4 Score Data Using ore.rowApply
 
 Let us first test locally, in open source R first.
@@ -914,6 +933,11 @@ scores.loc <- glm.pred(dat=cust_insur_ltv_loc, mod=mod.loc)
 head(scores.loc)
 class(scores.loc)
 ```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-5.png)
+
 
 Now score data using OML4R with database data
 
@@ -930,6 +954,11 @@ scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
 class(scores.oml4r)
 ore.pull(scores.oml4r)
 ```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-6.png)
+
 
 ## Task 6: Conclusion
 
