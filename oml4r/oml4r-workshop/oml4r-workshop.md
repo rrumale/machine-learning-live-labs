@@ -1,5 +1,3 @@
-https://github.com/rrumale/machine-learning-live-labs/blob/main/oml4r/oml4r-workshop/oml4r-workshop.md
-
 ## About this workshop
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R was formerly known as Oracle R Enterprise (ORE).
