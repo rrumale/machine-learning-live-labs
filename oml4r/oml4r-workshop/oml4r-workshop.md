@@ -674,7 +674,8 @@ There is no ideal value for RMSE as it depends on the magnitude of the measure.
 3.9: Store (Save) Model In Database
 
 ```
-ore.save(oreFit1A)
+ore.save(oreFit1A, name = "OREFIT1A")
+ore.datastore()
 ```
 
 
@@ -790,7 +791,8 @@ A confusion matrix is used to describe the performance of a classification model
 4.8: Store (Save) Model In Database
 
 ```
-ore.save(oreFit2A)
+ore.save(oreFit2A, name = "OREFIT2A")
+ore.datastore()
 ```
 
 4.9: Optionally, use another algorithm to create a different model and compare the results. 
@@ -829,96 +831,133 @@ Your results should be as follows.
 ![orefit2b](./images/orefit2b-1.png)
 
 
+You may save this model in the datastore as follows:
+
+```
+ore.save(oreFit2B, name = "OREFIT2B")
+ore.datastore()
+```
+
 How does the confusion matrix compare with the one generated previously?
 
 
 ## Task 5: Use Embedded R Functions to Leverage In-Database Parallel Processing
 
-5.1: Embedded R For Real-Time Model Building and Predictions
+Task 5: Use Embedded R Functions to Leverage In-Database Parallel Processing
 
 Some of the most significant benefits of using OML4R can be derived from using Embedded R execution in your applications. Embedded R execution allows you to store and run R scripts in the database using R and SQL interfaces.
 
-```
-test <- function() {
-  library(ORE)
-  ore.connect(user="oml_user",
-              conn_string="MLPDB1",
-              host="rinst5d",
-              password="oml_user",
-              all=TRUE)
-  CIL <- ore.pull(CUST_INSUR_LTV)
-  row.names(CIL) <- CIL$CUST_ID
-  sampleSize <- 4600 
-  set.seed(1) 
-  ind <- sample(1:nrow(CIL),sampleSize) 
-  group <- as.integer(1:nrow(CIL) %in% ind) 
-  CIL.test <- CIL[group==TRUE,] 
-  CIL.train <- CIL[group==FALSE,] 
-  glmfit1 <- glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = CIL.train)
-  pred <- predict(glmfit1, newdata = CIL.test)
-  pred 
-}
-```
-
-Your results should be as follows.
-
-![embedded-1](./images/embedded-1.png)
-
-
-Note: The above example function performs several steps including preparing the data, building the machine learning model, and then using it predict the target attribute. Many times all this may be unnecessary if all you want to do it to load and use a pre-build machine learning model, already stored in the database.
-
-R objects, including OML4R proxy objects, exist for the duration of the current R session unless you explicitly save them in a datastore. You can store database objects, such as Machine Learning models, in the Oracle Database using OML4R datastores. A datastore persists in the database when you end the R session. You use ore.save() function to store the object in the datastore and ore.load() function to retrieve it for scoring. 
-
-Now, check the predicted values. You can of course, use it in different ways in an application.
+5.1: Import libraries and connect to the database
 
 ```
-res <- ore.doEval(FUN=test)
-res
+library(ORE)
+options(ore.warn.order=FALSE)
+
+ore.connect(user="oml_user",
+            conn_string="MLPDB1",
+            host="rinst5d",
+            password="oml_user",
+            all=TRUE)
+
+ore.is.connected()
 ```
 
-Your results should be as follows.
+Your output should look as follows:
 
-![oredoeval-1](./images/oredoeval-1.png)
+![embr](./images/EmbR-1.png)
 
+5.2 Select Algorithm and Build Machine Learning Model  
 
-5.2: Embedded R for Real-Time LTV_BIN Prediction Using Pre-Built Classification Model
-
-Using ore.tableApply
-
-```
-res1 <- ore.tableApply(CUST_INSUR_LTV, 
-  function(dat){
-    mod1 <- ore.lm(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT, dat)   
-    mod1
-  })
-```
-
-Save the results and verify.
+Let us first invoke a script with table as input and test using open source R test and the local R data frame.
 
 ```
-ore.save(res1, name="MY_DS", overwrite=TRUE)
-class(res1)
-typeof(res1)
-res1.local <- ore.pull(res1)
-class(res1.local)
-summary(res1.local)
+cust_insur_ltv_loc <- ore.pull(CUST_INSUR_LTV)
+class(cust_insur_ltv_loc)
 ```
 
-![tableapply-1](./images/tableapply-1.png)
+```
+glm.fit <- function(dat){
+             glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = dat)}
 
-You can also use ore.groupApply and ore.rowApply functions as needed to leverage embedded R capabilities. For example:
+mod.loc <- glm.fit(cust_insur_ltv_loc)
+mod.loc
+class(mod.loc)
+```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-2.png)
+
+
+Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to “pull” data out.
 
 ```
-res2 <- ore.groupApply(CUST_INSUR_LTV,
-                       INDEX = CUST_INSUR_LTV$CUST_ID,
-                       function(dat) {
-                         lm(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT, dat)},
-                       parallel = TRUE)
-
-res2.local <- ore.pull(res2)
-class(res2.local)
-summary(res2.local)
+glm.fit.oml4r <- ore.tableApply(CUST_INSUR_LTV, FUN=glm.fit)
+glm.fit.oml4r
+class(glm.fit.oml4r)
+ore.pull(glm.fit.oml4r)
 ```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-3.png)
+
+
+5.3 Save Model in Datastore and 
+
+Save model in data store.
+
+```
+ore.save(glm.fit.oml4r, name = “GLMFITOML4R”)
+ore.datastore()
+```
+
+Create function for generating predictions for a given dataset.
+
+```
+glm.pred <- function(dat, mod){
+              return(data.frame(pred=predict(mod, newdata = dat), LTV=dat$LTV))}
+```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-4.png)
+
+
+5.4 Score Data Using ore.rowApply
+
+Let us first test locally, in open source R first.
+
+```
+scores.loc <- glm.pred(dat=cust_insur_ltv_loc, mod=mod.loc)
+head(scores.loc)
+class(scores.loc)
+```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-5.png)
+
+
+Now score data using OML4R with database data
+
+```
+scores.oml4r <- ore.rowApply(CUST_INSUR_LTV, 
+             FUN=glm.pred, 
+             mod=mod.loc, 
+             rows=200, 
+             ore.connect=TRUE, 
+             parallel=TRUE,
+             FUN.VALUE=data.frame(pred=numeric(0),
+                                  LTV=numeric(0)))
+
+class(scores.oml4r)
+ore.pull(scores.oml4r)
+```
+
+Your output should look as follows:
+
+![embr](./images/EmbR-6.png)
 
 
 ## Task 6: Conclusion
