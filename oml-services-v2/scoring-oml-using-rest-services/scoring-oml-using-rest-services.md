@@ -130,7 +130,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 
 ### Task 1.3:  Use REST calls to predict customer classification
 
-  In this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE\_TEST\_CLASIFICATION table:
+  In this Task we can test our prediction for 3 distinct customers from the CUSTOMER\_INSURANCE table:
    - ``CUST_ID = CU12350`` , ``LAST = FRAN``, ``FIRST = HOBBS``
    - ``CUST_ID = CU12331`` , ``LAST = AL`` , ``FIRST = FRANK``
    - ``CUST_ID = CU12286`` , ``LAST = ELLIOT`` , ``FIRST = PADGETT``
