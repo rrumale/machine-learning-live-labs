@@ -1,6 +1,6 @@
 # Loading an OML model in OML Services and using it
 
-In this section of the workshop we will import and score the Decision Tree model used on the OML4Py workshop Step 3 in our Autonomous Database and score it using REST APIs
+In this section of the workshop we will import and store the Decision Tree model in our OML Services repository and score it using REST APIs
 
 Estimated Time: 20 minutes
 
@@ -13,70 +13,14 @@ We are going to run the next steps:
 
 
 ### Prerequisites
-* Run the OML4Py workshop. (Optional)
 * Autonomous Database created
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
 
 ## Import the Decision Tree model
 
-Task 1 can be performed only if OML4PY workshop was ran on the same VM prior the OML-Services workshop, otherwise you can **skip to Task 2**.
 
-## Task 1: Extract the saved model to a file
-
-* Connect to the VM and open a Terminal window.
-
-  ![VM-Terminal](images/model-import-01.jpg)
-
-* Run these commands one by one:
-
-````
-. setEnv
-
-. oraenv
-
-ORACLE_SID = [mlcdb] ? - Hit Enter
-````
-
-  ![VM-Terminal](images/model-import-02.jpg)
-
-* Go to the OML_Services folder.
-
-````
-$<copy> cd ~/OML-Services</copy>
-````
-
-  ![VM-Terminal](images/model-import-03.jpg)
-
-
-* Run the `prepare_model_import.sql` script to write the exported DT_MODEL to a file on the operating system.
-
-````
-$ <copy> sqlplus sys/MLlearnPTS#21_@localhost:1521/mlpdb1.sub07141037280.rehevcn.oraclevcn.com as sysdba @prepare_model_import.sql</copy>
-````
-
-The script runs the following steps.
-
-  ![VM-Terminal](images/model-import-04.jpg)
-
-  - Creates the **`dmuser`** OS folder
-  - Creates the **`DMDIR`** database directory
-  - Creates a procedure that writes a BLOB to a file
-  - Writes the saved Decision Tree model to a file named **`DTModel.mod`**
-
-  Now we have the model saved in a file, the next steps are to load the model in Autonomous Database, deploy it there and score a customer.
-
-To check the exported file run the command:
-
-````
-$<copy>ls ~/dmuser</copy>
-````
-
-  ![VM-Terminal](images/model-import-05.jpg)
-
-
-
-## Task: 2: Store the model in the OML Services repository
+## Task: 1: Store the model in the OML Services repository
 
 *  In the Postman session opened run the following Get method to get the list of models deployed.
 
@@ -148,7 +92,7 @@ The response is that the model is created.
 Copy the **`modelId`** displayed in the JSON response.
 
 
-## Task: 3: Deploy the model
+## Task: 2: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
@@ -196,7 +140,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## Task: 4: Score a customer using the Decision Tree model
+## Task: 3: Score a customer using the Decision Tree model
 
 In this step we are going to score Fran Hobbs against our Decision Tree imported model.
 
