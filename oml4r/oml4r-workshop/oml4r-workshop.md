@@ -52,26 +52,26 @@ Use the provided username and password to connect to the database schema.
 
 ```
 
-Username: omluser 
+Username: omluser
 Password: MLlearnPTS#21_
 
 ```
-            
+
 ![connect](./images/connect-1.png)
 
 The RStudio interface looks as follows. Notice the multiple windows marked for their function.
 
 ![rstudio](./images/rstudio-1.png)
 
-The RStudio Graphical User Interface (GUI) provides four different panels: Console, Scripts, Environments, and Plots. Instead of working ad-hoc, writing scripts allows you to make your code and workflow reproducible. 
+The RStudio Graphical User Interface (GUI) provides four different panels: Console, Scripts, Environments, and Plots. Instead of working ad-hoc, writing scripts allows you to make your code and workflow reproducible.
 
 1.3: Install packages
 
 ```
 
-if (!require(“ORE”)) install.packages(“ORE”) 
-if (!require(“dplyr”)) install.packages(“dplyr”) 
-if (!require(“OREdplyr”)) install.packages(“OREdplyr”) 
+if (!require(“ORE”)) install.packages(“ORE”)
+if (!require(“dplyr”)) install.packages(“dplyr”)
+if (!require(“OREdplyr”)) install.packages(“OREdplyr”)
 
 ```
 
@@ -93,7 +93,7 @@ ORE - The ORE libraries are a set of packages that contains many useful R functi
 
 dplyr - The standard dplyr R package provides grammar of data manipulation, which gives a consistent set of verbs that help you solve the most common data manipulation challenges
 
-OREdplyr - The OREdplyr package is an overloaded package that provides much of the dplyr functionality. It extends the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes. Further, using the transparency layer operations are not constrained by R client memory, the latency of data movement, or single-threaded execution. 
+OREdplyr - The OREdplyr package is an overloaded package that provides much of the dplyr functionality. It extends the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes. Further, using the transparency layer operations are not constrained by R client memory, the latency of data movement, or single-threaded execution.
 
 1.5: Set Global Options to Disable Unnecessary Warning Messages
 
@@ -105,7 +105,7 @@ options(ore.warn.order=FALSE)
 
 ```
 
-For more details on this refer to the documentation. 
+For more details on this refer to the documentation.
 
 1.6: Connect to the Database
 
@@ -114,14 +114,14 @@ An Oracle 21c database instance (named MLPDB1) has been provisioned for you to r
 ```
 
 ore.connect(user="oml_user",
-            conn_string="MLPDB1",
-            host=<hostname>,
-            password=<password>,
-            all=TRUE)
+            conn_string="MLPDB1",
+            host=<hostname>,
+            password=<password>,
+            all=TRUE)
 
 ```
 
-Your database connection is to the database schema where the data resides. The connection port defaults to 1521. 
+Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
 
 By specifying “all = TRUE” in the connection specifications, proxy objects are automatically loaded for all tables and views in the target schema to which you are connecting.
 
@@ -173,9 +173,9 @@ class(CUST_INSUR_LTV)
 
 ```
 
-The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST_INSUR_LTV table in the database. 
+The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST_INSUR_LTV table in the database.
 
-There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance. 
+There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance.
 
 The class ore.frame inherits from data.frame and overloads many data.frame functions.
 
@@ -202,12 +202,12 @@ The dimensions represents the number of rows (i.e., records or observations) and
 
 Your result should be: 15342 31, which means there are 15342 records or observations (rows) in the table and each record has 31 attributes (columns).
 
-            
+
 ![basic](./images/basics-1.png)            
-            
+
 4: Summary (Categorical and Numerical Variables)
 
-The summary() function is a built-in R function that can help you get a quick survey of the distribution of your variables in the dataset. The output returns descriptive statistics such as the minimum, the 1st quantile, the median, the mean, the 3rd quantile, and the maximum value of our input data. 
+The summary() function is a built-in R function that can help you get a quick survey of the distribution of your variables in the dataset. The output returns descriptive statistics such as the minimum, the 1st quantile, the median, the mean, the 3rd quantile, and the maximum value of our input data.
 
 The summary function output may be seen as what is commonly known as the five-number summary plus mean.
 
@@ -329,7 +329,7 @@ plot(CUST_INSUR_LTV$LTV/1000, xlab = "Customer", ylab = “LTV in K$", col = "da
 
 ```
 
-2: Boxplot 
+2: Boxplot
 
 Plot the age attribute using a simple boxplot.
 
@@ -372,12 +372,12 @@ freq=TRUE)
 ```
 
 Your output should look as follows.
-            
+
 ![histogram](./images/histogram-1.png)
 
 4: Pie Chart
 
-Generate a pie chart for distribution of customers by region. Note that CLOCKWISE signifies to use alphabetical order. 
+Generate a pie chart for distribution of customers by region. Note that CLOCKWISE signifies to use alphabetical order.
 
 ```
 
@@ -386,7 +386,7 @@ pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution by Region", cloc
 ```
 
 Your output should look as follows.
-                        
+
 ![pie](./images/pie-1.png)
 
 Optionally, plot other attributes. For example,
@@ -401,11 +401,11 @@ pie(table(CUST_INSUR_LTV$MARITAL_STATUS), main = "Customer Distribution by Regio
 
 Use the package ggplot2 to generate a plot for visualizing LTV for various regions.
 
-When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory. 
+When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
 
 ```
 
-CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot() 
+CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot()
 
 ```
 
@@ -417,7 +417,7 @@ Optionally, plot other attributes.
 
 ```
 
-CIL %>% ggplot(aes(x=MARITAL_STATUS,y=LTV,color=MARITAL_STATUS)) + geom_boxplot() 
+CIL %>% ggplot(aes(x=MARITAL_STATUS,y=LTV,color=MARITAL_STATUS)) + geom_boxplot()
 
 ```
 
@@ -508,7 +508,7 @@ You should see output as follows.
 
 You observe you have most customers in the NORTHEAST and your penetration in the SOUTH and SOUTHEAST markets is relatively pretty low.
 
-Optionally, explore different attributes using the aggregate() function. 
+Optionally, explore different attributes using the aggregate() function.
 
 ```
 
@@ -575,7 +575,7 @@ remove(CUST_INSUR_LTV)
 colnames(CUST_INSUR_LTV)
 
 ```
-            
+
 You should see output as follows.
 
 ![rmadd](./images/rmadd-1.png)
@@ -764,7 +764,7 @@ head(row.names(CIL))
 
 ```
 
-Note, that in the first step above (CIL <- CUST_INSUR_LTV) we are simply aliasing the name of the ore.frame to a simpler one. 
+Note, that in the first step above (CIL <- CUST_INSUR_LTV) we are simply aliasing the name of the ore.frame to a simpler one.
 
 The output should show the following.
 
@@ -929,10 +929,10 @@ ore.datastore()
 
 ```
 
-This saves the model proxy object in the datastore so the model is not automatically deleted when you close the database connection. 
+This saves the model proxy object in the datastore so the model is not automatically deleted when you close the database connection.
 
 Your output should show the following:
-        
+
 ![orefitglm](./images/orefitglm-7.png)
 
 
@@ -1064,9 +1064,9 @@ Your results should be as follows.
 ![orefitnb](./images/orefitnb-5.png)
 
 
-9: Optionally, use another algorithm to create a different classification model and compare the results of the two models for their relative accuracy. 
+9: Optionally, use another algorithm to create a different classification model and compare the results of the two models for their relative accuracy.
 
-For example, the following creates a classification model using the DECISION TREE algorithm. 
+For example, the following creates a classification model using the DECISION TREE algorithm.
 
 Remove the LTV_BIN column from the ore.frame.
 
@@ -1130,10 +1130,10 @@ library(ORE)
 options(ore.warn.order=FALSE)
 
 ore.connect(user="oml_user",
-            conn_string="MLPDB1",
-            host="rinst5d",
-            password="oml_user",
-            all=TRUE)
+conn_string="MLPDB1",
+host="rinst5d",
+password="oml_user",
+all=TRUE)
 
 ore.is.connected()
 
@@ -1186,7 +1186,7 @@ Your output should look as follows:
 ![embr](./images/embr-3.png)
 
 
-3. Save Model in Datastore and 
+3. Save Model in Datastore and
 
 Save model in data store.
 
@@ -1232,11 +1232,11 @@ Now score data using OML4R with database data
 
 ```
 
-scores.oml4r <- ore.rowApply(CUST_INSUR_LTV, 
-             FUN=glm.pred, 
-             mod=mod.loc, 
-             rows=200, 
-             ore.connect=TRUE, 
+scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
+             FUN=glm.pred,
+             mod=mod.loc,
+             rows=200,
+             ore.connect=TRUE,
              parallel=TRUE,
              FUN.VALUE=data.frame(pred=numeric(0),
                                   LTV=numeric(0)))
