@@ -55,6 +55,52 @@ Estimated Time: 15 minutes
 
  Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning.
 
+ * Drop training and test tables if they exist
+
+     ````
+     <copy> %script
+     DROP TABLE Customer_insurance_train_classification;
+
+     DROP TABLE Customer_insurance_test_classification;
+     </copy>
+     ````
+     ![drop-model-tables](images/automl-screenshot-3.jpg)
+
+     If the tables don't exist, the script will return an error. We will create the tables in the next steps
+
+  * Create the training table for our Auto ML UI
+
+     ````
+     <copy>
+     %script
+     create table Customer_insurance_train_classification as
+     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK", "LTV","LTV_BIN"
+     from customer_insurance
+     SAMPLE (70) SEED (1)
+     where cust_id not in ('CU12350','CU12331', 'CU12286')
+     </copy>
+     ````
+     ![create-training-table](images/automl-screenshot-4.jpg)
+
+     Notice that we keep the ``LTV_BIN`` column to be the target for our supervised learning classification model.
+      For this particular workshop we exclude 3 specific customers so we will score 3 different models using their data.
+
+
+ * Create the test table for our Auto ML UI
+
+     ````
+     <copy>%script
+     create table Customer_insurance_test_classification as
+     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV","LTV_BIN"
+     from customer_insurance
+     minus
+     select CUST_ID,"LAST","FIRST","STATE","REGION","SEX","PROFESSION","BUY_INSURANCE","AGE","HAS_CHILDREN","SALARY","N_OF_DEPENDENTS","CAR_OWNERSHIP","HOUSE_OWNERSHIP","TIME_AS_CUSTOMER","MARITAL_STATUS","CREDIT_BALANCE","BANK_FUNDS","CHECKING_AMOUNT","MONEY_MONTLY_OVERDRAWN","T_AMOUNT_AUTOM_PAYMENTS","MONTHLY_CHECKS_WRITTEN","MORTGAGE_AMOUNT","N_TRANS_ATM","N_MORTGAGES","N_TRANS_TELLER","CREDIT_CARD_LIMITS","N_TRANS_KIOSK","N_TRANS_WEB_BANK","LTV","LTV_BIN"
+      from Customer_insurance_train_classification
+     </copy>
+     ````
+     ![create-test-table](images/automl-screenshot-5.jpg)
+
+     Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
 
 ## Task 2: Use OML AutoML UI from Oracle Autonomous Database
 
@@ -72,7 +118,7 @@ Estimated Time: 15 minutes
 * In the Create Experiment page choose the following details:
 
     - Name: **AutoML Classification**
-    - Data Source: chose the **CUSTOMER\_INSURANCE** table in the OMLUSER schema.
+    - Data Source: chose the **CUSTOMER\_INSURANCE\_TRAIN\_CLASSIFICATION** table in the OMLUSER schema.
     - Predict: **LTV_BIN**
     - Prediction Type: **CLASSIFICATION**
     - Case ID: **CUST_ID**
@@ -113,7 +159,7 @@ In most cases the name of the candidate should not be a deciding factor so we wi
 
   ![Classification Experiment Result](images/automl-screenshot-11.jpg)
 
-  Each model described here is based on one of the automatically selected algorithms. We can click on the model name and see its details.
+  Each model described here is based on one of the automatically selected algorithms. Select the **Support Vector Machine (Gaussian)** algorithm and click on the model name which starts with **SVMG_**.
 
   ![Chose a model](images/automl-screenshot-12.jpg)
 
@@ -197,20 +243,42 @@ We have a confirmation that the model was deployed successfully.
 
      ````
      <copy>%sql
-       SELECT a.cust_id,
-             a. Last,
-             a.First,
-             PREDICTION(SVMG USING a.*) PREDICTION,
-             PREDICTION_PROBABILITY(SVMG USING a.*)  PREDICTION_PROBABILITY,
-             a.LTV_BIN
-       FROM CUSTOMER_INSURANCE a
-      where a.cust_id in ('CU12350','CU12331', 'CU12286')
+         SELECT a.cust_id,
+               a. Last,
+               a.First,
+               PREDICTION(SVMG USING a.*) PREDICTION,
+               PREDICTION_PROBABILITY(SVMG USING a.*)  PREDICTION_PROBABILITY,
+               b.LTV_BIN
+         FROM Customer_insurance_test_classification a,
+         Customer_insurance b
+        where a.cust_id = b.cust_id
+        and b.cust_id in ('CU12350','CU12331', 'CU12286')
      </copy>
      ````
 
   ![Classification Prediction](images/automl-screenshot-34.jpg)
 
- The SQL statement returns the most probable group or class for the data provided in the column PREDICTION with it’s corresponding prediction probabilty. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
+ The SQL statement returns the most probable group or class for the data provided in the column PREDICTION with it’s corresponding prediction probability for each of the customers selected. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
+
+* Run the following SQL statement to compare the model predicted value with the actual value in the testing table.
+
+````
+<copy>%sql
+      SELECT a.cust_id,
+             a.Last,
+             a.First,
+             PREDICTION(SVMG USING a.*) PREDICTION,
+             b.LTV_BIN
+      FROM Customer_insurance_test_classification a,
+      Customer_insurance b
+       where a.cust_id = b.cust_id and a.last = b.last
+</copy>
+````
+
+![Classification Prediction](images/automl-screenshot-35.jpg)
+
+ The SQL statement returns the most probable group or class for the data provided in the column ``PREDICTION`` compared with the column ``LTV_BIN`` from the initial table.
+
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
