@@ -2,11 +2,13 @@
 
 Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistical programming language) for statistical analysis, data exploration, machine learning, and graphical analysis of data stored in an Oracle database. Using OML4R allows you to benefit from the simplicity of R and the power of Oracle Database without the need to deal with the complexities of sourcing, moving, and securing data. OML4R was formerly known as Oracle R Enterprise (ORE).
 
-In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. This dataset is contained in a database table (named CUST_INSUR_LTV). Each customer record in the dataset has 31 attributes. Your goal is to train machine learning models to predict a given customer's lifetime value (or LTV) and a four-level category representation of their LTV (i.e., the LTV_BIN that the customer belongs to). You will use a regression algorithm to predict LTV, and a classification algorithm to predict customers’ LTV_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH).
+In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. This dataset is contained in a database table (named CUST\_INSUR\_LTV). Each customer record in the dataset has 31 attributes. Your goal is to train machine learning models to predict a given customer's lifetime value (or LTV) and a four-level category representation of their LTV (i.e., the LTV\_BIN that the customer belongs to). You will use a regression algorithm to predict LTV, and a classification algorithm to predict customers’ LTV\_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH).
 
 Note: In marketing, the lifetime value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over the customer lifetime.
 
+
 ### Estimated Lab Time: 2 Hours
+
 
 ### Objectives
 
@@ -23,7 +25,7 @@ In this lab, you will:
 ### Note:
 
 1. AutoML is not available for OML4R. AutoML is a feature of OML4Py and is available with Autonomous Database through the OML AutoML UI.
-3. We will not be using Autonomous Database as OML4R is currently not available for Autonomous Database.
+2. We will not be using Autonomous Database as OML4R is currently not available for Autonomous Database.
 
 ### Pre-requisites
 
@@ -173,7 +175,7 @@ class(CUST_INSUR_LTV)
 
 ```
 
-The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST_INSUR_LTV table in the database.
+The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST\_INSUR\_LTV table in the database.
 
 There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance.
 
@@ -469,10 +471,10 @@ print(CIL %>% ggplot(aes(x=TIME_AS_CUSTOMER)) + geom_density(stat="count", , col
 
 Exploratory Data Analysis may also include the process of ad-hoc data analysis, typically based on intuition or existing insights.
 
-Let us first create an alias for the CUST_INSUR_LTV ore.frame for easier usage throughout this task. Also, lets order the ore.frame to avoid unnecessary warnings and errors.
+Let us first create an alias for the CUST\_INSUR\_LTV ore.frame for easier usage throughout this task. Also, lets order the ore.frame to avoid unnecessary warnings and errors.
 
-CIL <- CUST_INSUR_LTV
-row.names(CIL) <- CIL$CUST_ID
+CIL <- CUST\_INSUR\_LTV
+row.names(CIL) <- CIL$CUST\_ID
 
 1: Filtering Data and Aggregate Data View
 
@@ -746,11 +748,11 @@ In this task, we are going to build a regression model to predict LTV.
 
 1: Create Ordered ORE Frame
 
-Most operations in R do not need an ordered frame. Therefore, usually use.keys is set to FALSE. However, for sampling and partitioning etc. ordering of frames is necessary. Since you will be sampling data at this stage, use the primary key of a database table to order an ore.frame object. The primary key of the CUST_INSUR_LTV table (CUST_ID) can be used for this purpose.
+Most operations in R do not need an ordered frame. Therefore, usually use.keys is set to FALSE. However, for sampling and partitioning etc. ordering of frames is necessary. Since you will be sampling data at this stage, use the primary key of a database table to order an ore.frame object. The primary key of the CUST\_INSUR\_LTV table (CUST\_ID) can be used for this purpose.
 
 The set.seed() function sets the seed of R‘s random number generator, which is useful for creating simulations or random objects that can be reproduced.
 
-This example ensures that CUST_INSUR_LTV is an ordered ore.frame by assigning the values of the CUST_ID column as the row names of CUST_INSUR_LTV.
+This example ensures that CUST\_INSUR\_LTV is an ordered ore.frame by assigning the values of the CUST_ID column as the row names of CUST\_INSUR\_LTV.
 
 ```
 
@@ -764,7 +766,7 @@ head(row.names(CIL))
 
 ```
 
-Note, that in the first step above (CIL <- CUST_INSUR_LTV) we are simply aliasing the name of the ore.frame to a simpler one.
+Note, that in the first step above (CIL <- CUST\_INSUR\_LTV) we are simply aliasing the name of the ore.frame to a simpler one.
 
 The output should show the following.
 
