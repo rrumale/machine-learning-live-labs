@@ -71,9 +71,9 @@ The RStudio Graphical User Interface (GUI) provides four different panels: Conso
 
 ```
 
-if (!require(“ORE”)) install.packages(“ORE”)
-if (!require(“dplyr”)) install.packages(“dplyr”)
-if (!require(“OREdplyr”)) install.packages(“OREdplyr”)
+if (!require("ORE")) install.packages("ORE")
+if (!require("dplyr")) install.packages("dplyr")
+if (!require("OREdplyr")) install.packages("OREdplyr")
 
 ```
 
@@ -125,7 +125,7 @@ ore.connect(user="oml_user",
 
 Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
 
-By specifying “all = TRUE” in the connection specifications, proxy objects are automatically loaded for all tables and views in the target schema to which you are connecting.
+By specifying "all = TRUE" in the connection specifications, proxy objects are automatically loaded for all tables and views in the target schema to which you are connecting.
 
 Example:
 
@@ -327,7 +327,7 @@ Optionally, plot other attributes. For example,
 
 ```
 
-plot(CUST_INSUR_LTV$LTV/1000, xlab = "Customer", ylab = “LTV in K$", col = "darkblue", main = "Customer Salary Plot")
+plot(CUST_INSUR_LTV$LTV/1000, xlab = "Customer", ylab = "LTV in K$", col = "darkblue", main = "Customer Salary Plot")
 
 ```
 
@@ -350,7 +350,7 @@ Your output should look as follows.
 
 ![boxplot](./images/boxplot-1.png)
 
-A boxplot displays distribution of data based on a 5-number summary (“minimum”, first quartile (Q1), median, third quartile (Q3), and “maximum”). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
+A boxplot displays distribution of data based on a 5-number summary ("minimum", first quartile (Q1), median, third quartile (Q3), and "maximum"). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
 
 The above boxplot illustrates the distribution of data with a smallest (not minimum) value of 0, a highest (not maximum) value of 74, and an interquartile range from 27 to 46, with a median right in the center of these two (at 36) as depicted by the solid line. Values ranging from 75 to 84 are shown as outliers.
 
@@ -657,7 +657,7 @@ Save the generated model in datastore.
 
 ```
 
-ore.save(ltvbinai, name = “ltvbinai”, overwrite = TRUE)
+ore.save(ltvbinai, name = "ltvbinai", overwrite = TRUE)
 ore.datastore()
 
 ```
@@ -728,9 +728,9 @@ The summary() function in the result object shows standard deviation, proportion
 
 ```
 
-ore.save(prc0, name = "PRC0”, overwrite = TRUE)
+ore.save(prc0, name = "PRC0", overwrite = TRUE)
 ore.datastore()
-ore.datastore(name = "PRC0”, type = c("all"))
+ore.datastore(name = "PRC0", type = c("all"))
 
 ```
 
@@ -887,7 +887,7 @@ Your output should look as follows.
 
 Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced by the model.
 
-Root Mean Square Error (RMSE) is a metric that indicates the average distance between the predicted values from a model and the actual values in the dataset. A lower RMSE is desirable. Lower RMSE indicates a better “fit” of the model for the given dataset.
+Root Mean Square Error (RMSE) is a metric that indicates the average distance between the predicted values from a model and the actual values in the dataset. A lower RMSE is desirable. Lower RMSE indicates a better "fit" of the model for the given dataset.
 
 ```
 
@@ -1056,7 +1056,7 @@ A confusion matrix is used to describe the performance of a classification model
 
 ```
 
-ore.save(ore.fit.nb, name = "ore.fit.nb”, overwrite = TRUE)
+ore.save(ore.fit.nb, name = "ore.fit.nb", overwrite = TRUE)
 ore.datastore()
 
 ```
@@ -1112,7 +1112,7 @@ You may save this new model in the datastore as follows:
 
 ```
 
-ore.save(ore.fit.dt, name = "ore.fit.dt”, overwrite = TRUE)
+ore.save(ore.fit.dt, name = "ore.fit.dt", overwrite = TRUE)
 ore.datastore()
 
 ```
@@ -1172,7 +1172,7 @@ Your output should look as follows:
 ![embr](./images/embr-2.png)
 
 
-Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to “pull” data out.
+Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to "pull" data out.
 
 ```
 
@@ -1194,7 +1194,7 @@ Save model in data store.
 
 ```
 
-ore.save(glm.fit.oml4r, name = “GLMFITOML4R”)
+ore.save(glm.fit.oml4r, name = "GLMFITOML4R")
 ore.datastore()
 
 ```
