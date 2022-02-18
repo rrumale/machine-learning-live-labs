@@ -70,11 +70,11 @@ The RStudio Graphical User Interface (GUI) provides four different panels: Conso
 1.3: Install packages
 
 ```
-
+<copy>
 if (!require("ORE")) install.packages("ORE")
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("OREdplyr")) install.packages("OREdplyr")
-
+</copy>
 ```
 
 The above checks the existence of the given package in the present installation. It only installs the package if the given package is not already installed, thus eliminating redundant installation of packages.
@@ -84,11 +84,11 @@ The above checks the existence of the given package in the present installation.
 The library() function call installs attaches the given library in memory and makes the included functions available. If a call to a function is made and the corresponding library is not already attached, you get an error.
 
 ```
-
+<copy>
 library(ORE)
 library(dplyr)
 library(OREdplyr)
-
+</copy>
 ```
 
 ORE - The ORE libraries are a set of packages that contains many useful R functions.
@@ -102,9 +102,9 @@ OREdplyr - The OREdplyr package is an overloaded package that provides much of t
 Turn off warnings.
 
 ```
-
+<copy>
 options(ore.warn.order=FALSE)
-
+</copy>
 ```
 
 For more details on this refer to the documentation.
@@ -114,13 +114,11 @@ For more details on this refer to the documentation.
 An Oracle 21c database instance (named MLPDB1) has been provisioned for you to run this lab. Connect to the provided database using the ore.connect() function as follows:
 
 ```
-
 ore.connect(user="oml_user",
             conn_string="MLPDB1",
             host=<hostname>,
             password=<password>,
             all=TRUE)
-
 ```
 
 Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
@@ -142,9 +140,9 @@ ore.connect(user="oml_user",
 1.7: Check Database Connection
 
 ```
-
+<copy>
 ore.is.connected()
-
+</copy>
 ```
 
 If needed, you can use ore.disconnect() call to explicitly disconnect the database session. As we will discuss later, if you do this, then any temporary table, view, or model proxy objects will be automatically deleted.
@@ -154,9 +152,9 @@ If needed, you can use ore.disconnect() call to explicitly disconnect the databa
 The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables and views in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and it is enabled by the OML4R transparency layer.
 
 ```
-
+<copy>
 ore.ls()
-
+</copy>
 ```
 
 ![ls](./images/ls-1.png)
@@ -170,9 +168,9 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
 1: Check ‘class’ of Object
 
 ```
-
+<copy>
 class(CUST_INSUR_LTV)
-
+</copy>
 ```
 
 The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST\_INSUR\_LTV table in the database.
@@ -184,9 +182,9 @@ The class ore.frame inherits from data.frame and overloads many data.frame funct
 2: Get List of Column Names (‘colnames’)
 
 ```
-
+<copy>
 colnames(CUST_INSUR_LTV)
-
+</copy>
 ```
 
 The column names appear in an ordered list and can be referenced based on this order.
@@ -195,9 +193,9 @@ The column names appear in an ordered list and can be referenced based on this o
 3: Check Object or Frame Dimensions
 
 ```
-
+<copy>
 dim(CUST_INSUR_LTV)
-
+</copy>
 ```
 
 The dimensions represents the number of rows (i.e., records or observations) and number of columns (or variable, or attributes) in the given frame (table).
@@ -214,9 +212,9 @@ The summary() function is a built-in R function that can help you get a quick su
 The summary function output may be seen as what is commonly known as the five-number summary plus mean.
 
 ```
-
+<copy>
 summary(CUST_INSUR_LTV[,1:31])
-
+</copy>
 ```
 
 You can also specify one, multiple, or a range of columns to see the summary statistics of those columns.
@@ -230,63 +228,63 @@ The summary() call summarizes the specified attributes, along with statistics fo
 You can also use simple statistical functions on your dataset or data elements as desired. For example,
 
 ```
-
+<copy>
 min(CUST_INSUR_LTV$SALARY)
 
 max(CUST_INSUR_LTV$AGE)
-
+</copy>
 ```
 
 Note: Mean is the statistical average.
 
 ```
-
+<copy>
 mean(CUST_INSUR_LTV$SALARY)
 
 mean(CUST_INSUR_LTV$LTV)
-
+</copy>
 ```
 
 Note: Mode is the most frequently occurring observation or attribute.
 
 ```
-
+<copy>
 names(table(CUST_INSUR_LTV$N_OF_DEPENDENTS))[table(CUST_INSUR_LTV$N_OF_DEPENDENTS)==max(table(CUST_INSUR_LTV$N_OF_DEPENDENTS))]
-
+</copy>
 ```
 
 Note: Median represents the middle value.
 
 ```
-
+<copy>
 median(CUST_INSUR_LTV$AGE)
-
+</copy>/
 ```
 
 Range provides end-to-end range of numeric values.
 
 ```
-
+<copy>
 range(CUST_INSUR_LTV$SALARY)
-
+</copy>
 ```
 
 Unique provides the set of unique or distinct values in the data set for a given attribute or variable.
 
 ```
-
+<copy>
 unique(CUST_INSUR_LTV$REGION)
-
+</copy>
 ```
 
 In some cases, quantiles may be useful to identify outlier limits. The generic function 'quantile()' produces sample quantiles corresponding to the specified probabilities. The smallest observation corresponds to a probability of 0 and the largest to a probability of 1.
 
 ```
-
+<copy>
 quantile(CUST_INSUR_LTV$SALARY, 0.025)
 
 quantile(CUST_INSUR_LTV$SALARY, 0.975)
-
+</copy>
 ```
 
 Your results should show the following outputs.
@@ -301,10 +299,10 @@ Exploratory Data Analysis includes the process of visualizing data for better un
 Since a number of data visualization functions require a data.frame object, let us first pull the ore.frame object into a data.frame object first and also create an ordered frame.
 
 ```
-
+<copy>
 CIL <- ore.pull(CUST_INSUR_LTV)
 row.names(CIL) <- CIL$CUST_ID
-
+</copy>
 ```
 
 1: Simple Plot
@@ -314,9 +312,9 @@ Draw a simple and quick plot of customer salary.
 This basic plot illustrates the overall distribution of salary and the range within which it falls. You clearly see a dense band where most customers fall between about $50K to about $80K.
 
 ```
-
+<copy>
 plot(CUST_INSUR_LTV$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", col = "darkblue", main = "Customer Salary Plot")
-
+</copy>
 ```
 
 Your plot should look as follows.
@@ -326,9 +324,9 @@ Your plot should look as follows.
 Optionally, plot other attributes. For example,
 
 ```
-
+<copy>
 plot(CUST_INSUR_LTV$LTV/1000, xlab = "Customer", ylab = "LTV in K$", col = "darkblue", main = "Customer Salary Plot")
-
+</copy>
 ```
 
 2: Boxplot
@@ -338,12 +336,12 @@ Plot the age attribute using a simple boxplot.
 A simple boxplot can help you quickly see the concentration of customers in specific bands.
 
 ```
-
+<copy>
 out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
 boxplot(CUST_INSUR_LTV$AGE, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
 text(x=fivenum(x), labels = fivenum(x), y=1.35)
 mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
-
+<copy>
 ```
 
 Your output should look as follows.
@@ -363,14 +361,14 @@ Plot a histogram for customer salary data.
 Histograms help see distribution of data in range bands. Note, the hist() function uses the Sturges method by default to identify appropriate breaks.
 
 ```
-
+<copy>
 hist(CUST_INSUR_LTV$SALARY/1000,
      main="Customer Salary Data",
      xlab="Salary($K)",
      xlim=c(20,100),
      col="darkgreen",
 freq=TRUE)
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -382,9 +380,9 @@ Your output should look as follows.
 Generate a pie chart for distribution of customers by region. Note that CLOCKWISE signifies to use alphabetical order.
 
 ```
-
+<copy>
 pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution by Region", clockwise = TRUE)  
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -394,9 +392,9 @@ Your output should look as follows.
 Optionally, plot other attributes. For example,
 
 ```
-
+<copy>
 pie(table(CUST_INSUR_LTV$MARITAL_STATUS), main = "Customer Distribution by Region", clockwise = TRUE)  
-
+</copy>
 ```
 
 5: ggplot2
@@ -406,9 +404,9 @@ Use the package ggplot2 to generate a plot for visualizing LTV for various regio
 When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
 
 ```
-
+<copy>
 CIL %>% ggplot(aes(x=REGION,y=LTV,color=REGION)) + geom_boxplot()
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -418,17 +416,17 @@ Your output should look as follows.
 Optionally, plot other attributes.
 
 ```
-
+<copy>
 CIL %>% ggplot(aes(x=MARITAL_STATUS,y=LTV,color=MARITAL_STATUS)) + geom_boxplot()
-
+</copy>
 ```
 
 Let’s look at another plot using ggplot2 for marital status.
 
 ```
-
+<copy>
 CIL %>% ggplot(aes(x=MARITAL_STATUS)) + geom_histogram(stat="count", color = "darkred", fill = "#69b3a2")  
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -438,9 +436,9 @@ Your output should look as follows.
 Optionally, plot other attributes. For example,
 
 ```
-
+<copy>
 CIL %>% ggplot(aes(x=REGION)) + geom_histogram(stat="count", color = "darkred", fill = "#69b3a2")  
-
+</copy>
 ```
 
 You clearly see that you have most customers in the NORTHEAST and your penetration in the SOUTH and SOUTHEAST markets is relatively pretty low.
@@ -448,9 +446,9 @@ You clearly see that you have most customers in the NORTHEAST and your penetrati
 Let’s also look at the age distribution in the customer base.
 
 ```
-
+<copy>
 print(CIL %>% ggplot(aes(x=AGE)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -460,11 +458,11 @@ Your output should look as follows.
 Optionally, look at the distribution of other attributes in the dataset.
 
 ```
-
+<copy>
 print(CIL %>% ggplot(aes(x=SALARY/1000)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
 print(CIL %>% ggplot(aes(x=N_OF_DEPENDENTS)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
 print(CIL %>% ggplot(aes(x=TIME_AS_CUSTOMER)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
-
+</copy>
 ```
 
 ## Task 4: Explore Data Using R - Targeted Data Exploration
@@ -481,7 +479,7 @@ row.names(CIL) <- CIL$CUST\_ID
 Use the filter() function to filter data based on given criteria.
 
 ```
-
+<copy>
 nrow(CUST_INSUR_LTV)
 
 nrow(filter(CUST_INSUR_LTV, REGION == "NorthEast"))
@@ -489,7 +487,7 @@ nrow(filter(CUST_INSUR_LTV, REGION == "NorthEast"))
 nrow(filter(CUST_INSUR_LTV, SALARY > 110000))
 
 nrow(CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE)))
-
+</copy>
 ```
 
 Note that the 'na.rm' specification directs treatment of missing values. 'na.rm = TRUE' removes missing values from the dataset if they are coded as NA.
@@ -497,11 +495,11 @@ Note that the 'na.rm' specification directs treatment of missing values. 'na.rm 
 Use the aggregate() function to group data based on a given column or set of columns. Let us look at the data from different angles.
 
 ```
-
+<copy>
 aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
 
 aggregate(CUST_INSUR_LTV$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
-
+</copy>
 ```
 
 You should see output as follows.
@@ -513,7 +511,7 @@ You observe you have most customers in the NORTHEAST and your penetration in the
 Optionally, explore different attributes using the aggregate() function.
 
 ```
-
+<copy>
 aggregate(CUST_INSUR_LTV$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
 
 aggregate(CUST_INSUR_LTV$MARITAL_STATUS, by = list(MARITAL_STATUS = CUST_INSUR_LTV$MARITAL_STATUS),FUN = length)
@@ -529,17 +527,17 @@ aggregate(CUST_INSUR_LTV$HAS_CHILDREN, by = list(HAS_CHILDREN = CUST_INSUR_LTV$H
 aggregate(CUST_INSUR_LTV$HOUSE_OWNERSHIP, by = list(HOUSE_OWNERSHIP = CUST_INSUR_LTV$HOUSE_OWNERSHIP), FUN = length)
 
 aggregate(CUST_INSUR_LTV$BUY_INSURANCE, by = list(BUY_INSURANCE = CUST_INSUR_LTV$BUY_INSURANCE), FUN = length)
-
+</copy>
 ```
 
 You can slice and dice data as you wish. For example, to understand the distribution of male customers in the northeast region who do or do not currently buy insurance -
 
 ```
-
+<copy>
 cust_male_northeast <- (CUST_INSUR_LTV %>% filter(REGION == "NorthEast", na.rm = TRUE) %>% filter(SEX == "M"))
 
 aggregate(cust_male_northeast$BUY_INSURANCE, by = list(BUY_INSURANCE = cust_male_northeast$BUY_INSURANCE),FUN = length)
-
+</copy>
 ```
 
 2: Missing and Zero Values
@@ -547,17 +545,17 @@ aggregate(cust_male_northeast$BUY_INSURANCE, by = list(BUY_INSURANCE = cust_male
 Check the number of observations (records) where the customer age is specified less than 1.
 
 ```
-
+<copy>
 nrow(CUST_INSUR_LTV %>% filter(AGE < 1, na.rm = TRUE))
-
+</copy>
 ```
 
 Surprisingly, the number of observations where customer LTV is 0 is also the same count.
 
 ```
-
+<copy>
 nrow(CUST_INSUR_LTV %>% filter(LTV < 1, na.rm = TRUE))
-
+</copy>
 ```
 
 What might you be curious about next?
@@ -566,7 +564,7 @@ What might you be curious about next?
 3: Removing & Adding Variables (Columns)
 
 ```
-
+<copy>
 dim(CUST_INSUR_LTV)
 CUST_INSUR_LTV <- subset(CUST_INSUR_LTV, select = -c(LTV_BIN))
 dim(CUST_INSUR_LTV)
@@ -575,7 +573,7 @@ dim(CUST_INSUR_LTV)
 colnames(CUST_INSUR_LTV)
 remove(CUST_INSUR_LTV)
 colnames(CUST_INSUR_LTV)
-
+</copy>
 ```
 
 You should see output as follows.
@@ -587,23 +585,23 @@ You should see output as follows.
 Check for the existence of duplicate data in the dataset.
 
 ```
-
+<copy>
 CXL <- ore.pull(CUST_INSUR_LTV)
 class(CXL)
 nrow(CXL %>% get_dupes(CUST_ID))
 remove(CXL)
-
+</copy>
 ```
 
 Remove data from the frame where customer age is zero or not specified.
 
 ```
-
+<copy><copy>
 dim(CUST_INSUR_LTV)
 CUST_INSUR_LTV <- CUST_INSUR_LTV %>% filter(AGE > 1)
 dim(CUST_INSUR_LTV)
 remove(CUST_INSUR_LTV)
-
+</copy>
 ```
 
 You should see output as follows.
@@ -620,13 +618,13 @@ The ore.odmAI() function can be used to run Attribute Importance on the given da
 In order to use the ore.odmAI() function effectively, you should first exclude the most significant dependent attributes from the data frame. For example, exclude LTV attribute when predicting LTV_BIN and exclude LTV_BIN when predicting LTV, since LTV_BIN was derived from LTV.
 
 ```
-
+<copy>
 CIL <- CUST_INSUR_LTV
 dim(CIL)
 CIL$LTV <- NULL
 dim(CIL)
 class(CIL)
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -638,11 +636,11 @@ You could also exclude a column using the R Formula itself. For example use (LTV
 Notice the dimensions now show (15342 30), and not (15342 31) as was originally the case. Now, run the ore.odmAI() function to identify ordered importance of attribute for target variable LTV_BIN. Note that CIL is an ore.frame object.
 
 ```
-
+<copy>
 ltvbinai <- ore.odmAI(LTV_BIN ~ ., CIL)
 class(ltvbinai)
 print(ltvbinai)
-
+</copy>
 ```
 
 Assess the output as it lists all the important attributes and their relative influence on the target attribute (LTV_BIN).
@@ -656,10 +654,10 @@ Your output should look as follows.
 Save the generated model in datastore.
 
 ```
-
+<copy>
 ore.save(ltvbinai, name = "ltvbinai", overwrite = TRUE)
 ore.datastore()
-
+</copy>
 ```
 
 Notice that if the datastore already exists by a given name, an error is flagged. You may overwrite the object, if appropriate, or save it with a different (unique) name.
@@ -674,25 +672,25 @@ Your output should look as follows.
 Use Attribute Importance (i.e., the ore.odmAI() function) to identify attributes of relative importance for a LTV prediction with the given dataset.
 
 ```
-
+<copy>
 CIL <- CUST_INSUR_LTV
 CIL$LTV_BIN <- NULL
 dim(CIL)
 
 ltvai <- ore.odmAI(LTV ~ ., CIL)
-
+</copy>
 ```
 
 Check the class of the object returned and save it in the datastore.
 
 ```
-
+<copy>
 class(ltvai)  
 print(ltvai)
 
 ore.save(ltvai, name = 'ltvai', overwrite = TRUE)
 ore.datastore()
-
+<copy>
 ```
 
 Attribute importance ranks attributes according to their significance in predicting a target. The ore.odmAI() function produces a ranking of attributes and their importance expressed as a fraction.
@@ -709,11 +707,11 @@ Do you notice the difference between AI output for LTV and for LTV_BIN?.
 Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (when each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
 
 ```
-
+<copy>
 prc0 <- prcomp(~  HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + AGE + SALARY + N_OF_DEPENDENTS, data = CUST_INSUR_LTV, scale = TRUE)
 
 summary(prc0)
-
+</copy>
 ```
 
 Note: The prcomp() function is overloaded to build a model on an ore.frame. Setting the argument scale=TRUE, standardizes the input data so that it has zero mean and variance one before doing PCA.
@@ -727,11 +725,11 @@ The summary() function in the result object shows standard deviation, proportion
 8 Save the object in a datastore
 
 ```
-
+<copy>
 ore.save(prc0, name = "PRC0", overwrite = TRUE)
 ore.datastore()
 ore.datastore(name = "PRC0", type = c("all"))
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -755,7 +753,7 @@ The set.seed() function sets the seed of R‘s random number generator, which is
 This example ensures that CUST\_INSUR\_LTV is an ordered ore.frame by assigning the values of the CUST_ID column as the row names of CUST\_INSUR\_LTV.
 
 ```
-
+<copy>
 CIL <- CUST_INSUR_LTV
 head(row.names(CIL))
 
@@ -763,7 +761,7 @@ set.seed(1)
 row.names(CIL) <- CIL$CUST_ID
 
 head(row.names(CIL))
-
+</copy>
 ```
 
 Note, that in the first step above (CIL <- CUST\_INSUR\_LTV) we are simply aliasing the name of the ore.frame to a simpler one.
@@ -781,7 +779,7 @@ Split the dataset into two buckets - training data set (~70%), and testing data 
 The 'seed' can be set to any value. Setting a 'seed' ensures the same output is reproduced by the R psuedo-number generator, when you rerun your code. This can be helpful for consistency and debugging purposes.
 
 ```
-
+<copy>
 set.seed(1)
 
 sampleSize <- 4500
@@ -790,7 +788,7 @@ ind <- sample(1:nrow(CIL),sampleSize)
 group <- as.integer(1:nrow(CIL) %in% ind)
 CIL.train <- CIL[group==FALSE,]
 CIL.test <- CIL[group==TRUE,]
-
+</copy>
 ```
 
 Note that the sample size is specified as 4500, which is about 30% of the dataset volume.
@@ -798,12 +796,12 @@ Note that the sample size is specified as 4500, which is about 30% of the datase
 3: Check Class and Dimensions of Training and Test Datasets
 
 ```
-
+<copy>
 class(CIL.train)
 dim(CIL.train)
 class(CIL.test)
 dim(CIL.test)
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -815,11 +813,11 @@ Your output should look as follows.
 Build a REGRESSION MODEL to predict customer LTV using the training data set.
 
 ```
-
+<copy>
 ore.fit.glm <- ore.odmGLM(LTV ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train, ridge=TRUE)
 
 ore.fit.glm %>% print()
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -831,7 +829,7 @@ Your output should look as follows.
 Check details of the REGRESSION MODEL created above.
 
 ```
-
+<copy>
 class(ore.fit.glm)
 
 summary(ore.fit.glm)
@@ -839,7 +837,7 @@ summary(ore.fit.glm)
 ore.fit.glm$formula
 
 head(ore.fit.glm$residuals)
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -854,11 +852,11 @@ Generate LTV predictions using ore.predict.
 The ore.predict function is invoked on a model. For example, the following code generates predictions (ore.fit.glm.pred) by invoking ore.predict() on the ore.fit.glm model produced above and uses CIL.test dataset to score the model.
 
 ```
-
+<copy>
 ore.fit.glm.pred = ore.predict(ore.fit.glm, newdata = CIL.test)
 
 head(ore.fit.glm.pred)
-
+</copy>
 ```
 
 Note: Using the ore.predict function to score data in the database allows the use of R-generated models to score in-database data (in an ore.frame object). The ore.predict function maximizes the use of Oracle Database as a compute engine which provides a commercial grade, high performance, scalable scoring engine.
@@ -871,11 +869,11 @@ Your output should look as follows.
 7: Compare Actual and Predicted Values
 
 ```
-
+<copy>
 ore.fit.glm.res <- ore.predict(ore.fit.glm, CIL.test, se.fit = TRUE, interval = "prediction")
 CIL <- cbind(CIL, ore.fit.glm.res)
 head(select (CIL, LTV, PREDICTION))
-
+</copy>
 ```
 
 Your output should look as follows.
@@ -890,7 +888,7 @@ Check Root Mean Squared Error (RMSE) to assess prediction accuracy as produced b
 Root Mean Square Error (RMSE) is a metric that indicates the average distance between the predicted values from a model and the actual values in the dataset. A lower RMSE is desirable. Lower RMSE indicates a better "fit" of the model for the given dataset.
 
 ```
-
+<copy>
 ans <- ore.predict(ore.fit.glm, newdata = CIL.test, supplemental.cols = 'LTV')
 localPredictions <- ore.pull(ans)
 ore.rmse <- function (pred, obs) {
@@ -898,7 +896,7 @@ sqrt(mean(pred-obs)^2)
 }
 
 ore.rmse(localPredictions$PREDICTION, localPredictions$LTV)
-
+</copy>
 ```
 
 Your output should show the following:
@@ -910,9 +908,9 @@ Recall that the average (mean) LTV as calculated previously was $22266.67. Thus 
 Plot the predictions alongside actual LTV value.
 
 ```
-
+<copy>
 localPredictions %>% ggplot(aes(x=PREDICTION, y=LTV, color=PREDICTION)) + geom_point()
-
+</copy>
 ```
 
 Your output should show the following:
@@ -925,10 +923,10 @@ RMSE is a useful way to assess the quality of a regression model. When comparing
 9: Store (Save) Model Proxy Object in Database
 
 ```
-
+<copy>
 ore.save(ore.fit.glm, name = "ore.fit.glm", overwrite = TRUE)
 ore.datastore()
-
+</copy>
 ```
 
 This saves the model proxy object in the datastore so the model is not automatically deleted when you close the database connection.
@@ -945,12 +943,12 @@ In this task, we build a classification model for LTV_BIN prediction and then ev
 1: Create Ordered ORE Frame
 
 ```
-
+<copy>
 set.seed(1)
 CIL <- CUST_INSUR_LTV
 row.names(CIL) <- CIL$CUST_ID
 head(row.names(CIL))
-
+</copy>
 ```
 
 2: Partition Data For Training & Testing
@@ -958,26 +956,26 @@ head(row.names(CIL))
 Split the dataset into two buckets - training data set (~70%), and testing data set (~30%).
 
 ```
-
+<copy>
 set.seed(1)
 sampleSize <- 4500
 ind <- sample(1:nrow(CIL),sampleSize)
 group <- as.integer(1:nrow(CIL) %in% ind)
 CIL.train <- CIL[group==FALSE,]
 CIL.test <- CIL[group==TRUE,]
-
+</copy>
 ```
 
 
 3: Check Class and Dimensions of Training and Test Datasets
 
 ```
-
+<copy>
 class(CIL.train)
 dim(CIL.train)
 class(CIL.test)
 dim(CIL.test)
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -990,11 +988,11 @@ Your results should be as follows.
 Build a CLASSIFICATION MODEL using the NAIVE BAYES algorithm and the training data set (CIL.train) for predicting customer LTV_BIN.
 
 ```
-
+<copy>
 ore.fit.nb <- ore.odmNB(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
 
 ore.fit.nb %>% print()
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -1005,13 +1003,13 @@ Your results should be as follows.
 5: Check Model Details
 
 ```
-
+<copy>
 summary(ore.fit.nb)
 
 names(ore.fit.nb)
 
 ore.fit.nb$formula
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -1023,11 +1021,11 @@ Your results should be as follows.
 6: Generate Predictions for LTV_BIN
 
 ```
-
+<copy>
 ore.fit.nb.res <- ore.predict(ore.fit.nb, newdata = CIL.test)
 
 head(ore.fit.nb.res,10)
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -1040,9 +1038,9 @@ Your results should be as follows.
 Now, let us look at the confusion matrix to compare the aggregate predictions with actual data.
 
 ```
-
+<copy>
 with(ore.fit.nb.res, table(CIL.test$LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -1055,10 +1053,10 @@ A confusion matrix is used to describe the performance of a classification model
 8: Store (Save) Model In Database
 
 ```
-
+<copy>
 ore.save(ore.fit.nb, name = "ore.fit.nb", overwrite = TRUE)
 ore.datastore()
-
+</copy>
 ```
 
 Your results should be as follows.
@@ -1073,17 +1071,17 @@ For example, the following creates a classification model using the DECISION TRE
 Remove the LTV_BIN column from the ore.frame.
 
 ```
-
+<copy>
 CIL <- CUST_INSUR_LTV
 CIL$LTV_BIN <- NULL
 dim(CIL)
-
+</copy>
 ```
 
 Fit the model with training data.
 
 ```
-
+<copy>
 ore.fit.dt <- ore.odmDT(LTV_BIN ~ HOUSE_OWNERSHIP + N_MORTGAGES + MORTGAGE_AMOUNT + N_TRANS_WEB_BANK + N_OF_DEPENDENTS, data = CIL.train)
 
 ore.fit.dt %>% print()
@@ -1093,28 +1091,28 @@ summary(ore.fit.dt)
 names(ore.fit.dt)
 
 ore.fit.dt$formula
-
+</copy>
 ```
 
 Generate predictions and the confusion matrix.
 
 ```
-
+<copy>
 ore.fit.dt.res <- predict (ore.fit.dt, CIL.test, "LTV_BIN")
 
 head(ore.fit.dt.res,10)
 
 with(ore.fit.dt.res, table(LTV_BIN,PREDICTION, dnn = c("Actual","Predicted")))
-
+</copy>
 ```
 
 You may save this new model in the datastore as follows:
 
 ```
-
+<copy>
 ore.save(ore.fit.dt, name = "ore.fit.dt", overwrite = TRUE)
 ore.datastore()
-
+</copy>
 ```
 
 How does the confusion matrix compare with the one generated previously?
@@ -1127,7 +1125,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 1. Import libraries and connect to the database
 
 ```
-
+<copy>
 library(ORE)
 options(ore.warn.order=FALSE)
 
@@ -1138,7 +1136,7 @@ password="oml_user",
 all=TRUE)
 
 ore.is.connected()
-
+</copy>
 ```
 
 Your output should look as follows:
@@ -1150,21 +1148,21 @@ Your output should look as follows:
 Let us first invoke a script with table as input and test using open source R test and the local R data frame.
 
 ```
-
+<copy>
 cust_insur_ltv_loc <- ore.pull(CUST_INSUR_LTV)
 class(cust_insur_ltv_loc)
-
+</copy>
 ```
 
 ```
-
+<copy>
 glm.fit <- function(dat){
              glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = dat)}
 
 mod.loc <- glm.fit(cust_insur_ltv_loc)
 mod.loc
 class(mod.loc)
-
+</copy>
 ```
 
 Your output should look as follows:
@@ -1175,12 +1173,12 @@ Your output should look as follows:
 Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to "pull" data out.
 
 ```
-
+<copy>
 glm.fit.oml4r <- ore.tableApply(CUST_INSUR_LTV, FUN=glm.fit)
 glm.fit.oml4r
 class(glm.fit.oml4r)
 ore.pull(glm.fit.oml4r)
-
+</copy>
 ```
 
 Your output should look as follows:
@@ -1193,19 +1191,19 @@ Your output should look as follows:
 Save model in data store.
 
 ```
-
+<copy>
 ore.save(glm.fit.oml4r, name = "GLMFITOML4R")
 ore.datastore()
-
+</copy>
 ```
 
 Create function for generating predictions for a given dataset.
 
 ```
-
+<copy>
 glm.pred <- function(dat, mod){
               return(data.frame(pred=predict(mod, newdata = dat), LTV=dat$LTV))}
-
+</copy>
 ```
 
 Your output should look as follows:
@@ -1218,11 +1216,11 @@ Your output should look as follows:
 Let us first test locally, in open source R first.
 
 ```
-
+<copy>
 scores.loc <- glm.pred(dat=cust_insur_ltv_loc, mod=mod.loc)
 head(scores.loc)
 class(scores.loc)
-
+</copy>
 ```
 
 Your output should look as follows:
@@ -1233,7 +1231,7 @@ Your output should look as follows:
 Now score data using OML4R with database data
 
 ```
-
+<copy>
 scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
              FUN=glm.pred,
              mod=mod.loc,
@@ -1245,7 +1243,7 @@ scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
 
 class(scores.oml4r)
 ore.pull(scores.oml4r)
-
+</copy>
 ```
 
 Your output should look as follows:
