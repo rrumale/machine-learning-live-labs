@@ -19,7 +19,7 @@ In this lab, you will:
 * Use R for exploratory data analysis, data visualization, data organization (e.g., splitting data in train and test sets),
 * Use Attribute Importance and Principal Component Analysis
 * Use an OML4R in-database regression algorithm for building a machine learning model for estimating customer life-time value (LTV)
-* Use an OML4R in-database classification algorithm for building a machine learning model for predicting LTV_BIN
+* Use an OML4R in-database classification algorithm for building a machine learning model for predicting LTV\_BIN
 * Assess model quality using RMSE (Root Mean Squared Error), and assess classification model quality using a confusion matrix
 
 ### Note:
@@ -401,7 +401,7 @@ pie(table(CUST_INSUR_LTV$MARITAL_STATUS), main = "Customer Distribution by Regio
 
 Use the package ggplot2 to generate a plot for visualizing LTV for various regions.
 
-When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST_INSUR_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
+When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST\_INSUR\_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
 
 ```
 <copy>
@@ -609,13 +609,13 @@ You should see output as follows.
 ![filter](./images/filter-1.png)
 
 
-5: Assess Attribute Importance For LTV_BIN Prediction
+5: Assess Attribute Importance For LTV\_BIN Prediction
 
 Use Attribute Importance to identify attributes of high relevance in predicting target dependent variable.
 
-The ore.odmAI() function can be used to run Attribute Importance on the given dataset. This helps identify attributes in the given dataset that are important in predicting the given dependent attribute (LTV_BIN in this case). 
+The ore.odmAI() function can be used to run Attribute Importance on the given dataset. This helps identify attributes in the given dataset that are important in predicting the given dependent attribute (LTV\_BIN in this case). 
 
-In order to use the ore.odmAI() function effectively, you should first exclude the most significant dependent attributes from the data frame. For example, exclude LTV attribute when predicting LTV_BIN and exclude LTV_BIN when predicting LTV, since LTV_BIN was derived from LTV.
+In order to use the ore.odmAI() function effectively, you should first exclude the most significant dependent attributes from the data frame. For example, exclude LTV attribute when predicting LTV\_BIN and exclude LTV\_BIN when predicting LTV, since LTV\_BIN was derived from LTV.
 
 ```
 <copy>
@@ -631,9 +631,9 @@ Your output should look as follows.
 
 ![ai](./images/ai-1.png)
 
-You could also exclude a column using the R Formula itself. For example use (LTV_BIN ~ . - CUST_ID) to remove the CUST_ID column from the dataset.
+You could also exclude a column using the R Formula itself. For example use (LTV\_BIN ~ . - CUST\_ID) to remove the CUST\_ID column from the dataset.
 
-Notice the dimensions now show (15342 30), and not (15342 31) as was originally the case. Now, run the ore.odmAI() function to identify ordered importance of attribute for target variable LTV_BIN. Note that CIL is an ore.frame object.
+Notice the dimensions now show (15342 30), and not (15342 31) as was originally the case. Now, run the ore.odmAI() function to identify ordered importance of attribute for target variable LTV\_BIN. Note that CIL is an ore.frame object.
 
 ```
 <copy>
@@ -643,9 +643,9 @@ print(ltvbinai)
 </copy>
 ```
 
-Assess the output as it lists all the important attributes and their relative influence on the target attribute (LTV_BIN).
+Assess the output as it lists all the important attributes and their relative influence on the target attribute (LTV\_BIN).
 
-Your result should look like the ranking below with House Ownership as the highest importance for determine LTV_BIN, and Customer ID as the least important.
+Your result should look like the ranking below with House Ownership as the highest importance for determine LTV\_BIN, and Customer ID as the least important.
 
 Your output should look as follows.
 
@@ -700,7 +700,7 @@ As seen below, Attribute Importance (AI) ranks attributes according to their sig
 ![ai](./images/ai-4a.png)
 ![ai](./images/ai-4b.png)
 
-Do you notice the difference between AI output for LTV and for LTV_BIN?.
+Do you notice the difference between AI output for LTV and for LTV\_BIN?.
 
 7: Principal Component Analysis
 
@@ -936,9 +936,9 @@ Your output should show the following:
 ![orefitglm](./images/orefitglm-7.png)
 
 
-## Task 6: Build Classification Model for LTV_BIN Prediction and Evaluate Model
+## Task 6: Build Classification Model for LTV\_BIN Prediction and Evaluate Model
 
-In this task, we build a classification model for LTV_BIN prediction and then evaluate it using a confusion matrix. As you will notice, the overall process is similar to the one for predicting LTV. However, here we use a classification model as opposed to a regression model. Also, the model is assessed using a confusion matrix instead of the RMSE (Room Mean Square Error) method we used previously.
+In this task, we build a classification model for LTV\_BIN prediction and then evaluate it using a confusion matrix. As you will notice, the overall process is similar to the one for predicting LTV. However, here we use a classification model as opposed to a regression model. Also, the model is assessed using a confusion matrix instead of the RMSE (Room Mean Square Error) method we used previously.
 
 1: Create Ordered ORE Frame
 
@@ -985,7 +985,7 @@ Your results should be as follows.
 
 4: Build Model
 
-Build a CLASSIFICATION MODEL using the NAIVE BAYES algorithm and the training data set (CIL.train) for predicting customer LTV_BIN.
+Build a CLASSIFICATION MODEL using the NAIVE BAYES algorithm and the training data set (CIL.train) for predicting customer LTV\_BIN.
 
 ```
 <copy>
@@ -1018,7 +1018,7 @@ Your results should be as follows.
 ![orefitnb](./images/orefitnb-2b.png)
 ![orefitnb](./images/orefitnb-2c.png)
 
-6: Generate Predictions for LTV_BIN
+6: Generate Predictions for LTV\_BIN
 
 ```
 <copy>
@@ -1068,7 +1068,7 @@ Your results should be as follows.
 
 For example, the following creates a classification model using the DECISION TREE algorithm.
 
-Remove the LTV_BIN column from the ore.frame.
+Remove the LTV\_BIN column from the ore.frame.
 
 ```
 <copy>
