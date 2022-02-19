@@ -33,7 +33,6 @@ Estimated Lab Time: 15 minutes
 ![ADB-oml-admin](images/prerequisites-screenshot-14.jpg)
 
 * In the Machine Learning User Administration  we see only the ADMIN user with the System Administrator role. Click on the Create button to create another user.
-
 ![ADB-oml-admin](images/prerequisites-screenshot-15.jpg)
 
 * In the Create User page enter the following:
@@ -90,17 +89,16 @@ Click Next.
 * In the Review screen click on Finish to start the data load.
 ![ADB-data-load](images/prerequisites-screenshot-11.jpg)
 
-The uploading data confirmation shows up.
+* The uploading data confirmation shows up.
 ![ADB-data-load](images/prerequisites-screenshot-X11.jpg)
 
-The data loading process takes less than a minute. When is completed notice the entry on the Data Loading tab.
-
+* The data loading process takes less than a minute. When is completed notice the entry on the Data Loading tab.
 ![ADB-data-load-completed](images/prerequisites-screenshot-12.jpg)
 
-When you click on the row you will get a confirmation.
+* When you click on the row you will get a confirmation.
 ![ADB-data-load-completed](images/prerequisites-screenshot-X12.jpg)
 
-Click OK.
+* Click OK.
 
 
 The next step is to use this data and create an AutoML model.

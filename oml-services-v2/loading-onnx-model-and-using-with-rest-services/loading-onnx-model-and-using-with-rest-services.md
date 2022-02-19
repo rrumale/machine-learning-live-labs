@@ -6,13 +6,13 @@ In this section of the workshop we will import a Neural Network model saved on O
 The ONNX model is already pre-build and on the VM. To create it we ran the following steps:
 *  create a pipeline to process the columns. We are putting first the character columns named ``categorical_data`` and after the numeric columns named ``numeric_data``. The categorical columns are encoded with OneHotEncoder.
 
-      ```
+      ``
       preprocessor = ColumnTransformer(
           transformers=[
               ('num', numeric_transformer, numeric_feat_index),
               ('cat', categorical_transformer, categorical_feat_index)
           ])
-      ```
+      ``
 
 * define the Neural Network classification model using SKlearn:
 
@@ -26,13 +26,13 @@ The ONNX model is already pre-build and on the VM. To create it we ran the follo
 
 * create the onnx model from the pipeline:
 
-When converting a model to ONNX, the initial types are required. sklearn does not store information about the training data, so it is not always possible to retrieve the number of features or their types. For this reason, convert_sklearn contains an argument called initial_types to define the model input types.
+  When converting a model to ONNX, the initial types are required. sklearn does not store information about the training data, so it is not always possible to retrieve the number of features or their types. For this reason, convert\_sklearn contains an argument called initial\_types to define the model input types.
 
       ``initial_types = [('categorical_data', StringTensorType(shape=[None, 9])),
           ('numeric_data', FloatTensorType([None, 20]))]
       ``
 
-Convert the model:
+  Convert the model:
 
       ``onnxclassnn = convert_sklearn(model,initial_types=initial_types,target_opset=12)``
 
@@ -69,29 +69,27 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``onnx_class_NN.model.zip`` file on the VM.
 
+## 
 ## Task: 1: List the models in the OML Services repository
 
 *  In the Postman session opened run the Get method to get the list of models deployed.
 
-````
-Operation: GET
+    ````
+    Operation: GET
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
+    URI endpoint:
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
 
-````
- - Replace **`<oml-cloud-service-location-url>`** with your URL saved in chapter "Scoring OML model using OML Services" Task 1.2: Authorize OML Services User
+    ````
+    - Replace **`<oml-cloud-service-location-url>`** with your URL saved in chapter "Scoring OML model using OML Services" Task 1.2: Authorize OML Services User
 
+    In the Authorization tab pick **Bearer Token** and paste the token copied from *Scoring OML using OML Services Task 1*.
+    ![Model Import](images/model-import-06.jpg)
 
- In the Authorization tab pick **Bearer Token** and paste the token copied from *Scoring OML using OML Services Task 1*.
+    The response is with both the Decistion Tree Model **DTModel** and the Support Vector Machine model **SVMG** model we created and scored in our previous tasks.
+    ![Model Import](images/model-import-07.jpg)
 
- ![Model Import](images/model-import-06.jpg)
-
-The response is with both the Decistion Tree Model **DTModel** and the Support Vector Machine model **SVMG** model we created and scored in our previous tasks.
-
-  ![Model Import](images/model-import-07.jpg)
-
-In case you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
+    In case you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
 
 ## Task: 2: Store an ONNX model in the OML Services repository

@@ -17,9 +17,7 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
 
-## Import the Decision Tree model
-
-
+## 
 ## Task: 1: Store the model in the OML Services repository
 
 *  In the Postman session opened run the following Get method to get the list of models deployed.

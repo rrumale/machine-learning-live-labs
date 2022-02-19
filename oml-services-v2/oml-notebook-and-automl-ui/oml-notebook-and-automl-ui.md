@@ -2,15 +2,12 @@
 
 In this section we will connect to OML Notebooks and split the data in train and test chunks. We will use the train data to run the OML AutoML UI and create a good model to make our prediction. We will deploy the model for use with OML Services REST endpoints in the next sections.
 
-
-
 Estimated Time: 15 minutes
 
 ### Objectives
 
 * Use OML AutoML UI to create the models
 * See the models created and Deploy one
-
 
 ### Prerequisites
 * Autonomous Database created
@@ -35,9 +32,8 @@ Estimated Time: 15 minutes
 * Login to OML Machine Learning User Interface in Autonomous Database
 
   Access the Oracle Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case the credentials are:
-
-   - Username: **OMLUSER**
-   - Password: **Welcome12345**
+    - Username: **OMLUSER**
+    - Password: **Welcome12345**
 
    ![ADB-OML-connect](images/prerequisites-screenshot-25.jpg)
 
@@ -68,7 +64,7 @@ Estimated Time: 15 minutes
 
      If the tables don't exist, the script will return an error. We will create the tables in the next steps
 
-  * Create the training table for our Auto ML UI
+  * Create the training table for our AutoML UI
 
      ````
      <copy>
@@ -141,22 +137,19 @@ Estimated Time: 15 minutes
 
 
 * In the **Features** section, we can deselect the following columns:
-  - First
-  - Last
-  - LTV
+    - First
+    - Last
+    - LTV
 
-In most cases the name of the candidate should not be a deciding factor so we will remove them from the model features. Also LTV column which is a computational numeric column that drive the LTV_BIN column might be missdirecting the model and this column is removed also.
-
-![AutoML-additional-settings](images/automl-screenshot-9b.jpg)
+  In most cases the name of the candidate should not be a deciding factor so we will remove them from the model features. Also LTV column which is a computational numeric column that drive the LTV_BIN column might be missdirecting the model and this column is removed also.
+  ![AutoML-additional-settings](images/automl-screenshot-9b.jpg)
 
 * Run OML Auto ML experiment by clicking **```Start```** and **```Better Accuracy```**.
-
   ![Run-AutoML](images/automl-screenshot-10.jpg)
 
   The AutoML Classification will run for several minutes showing which top 5 algorithms have a Better Accuracy. The running process takes around 20 minutes.
 
 * And the result of the experiment
-
   ![Classification Experiment Result](images/automl-screenshot-11.jpg)
 
   Each model described here is based on one of the automatically selected algorithms. Select the **Support Vector Machine (Gaussian)** algorithm and click on the model name which starts with **SVMG_**.
@@ -200,14 +193,12 @@ In most cases the name of the candidate should not be a deciding factor so we wi
 
 
   Copy the Model URI in a accessible place because we are going to use it in the next sections of the workshop.
-
-![Deploy Model](images/automl-screenshot-17.jpg)
+  ![Deploy Model](images/automl-screenshot-17.jpg)
 
   Click OK.
 
-We have a confirmation that the model was deployed successfully.
-
-![Deploy Model](images/automl-screenshot-X17.jpg)
+  We have a confirmation that the model was deployed successfully.
+  ![Deploy Model](images/automl-screenshot-X17.jpg)
 
 ## Task 3: Verify the model deployment.
 
@@ -262,20 +253,20 @@ We have a confirmation that the model was deployed successfully.
 
 * Run the following SQL statement to compare the model predicted value with the actual value in the testing table.
 
-````
-<copy>%sql
-      SELECT a.cust_id,
-             a.Last,
-             a.First,
-             PREDICTION(SVMG USING a.*) PREDICTION,
-             b.LTV_BIN
-      FROM Customer_insurance_test_classification a,
-      Customer_insurance b
-       where a.cust_id = b.cust_id and a.last = b.last
-</copy>
-````
+    ````
+    <copy>%sql
+          SELECT a.cust_id,
+                 a.Last,
+                 a.First,
+                 PREDICTION(SVMG USING a.*) PREDICTION,
+                 b.LTV_BIN
+          FROM Customer_insurance_test_classification a,
+          Customer_insurance b
+           where a.cust_id = b.cust_id and a.last = b.last
+    </copy>
+    ````
 
-![Classification Prediction](images/automl-screenshot-35.jpg)
+    ![Classification Prediction](images/automl-screenshot-35.jpg)
 
  The SQL statement returns the most probable group or class for the data provided in the column ``PREDICTION`` compared with the column ``LTV_BIN`` from the initial table.
 

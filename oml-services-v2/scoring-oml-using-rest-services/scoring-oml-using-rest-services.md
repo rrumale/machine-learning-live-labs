@@ -71,12 +71,12 @@ Estimated Time: 15 minutes
 * In the Development section, notice the **Oracle Machine Learning RESTful services** section.
 ![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
 
-The 2 important URLs from this section:
-+ The URL to obtain a REST authentication token for OML-provided REST APIs:
-`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
+  The 2 important URLs from this section:
+    + The URL to obtain a REST authentication token for OML-provided REST APIs:
+    `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
 
-+ All OML Services REST APIs use the following common base URL:
-`https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
+    + All OML Services REST APIs use the following common base URL:
+    `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
 
 #### Generate Access Token
 
@@ -90,7 +90,7 @@ URI endpoint:
 
 ````
 
-   - Replace **`<oml-cloud-service-location-url>`** with your URL.
+> Replace **`<oml-cloud-service-location-url>`** with your URL.
 
 
 In the header Tab enter the details:
@@ -115,7 +115,7 @@ In the Body tab, pick RAW format and enter the following:
 ````
 ![Postman token body](images/automl-screenshot-23.jpg)
 
-Click Send
+Click **Send**
 
 The response in JSON format and it contains the access token:
 
@@ -212,7 +212,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
 
   ![Postman Model Score Fran Hobs](images/automl-screenshot-30.jpg)
 
-  Click Send.
+  Click **Send**.
 
   ![Postman Model Score Fran Hobs Result](images/automl-screenshot-31.jpg)
 
@@ -223,7 +223,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
   + For VERY HIGH is ``1.1811557470959117E-4``  which is 0.001% a very small probability.
 
 
-  We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click Send.
+  We can test now our second candidate:  AL FRANK. Copy the following Json data in the Body tab and click **Send**.
 
       ````
       <copy>
@@ -275,7 +275,7 @@ Choose the display format in RAW and copy the token starting from ``:"``  up unt
   - For VERY HIGH is ``5.034903924262419E-8``  which is 0.00000005% a very small probability.
 
 
-  We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click Send.
+  We can test now our third candidate: ELLIOT PADGETT. Copy the following Json data in the Body tab and click **Send**.
 
     ````
     <copy>
