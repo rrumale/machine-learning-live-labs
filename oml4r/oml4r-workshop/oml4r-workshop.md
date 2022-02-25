@@ -128,13 +128,13 @@ By specifying "all = TRUE" in the connection specifications, proxy objects are a
 Example:
 
 ```
-
+<copy>
 ore.connect(user="oml_user",
             conn_string="MLPDB1",
-            host="130.61.44.205",
+            host="omlvm.livelabs.oraclevcn.com",
             password="MLlearnPTS#21_",
             all=TRUE)
-
+</copy>
 ```
 
 1.7: Check Database Connection
@@ -936,7 +936,7 @@ Your output should show the following:
 ![orefitglm](./images/orefitglm-7.png)
 
 
-## Task 6: Build Classification Model for LTV\_BIN Prediction and Evaluate Model
+## Task 6: Build Classification Model for LTV_BIN Prediction and Evaluate Model
 
 In this task, we build a classification model for LTV\_BIN prediction and then evaluate it using a confusion matrix. As you will notice, the overall process is similar to the one for predicting LTV. However, here we use a classification model as opposed to a regression model. Also, the model is assessed using a confusion matrix instead of the RMSE (Room Mean Square Error) method we used previously.
 
