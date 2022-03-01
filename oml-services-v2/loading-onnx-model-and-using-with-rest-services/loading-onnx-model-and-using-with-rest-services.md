@@ -69,7 +69,7 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``onnx_class_NN.model.zip`` file on the VM.
 
-## 
+##
 ## Task: 1: List the models in the OML Services repository
 
 *  In the Postman session opened run the Get method to get the list of models deployed.
@@ -119,7 +119,7 @@ boundary: Boundary
   ![Model Import](images/model-import-09.jpg)
 
 
-In the Body tab pick form-data and enter `modelData` in the key field, hover over the right side of the field and pick File in the dropdown.
+In the Body tab pick form-data and enter **`modelData`** in the key field, hover over the right side of the field and pick File in the dropdown.
 
   ![Model Import](images/model-import-10.jpg)
 

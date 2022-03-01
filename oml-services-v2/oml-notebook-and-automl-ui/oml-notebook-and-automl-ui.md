@@ -51,18 +51,6 @@ Estimated Time: 15 minutes
 
  Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning.
 
- * Drop training and test tables if they exist
-
-     ````
-     <copy> %script
-     DROP TABLE Customer_insurance_train_classification;
-
-     DROP TABLE Customer_insurance_test_classification;
-     </copy>
-     ````
-     ![drop-model-tables](images/automl-screenshot-3.jpg)
-
-     If the tables don't exist, the script will return an error. We will create the tables in the next steps
 
   * Create the training table for our AutoML UI
 

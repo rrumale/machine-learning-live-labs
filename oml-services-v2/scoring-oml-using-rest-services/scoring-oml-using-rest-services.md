@@ -20,11 +20,6 @@ Estimated Time: 15 minutes
 
 ### Task 1.1: Prepare the REST calls
 
-* Connect to the UI of your VM instance accessing the noVNC link. The URL to connect is on the home LiveLabs page.
-    ````
-    <copy>http://<Instance IP\>:6080/vnc.html?password=MLlearnPTS#21_&resize=scale&quality=9&autoconnect=true</copy>
-    ````
-
 
 * Open a terminal and launch the Postman Application by running
     ````
@@ -54,7 +49,7 @@ Estimated Time: 15 minutes
   Use the following URL structure to access the REST endpoints:
 
   ````
-  https://<oml-cloud-service-location-url>.oraclecloudapps.com
+  https://**<oml-cloud-service-location-url>**.oraclecloudapps.com
   ````
 
   Where:

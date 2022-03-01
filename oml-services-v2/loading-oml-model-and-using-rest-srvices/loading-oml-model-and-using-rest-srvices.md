@@ -17,7 +17,7 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
 
-## 
+##
 ## Task: 1: Store the model in the OML Services repository
 
 *  In the Postman session opened run the following Get method to get the list of models deployed.
@@ -66,7 +66,7 @@ boundary: Boundary
   ![Model Import](images/model-import-09.jpg)
 
 
-In the Body tab pick form-data and enter `modelData` in the key field, hover over the right side of the field and pick File in the dropdown.
+In the Body tab pick form-data and enter **`modelData`** in the key field, hover over the right side of the field and pick File in the dropdown.
 
   ![Model Import](images/model-import-10.jpg)
 
@@ -119,10 +119,10 @@ Content-Type: application/json
  In the Body tab enter the following JSON:
 
 ````
- {
+ <copy>{
    "uri":"dtmodel",
    "modelId":"50ffc903-aaf6-4a94-a228-4cb7ab6b3c07"
-}
+}</copy>
 ````
 
 Where `50ffc903-aaf6-4a94-a228-4cb7ab6b3c07` is the model Id copied from the previous step. Replace it with the returned model Id from your command in Task 6.2.
