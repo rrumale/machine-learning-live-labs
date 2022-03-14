@@ -9,6 +9,11 @@
       "filename": "./../../introduction/introduction.md"
     },
     {
+      "title": "Getting Familiar with NoVNC environment",
+      "description": "Introduction",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/common/labs/open-workshop-guide.md"
+    },
+    {
     "title": "Understanding Use Case",
     "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
     "filename": "./../../../use-case/use-case.md"
