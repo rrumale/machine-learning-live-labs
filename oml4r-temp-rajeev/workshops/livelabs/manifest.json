@@ -19,11 +19,6 @@
     "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/verify-compute/verify-compute-novnc.md"
     },
     {
-    "title": "Initialize Environment",
-    "description": "Initialize Environment",
-    "filename": "../../initialize-environment-novnc/initialize-environment-novnc.md"
-    },
-    {
       "title": "OML4R Workshop",
       "description": "OML4R Workshop using the Insurance dataset to predict customer's LTV value",
       "filename": "./../../oml4r-workshop/oml4r-workshop.md"
