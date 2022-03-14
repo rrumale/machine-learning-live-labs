@@ -14,11 +14,6 @@
     "filename": "./../../../use-case/use-case.md"
     },
     {
-    "title": "Load and Prepare Data",
-    "description": "Load and Prepare Data",
-    "filename": "./../../preparation/preparation.md"
-    },
-    {
       "title": "OML4R Workshop",
       "description": "OML4R Workshop using the Insurance dataset to predict customer's LTV value",
       "filename": "./../../oml4r-workshop/oml4r-workshop.md"
