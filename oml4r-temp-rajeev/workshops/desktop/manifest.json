@@ -14,14 +14,9 @@
     "filename": "./../../../use-case/use-case.md"
     },
     {
-    "title": "Environment Setup",
-    "description": "Verify Setup of compute instance",
-    "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/verify-compute/verify-compute-novnc.md"
-    },
-    {
-    "title": "Initialize Environment",
-    "description": "Initialize Environment",
-    "filename": "../../initialize-environment-novnc/initialize-environment-novnc.md"
+    "title": "Load and Prepare Data",
+    "description": "Load and Prepare Data",
+    "filename": "./../../preparation/preparation.md"
     },
     {
       "title": "OML4R Workshop",
