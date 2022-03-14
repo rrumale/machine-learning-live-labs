@@ -4,14 +4,14 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
+      "title": "Getting Familiar with NoVNC environment",
+      "description": "Getting Familiar with NoVNC environment",
+      "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
       "title": "Introduction",
       "description": "Introduction",
       "filename": "./../../introduction/introduction.md"
-    },
-    {
-      "title": "Getting Familiar with NoVNC environment",
-      "description": "Getting Familiar with NoVNC environment",
-      "filename": "https://raw.githubusercontent.com/oracle/learning-library/common/labs/open-workshop-guide.md"
     },
     {
     "title": "Understanding Use Case",
