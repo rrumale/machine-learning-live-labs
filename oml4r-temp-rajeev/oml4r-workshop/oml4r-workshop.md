@@ -4,8 +4,7 @@ Oracle Machine Learning for R (OML4R) enables you to use R (a leading statistica
 
 In this introductory workshop, you will use a dataset representing about 15,000 customers of an insurance company. This dataset is contained in a database table (named CUST\_INSUR\_LTV). Each customer record in the dataset has 31 attributes. Your goal is to train machine learning models to predict a given customer's lifetime value (or LTV) and a four-level category representation of their LTV (i.e., the LTV\_BIN that the customer belongs to). You will use a regression algorithm to predict LTV, and a classification algorithm to predict customers’ LTV\_BIN assignments (LOW, MEDIUM, HIGH, or VERY HIGH).
 
-Note: In marketing, the lifetime value (LTV) of a customer is an estimate of the net profit attributed to a given customer relationship over the customer lifetime.
-
+Note: In marketing, a customer's lifetime value (LTV) is an estimate of the net profit attributed to a given customer relationship over the customer lifetime.
 
 ### Estimated Lab Time: 2 Hours
 
@@ -34,11 +33,11 @@ In this lab, you will:
 
 ## Task 1: Connect to RStudio Client and Establish Database Connection
 
-RStudio provides an IDE (Integrated Development Environment) for R with a GUI (Graphical User Interface) and BUI (Browser User Interface). Note that RStudio Server has been pre-configured on your VM that is running the database server.
+RStudio provides an IDE (Integrated Development Environment) for R with a GUI (Graphical User Interface) and BUI (Browser User Interface). Note that an Oracle database and RStudio Server is already installed and pre-configured on VM provided for the lab.
 
 You will be running all the lab steps in the RStudio R Script window as shown below.
 
-1. Point browser to RStudio Web, you should have the window open in the Novnc terminal, if not open a new browser session and put URL
+1. Point browser to RStudio Web, you should have the window open in the NoVNC terminal, if not open a new browser session and enter URL mention in the code block below.
 
     ```
     <copy>http://localhost:8787</copy>
@@ -60,7 +59,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
 
     ![rstudio interface](./images/rstudio-1.png "rstudio interface")
 
-    The RStudio Graphical User Interface (GUI) provides four different panels: Console, Scripts, Environments, and Plots. Instead of working ad-hoc, writing scripts allows you to make your code and workflow reproducible.
+    The RStudio Graphical User Interface (GUI) provides four panels: Console, Scripts, Environments, and Plots. Instead of working ad-hoc, writing scripts makes the code and workflow reproducible.
 
 3. Install packages
 
@@ -72,11 +71,11 @@ You will be running all the lab steps in the RStudio R Script window as shown be
     </copy>
     ```
 
-    The above checks the existence of the given package in the present installation. It only installs the package if the given package is not already installed, thus eliminating redundant installation of packages.
+    The above code checks the existence of the given package in the R-Studio installation. It only installs the package if the given package is not already installed, thus eliminating the redundant installation of packages.
 
 4. Load Libraries
 
-    The library() function call installs attaches the given library in memory and makes the included functions available. If a call to a function is made and the corresponding library is not already attached, you get an error.
+    The library() function call installs and attaches the given library in memory and makes the included functions available. If a call to a function is made and the corresponding library is not already attached, you get an error.
 
     ```
     <copy>
@@ -90,7 +89,9 @@ You will be running all the lab steps in the RStudio R Script window as shown be
 
     dplyr - The standard dplyr R package provides grammar of data manipulation, which gives a consistent set of verbs that help you solve the most common data manipulation challenges
 
-    OREdplyr - The OREdplyr package is an overloaded package that provides much of the dplyr functionality. It extends the ORE transparency layer for in-database execution of dplyr function calls. OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes. Further, using the transparency layer operations are not constrained by R client memory, the latency of data movement, or single-threaded execution.
+    OREdplyr - The OREdplyr package is an overloaded package that provides much of the dplyr functionality. It extends the ORE transparency layer for in-database execution of dplyr function calls.
+
+    OREdplyr allows users to avoid costly movement of data while scaling to larger data volumes. Further, using the transparency layer operations are not constrained by R client memory, the latency of data movement, or single-threaded execution.
 
 5. Set Global Options to Disable Unnecessary Warning Messages
 
@@ -106,7 +107,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
 
 6. Connect to the Database
 
-    An Oracle 21c database instance (named MLPDB1) has been provisioned for you to run this lab. Connect to the provided database using the ore.connect() function as follows:
+    An Oracle 21c database instance (named MLPDB1) is already provisioned for you on the VM to run this lab. Connect to the provided database using the ore.connect() function as follows:
 
     ```
     ore.connect(user="oml_user",
@@ -116,7 +117,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
                 all=TRUE)
     ```
 
-    Your database connection is to the database schema where the data resides. The connection port defaults to 1521.
+    It will establish a database connection is to the database schema (oml_user) where the data resides. The connection port defaults to 1521.
 
     By specifying "all = TRUE" in the connection specifications, proxy objects are automatically loaded for all tables and views in the target schema to which you are connecting.
 
@@ -140,11 +141,11 @@ You will be running all the lab steps in the RStudio R Script window as shown be
     </copy>
     ```
 
-    If needed, you can use ore.disconnect() call to explicitly disconnect the database session. As we will discuss later, if you do this, then any temporary table, view, or model proxy objects will be automatically deleted.
+    If needed, you can use ore.disconnect() call to disconnect the database session explicitly. As we will discuss later, if you do this, then any temporary table, view, or model proxy objects will be automatically deleted
 
 8. List Database Objects
 
-    The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables and views in the database schema you are connected to, which appear as ore frames in your OML4R session. The conversion is transparent and it is enabled by the OML4R transparency layer.
+    The ore.ls() function returns all OML4R proxy objects. Use the ore.ls() function call to list tables and views in the database schema, which appear as ore frames in your OML4R session. The conversion is transparent, and the OML4R transparency layer enables it.
 
     ```
     <copy>
@@ -157,7 +158,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
 
 ## Task 2: Explore Data Using R - Statistical Functions
 
-Exploratory Data Analysis is the process of visualizing and analyzing data to develop better understanding of the data and gain insight into the data.
+Exploratory Data Analysis is the process of visualizing and analyzing data to develop a better understanding of the data and gain insight into the data.
 
 
 1. Check ‘class’ of Object
@@ -170,7 +171,7 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
 
     The database table appears as an "ore.frame". An ore.frame is a proxy object - the R object representation - of the CUST\_INSUR\_LTV table in the database.
 
-    There are 6 types of objects in R Programming. They include vector, list, matrix, array, factor, and data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance.
+    There are 6 types of objects in R Programming. They are Vector, List, Matrix, Array, Factor, and Data frame. An ore.frame object represents a relational (SQL) query to an Oracle Database instance.
 
     The class ore.frame inherits from data.frame and overloads many data.frame functions.
 
@@ -288,7 +289,7 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
 
 ## Task 3: Explore Data Using R - Data Visualization
 
-Exploratory Data Analysis includes the process of visualizing data for better understanding of the data and for developing insight.
+Exploratory Data Analysis includes the process of visualizing data for a better understanding of the data and for developing insight.
 
 Since a number of data visualization functions require a data.frame object, let us first pull the ore.frame object into a data.frame object first and also create an ordered frame.
 
@@ -342,7 +343,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ![boxplot](./images/boxplot-1.png "Data Visualization - Box plot")
 
-    A boxplot displays distribution of data based on a 5-number summary ("minimum", first quartile (Q1), median, third quartile (Q3), and "maximum"). A boxplot makes it easy to see outliers and what their values are. It can also indicate if your data is symmetrical, general grouping of data, and data skew.
+    A boxplot displays the distribution of data based on a 5-number summary ("minimum," first quartile (Q1), median, third quartile (Q3), and "maximum"). A boxplot makes it easy to see outliers and what their values are. It can also indicate whether the data is symmetrical, the general grouping of data, and data skew.
 
     The above boxplot illustrates the distribution of data with a smallest (not minimum) value of 0, a highest (not maximum) value of 74, and an interquartile range from 27 to 46, with a median right in the center of these two (at 36) as depicted by the solid line. Values ranging from 75 to 84 are shown as outliers.
 
@@ -352,7 +353,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     Plot a histogram for customer salary data.
 
-    Histograms help see distribution of data in range bands. Note, the hist() function uses the Sturges method by default to identify appropriate breaks.
+    Histograms help see a distribution of data in range bands. Note that the hist() function uses the Sturges method by default to identify appropriate breaks.
 
     ```
     <copy>
@@ -371,7 +372,7 @@ row.names(CIL) <- CIL$CUST_ID
 
 4. Pie Chart
 
-    Generate a pie chart for distribution of customers by region. Note that CLOCKWISE signifies to use alphabetical order.
+    Generate a pie chart for the distribution of customers by region. Note that CLOCKWISE signifies to use alphabetical order.
 
     ```
     <copy>
@@ -698,7 +699,7 @@ row.names(CIL) <- CIL$CUST\_ID
 
 7. Principal Component Analysis
 
-    Principal Component Analysis (PCA) is a technique used for exploratory data analysis, and to visualize the existing variation in a dataset that has several variables. PCA is particularly helpful when dealing with wide datasets (when each record has many attributes). PCA allows you to simplify a dataset by turning the original (many) variables into a smaller number of what are termed as "Principal Components".
+    Principal Component Analysis (PCA) is a technique used for exploratory data analysis and to visualize the existing variation in a dataset that contains several variables. PCA is particularly helpful when dealing with vast datasets (when each record has many attributes). PCA simplifies a dataset by turning the original (many) variables into a smaller number, termed "Principal Components".
 
     ```
     <copy>
@@ -932,7 +933,7 @@ In this task, we are going to build a regression model to predict LTV.
 
 ## Task 6: Build Classification Model for LTV_BIN Prediction and Evaluate Model
 
-In this task, we build a classification model for LTV\_BIN prediction and then evaluate it using a confusion matrix. As you will notice, the overall process is similar to the one for predicting LTV. However, here we use a classification model as opposed to a regression model. Also, the model is assessed using a confusion matrix instead of the RMSE (Room Mean Square Error) method we used previously.
+In this task, we build a classification model for LTV\_BIN prediction and then evaluate it using a confusion matrix. As you will notice, the overall process is similar to predicting LTV. However, here we use a Classification model instead of a regression model. Also, the model is assessed using a confusion matrix instead of the RMSE (Room Mean Square Error) method we used previously.
 
 1. Create Ordered ORE Frame
 
@@ -1252,7 +1253,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
 ### Conclusion
 
-OML4R enables you to leverage the power of R, a leading statistical programming language, with Oracle Database, the world’s most advanced, and high-performance database. OML4R provides simple, easy to use functions to perform exploratory data analysis including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle Database to eliminate the need for data movement while utilizing in-database parallel processing.
+OML4R enables you to leverage the power of R, a leading statistical programming language, with Oracle Database, the world’s most advanced and high-performance database. OML4R provides simple, easy-to-use functions to perform exploratory data analysis, including statistical analysis, data visualization, and more advanced and targeted data analysis. OML4R uses overloaded R functions that leverage the powerful Oracle Database to eliminate the need for data movement while utilizing in-database parallel processing.
 
 ### Next Steps
 
