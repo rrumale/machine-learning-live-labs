@@ -255,7 +255,7 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
     ```
     <copy>
     median(CUST_INSUR_LTV$AGE)
-    </copy>/
+    </copy>
     ```
 
     Range provides end-to-end range of numeric values.
@@ -697,7 +697,7 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ore.save(ltvai, name = 'ltvai', overwrite = TRUE)
     ore.datastore()
-    <copy>
+    </copy>
     ```
 
     Attribute importance ranks attributes according to their significance in predicting a target. The ore.odmAI() function produces a ranking of attributes and their importance expressed as a fraction.
@@ -910,7 +910,7 @@ In this task, we are going to build a regression model to predict LTV.
 
     ![orefitglm](./images/orefitglm-5.png "Check Root Mean Squared Error - RMSE")
 
-    Recall that the average (mean) LTV as calculated previously was $22266.67. Thus a value of 48.46 is relatively low, suggesting a good model fit.
+    Recall that the average (mean) LTV as calculated previously was $22266.67. Thus a value of 57.44 is relatively low, suggesting a good model fit.
 
     Plot the predictions alongside actual LTV value.
 
@@ -1138,14 +1138,6 @@ Some of the most significant benefits of using OML4R can be derived from using E
     <copy>
     library(ORE)
     options(ore.warn.order=FALSE)
-
-    ore.connect(user="oml_user",
-    conn_string="MLPDB1",
-    host="rinst5d",
-    password="oml_user",
-    all=TRUE)
-
-    ore.is.connected()
     </copy>
     ```
 
