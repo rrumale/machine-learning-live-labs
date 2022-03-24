@@ -68,6 +68,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
     if (!require("ORE")) install.packages("ORE")
     if (!require("dplyr")) install.packages("dplyr")
     if (!require("OREdplyr")) install.packages("OREdplyr")
+    if (!require("caret")) install.packages("caret")
     </copy>
     ```
 
@@ -82,6 +83,7 @@ You will be running all the lab steps in the RStudio R Script window as shown be
     library(ORE)
     library(dplyr)
     library(OREdplyr)
+    library(caret)
     </copy>
     ```
 
@@ -291,7 +293,7 @@ Exploratory Data Analysis is the process of visualizing and analyzing data to de
 
 Exploratory Data Analysis includes the process of visualizing data for a better understanding of the data and for developing insight.
 
-Since a number of data visualization functions require a data.frame object, let us first pull the ore.frame object into a data.frame object first and also create an ordered frame.
+Since a number of standard data visualization functions require a data.frame object, let us first convert the ore.frame object into a data.frame object and also create an ordered frame.
 
 ```
 <copy>
@@ -308,7 +310,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    plot(CUST_INSUR_LTV$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", col = "darkblue", main = "Customer Salary Plot")
+    plot(CIL$SALARY/1000, xlab = "Customer", ylab = "Salary in K$", col = "darkblue", main = "Customer Salary Plot")
     </copy>
     ```
 
@@ -320,7 +322,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    plot(CUST_INSUR_LTV$LTV/1000, xlab = "Customer", ylab = "LTV in K$", col = "darkblue", main = "Customer Salary Plot")
+    plot(CIL$LTV/1000, xlab = "Customer", ylab = "LTV in K$", col = "darkblue", main = "Customer LTV Plot")
     </copy>
     ```
 
@@ -332,8 +334,8 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    out <- boxplot.stats(CUST_INSUR_LTV$AGE)$out
-    boxplot(CUST_INSUR_LTV$AGE, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
+    out <- boxplot.stats(CIL$AGE)$out
+    boxplot(CIL$AGE, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
     text(x=fivenum(x), labels = fivenum(x), y=1.35)
     mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
     </copy>
@@ -357,7 +359,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    hist(CUST_INSUR_LTV$SALARY/1000,
+    hist(CIL$SALARY/1000,
           main="Customer Salary Data",
           xlab="Salary($K)",
           xlim=c(20,100),
@@ -376,7 +378,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    pie(table(CUST_INSUR_LTV$REGION), main = "Customer Distribution by Region", clockwise = TRUE)  
+    pie(table(CIL$REGION), main = "Customer Distribution by Region", clockwise = TRUE)  
     </copy>
     ```
 
@@ -388,7 +390,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    pie(table(CUST_INSUR_LTV$MARITAL_STATUS), main = "Customer Distribution by Region", clockwise = TRUE)  
+    pie(table(CIL$MARITAL_STATUS), main = "Customer Marital Status", clockwise = TRUE)  
     </copy>
     ```
 
@@ -396,7 +398,7 @@ row.names(CIL) <- CIL$CUST_ID
 
     Use the package ggplot2 to generate a plot for visualizing LTV for various regions.
 
-    When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST\_INSUR\_LTV is an ore.frame and once the data is pulled, it is an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
+    When using third-party packages, the data needs to be loaded into R memory, from the database. For this we use the ore.pull() function. Note that CUST\_INSUR\_LTV is an ore.frame and once that frame is transformed using the ore.pull function, it is translated to an R data.frame. Users must take into account the size of a table before attempting to load it into memory.
 
     ```
     <copy>
@@ -455,7 +457,17 @@ row.names(CIL) <- CIL$CUST_ID
     ```
     <copy>
     print(CIL %>% ggplot(aes(x=SALARY/1000)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
+    </copy>
+    ```
+
+    ```
+    <copy>
     print(CIL %>% ggplot(aes(x=N_OF_DEPENDENTS)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
+    </copy>
+    ```
+
+    ```
+    <copy>
     print(CIL %>% ggplot(aes(x=TIME_AS_CUSTOMER)) + geom_density(stat="count", , color = "darkred", fill = "#69b3a2"))
     </copy>
     ```
@@ -475,13 +487,13 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    nrow(CUST_INSUR_LTV)
+    nrow(CIL)
 
-    nrow(filter(CUST_INSUR_LTV, REGION == "NorthEast"))
+    nrow(filter(CIL, REGION == "NorthEast"))
 
-    nrow(filter(CUST_INSUR_LTV, SALARY > 110000))
+    nrow(filter(CIL, SALARY > 110000))
 
-    nrow(CUST_INSUR_LTV %>% filter(SALARY > mean(SALARY, na.rm = TRUE)))
+    nrow(CIL %>% filter(SALARY > mean(SALARY, na.rm = TRUE)))
     </copy>
     ```
 
@@ -491,9 +503,9 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    aggregate(CUST_INSUR_LTV$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
+    aggregate(CIL$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
+    aggregate(CIL$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
     </copy>
     ```
 
@@ -507,21 +519,21 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    aggregate(CUST_INSUR_LTV$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
+    aggregate(CIL$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$MARITAL_STATUS, by = list(MARITAL_STATUS = CUST_INSUR_LTV$MARITAL_STATUS),FUN = length)
+    aggregate(CIL$MARITAL_STATUS, by = list(MARITAL_STATUS = CUST_INSUR_LTV$MARITAL_STATUS),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$SEX, by = list(SEX = CUST_INSUR_LTV$SEX),FUN = length)
+    aggregate(CIL$SEX, by = list(SEX = CUST_INSUR_LTV$SEX),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$N_MORTGAGES, by = list(N_MORTGAGES = CUST_INSUR_LTV$N_MORTGAGES),FUN = length)
+    aggregate(CIL$N_MORTGAGES, by = list(N_MORTGAGES = CUST_INSUR_LTV$N_MORTGAGES),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$N_MORTGAGES, by = list(N_MORTGAGES = CUST_INSUR_LTV$N_MORTGAGES),FUN = length)
+    aggregate(CIL$N_MORTGAGES, by = list(N_MORTGAGES = CUST_INSUR_LTV$N_MORTGAGES),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$HAS_CHILDREN, by = list(HAS_CHILDREN = CUST_INSUR_LTV$HAS_CHILDREN),FUN = length)
+    aggregate(CIL$HAS_CHILDREN, by = list(HAS_CHILDREN = CUST_INSUR_LTV$HAS_CHILDREN),FUN = length)
 
-    aggregate(CUST_INSUR_LTV$HOUSE_OWNERSHIP, by = list(HOUSE_OWNERSHIP = CUST_INSUR_LTV$HOUSE_OWNERSHIP), FUN = length)
+    aggregate(CIL$HOUSE_OWNERSHIP, by = list(HOUSE_OWNERSHIP = CUST_INSUR_LTV$HOUSE_OWNERSHIP), FUN = length)
 
-    aggregate(CUST_INSUR_LTV$BUY_INSURANCE, by = list(BUY_INSURANCE = CUST_INSUR_LTV$BUY_INSURANCE), FUN = length)
+    aggregate(CIL$BUY_INSURANCE, by = list(BUY_INSURANCE = CUST_INSUR_LTV$BUY_INSURANCE), FUN = length)
     </copy>
     ```
 
@@ -529,7 +541,7 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    cust_male_northeast <- (CUST_INSUR_LTV %>% filter(REGION == "NorthEast", na.rm = TRUE) %>% filter(SEX == "M"))
+    cust_male_northeast <- (CIL %>% filter(REGION == "NorthEast", na.rm = TRUE) %>% filter(SEX == "M"))
 
     aggregate(cust_male_northeast$BUY_INSURANCE, by = list(BUY_INSURANCE = cust_male_northeast$BUY_INSURANCE),FUN = length)
     </copy>
@@ -541,7 +553,7 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    nrow(CUST_INSUR_LTV %>% filter(AGE < 1, na.rm = TRUE))
+    nrow(CIL %>% filter(AGE < 1, na.rm = TRUE))
     </copy>
     ```
 
@@ -549,7 +561,7 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    nrow(CUST_INSUR_LTV %>% filter(LTV < 1, na.rm = TRUE))
+    nrow(CIL %>% filter(LTV < 1, na.rm = TRUE))
     </copy>
     ```
 
@@ -1143,11 +1155,30 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
 2. Select Algorithm and Build Machine Learning Model  
 
+    Organize data for training and testing.
+
+    ```
+    CIL <- CUST_INSUR_LTV
+    row.names(CIL) <- CIL$CUST_ID
+
+    set.seed(1)
+    sampleSize <- 4500
+
+    ind <- sample(1:nrow(CIL),sampleSize)
+    group <- as.integer(1:nrow(CIL) %in% ind)
+    CIL.train <- CIL[group==FALSE,]
+    CIL.test <- CIL[group==TRUE,]
+
+    dim(CIL.train)
+    dim(CIL.test)
+
+    ```
+
     Let us first invoke a script with table as input and test using open source R test and the local R data frame.
 
     ```
     <copy>
-    cust_insur_ltv_loc <- ore.pull(CUST_INSUR_LTV)
+    cust_insur_ltv_loc <- ore.pull(CIL.train)
     class(cust_insur_ltv_loc)
     </copy>
     ```
@@ -1168,11 +1199,11 @@ Some of the most significant benefits of using OML4R can be derived from using E
     ![embr](./images/embr-2.png "Select Algorithm and Build Machine Learning Model")
 
 
-    Now, let us use ore.TableApply function with a database proxy table as input. This allows for in database processing and eliminates the need to "pull" data out.
+    Now, let us use ore.TableApply function to score the data in a database proxy table as input.
 
     ```
     <copy>
-    glm.fit.oml4r <- ore.tableApply(CUST_INSUR_LTV, FUN=glm.fit)
+    glm.fit.oml4r <- ore.tableApply(CIL.test, FUN=glm.fit)
     glm.fit.oml4r
     class(glm.fit.oml4r)
     ore.pull(glm.fit.oml4r)
@@ -1230,7 +1261,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
     ```
     <copy>
-    scores.oml4r <- ore.rowApply(CUST_INSUR_LTV,
+    scores.oml4r <- ore.rowApply(CIL.test,
                  FUN=glm.pred,
                  mod=mod.loc,
                  rows=200,
