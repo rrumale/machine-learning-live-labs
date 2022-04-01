@@ -1150,6 +1150,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
     Organize data for training and testing.
 
     ```
+    <copy>
     CIL <- CUST_INSUR_LTV
     row.names(CIL) <- CIL$CUST_ID
 
@@ -1163,7 +1164,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
     dim(CIL.train)
     dim(CIL.test)
-
+    </copy>
     ```
 
     Let us first invoke a script with table as input and test using open source R test and the local R data frame.
