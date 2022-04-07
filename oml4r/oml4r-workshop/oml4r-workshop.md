@@ -1186,6 +1186,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
     ```
     <copy>
     glm.fit <- function(dat){
+                 library(ORE)
                  glm(LTV ~ N_MORTGAGES + MORTGAGE_AMOUNT + N_OF_DEPENDENTS, data = dat)}
 
     mod.loc <- glm.fit(cust_insur_ltv_loc)
@@ -1221,7 +1222,7 @@ Some of the most significant benefits of using OML4R can be derived from using E
 
     ```
     <copy>
-    ore.save(glm.fit.oml4r, name = "GLMFITOML4R")
+    ore.save(glm.fit.oml4r, name = "GLMFITOML4R", overwrite = TRUE)
     ore.datastore()
     </copy>
     ```
