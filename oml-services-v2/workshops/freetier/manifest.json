@@ -18,10 +18,10 @@
     "filename": "./../../../use-case/use-case.md"
     },
     {
-    "title": "Lab 1: Prepare Setup",
+    "title": "Prepare Lab Setup",
     "description": "How to download your ORM stack",
     "publisheddate": "11/12/2021",
-    "filename": "../../prepare-setup/prepare-setup.md"
+    "filename": "../../prepare-lab-setup/prepare-lab-setup.md"
     },
     {
     "title": "Load and Prepare Data",
