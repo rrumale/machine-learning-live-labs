@@ -1,7 +1,7 @@
 # Initialize Environment
 
 ## Introduction
-This lab will show you how to connect to the Lab VM, Autonomous Database on Oracle cloud & explore the various tools to interact with it and loading the sample dataset.
+This lab will show you how to connect to the Lab VM, Autonomous Database on Oracle cloud & explore the various tools to interact with it and load the sample dataset.
 
 Estimated Time: 15 minutes
 
