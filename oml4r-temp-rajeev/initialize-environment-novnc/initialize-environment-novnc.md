@@ -42,4 +42,4 @@ You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Author** - Rajeev Rumale, Valentin Leonard Tabacaru, Milton Wan
-* **Last Updated By/Date** -  Rajeev Rumale, November 2021
+* **Last Updated By/Date** -  Rajeev Rumale, April 2022

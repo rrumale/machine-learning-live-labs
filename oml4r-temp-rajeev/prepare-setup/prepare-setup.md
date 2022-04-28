@@ -20,8 +20,9 @@ This lab assumes you have:
 
 ## Task 2: Setup Compute   
 Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
-  -  Create Stack:  *Compute + Networking*
-  -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
+  -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated in the resource stack.
+
+Note: All the resources include R-Studio and Oracle Database are already setup in the Sandbox VM we are creating using the stack provided in previous step, hence there is not need to create ssh keys and access the instance using SSH or other method.
 
 You may now [proceed to the next lab](#next).
 
@@ -29,4 +30,4 @@ You may now [proceed to the next lab](#next).
 
 * **Author** - Rajeev Rumale
 * **Contributors** - Meghana Banka, Rene Fontcha, Narayanan Ramakrishnan
-* **Last Updated By/Date** - Rajeev Rumale, November 2021
+* **Last Updated By/Date** - Rajeev Rumale, April 2022
