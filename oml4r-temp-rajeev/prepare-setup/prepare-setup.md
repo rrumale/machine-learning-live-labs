@@ -14,9 +14,9 @@ This lab assumes you have:
 - Have sufficient quota for in your tenancy to create VM and VCN.
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [oml4r-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hGa8v7gYSUtoSRF9gl5FhuvtB53rAb9ko-LOzT_RhwphaqYb7CXVNejlmm8fccnm/n/oraclepartnersas/b/omlvm-mkplc-freetier/o/oml4r-mkplc-freetier.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [oml4r-mkplc-freetier.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/qZjEnLD0vWMY4nXqfnhtPGP7G18XT0iRwPRliMvK0k1JAYIdzXu9lsc_msHxcRd-/n/oraclepartnersas/b/omlvm-mkplc-freetier/o/oml4r-mkplc-freetier.zip)
 
-2.  Save the **omlvm-mkplc-freetier.zip** file in your machine and note the folder location.
+2.  Save the **oml4r-mkplc-freetier.zip** file in your machine and note the folder location.
 
 ## Task 2: Setup Compute   
 Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
