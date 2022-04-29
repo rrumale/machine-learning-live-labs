@@ -17,8 +17,8 @@ In this lab, you will:
 * Explore, visualize, and prepare data for analysis and machine learning.
 * Use R for exploratory data analysis, data visualization, data organization (e.g., splitting data in train and test sets),
 * Use Attribute Importance and Principal Component Analysis
-* Use an OML4R in-database regression algorithm for building a machine learning model for estimating customer life-time value (LTV)
-* Use an OML4R in-database classification algorithm for building a machine learning model for predicting LTV\_BIN
+* Use the OML4R in-database regression algorithm for building a machine learning model for estimating customer life-time value (LTV)
+* Use the OML4R in-database classification algorithm for building a machine learning model for predicting LTV\_BIN
 * Assess model quality using RMSE (Root Mean Squared Error), and assess classification model quality using a confusion matrix
 
 ### Note:
@@ -35,9 +35,9 @@ In this lab, you will:
 
 RStudio provides an IDE (Integrated Development Environment) for R with a GUI (Graphical User Interface) and BUI (Browser User Interface). Note that an Oracle database and RStudio Server is already installed and pre-configured on VM provided for the lab.
 
-You will be running all the lab steps in the RStudio R Script window as shown below.
+You will be running all the lab steps in the RStudio R Script window, as shown below.
 
-1. Point browser to RStudio Web, you should have the window open in the NoVNC terminal, if not open a new browser session and enter URL mention in the code block below.
+1. Point the browser to RStudio Web. You should have the window open in the NoVNC terminal. If not, open a new browser session and enter the URL mentioned in the code block below.
 
     ```
     <copy>http://localhost:8787</copy>
@@ -72,11 +72,11 @@ You will be running all the lab steps in the RStudio R Script window as shown be
     </copy>
     ```
 
-    The above code checks the existence of the given package in the R-Studio installation. It only installs the package if the given package is not already installed, thus eliminating the redundant installation of packages.
+    The above code checks the existence of the given package in the R-Studio installation. It only installs the package if it is not already installed, thus eliminating the redundant installation of packages.
 
 4. Load Libraries
 
-    The library() function call installs and attaches the given library in memory and makes the included functions available. If a call to a function is made and the corresponding library is not already attached, you get an error.
+    The library() function call installs and attaches the given library in memory and makes the included functions available. You get an error if a call to a function is made and the corresponding library is not already attached.
 
     ```
     <copy>
@@ -1136,9 +1136,9 @@ OML4R enables you to leverage the power of R, a leading statistical programming 
 
 ### Next Steps
 
-a) Sign-up: OCI Always Free Tier
+a) Sign-up:  Oracle Cloud Infrastructure trial account
 
-Consider signing-up for the Oracle Cloud Infrastructure Always Free Tier and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects. Note that OML4R is currently not supported on Autonomous Database. However, you can use Oracle Database installed in a compute VM and OML4R.
+Consider signing-up for the Oracle Cloud Infrastructure and use Oracle Machine Learning for R (as well as Oracle Machine Learning for Python and Oracle Machine Learning for SQL) for your development projects. Note that OML4R is currently not supported on Autonomous Database. However, you can use Oracle Database installed in a compute VM and OML4R.
 
 b) Get Certified: Oracle Machine Learning with Oracle Autonomous Database Certification
 Consider taking the Oracle Machine Learning with Oracle Autonomous Database Certification offered by Oracle University.
