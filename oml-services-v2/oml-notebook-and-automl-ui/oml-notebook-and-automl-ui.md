@@ -1,6 +1,6 @@
 # Creating models using OML Notebooks and OML AutoML UI
 
-In this section we will connect to OML Notebooks and split the data in train and test chunks. We will use the train data to run the OML AutoML UI and create a good model to make our prediction. We will deploy the model for use with OML Services REST endpoints in the next sections.
+In this section, we will connect to OML Notebooks and split the data into training and test chunks. We will use the train data to run the OML AutoML UI and create a good model to make our prediction. In the next sections, we will deploy the model for use with OML Services REST endpoints.
 
 Estimated Time: 15 minutes
 
@@ -22,7 +22,7 @@ Estimated Time: 15 minutes
 * In the Autonomous Database instance details page. Click on the Service Console button.
   ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
 
-* A new page with the service console is opened. In the Overview section we see the details of this specific instance. We can go to the Development section in the left side.
+* A new page with the service console is opened. In the Overview section, we see the details of this specific instance. We can go to the Development section on the left side.
   ![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
 
@@ -31,7 +31,7 @@ Estimated Time: 15 minutes
 
 * Login to OML Machine Learning User Interface in Autonomous Database
 
-  Access the Oracle Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case the credentials are:
+  Access the Oracle Machine Learning Notebooks link and connect with the credentials that we created earlier. In our case, the credentials are:
     - Username: **OMLUSER**
     - Password: **Welcome12345**
 
@@ -113,7 +113,7 @@ Estimated Time: 15 minutes
 
     ![AutoML-additional-settings](images/automl-screenshot-9.jpg)
 
-    Notice that we can set the Database Service Level to High, and select by which metric we should compare the models, and which predefined algorithms to include or exclude from this experiment.
+    Notice that we can set the Database Service Level to High and select which metric we should compare the models and which predefined algorithms to include or exclude from this experiment.
 
       - Choose the following options for your experiment:
 

@@ -1,6 +1,6 @@
 # Loading an OML model in OML Services and using it
 
-In this section of the workshop we will import and store the Decision Tree model in our OML Services repository and score it using REST APIs
+In this section of the workshop, we will import and store the Decision Tree model in our OML Services repository and score it using REST APIs.
 
 Estimated Time: 20 minutes
 
@@ -20,7 +20,7 @@ We are going to run the next steps:
 ##
 ## Task: 1: Store the model in the OML Services repository
 
-*  In the Postman session opened run the following Get method to get the list of models deployed.
+*  In the Postman session open, run the following Get method to get the list of models deployed.
 
 ````
 Operation: GET
@@ -66,7 +66,7 @@ boundary: Boundary
   ![Model Import](images/model-import-09.jpg)
 
 
-In the Body tab pick form-data and enter **`modelData`** in the key field, hover over the right side of the field and pick File in the dropdown.
+In the Body tab, pick form-data and enter **`modelData`** in the key field, hover over the right side of the field, and select File in the dropdown.
 
   ![Model Import](images/model-import-10.jpg)
 

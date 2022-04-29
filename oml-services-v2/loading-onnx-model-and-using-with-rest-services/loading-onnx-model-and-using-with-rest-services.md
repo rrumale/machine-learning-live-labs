@@ -1,7 +1,6 @@
 # Loading an ONNX model and score it using OML Services
 
-
-In this section of the workshop we will import a Neural Network model saved on ONNX format in our Autonomous Database and score it using OML Services REST APIs
+In this section of the workshop, we will import a Neural Network model saved in ONNX format in our Autonomous Database and score it using OML Services REST APIs
 
 The ONNX model is already pre-build and on the VM. To create it we ran the following steps:
 *  create a pipeline to process the columns. We are putting first the character columns named ``categorical_data`` and after the numeric columns named ``numeric_data``. The categorical columns are encoded with OneHotEncoder.
@@ -26,7 +25,7 @@ The ONNX model is already pre-build and on the VM. To create it we ran the follo
 
 * create the onnx model from the pipeline:
 
-  When converting a model to ONNX, the initial types are required. sklearn does not store information about the training data, so it is not always possible to retrieve the number of features or their types. For this reason, convert\_sklearn contains an argument called initial\_types to define the model input types.
+  When converting a model to ONNX, the initial types are required. sklearn does not store information about the training data, so retrieving the number of features or their types is not always possible. For this reason, convert\_sklearn contains an argument called initial\_types to define the model input types.
 
       ``initial_types = [('categorical_data', StringTensorType(shape=[None, 9])),
           ('numeric_data', FloatTensorType([None, 20]))]
@@ -379,7 +378,7 @@ Notice the response for this scoring.
 
   ![Model Score](images/model-import-23.jpg)  
 
-The percentages may be different but the groups to which the customers are assigned are the same as with the SVMG and Decision Tree models.
+The percentages may be different, but the groups to which the customers are assigned are the same as the SVMG and Decision Tree models.
 
 
 

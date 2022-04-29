@@ -38,7 +38,7 @@ Estimated Time: 15 minutes
 
 ### Task 1.2: Authorize OML Services User
 
-  To access OML Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the OML User Management Cloud Service REST endpoint /oauth2/v1/token.
+  To access OML Services using the REST API, you must provide an access token. To authenticate and obtain an access token, use the following POST command and the header to pass the user name and password for your Oracle Machine Learning Services account against the OML User Management Cloud Service REST endpoint /oauth2/v1/token.
 
   The access token has a life span of one hour and can be refreshed before it expires.
     - A token can be refreshed up to 8 hours.
