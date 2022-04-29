@@ -14,10 +14,6 @@ Oracle Machine Learning for R (OML4R) enables you to use R (a statistical progra
 
 Data scientists and broader R users can take advantage of the R ecosystem on data managed by Oracle Database. R provides a suite of software packages for data manipulation, graphics, statistical functions, and machine learning algorithms. Oracle Machine Learning for R extends R’s capabilities through three primary areas: transparent access and manipulation of database data from R, in-database machine learning algorithms, ease of deployment using embedded R execution.
 
-Watch the video below on introduction to Oracle Machine Learning for Python.
-
-[] (youtube:lR08bM8QkNE)
-
 ### Objectives
 
 In this lab, you will:
