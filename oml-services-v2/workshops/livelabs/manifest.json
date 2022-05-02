@@ -8,32 +8,32 @@
       "filename": "./../../introduction/introduction.md"
     },
     {
-    "title": "Understand Use Case",
+    "title": "Lab 1: Understand Use Case",
     "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
     "filename": "./../../../use-case/use-case.md"
     },
     {
-    "title": "Load and Prepare Data",
+    "title": "Lab 2: Load and Prepare Data",
     "description": "Load and Prepare Data",
     "filename": "./../../preparation/preparation.md"
     },
     {
-      "title": "Creating models using OML Notebooks and OML AutoML UI",
+      "title": "Lab 3: Creating models using OML Notebooks and OML AutoML UI",
       "description": "Section 1: Creating models using OML Notebooks and OML AutoML UI",
       "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
     },
     {
-      "title": "Scoring Data using OML Services",
+      "title": "Lab 4: Scoring Data using OML Services",
       "description": "Section 2: Scoring Data using OML Services REST API",
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {
-      "title": "Storing an OML model and score it using OML Services",
+      "title": "Lab 5: Storing an OML model and score it using OML Services",
       "description": "Section 3: Storing an OML model and score it using OML Services REST API",
       "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
     },
     {
-      "title": "Storing an ONNX model and score it using OML Services",
+      "title": "Lab 6: Storing an ONNX model and score it using OML Services",
       "description": "Section 4: Storing an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },

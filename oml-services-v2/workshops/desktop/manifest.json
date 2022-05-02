@@ -8,37 +8,37 @@
       "filename": "./../../introduction/introduction.md"
     },
     {
-    "title": "Understanding Use Case",
-    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
-    "filename": "./../../../use-case/use-case.md"
-    },
-    {
-    "title": "Get Started with noVNC Remote Desktop",
+    "title": "Lab 1: Get Started with noVNC Remote Desktop",
     "description": "Using noVNC Remote Desktop",
     "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
     },
     {
-    "title": "Load and Prepare Data",
+    "title": "Lab 2: Understand Use Case",
+    "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
+    "filename": "./../../../use-case/use-case.md"
+    },
+    {
+    "title": "Lab 3: Load and Prepare Data",
     "description": "Load and Prepare Data",
     "filename": "./../../preparation/preparation.md"
     },
     {
-      "title": "Creating models using OML Notebook and AutoML UI",
+      "title": "Lab 4: Creating models using OML Notebook and AutoML UI",
       "description": "Section 1: Creating models using OML Notebook and AutoML UI",
       "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
     },
     {
-      "title": "Scoring OML using Rest Services",
+      "title": "Lab 5: Scoring OML using Rest Services",
       "description": "Section 2: Scoring OML using Rest Services",
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {
-      "title": "Loading an OML  model and score it using Rest Services",
+      "title": "Lab 6: Loading an OML  model and score it using Rest Services",
       "description": "Section 3: Loading an ONNX model and score it using Rest Services",
       "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
     },
     {
-      "title": "Loading an ONNX model and score it using Rest Services",
+      "title": "Lab 7: Loading an ONNX model and score it using Rest Services",
       "description": "Section 4: Loading an ONNX model and score it using Rest Services",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
     },
