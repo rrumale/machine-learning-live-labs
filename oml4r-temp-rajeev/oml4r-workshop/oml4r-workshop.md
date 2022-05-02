@@ -334,9 +334,9 @@ row.names(CIL) <- CIL$CUST_ID
 
     ```
     <copy>
-    out <- boxplot.stats(CIL$AGE)$out
-    boxplot(CIL$AGE, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
-    text(x=fivenum(x), labels = fivenum(x), y=1.35)
+    y <- CIL$AGE
+    boxplot(y, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
+    text(x=fivenum(y), labels = fivenum(y), y=1.35)
     mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
     </copy>
     ```
