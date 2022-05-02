@@ -1,7 +1,7 @@
 # Prepare Setup
 
 ## Introduction
-This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file needed to setup the resource needed to run this workshop. We would use in the next lab to create an compute instance needed to run the lab tasks.
+This lab will show you how to download the Oracle Resource Manager (ORM) stack zip file required to set up the resource needed for this workshop. We would use it in the next lab to create a compute instance to run the lab tasks.
 
 *Estimated Lab Time:* 15 minutes
 
@@ -19,7 +19,7 @@ This lab assumes you have:
 2.  Save the **omlvm-mkplc-freetier.zip** file in your machine and note the folder location.
 
 ## Task 2: Setup Compute   
-Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
+Using the details from the above task, proceed to the lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
   -  Create Stack:  *Compute + Networking*
   -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
 
