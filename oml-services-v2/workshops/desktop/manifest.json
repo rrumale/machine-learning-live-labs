@@ -8,16 +8,15 @@
       "filename": "./../../introduction/introduction.md"
     },
     {
-    "title": "Lab 1: Get Started with noVNC Remote Desktop",
-    "description": "Using noVNC Remote Desktop",
-    "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
-    },
-    {
-    "title": "Lab 2: Understand Use Case",
+    "title": "Lab 1: Understand Use Case",
     "description": "Understanding the Customer Insurance dataset to be used in the lab excercises.",
     "filename": "./../../../use-case/use-case.md"
     },
     {
+    "title": "Lab 2: Get Started with noVNC Remote Desktop",
+    "description": "Using noVNC Remote Desktop",
+    "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },    {
     "title": "Lab 3: Load and Prepare Data",
     "description": "Load and Prepare Data",
     "filename": "./../../preparation/preparation.md"
