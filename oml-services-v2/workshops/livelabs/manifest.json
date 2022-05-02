@@ -18,13 +18,13 @@
     "filename": "./../../preparation/preparation.md"
     },
     {
-      "title": "Creating models using OML Notebook and AutoML UI",
-      "description": "Section 1: Creating models using OML Notebook and AutoML UI",
+      "title": "Creating models using OML Notebooks and OML AutoML UI",
+      "description": "Section 1: Creating models using OML Notebooks and OML AutoML UI",
       "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
     },
     {
-      "title": "Scoring OML using OML Services",
-      "description": "Section 2: Scoring OML model using OML Services REST API",
+      "title": "Scoring Data using OML Services",
+      "description": "Section 2: Scoring Data using OML Services REST API",
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {

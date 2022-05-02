@@ -1,6 +1,6 @@
 # Creating models using OML Notebooks and OML AutoML UI
 
-In this section, we will connect to OML Notebooks and split the data into training and test chunks. We will use the train data to run the OML AutoML UI and create a good model to make our prediction. In the next sections, we will deploy the model for use with OML Services REST endpoints.
+In this chapter, we will connect to OML Notebooks and split the data into training and test chunks. We will use the train data to run the OML AutoML UI and create a model to make our prediction. In the succeeding chapters, we will deploy the model for use with OML Services REST endpoints.
 
 Estimated Time: 15 minutes
 
@@ -42,14 +42,14 @@ Estimated Time: 15 minutes
   ![Open-Scratchpad](images/automl-screenshot-1.jpg)
 
 
-* The notebook server is starting. Once opened we can run a select on the ``CUSTOMER_INSURANCE`` table
+* The notebook server is starting. Once opened, we can run a select on the ``CUSTOMER_INSURANCE`` table
     ````
     <copy> select * from customer_insurance;  </copy>
     ````
 
     ![customer-insurance](images/automl-screenshot-2.jpg)
 
- Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning.
+ Notice the columns ``LTV`` and ``LTV_BIN`` when you scroll to the right. These are our targets for the machine learning process.
 
 
   * Create the training table for our AutoML UI
@@ -66,8 +66,8 @@ Estimated Time: 15 minutes
      ````
      ![create-training-table](images/automl-screenshot-4.jpg)
 
-     Notice that we keep the ``LTV_BIN`` column to be the target for our supervised learning classification model.
-      For this particular workshop we exclude 3 specific customers so we will score 3 different models using their data.
+     Notice that we keep the ``LTV_BIN`` column. It will be the target for our supervised learning classification model.
+      In this workshop, we exclude three specific customers, and we will score three different models using their data.
 
 
  * Create the test table for our Auto ML UI
@@ -84,9 +84,10 @@ Estimated Time: 15 minutes
      ````
      ![create-test-table](images/automl-screenshot-5.jpg)
 
-     Notice that in the testing table we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These column might be misleading in the process. We will still use them in our verification process.
+     Notice that in the testing table, we will not use any of the leading ``LTV`` or ``LTV_BIN`` columns. These columns might be misleading in the process. We will still use them in our verification process.
 
 ## Task 2: Use OML AutoML UI from Oracle Autonomous Database
+
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
 ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -129,7 +130,7 @@ Estimated Time: 15 minutes
     - Last
     - LTV
 
-  In most cases the name of the candidate should not be a deciding factor so we will remove them from the model features. Also LTV column which is a computational numeric column that drive the LTV_BIN column might be missdirecting the model and this column is removed also.
+  In most cases, the name of the candidate should not be a deciding factor so we will remove them from the model features. Also, the LTV column which is a computational numeric column that drives the LTV_BIN column might be misdirecting the model and this column is removed also.
   ![AutoML-additional-settings](images/automl-screenshot-9b.jpg)
 
 * Run OML Auto ML experiment by clicking **```Start```** and **```Better Accuracy```**.
@@ -155,11 +156,11 @@ Estimated Time: 15 minutes
   There we can see for each class: **LOW**, **MEDIUM**, **HIGH**, **VERY HIGH** what percentage of customers correctly predicted for each combination of actual and predicted values.
 
 
-* We can rename the Support Vector Machine model so it would be easier to recognize in the next sections. For this we can select the model and click on the Rename button.
+* We can rename the Support Vector Machine model so it would be easier to recognize in the next sections. For this, we can select the model and click on the Rename button.
 
   ![Model Rename ](images/automl-screenshot-X14.jpg)
 
-* Enter a new Model Name and click OK. In our case we are going to use **SVMG**.
+* Enter a new Model Name and click OK. In our case, we are going to use **SVMG**.
 
   ![Model Rename ](images/automl-screenshot-X114.jpg)
 
@@ -180,16 +181,15 @@ Estimated Time: 15 minutes
     - Namespace: OML
 
 
-  Copy the Model URI in a accessible place because we are going to use it in the next sections of the workshop.
+  Copy the Model URI in an accessible place because we are going to use it in the next sections of the workshop.
   ![Deploy Model](images/automl-screenshot-17.jpg)
 
   Click OK.
 
-  We have a confirmation that the model was deployed successfully.
+  We have confirmation that the model was deployed successfully.
   ![Deploy Model](images/automl-screenshot-X17.jpg)
 
 ## Task 3: Verify the model deployment.
-
 
 * Go to the Main menu on the top left side near the Oracle Machine Learning icon.
   ![AutoML-menu](images/automl-screenshot-X06.jpg)
@@ -205,58 +205,59 @@ Estimated Time: 15 minutes
 
   ![Models Deploy Details](images/automl-screenshot-19.jpg)
 
-  We can now use REST APIs to query the model, model scoring and scoring for specific data.
+  We can now use REST APIs to query the model, model scoring, and scoring for specific data.
+
 
 
 ## Task 4: Score data against the model using SQL
 
-  * Return to the OML Notebooks Scratchpad we created earlier. Click on the menu and chose Notebooks.
-  ![Classification Prediction](images/automl-screenshot-21.jpg)
+* Return to the OML Notebooks Scratchpad we created earlier. Click on the menu and chose Notebooks.
+![Classification Prediction](images/automl-screenshot-21.jpg)
 
 
-  * Click on the Scratchpad notebook.
-    ![Classification Prediction](images/automl-screenshot-22.jpg)
+* Click on the Scratchpad notebook.
+  ![Classification Prediction](images/automl-screenshot-22.jpg)
 
 
-  * Run the following SQL statement using the ``CUST_IDs`` we picked in the train test split. You can replace the model name with the one used previously.
+* Run the following SQL statement using the ``CUST_IDs`` we picked in the train test split. You can replace the model name with the one used previously.
 
-     ````
-     <copy>%sql
-         SELECT a.cust_id,
-               a. Last,
-               a.First,
-               PREDICTION(SVMG USING a.*) PREDICTION,
-               PREDICTION_PROBABILITY(SVMG USING a.*)  PREDICTION_PROBABILITY,
-               b.LTV_BIN
-         FROM Customer_insurance_test_classification a,
-         Customer_insurance b
-        where a.cust_id = b.cust_id
-        and b.cust_id in ('CU12350','CU12331', 'CU12286')
-     </copy>
-     ````
+   ````
+   <copy>%sql
+       SELECT a.cust_id,
+             a. Last,
+             a.First,
+             PREDICTION(SVMG USING a.*) PREDICTION,
+             PREDICTION_PROBABILITY(SVMG USING a.*)  PREDICTION_PROBABILITY,
+             b.LTV_BIN
+       FROM Customer_insurance_test_classification a,
+       Customer_insurance b
+      where a.cust_id = b.cust_id
+      and b.cust_id in ('CU12350','CU12331', 'CU12286')
+   </copy>
+   ````
 
-  ![Classification Prediction](images/automl-screenshot-34.jpg)
+![Classification Prediction](images/automl-screenshot-34.jpg)
 
- The SQL statement returns the most probable group or class for the data provided in the column PREDICTION with it’s corresponding prediction probability for each of the customers selected. In out case the prediction is the same as the actual ``LTB_BIN`` column in ``CUSTOMER_INSURANCE`` initial table.
+The SQL statement returns the most probable group or class for the data provided in the column PREDICTION with its corresponding prediction probability for each of the customers selected. In our case, the prediction is the same as the actual ``LTB_BIN`` column in the ``CUSTOMER_INSURANCE`` initial table.
 
 * Run the following SQL statement to compare the model predicted value with the actual value in the testing table.
 
-    ````
-    <copy>%sql
-          SELECT a.cust_id,
-                 a.Last,
-                 a.First,
-                 PREDICTION(SVMG USING a.*) PREDICTION,
-                 b.LTV_BIN
-          FROM Customer_insurance_test_classification a,
-          Customer_insurance b
-           where a.cust_id = b.cust_id and a.last = b.last
-    </copy>
-    ````
+  ````
+  <copy>%sql
+        SELECT a.cust_id,
+               a.Last,
+               a.First,
+               PREDICTION(SVMG USING a.*) PREDICTION,
+               b.LTV_BIN
+        FROM Customer_insurance_test_classification a,
+        Customer_insurance b
+         where a.cust_id = b.cust_id and a.last = b.last
+  </copy>
+  ````
 
-    ![Classification Prediction](images/automl-screenshot-35.jpg)
+  ![Classification Prediction](images/automl-screenshot-35.jpg)
 
- The SQL statement returns the most probable group or class for the data provided in the column ``PREDICTION`` compared with the column ``LTV_BIN`` from the initial table.
+The SQL statement returns the most probable group or class for the data provided in the column ``PREDICTION`` compared with the column ``LTV_BIN`` from the initial table.
 
 
 ## Acknowledgements

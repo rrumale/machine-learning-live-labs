@@ -1,7 +1,7 @@
 # Initialize Environment
 
 ## Introduction
-This lab will show you how to connect to the Lab VM, Autonomous Database on Oracle cloud & explore the various tools to interact with it and load the sample dataset.
+This lab will show you how to connect to the Lab VM, Autonomous Database on Oracle Cloud, and explore the various tools to interact with it.
 
 Estimated Time: 15 minutes
 
@@ -12,7 +12,7 @@ Estimated Time: 15 minutes
 
 ### Prerequisites
 This lab assumes you have:
-* You have completed the reservation process and can login into the Remote Desktop connection
+* You have completed the reservation process and can log in to the Remote Desktop connection
 * Able to login to Oracle Cloud Infrastructure (OCI) account
 
 ## Task 1: Check the Lab setup
