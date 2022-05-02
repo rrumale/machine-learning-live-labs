@@ -8,7 +8,6 @@ The REST API for Oracle Machine Learning Services provides REST API endpoints ho
 
 [] (youtube:VB8WUOd0dj8)
 
-
 Estimated Time: 1 hour
 
 ### Objectives
@@ -18,21 +17,16 @@ Estimated Time: 1 hour
 * Storing an OML model and score it using OML Services
 * Storing an ONNX model and score it using OML Services
 
-
-
 ### Prerequisites
 * Prior knowledge and familiarity of Machine Learning Algorithms
 * Oracle Cloud Infrastructure (OCI) account
 * Autonomous Database provisioned in Oracle Cloud
-
 
 ## Learn More
 
 * [REST API for Oracle Machine Learning Services](https://docs.oracle.com/en/database/oracle/machine-learning/omlss/omlss/index.html)
 * [Oracle Machine Learning for Python](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/index.html)
 * [Oracle Machine Learning Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/)
-
-
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
