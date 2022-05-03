@@ -23,24 +23,23 @@
     },
     {
       "title": "Lab 4: Creating models using OML Notebook and AutoML UI",
-      "description": "Section 1: Creating models using OML Notebook and AutoML UI",
+      "description": "Section 1: Create models using OML Notebook and AutoML UI",
       "filename": "./../../oml-notebook-and-automl-ui/oml-notebook-and-automl-ui.md"
     },
     {
-      "title": "Lab 5: Scoring OML using Rest Services",
+      "title": "Lab 5: Score OML using Rest Services",
       "description": "Section 2: Scoring OML using Rest Services",
       "filename": "./../../scoring-oml-using-rest-services/scoring-oml-using-rest-services.md"
     },
     {
-      "title": "Lab 6: Loading an OML  model and score it using Rest Services",
-      "description": "Section 3: Loading an ONNX model and score it using Rest Services",
+      "title": "Lab 6: Store an OML model and score it using OML Services",
+      "description": "Storing an OML model and score it using OML Services REST API",
       "filename": "./../../loading-oml-model-and-using-rest-srvices/loading-oml-model-and-using-rest-srvices.md"
     },
     {
-      "title": "Lab 7: Loading an ONNX model and score it using Rest Services",
-      "description": "Section 4: Loading an ONNX model and score it using Rest Services",
+      "title": "Lab 7: Store an ONNX model and score it using OML Services",
+      "description": "Storing an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
-    },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

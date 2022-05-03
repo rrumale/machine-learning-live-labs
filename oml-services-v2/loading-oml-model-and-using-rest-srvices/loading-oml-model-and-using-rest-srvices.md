@@ -1,4 +1,4 @@
-# Storing an OML model and score it using OML Services
+# Store an OML model and score it using OML Services
 
 In this chapter, we will import and store the Decision Tree model in our OML Services repository and score it using REST APIs.
 

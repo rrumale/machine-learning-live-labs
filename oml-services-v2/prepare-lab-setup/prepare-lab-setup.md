@@ -18,10 +18,12 @@ This lab assumes you have:
 
 2.  Save the **omlvm-mkplc-freetier.zip** file in your machine and note the folder location.
 
+The stack contains a terraform script that would provision a Compute instance in OCI along with an Autonomous database to use in this hands on lab.
+
 ## Task 2: Setup Compute   
-Using the details from the above task, proceed to the lab *Environment Setup* to set up your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
-  -  Create Stack:  *Compute + Networking*
-  -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated as per *Step 2* above
+Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
+  -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated in the resource stack.
+
 
 You may now [proceed to the next lab](#next).
 

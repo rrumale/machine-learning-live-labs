@@ -1,4 +1,4 @@
-# Creating models using OML Notebooks and OML AutoML UI
+# Create models using OML Notebooks and OML AutoML UI
 
 In this chapter, we will connect to OML Notebooks and split the data into training and test chunks. We will use the train data to run the OML AutoML UI and create a model to make our prediction. In the succeeding chapters, we will deploy the model for use with OML Services REST endpoints.
 

@@ -1,4 +1,4 @@
-# Scoring Data using OML Services
+# Score Data using OML Services
 
 In this lab we will learn about accessing our deployed machine learning model using the OML Services REST API.  We will use Postman and cURL to invoke the REST API, the required software is pre-installed on the virtual machine assigned.
 

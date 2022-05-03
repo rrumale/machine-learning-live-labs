@@ -1,4 +1,4 @@
-# Storing an ONNX model and score it using OML Services
+# Store an ONNX model and score it using OML Services
 
 ## Introduction
 
