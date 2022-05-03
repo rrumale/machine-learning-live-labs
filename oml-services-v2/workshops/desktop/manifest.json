@@ -16,7 +16,8 @@
     "title": "Lab 2: Get Started with noVNC Remote Desktop",
     "description": "Using noVNC Remote Desktop",
     "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/remote-desktop/using-novnc-remote-desktop.md"
-    },    {
+    },
+    {
     "title": "Lab 3: Load and Prepare Data",
     "description": "Load and Prepare Data",
     "filename": "./../../preparation/preparation.md"
@@ -38,9 +39,10 @@
     },
     {
       "title": "Lab 7: Store an ONNX model and score it using OML Services",
-      "description": "Storing an ONNX model and score it using OML Services REST API",
+      "description": "Store an ONNX model and score it using OML Services REST API",
       "filename": "./../../loading-onnx-model-and-using-with-rest-services/loading-onnx-model-and-using-with-rest-services.md"
-    {
+    },
+	  {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
       "filename": "https://raw.githubusercontent.com/oracle/learning-library/master/common/labs/need-help/need-help-freetier.md"
