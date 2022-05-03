@@ -23,6 +23,7 @@ The stack contains a terraform script that would provision a Compute instance in
 ## Task 2: Setup Compute   
 Using the details from the above task, proceed to the lab *Environment Setup* to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
   -  Create Stack:  *Compute only* with an existing VCN where security lists have been updated in the resource stack.
+  -  You are required to select the availability domain, set name and admin password for the Autonomous database.  
 
 
 You may now [proceed to the next lab](#next).
