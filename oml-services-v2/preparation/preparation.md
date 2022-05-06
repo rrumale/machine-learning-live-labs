@@ -18,6 +18,7 @@ Estimated Lab Time: 15 minutes
 ### Prerequisites
 * Oracle Cloud Infrastructure (OCI) account
 * Autonomous Database deployed in Oracle Cloud
+* ADMIN user password for Autonomous database
 
 
 ## Task 1:  Create the OMLUSER user
@@ -102,6 +103,7 @@ Click Next.
 
 The next step is to use this data and create an AutoML model.
 
+You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan

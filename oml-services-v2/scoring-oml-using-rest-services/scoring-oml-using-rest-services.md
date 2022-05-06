@@ -14,8 +14,7 @@ Estimated Time: 15 minutes
 ### Prerequisites
 * The OML model deployed to OML Services.
 * POSTMAN and cURL available on your working environment
-
-##                                        
+                                
 ## Task 1: Access the model using REST APIs using POSTMAN
 
 ### Task 1.1: Prepare the REST calls

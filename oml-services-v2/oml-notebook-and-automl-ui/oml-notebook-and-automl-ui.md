@@ -259,6 +259,7 @@ The SQL statement returns the most probable group or class for the data provided
 
 The SQL statement returns the most probable group or class for the data provided in the column ``PREDICTION`` compared with the column ``LTV_BIN`` from the initial table.
 
+You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan

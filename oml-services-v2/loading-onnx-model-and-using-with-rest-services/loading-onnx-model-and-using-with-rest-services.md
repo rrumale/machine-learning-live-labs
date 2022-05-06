@@ -70,10 +70,7 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``onnx_class_NN.model.zip`` file on the VM.
 
-
-
-
-## Task: 1: List the models in the OML Services repository
+## Task 1: List the models in the OML Services repository
 
 * In the Postman session opened, run the Get method to get the list of models deployed.
 
@@ -95,7 +92,7 @@ In the response, we see both the Decision Tree Model **DTModel** and the Support
 If you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
 
-## Task: 2: Store an ONNX model in the OML Services repository
+## Task 2: Store an ONNX model in the OML Services repository
 
 * Open a new tab in Postman and run the following POST command to load the model in Autonomous Database.
 
@@ -147,7 +144,7 @@ The response status is '201 Created'. We succeeded in saving the model in the re
 Copy the **`modelId`** displayed in the JSON response.
 
 
-## Task: 3: Deploy the model
+## Task 3: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
@@ -195,7 +192,7 @@ And the result is:
 The next step is to score a customer.
 
 
-## Task: 4: Score a customer using ONNX Neural Network Model
+## Task 4: Score a customer using ONNX Neural Network Model
 
 Now, we will score Fran Hobbs against our Neural Network imported model.
 
@@ -208,7 +205,7 @@ URI endpoint:
 <copy><oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score </copy>
 ````
  - Replace **`<oml-cloud-service-location-url>`** with your URL saved
- - Replace **`<model_URI>`** with the model URI that we defined in the previous task: **` ONNXCLASSNN`**
+ - Replace **`<model_URI>`** with the model URI that we defined in the previous Task **` ONNXCLASSNN`**
 
 In the Authorization tab, pick **Bearer Token** in the dropdown list, and the token is pre-filled.
 
@@ -324,7 +321,7 @@ Notice the response for this scoring.
 In this case, the percentages are different from the other model scoring, but the prediction is the same. It still has the highest probability for the **LOW** category.
 
 
-## Task: 5: Score multiple customers using ONNX Neural Network Model
+## Task 5: Score multiple customers using ONNX Neural Network Model
 
 In this step, we are going to score all three customers against our Neural Network imported model.
 
@@ -337,7 +334,7 @@ URI endpoint:
 <copy><oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score </copy>
 ````
  - Replace **`<oml-cloud-service-location-url>`** with your URL saved
- - Replace **`<model_URI>`** with the model URI that we defined in the previous task: **`onnxclassnn`**
+ - Replace **`<model_URI>`** with the model URI that we defined in the previous Task **`onnxclassnn`**
 
 
 In the Authorization tab pick **Bearer Token** and the token is pre-filled.
@@ -384,7 +381,7 @@ Notice the response for this scoring.
 
 The percentages may be different, but the groups to which the customers are assigned are the same as the SVMG and Decision Tree models.
 
-
+You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan

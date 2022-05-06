@@ -28,6 +28,8 @@ Estimated Time: 1 hour
 * [Oracle Machine Learning for Python](https://docs.oracle.com/en/database/oracle/machine-learning/oml4py/1/index.html)
 * [Oracle Machine Learning Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/)
 
+You may now [proceed to the next lab](#next).
+
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
 * **Contributors** - Rajeev Rumale, Mark Hornick, Sherry LaMonica

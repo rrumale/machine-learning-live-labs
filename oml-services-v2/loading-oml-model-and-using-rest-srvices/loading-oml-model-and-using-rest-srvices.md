@@ -6,10 +6,10 @@ Estimated Time: 20 minutes
 
 ### Objectives
 We are going to run the next steps:
-* Extract the saved model to a file;
-* Store the model in the OML Services repository;
-* Deploy the model;
-* Score a customer using the Decision Tree model;
+* Extract the saved model to a file
+* Store the model in the OML Services repository
+* Deploy the model
+* Score a customer using the Decision Tree model
 
 
 ### Prerequisites
@@ -17,128 +17,128 @@ We are going to run the next steps:
 * OML user created in Autonomous database
 * ``DTModel.mod`` on the VM
 
-##
-## Task: 1: Store the model in the OML Services repository
+##  
 
+## Task 1: Store the model in the OML Services repository
 
 *  In the Postman session open, run the following Get method to get the list of models deployed.
 
-````
-Operation: GET
+    ````
+    Operation: GET
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
+    URI endpoint:
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
 
-````
+    ````
  - Replace **`<oml-cloud-service-location-url>`** with your URL saved in the chapter "Scoring OML model using OML Services" Task 1.2: Authorize OML Services User
 
- In the Authorization tab, pick **Bearer Token** and paste the token copied from *Scoring OML using OML Services Task 1*.
+    In the Authorization tab, pick **Bearer Token** and paste the token copied from *Scoring OML using OML Services Task 1*.
 
- ![Model Import](images/model-import-06.jpg)
+    ![Model Import](images/model-import-06.jpg)
 
-The response is just the **SVMG** model we used in our previous tasks.
+    The response is just the **SVMG** model we used in our previous tasks.
 
-  ![Model Import](images/model-import-07.jpg)
+    ![Model Import](images/model-import-07.jpg)
 
-If you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
+    If you get the Expired Token Error, rerun the generate Token command explained in **Scoring OML using Rest Services: Task 1**.
 
-* Open a new tab in Postman and run the following POST command to store the model in the OML Services repository.
+    * Open a new tab in Postman and run the following POST command to store the model in the OML Services repository.
 
-````
-Operation: POST
+    ````
+    Operation: POST
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
+    URI endpoint:
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/models</copy>
 
-````
+    ````
  - Replace **`<oml-cloud-service-location-url>`** with your URL saved.
 
- In the Authorization tab, pick **Bearer Token**, and the token is pre-filled.
+   In the Authorization tab, pick **Bearer Token**, and the token is pre-filled.
 
- ![Model Import](images/model-import-08.jpg)
+   ![Model Import](images/model-import-08.jpg)
 
-In the Headers tab, enter the following:
+    In the Headers tab, enter the following:
 
-````
-Content-Type: multipart/form-data
-boundary: Boundary
-````
+    ````
+    Content-Type: multipart/form-data
+    boundary: Boundary
+    ````
 
-  ![Model Import](images/model-import-09.jpg)
+    ![Model Import](images/model-import-09.jpg)
 
 
-In the Body tab, pick form-data and enter **`modelData`** in the Key area, hover over the right side of the field, and select File in the dropdown.
+    In the Body tab, pick form-data and enter **`modelData`** in the Key area, hover over the right side of the field, and select File in the dropdown.
 
-  ![Model Import](images/model-import-10.jpg)
+    ![Model Import](images/model-import-10.jpg)
 
-Click Select File; go to `/home/oracle/OML-Services/` folder and select the **`DTModel.mod`** file created earlier.
+    Click Select File; go to `/home/oracle/OML-Services/` folder and select the **`DTModel.mod`** file created earlier.
 
-  ![Model Import](images/model-import-11.jpg)
+    ![Model Import](images/model-import-11.jpg)
 
-Add the below keys in the Body tab and click Send.
+    Add the below keys in the Body tab and click Send.
 
-````
- modelName=DTModel
- modelType=OML
- version=1.0
-````
-  ![Model Import](images/model-import-12.jpg)
+    ````
+     modelName=DTModel
+     modelType=OML
+     version=1.0
+    ````
+    ![Model Import](images/model-import-12.jpg)
 
-The response status is '201 Created'. We succeeded in saving the model in the repository.
+    The response status is '201 Created'. We succeeded in saving the model in the repository.
 
- ![Model Import](images/model-import-13.jpg)
+    ![Model Import](images/model-import-13.jpg)
 
-Copy the **`modelId`** displayed in the JSON response.
+    Copy the **`modelId`** displayed in the JSON response.
 
-## Task: 2: Deploy the model
+## Task 2: Deploy the model
 
 * Open a new tab in Postman and run the following POST command to deploy the model in Autonomous Database.
 
-````
-Operation: POST
+    ````
+    Operation: POST
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment</copy>
+    URI endpoint:
+    <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment</copy>
 
-````
+    ````
  - Replace **`<oml-cloud-service-location-url>`** with your URL saved.
 
 
-In the Authorization tab pick **Bearer Token** and the token is pre-filled.
+    In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 
-  ![Model Deploy](images/model-import-14.jpg)  
+    ![Model Deploy](images/model-import-14.jpg)  
 
-In the Headers tab enter the following:
+    In the Headers tab enter the following:
 
-````
-Content-Type: application/json
-````
+    ````
+    Content-Type: application/json
+    ````
 
-  ![Model Deploy](images/model-import-15.jpg)
+    ![Model Deploy](images/model-import-15.jpg)
 
- In the Body tab enter the following JSON:
+    In the Body tab enter the following JSON:
 
-````
- <copy>{
-   "uri":"dtmodel",
-   "modelId":"50ffc903-aaf6-4a94-a228-4cb7ab6b3c07"
-}</copy>
-````
+    ````
+     <copy>{
+       "uri":"dtmodel",
+       "modelId":"50ffc903-aaf6-4a94-a228-4cb7ab6b3c07"
+    }</copy>
+    ````
 
-Where `50ffc903-aaf6-4a94-a228-4cb7ab6b3c07` is the model Id copied from the previous step. Replace it with the returned model Id from your command in Task 6.2.
+    Where `50ffc903-aaf6-4a94-a228-4cb7ab6b3c07` is the model Id copied from the previous step. Replace it with the returned model Id from your command in Task 6.2.
 
-The URI **`dtmodel`** we are going to use in Task 6.4 when scoring the data against our model.
+    The URI **`dtmodel`** we are going to use in Task 6.4 when scoring the data against our model.
 
-  ![Model Deploy](images/model-import-16.jpg)
+    ![Model Deploy](images/model-import-16.jpg)
 
-And the result is:
+    And the result is:
 
- ![Model Deploy](images/model-import-17.jpg)
+     ![Model Deploy](images/model-import-17.jpg)
 
-The next step is to score a customer.
+    The next step is to score a customer.
 
 
-## Task: 3: Score a customer using the Decision Tree model
+## Task 3: Score a customer using the Decision Tree model
 
 In this step, we are going to score Fran Hobbs against our Decision Tree imported model.
 
@@ -222,7 +222,7 @@ Notice the response for this scoring.
 
 In this case, the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our Support Vector Machine Gaussian model.
 
-
+You may now [proceed to the next lab](#next).
 
 ## Acknowledgements
 * **Authors** -  Andrei Manoliu, Milton Wan
