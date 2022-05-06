@@ -142,85 +142,85 @@ We are going to run the next steps:
 
 In this step, we are going to score Fran Hobbs against our Decision Tree imported model.
 
-Enter the following details:
+  - Enter the following details:
 
-````
-Operation: POST
+      ````
+      Operation: POST
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score </copy>
+      URI endpoint:
+      <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/v1/deployment/<model_URI>/score </copy>
 
-````
-- Replace **`<oml-cloud-service-location-url>`** with your URL saved.
+      ````
+  - Replace **`<oml-cloud-service-location-url>`** with your URL saved.
 
- - Replace **`<model_URI>`** with the model URI that we defined in the previous task: **`dtmodel`**
+  - Replace **`<model_URI>`** with the model URI that we defined in the previous task: **`dtmodel`**
 
-In the Authorization tab pick **Bearer Token** and the token is pre-filled.
+    In the Authorization tab pick **Bearer Token** and the token is pre-filled.
 
- ![Model Score](images/model-import-18.jpg)  
-
-
-In the header Tab enter the details:
-
-````
---header 'Content-Type: application/json'
-
-````
-
-  ![Model Score](images/model-import-19.jpg)  
+     ![Model Score](images/model-import-18.jpg)  
 
 
-In the Body tab, please enter the Fran Hobs data in RAW format. Notice that we are not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data
+    In the header Tab enter the details:
 
-````
-<copy>
-{
-   "inputRecords":[
+      ````
+      --header 'Content-Type: application/json'
+
+      ````
+
+      ![Model Score](images/model-import-19.jpg)  
+
+
+    In the Body tab, please enter the Fran Hobs data in RAW format. Notice that we are not providing any of the ``LTV`` or ``LTV_BIN`` data, but provide fully the other important data
+
+      ````
+      <copy>
       {
-         "CUST_ID":"CU12350",
-         "LAST":"FRAN",
-         "FIRST":"HOBBS",
-         "STATE":"NV",
-         "REGION":"Southwest",
-         "SEX":"F",
-         "PROFESSION":"Programmer/Developer",
-         "BUY_INSURANCE":"No",
-         "AGE":21,
-         "HAS_CHILDREN":0,
-         "SALARY":66180,
-         "N_OF_DEPENDENTS":5,
-         "CAR_OWNERSHIP":1,
-         "HOUSE_OWNERSHIP":0,
-         "TIME_AS_CUSTOMER":5,
-         "MARITAL_STATUS":"SINGLE",
-         "CREDIT_BALANCE":0,
-         "BANK_FUNDS":500,
-         "CHECKING_AMOUNT":185,
-         "MONEY_MONTLY_OVERDRAWN":53.21,
-         "T_AMOUNT_AUTOM_PAYMENTS":197,
-         "MONTHLY_CHECKS_WRITTEN":4,
-         "MORTGAGE_AMOUNT":0,
-         "N_TRANS_ATM":3,
-         "N_MORTGAGES":0,
-         "N_TRANS_TELLER":2,
-         "CREDIT_CARD_LIMITS":2500,
-         "N_TRANS_KIOSK":4,
-         "N_TRANS_WEB_BANK":0
+         "inputRecords":[
+            {
+               "CUST_ID":"CU12350",
+               "LAST":"FRAN",
+               "FIRST":"HOBBS",
+               "STATE":"NV",
+               "REGION":"Southwest",
+               "SEX":"F",
+               "PROFESSION":"Programmer/Developer",
+               "BUY_INSURANCE":"No",
+               "AGE":21,
+               "HAS_CHILDREN":0,
+               "SALARY":66180,
+               "N_OF_DEPENDENTS":5,
+               "CAR_OWNERSHIP":1,
+               "HOUSE_OWNERSHIP":0,
+               "TIME_AS_CUSTOMER":5,
+               "MARITAL_STATUS":"SINGLE",
+               "CREDIT_BALANCE":0,
+               "BANK_FUNDS":500,
+               "CHECKING_AMOUNT":185,
+               "MONEY_MONTLY_OVERDRAWN":53.21,
+               "T_AMOUNT_AUTOM_PAYMENTS":197,
+               "MONTHLY_CHECKS_WRITTEN":4,
+               "MORTGAGE_AMOUNT":0,
+               "N_TRANS_ATM":3,
+               "N_MORTGAGES":0,
+               "N_TRANS_TELLER":2,
+               "CREDIT_CARD_LIMITS":2500,
+               "N_TRANS_KIOSK":4,
+               "N_TRANS_WEB_BANK":0
+            }
+         ]
       }
-   ]
-}
-</copy>
-````
+      </copy>
+      ````
 
-Click Send
+    Click **Send**
 
-  ![Model Score](images/model-import-20.jpg)  
+    ![Model Score](images/model-import-20.jpg)  
 
-Notice the response for this scoring.
+    Notice the response for this scoring.
 
-  ![Model Score](images/model-import-21.jpg)  
+    ![Model Score](images/model-import-21.jpg)  
 
-In this case, the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our Support Vector Machine Gaussian model.
+    In this case, the percentages are different but it still has the highest probability to be in the **LOW** category as it was in our Support Vector Machine Gaussian model.
 
 You may now [proceed to the next lab](#next).
 

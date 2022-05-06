@@ -14,7 +14,9 @@ Estimated Time: 15 minutes
 ### Prerequisites
 * The OML model deployed to OML Services.
 * POSTMAN and cURL available on your working environment
-                                
+
+##  
+
 ## Task 1: Access the model using REST APIs using POSTMAN
 
 ### Task 1.1: Prepare the REST calls
@@ -56,70 +58,70 @@ Estimated Time: 15 minutes
 
 #### Obtain the `oml-cloud-service-location-url` URL
 
-* In the Autonomous Database instance details page. Click on the Service Console button.
-![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
+  * In the Autonomous Database instance details page. Click on the Service Console button.
+  ![ADB-instance-home](images/prerequisites-screenshot-22.jpg)
 
-* The service console is opened. Go to the Development section in the left side.
-![ADB-service-console](images/prerequisites-screenshot-23.jpg)
+  * The service console is opened. Go to the Development section in the left side.
+  ![ADB-service-console](images/prerequisites-screenshot-23.jpg)
 
-* In the Development section, notice the **Oracle Machine Learning RESTful services** section.
-![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
+  * In the Development section, notice the **Oracle Machine Learning RESTful services** section.
+  ![ADB-service-console](images/prerequisites-screenshot-X23.jpg)
 
-  The 2 important URLs from this section:
-    + The URL to obtain a REST authentication token for OML-provided REST APIs:
-    `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
+    The 2 important URLs from this section:
+      + The URL to obtain a REST authentication token for OML-provided REST APIs:
+      `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/`
 
-    + All OML Services REST APIs use the following common base URL:
-    `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
+      + All OML Services REST APIs use the following common base URL:
+      `https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlmod/`
 
 #### Generate Access Token
 
-To generate the access token we will need the following details:
+  To generate the access token we will need the following details:
 
-````
-Operation: POST
+  ````
+  Operation: POST
 
-URI endpoint:
-<copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/api/oauth2/v1/token</copy>
+  URI endpoint:
+  <copy>https://<oml-cloud-service-location-url>.oraclecloudapps.com/omlusers/api/oauth2/v1/token</copy>
 
-````
+  ````
 
-> Replace **`<oml-cloud-service-location-url>`** with your URL.
+  > Replace **`<oml-cloud-service-location-url>`** with your URL.
 
 
-In the header Tab enter the details:
+  In the header Tab enter the details:
 
-````
---header 'Content-Type: application/json'
---header 'Accept: application/json'
-````
+  ````
+  --header 'Content-Type: application/json'
+  --header 'Accept: application/json'
+  ````
 
-![Postman token headers](images/automl-screenshot-22.jpg)
+  ![Postman token headers](images/automl-screenshot-22.jpg)
 
-In the Body tab, pick RAW format and enter the following:
+  In the Body tab, pick RAW format and enter the following:
 
-````
-<copy>
-{
-   "grant_type":"password",
-   "username":"OMLUSER",
-   "password":"Welcome12345"
-}
-</copy>
-````
-![Postman token body](images/automl-screenshot-23.jpg)
+  ````
+  <copy>
+  {
+     "grant_type":"password",
+     "username":"OMLUSER",
+     "password":"Welcome12345"
+  }
+  </copy>
+  ````
+  ![Postman token body](images/automl-screenshot-23.jpg)
 
-Click **Send**
+  Click **Send**
 
-The response in JSON format and it contains the access token:
+  The response in JSON format and it contains the access token:
 
-![Postman token](images/automl-screenshot-24.jpg)
+  ![Postman token](images/automl-screenshot-24.jpg)
 
-Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
+  Choose the display format in RAW and copy the token starting from ``:"``  up until ``==``. In the above example the token is:
 
->{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
+  >{"accessToken":"**eyJhbGci....6zIw==**","expiresIn":3600,"tokenType":"Bearer"}
 
-![Postman token copy](images/automl-screenshot-25.jpg)
+  ![Postman token copy](images/automl-screenshot-25.jpg)
 
 
 ### Task 1.3:  Use REST calls to predict customer classification

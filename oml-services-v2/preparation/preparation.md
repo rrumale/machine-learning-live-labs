@@ -51,7 +51,7 @@ Click Create.
 * Now, we have a new user named OMLUSER available.
 ![ADB-oml-user](images/prerequisites-screenshot-17.jpg)
 
-OMLUSER is also a database user, and for the moment, he doesn't have access to our data. The next step is to load our data in the OMLUSER schema.
+  OMLUSER is also a database user, and for the moment, he doesn't have access to our data. The next step is to load our data in the OMLUSER schema.
 
 
 
