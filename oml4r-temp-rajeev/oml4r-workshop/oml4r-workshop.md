@@ -337,7 +337,7 @@ row.names(CIL) <- CIL$CUST_ID
     y <- CIL$AGE
     boxplot(y, xlab = "Boxplot (AGE)", col = "darkred", horizontal=TRUE)
     text(x=fivenum(y), labels = fivenum(y), y=1.35)
-    mtext(paste("Outliers: ", paste(unique(out), collapse = ", ")))
+    mtext(paste("Outliers: ", paste(unique(y), collapse = ", ")))
     </copy>
     ```
 
@@ -481,6 +481,12 @@ Let us first create an alias for the CUST\_INSUR\_LTV ore.frame for easier usage
 CIL <- CUST\_INSUR\_LTV
 row.names(CIL) <- CIL$CUST\_ID
 
+
+```
+<copy>
+CIL <- CUST_INSUR_LTV row.names(CIL) <- CIL$CUST_ID
+</copy>
+```
 1. Filtering Data and Aggregate Data View
 
     Use the filter() function to filter data based on given criteria.
@@ -503,9 +509,11 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
-    aggregate(CIL$LTV_BIN, by = list(LTV_BIN = CUST_INSUR_LTV$LTV_BIN),FUN = length)
+    aggregate(CIL$LTV_BIN, by = list(LTV_BIN = CIL$LTV_BIN), FUN = length)
+    aggregate(CIL$REGION, by = list(REGION = CIL$REGION),FUN = length)
 
-    aggregate(CIL$REGION, by = list(REGION = CUST_INSUR_LTV$REGION),FUN = length)
+    cust_male_northeast <- (CIL %>% filter(REGION == "NorthEast", na.rm = TRUE) %>% filter(SEX == "M"))
+    aggregate(cust_male_northeast$BUY_INSURANCE, by = list(BUY_INSURANCE = cust_male_northeast$BUY_INSURANCE),FUN = length)
     </copy>
     ```
 
@@ -593,8 +601,12 @@ row.names(CIL) <- CIL$CUST\_ID
 
     ```
     <copy>
+    if (!require("janitor")) install.packages("janitor")
+    library(janitor)
     CXL <- ore.pull(CUST_INSUR_LTV)
     class(CXL)
+    nrow(CXL %>% get_dupes(CUST_ID))
+    ??get_dupes
     nrow(CXL %>% get_dupes(CUST_ID))
     remove(CXL)
     </copy>
